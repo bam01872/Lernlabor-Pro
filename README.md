@@ -1,8 +1,8 @@
 # Lernlabor Pro
 
-Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister Metall (Technik, Organisation, Führung und Personal). Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
+Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 2 (13.11.2026), alle 38 Themen ausgebaut. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 3 (14.11.2026). Metall 38 Themen, Elektrotechnik 39, Chemie 40, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
@@ -13,6 +13,11 @@ Stand: Version 2 (13.11.2026), alle 38 Themen ausgebaut. Alle Texte und Aufgaben
   - `basis/meisterlabor-v5.html`: das Gerüst (Meisterlabor Version 5)
   - `pro-data.js`, `pro-pakete.js`, `pro-p3a.js` bis `pro-p3d.js`: Fächer, Themen, Check-Fragen, Rechenaufgaben, Situationsaufgaben, Fachgespräch
   - `pro-ml5.js`, `pro-x2.js`, `pro-x3.js`, `pro-x4.js`: Vermuten, Kurz erklärt, Skizzen, Regler mit Auftrag
+  - `pro-fr.js`: Fachrichtungen (Umschalter, Gruppen, Prüfungsaufbau)
+  - `pro-el1.js`, `pro-el2.js`, `pro-xe1.js`, `pro-xe2.js`: Elektrotechnik (Themen, Aufgaben, Erklärstrecken, Skizzen, Regler)
+  - `pro-ch1.js`, `pro-ch2.js`, `pro-xc1.js`, `pro-xc2.js`: Chemie
+  - `pro-ib.js`: Aufgaben „Im Betrieb“ für alle drei Fachrichtungen
+  - `pro-a1.js`, `pro-xa.js`: Zusatzthemen und Fachbeispiele in der Organisation, Situationsaufgaben, Fachgespräch
   - `pro.css`: Gestaltung
 
 ## Bauen
@@ -24,3 +29,11 @@ python3 werkzeug/build.py werkzeug/basis/meisterlabor-v5.html index.html
 ## Hinweis zum Rechtsstand
 
 Die Themen zu Arbeitsschutz, Gefahrstoffen und Unfallmeldung sind nach bestem Wissen geschrieben (November 2026) und noch nicht gegen die aktuellen Gesetzestexte abgeglichen.
+
+## Fachrichtungen
+
+Die Fachrichtung wird auf der Startseite gewählt (oder per `?fr=me`, `?fr=el`, `?fr=ch`). Der Lernstand wird je Fachrichtung getrennt im Browser gespeichert. Organisation sowie Führung und Personal sind gemeinsam, die Technik wechselt.
+
+Chemie folgt dem Aufbau der Verordnung von 2004: Der technische Handlungsbereich heißt dort „Chemische Produktion“ (Verfahrens- und Anlagentechnik, Chemische Prozesse und Verfahren, Prozessleittechnik). Die Spezialisierungsgebiete sind noch nicht enthalten.
+
+Normwerte (zum Beispiel Abschaltzeiten, Richtwerte für den Spannungsfall, Grenzwerte) sind Beispiel- und Richtwerte zum Üben. Maßgeblich sind die aktuellen Normen, Tabellenbücher und die Angaben der IHK.
