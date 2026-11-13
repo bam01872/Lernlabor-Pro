@@ -1049,7 +1049,7 @@ VIZ.arbg=()=>S.svg(560,200,bx(10,14,170,56,BL,['1. Instanz','Arbeitsgericht'])+S
  bx(10,100,170,56,GR,['Güteverhandlung','(Vorsitzender allein)'])+S.a(180,128,195,128)+bx(195,100,170,56,GR,['Kammertermin','mit 2 ehrenamtl. Richtern'])+S.a(365,128,380,128)+bx(380,100,170,56,GR,['Urteil','oder Vergleich'])+
  S.t(280,186,'1. Instanz: kein Anwaltszwang, jede Seite trägt ihre Anwaltskosten selbst (§ 12a ArbGG)',null,{sz:12,f:'var(--mute)'}),'Instanzen und Ablauf vor dem Arbeitsgericht');
 VIZ.mob=()=>S.svg(560,150,bx(10,40,120,56,YL,['Vorfall','dokumentieren'])+S.a(130,68,150,68)+bx(150,40,120,56,BL,['Beschwerde','§ 84, § 85 BetrVG'])+S.a(270,68,290,68)+bx(290,40,120,56,RD,['Arbeitgeber','handelt (§ 12 AGG)'])+S.a(410,68,430,68)+bx(430,40,120,56,GR,['Nachfassen,','Schutz (§ 16 AGG)'])+S.t(280,130,'Keine Nachteile wegen der Beschwerde',null,{sz:12,f:'var(--mute)'}),'Ablauf bei Belästigung oder Mobbing');
-const NEU='<h3>🆕 Vorschau 2 (13.11.2026)</h3><ul><li>Pakete O1 Kostenwesen, T1 Instandhaltung &amp; Zerspanung, T2 Fluidtechnik &amp; Antriebe, F1 Personalführung: zwölf neue Themen.</li><li>17 fertige Themen mit Vermuten, Kurz erklärt, Skizze, Merkbox, Check-Fragen, die meisten mit Reglern und Auftrag.</li><li>Einleitung im Blocksatz wie im Lernlabor, Hydraulik im Lernlabor-Stil, Drehwerkzeug sitzt immer am Werkstück.</li></ul>';
+const NEU='<h3>🆕 Version 2 (13.11.2026)</h3><ul><li>Alle 38 Themen sind ausgebaut: neu sind Planung &amp; Steuerung, Montage &amp; Risiko, Qualitätsmanagement, Werkstoffe &amp; Verfahren, Arbeits-, Umwelt- &amp; Gesundheitsschutz und Personalentwicklung.</li><li>Zehn neue Regler mit Auftrag, 27 neue Rechenaufgaben, vier neue Situationsaufgaben und 16 neue Fragen für das Fachgespräch.</li></ul>';
 const ABK=[['AEVO','Ausbilder-Eignungsverordnung'],['AGG','Allgemeines Gleichbehandlungsgesetz'],['ArbGG','Arbeitsgerichtsgesetz'],['ArbSchG','Arbeitsschutzgesetz'],['ArbZG','Arbeitszeitgesetz'],['ASiG','Arbeitssicherheitsgesetz'],['BAG','Bundesarbeitsgericht'],['BBiG','Berufsbildungsgesetz'],['BDSG','Bundesdatenschutzgesetz'],['BEEG','Bundeselterngeld- und Elternzeitgesetz'],['BetrSichV','Betriebssicherheitsverordnung'],['BetrVG','Betriebsverfassungsgesetz'],['BGB','Bürgerliches Gesetzbuch'],['BImSchG','Bundes-Immissionsschutzgesetz'],['BUrlG','Bundesurlaubsgesetz'],['DSGVO','Datenschutz-Grundverordnung'],['EFZG','Entgeltfortzahlungsgesetz'],['EuGH','Europäischer Gerichtshof'],['GefStoffV','Gefahrstoffverordnung'],['GewO','Gewerbeordnung'],['HGB','Handelsgesetzbuch'],['HinSchG','Hinweisgeberschutzgesetz'],['JArbSchG','Jugendarbeitsschutzgesetz'],['KrWG','Kreislaufwirtschaftsgesetz'],['KSchG','Kündigungsschutzgesetz'],['MiLoG','Mindestlohngesetz'],['MuSchG','Mutterschutzgesetz'],['NachwG','Nachweisgesetz'],['ProdHaftG','Produkthaftungsgesetz'],['SGB III / VII / IX','Sozialgesetzbuch: Arbeitsförderung / Unfallversicherung / Rehabilitation und Teilhabe'],['TVG','Tarifvertragsgesetz'],['TzBfG','Teilzeit- und Befristungsgesetz'],['UStG','Umsatzsteuergesetz'],['WHG','Wasserhaushaltsgesetz']];
 
 /* Neue Rechenaufgaben */
@@ -1777,6 +1777,444 @@ ORAL.push(['fp','Ein Mitarbeiter schafft eine delegierte Aufgabe nicht. Wie reag
 /* Mustermodule aus Vorschau 1: je eine vierte Check-Frage */
 D.org.modules.find(x=>x.t==='Maschinenstundensatz').mcq.push(['Fixe Maschinenkosten 48 000 € pro Jahr, Energie 3 € je Stunde, 1600 Laufstunden. Wie hoch ist der Maschinenstundensatz?','33,00 €/h','30,00 €/h','30,19 €/h','51,00 €/h','48 000 € ÷ 1600 h = 30,00 €/h, dazu 3,00 €/h Energie: 33,00 €/h.']);
 D.org.modules.find(x=>x.t==='Kostenvergleich & kritische Menge').mcq.push(['Fremdbezug kostet 12 € je Stück. Selbst gefertigt: 40 000 € fix pro Jahr und 7 € je Stück. Ab welcher Menge lohnt sich die Eigenfertigung?','ab 8000 Stück','ab 3333 Stück','ab 5714 Stück','ab 2105 Stück','x = 40 000 € ÷ (12 €/Stück − 7 €/Stück) = 8000 Stück.']);
+
+/* ===== Lernlabor Pro, Pakete O2 und T4 (Vorschau 3): Inhalte. Eigene Texte und Aufgaben. ===== */
+
+/* ---------- O2 Planung & Steuerung ---------- */
+PK('org','Kapazitäts- und Terminplanung',{intro:'Ein Auftrag ist erst dann sicher zugesagt, wenn Maschinen und Personal dafür frei sind. Du stellst den Kapazitätsbedarf dem Kapazitätsbestand gegenüber, gleichst Überlast aus und planst die Termine mit Balkendiagramm oder Netzplan. In der Organisationsaufgabe gehört das zum festen Bestand.',
+pts:['Kapazitätsbedarf = Rüstzeit + Stückzahl · Zeit je Einheit. Er sagt, wie viele Stunden ein Auftrag die Maschine belegt.',
+'Kapazitätsbestand = Arbeitstage · Schichten · Stunden je Schicht · Nutzungsgrad. Der Nutzungsgrad berücksichtigt Störungen, Wartung und Pausen.',
+'Auslastung = [[Kapazitätsbedarf||Kapazitätsbestand]] · 100 %. Über 100 % ist der Plan nicht machbar, dauerhaft über etwa 90 % fehlt jede Reserve.',
+'Kapazität anpassen: Überstunden, Zusatzschicht, Fremdvergabe, Personal umsetzen. Bedarf anpassen: Aufträge verschieben, Lose teilen, Termine neu vereinbaren.',
+'Durchlaufzeit = Rüsten + Bearbeiten + Liegen + Transportieren. Die Liegezeit ist meist der größte Teil.',
+'Netzplan: Vorwärtsrechnung liefert die frühesten Zeiten (FAZ, FEZ), Rückwärtsrechnung die spätesten (SAZ, SEZ). Gesamtpuffer = SAZ − FAZ.',
+'Der kritische Weg ist die Kette der Vorgänge ohne Puffer. Jede Verzögerung dort verschiebt den Endtermin.'],
+mcq:[['Eine Maschine läuft 5 Tage in 2 Schichten zu je 8 h bei 85 % Nutzungsgrad. Wie groß ist der Kapazitätsbestand der Woche?','68 h','80 h','94 h','34 h','5 · 2 · 8 h · 0,85 = 68 h.'],
+['Der Kapazitätsbedarf beträgt 76 h, der Bestand 68 h. Was folgt daraus?','Die Maschine ist mit rund 112 % überlastet, Du musst ausgleichen','Die Maschine hat 12 % Reserve','Der Auftrag ist nach 68 h fertig','Der Nutzungsgrad steigt auf 112 %','76 h ÷ 68 h = 1,12. Ohne Ausgleich wird der Termin nicht gehalten.'],
+['Was kennzeichnet den kritischen Weg im Netzplan?','Die Vorgänge haben keinen Puffer','Die Vorgänge sind am teuersten','Er enthält die meisten Vorgänge','Er beginnt immer mit dem kürzesten Vorgang','Ohne Puffer schlägt jede Verzögerung auf den Endtermin durch.'],
+['Welcher Anteil der Durchlaufzeit ist in der Werkstattfertigung meist am größten?','Die Liegezeit','Die Rüstzeit','Die Bearbeitungszeit','Die Transportzeit','Aufträge warten vor den Maschinen. Hier liegt das größte Potenzial für kürzere Lieferzeiten.']]});
+
+PK('org','Reihenfolgeplanung',{intro:'Vor einer Maschine warten mehrere Aufträge. Welcher kommt zuerst? Die Antwort entscheidet über Liefertreue, Bestände und Rüstaufwand. Prioritätsregeln geben eine nachvollziehbare Reihenfolge, die Du begründen kannst.',
+pts:['FIFO (First in, first out): Reihenfolge nach Eingang. Einfach und gerecht, aber ohne Blick auf Termine.',
+'KOZ (kürzeste Operationszeit): kurze Aufträge zuerst. Senkt die mittlere Durchlaufzeit und den Bestand, lange Aufträge warten aber lange.',
+'Frühester Liefertermin: der dringendste Auftrag zuerst. Senkt Terminüberschreitungen.',
+'Schlupfzeit = Zeit bis zum Liefertermin − restliche Bearbeitungszeit. Der Auftrag mit dem kleinsten Schlupf kommt zuerst.',
+'Rüstoptimiert: ähnliche Teile hintereinander fertigen (Teilefamilien). Spart Rüstzeit, kann aber Termine gefährden.',
+'Mittlere Durchlaufzeit = Summe der Fertigstellungszeitpunkte geteilt durch die Zahl der Aufträge.',
+'Keine Regel ist immer die beste. Lege fest, was im Betrieb gerade am meisten zählt: Termin, Durchlaufzeit oder Rüstaufwand.'],
+mcq:[['Drei Aufträge brauchen 2 h, 5 h und 8 h und liegen gleichzeitig vor. Wie groß ist die mittlere Durchlaufzeit nach der KOZ-Regel?','8 h','15 h','5 h','10,3 h','Fertig nach 2 h, 7 h und 15 h. (2 h + 7 h + 15 h) ÷ 3 = 8 h.'],
+['Welche Regel senkt die mittlere Durchlaufzeit am stärksten?','Kürzeste Operationszeit','FIFO','Längste Operationszeit','Zufällige Auswahl','Kurze Aufträge sind schnell fertig und halten die anderen nur kurz auf.'],
+['Auftrag A: Liefertermin in 10 h, Restbearbeitung 6 h. Auftrag B: Liefertermin in 12 h, Restbearbeitung 10 h. Wer kommt nach der Schlupfzeitregel zuerst?','B, der Schlupf beträgt nur 2 h','A, der Termin ist früher','A, die Bearbeitung ist kürzer','Beide gleichzeitig','Schlupf A = 10 h − 6 h = 4 h, Schlupf B = 12 h − 10 h = 2 h.'],
+['Welches Risiko hat eine rein rüstoptimierte Reihenfolge?','Dringende Aufträge warten, bis ihre Teilefamilie an der Reihe ist','Die Rüstzeit steigt','Die Maschine steht öfter still','Die Qualität sinkt','Weniger Rüsten ist gut, darf aber die Termine nicht aus dem Blick verlieren.']]});
+
+PK('org','Material: ABC, XYZ, Bestellmenge, Kanban',{intro:'Zu viel Material bindet Geld und Platz, zu wenig stoppt die Fertigung. Mit ABC- und XYZ-Analyse erkennst Du, welche Teile Aufmerksamkeit verdienen. Meldebestand, Bestellmenge und Kanban steuern dann den Nachschub.',
+pts:['ABC-Analyse: Teile nach ihrem Jahresverbrauchswert ordnen. Wenige A-Teile machen den größten Teil des Wertes aus, viele C-Teile nur einen kleinen.',
+'XYZ-Analyse: Teile nach der Vorhersagbarkeit ordnen. X = gleichmäßiger Verbrauch, Y = schwankend, Z = unregelmäßig.',
+'Folgerung: A-Teile genau disponieren und knapp bevorraten, C-Teile einfach und großzügig, zum Beispiel über Kanban.',
+'Meldebestand = Tagesverbrauch · Beschaffungszeit + Sicherheitsbestand. Wird er erreicht, löst Du die Bestellung aus.',
+'Optimale Bestellmenge: Bei ihr ist die Summe aus Bestellkosten und Lagerkosten am kleinsten. x_opt² = [[200 · Jahresbedarf · Kosten je Bestellung||Einstandspreis · Lagerkostensatz in %]]. Die optimale Bestellmenge ist die Wurzel daraus.',
+'Kanban: Die verbrauchende Stelle holt Nachschub mit Karte oder leerem Behälter. Karten = [[Verbrauch je Tag · Wiederbeschaffungszeit · (1 + Sicherheit)||Behälterinhalt]], aufgerundet.',
+'Durchschnittlicher Lagerbestand = [[Bestellmenge||2]] + Sicherheitsbestand. Umschlagshäufigkeit = [[Jahresverbrauch||durchschnittlicher Bestand]].'],
+mcq:[['Tagesverbrauch 40 Stück, Beschaffungszeit 6 Tage, Sicherheitsbestand 120 Stück. Wie hoch ist der Meldebestand?','360 Stück','240 Stück','120 Stück','720 Stück','40 Stück/Tag · 6 Tage + 120 Stück = 360 Stück.'],
+['Welche Teile planst Du am genauesten?','A-Teile mit gleichmäßigem Verbrauch','C-Teile mit unregelmäßigem Verbrauch','Alle Teile gleich genau','Nur Z-Teile','Bei A-Teilen steckt das meiste Geld, bei X-Verbrauch ist die Planung zuverlässig. Hier lohnt sich die Mühe.'],
+['Was passiert mit den Kosten, wenn Du seltener, aber größere Mengen bestellst?','Die Bestellkosten sinken, die Lagerkosten steigen','Beide sinken','Beide steigen','Die Bestellkosten steigen, die Lagerkosten sinken','Weniger Bestellvorgänge, dafür mehr gebundenes Kapital und mehr Lagerplatz.'],
+['Was ist der Grundgedanke von Kanban?','Der Verbrauch löst den Nachschub aus (Holprinzip)','Die Planung schiebt Material in die Fertigung','Jedes Teil wird einzeln bestellt','Der Lieferant bestimmt die Menge','Es wird nur nachgeliefert, was tatsächlich verbraucht wurde.']]});
+
+PK('org','Zeitwirtschaft: Auftragszeit & Zeitgrad',{intro:'Ohne Vorgabezeiten gibt es keine Kalkulation, keine Kapazitätsplanung und keinen Leistungslohn. Du baust die Auftragszeit aus Rüst- und Ausführungszeit auf und beurteilst mit dem Zeitgrad, wie die tatsächliche Zeit zur Vorgabe steht.',
+pts:['Auftragszeit T = t_r + t_a. Rüstzeit t_r fällt einmal je Auftrag an, die Ausführungszeit t_a hängt von der Stückzahl ab.',
+'Ausführungszeit t_a = m · t_e, also Stückzahl mal Zeit je Einheit.',
+'Zeit je Einheit t_e = t_g + t_er + t_v: Grundzeit, Erholungszeit und Verteilzeit. Erholungs- und Verteilzeit werden meist als Zuschlag in Prozent der Grundzeit angegeben.',
+'Die Rüstzeit setzt sich genauso zusammen: t_r = t_rg + t_rer + t_rv.',
+'Leistungsgrad = [[beobachtete Leistung||Bezugsleistung]] · 100 %. Normalzeit = gemessene Istzeit · Leistungsgrad.',
+'Zeitgrad = [[Vorgabezeit||Istzeit]] · 100 %. Über 100 % war der Mitarbeiter schneller als die Vorgabe.',
+'Zeiten ermittelst Du durch Zeitaufnahme, Multimomentaufnahme, Systeme vorbestimmter Zeiten oder durch Vergleichen und Schätzen. Der Betriebsrat bestimmt bei Leistungsentgelt mit.'],
+mcq:[['Rüstzeit 30 min, Zeit je Einheit 4 min, 50 Stück. Wie groß ist die Auftragszeit?','230 min','200 min','170 min','1700 min','T = 30 min + 50 · 4 min = 230 min.'],
+['Grundzeit 5 min, Erholungszeit 4 %, Verteilzeit 10 %. Wie groß ist die Zeit je Einheit?','5,7 min','5,14 min','7 min','5,5 min','5 min · (1 + 0,04 + 0,10) = 5,7 min.'],
+['Vorgabezeit 400 min, benötigt wurden 320 min. Wie hoch ist der Zeitgrad?','125 %','80 %','120 %','25 %','400 min ÷ 320 min · 100 % = 125 %.'],
+['Bei einer Zeitaufnahme misst Du 2 min je Stück und schätzt den Leistungsgrad auf 110 %. Wie groß ist die Normalzeit?','2,2 min','1,82 min','2 min','3,1 min','2 min · 1,10 = 2,2 min. Wer schneller arbeitet als normal, dessen Zeit wird hochgerechnet.']]});
+
+/* ---------- T4 Montage & Risiko ---------- */
+PK('tec','Montageplanung & Fügen',{intro:'In der Montage entsteht aus Einzelteilen das fertige Produkt. Du legst die Reihenfolge fest, teilst die Arbeit auf Stationen auf und wählst das Fügeverfahren. Fehler zeigen sich hier oft zum ersten Mal, deshalb gehört die Prüfung gleich mit in den Plan.',
+pts:['Der Vorranggraph zeigt, welche Montageschritte vor welchen liegen müssen. Daraus entsteht der Montageplan mit Reihenfolge, Werkzeug, Zeit und Prüfung.',
+'Organisationsformen: Baustellenmontage (großes Produkt bleibt am Platz), Gruppenmontage, Fließmontage im Takt.',
+'Taktzeit = [[verfügbare Arbeitszeit||geforderte Stückzahl]]. In dieser Zeit muss jede Station fertig sein.',
+'Kleinste Stationenzahl = [[Summe der Montagezeiten||Taktzeit]], aufgerundet. Bandwirkungsgrad = [[Summe der Montagezeiten||Stationen · Taktzeit]] · 100 %.',
+'Fügeverfahren: lösbar (Schrauben, Stifte, Passfedern) oder unlösbar (Schweißen, Löten, Kleben, Nieten, Pressen). Entscheidend sind Kraft, Werkstoff, Temperatur und ob später demontiert wird.',
+'Schraubverbindungen halten über die Vorspannkraft. Angezogen wird drehmomentgesteuert oder genauer drehwinkelgesteuert. Reibung an Gewinde und Kopf streut stark.',
+'Montagegerecht gestalten hilft am meisten: weniger Teile, eindeutige Lage, Fügen von oben, Verwechslung ausschließen (Poka Yoke).'],
+mcq:[['In einer Schicht stehen 450 min zur Verfügung, gefordert sind 150 Geräte. Wie groß ist die Taktzeit?','3 min','0,33 min','4,5 min','1,5 min','450 min ÷ 150 Stück = 3 min je Gerät.'],
+['Die Montagezeiten ergeben zusammen 20 min, die Taktzeit beträgt 3 min. Wie viele Stationen brauchst Du mindestens?','7','6','8','20','20 min ÷ 3 min = 6,67. Aufgerundet sind es 7 Stationen.'],
+['Welches Fügeverfahren ist lösbar?','Schraubverbindung','Schweißverbindung','Klebeverbindung','Nietverbindung','Schrauben lassen sich ohne Zerstörung lösen, das zählt bei Wartung und Reparatur.'],
+['Warum wird bei wichtigen Schraubverbindungen drehwinkelgesteuert angezogen?','Die Vorspannkraft wird genauer erreicht, weil die Reibung weniger Einfluss hat','Es geht schneller','Die Schraube wird dabei nicht belastet','Es ist kein Werkzeug nötig','Beim Drehmomentverfahren geht der größte Teil des Moments in Reibung, die stark schwankt.']]});
+
+PK('tec','Inbetriebnahme & Abnahme',{intro:'Zwischen aufgestellter und produzierender Maschine liegt die Inbetriebnahme. Du prüfst Schritt für Schritt, ob alles sicher und wie bestellt funktioniert, und übernimmst die Anlage erst mit einem Protokoll in die Fertigung.',
+pts:['Vor dem ersten Einschalten: Aufstellung und Ausrichtung, Anschlüsse (Strom, Druckluft, Hydraulik, Kühlschmierstoff), Füllstände, Transportsicherungen entfernt.',
+'Unterlagen prüfen: Betriebsanleitung in deutscher Sprache, EG-Konformitätserklärung, CE-Kennzeichnung, Schaltpläne, Wartungsplan.',
+'Reihenfolge: Sichtprüfung, Schutzeinrichtungen und Not-Halt prüfen, Funktionen einzeln ohne Werkstück, Leerlauf, Probelauf unter Last, Abnahmeteile fertigen und messen.',
+'Der Arbeitgeber darf Arbeitsmittel erst verwenden lassen, wenn die Gefährdungsbeurteilung gemacht ist und die Schutzmaßnahmen wirken (Betriebssicherheitsverordnung).',
+'Abnahme: Vergleich mit Lastenheft und Pflichtenheft. Leistung, Genauigkeit, Taktzeit und Maschinenfähigkeit werden nachgewiesen.',
+'Abnahmeprotokoll: Ergebnisse, offene Mängel mit Termin und Verantwortlichem, Unterschriften. Mit der Abnahme geht die Verantwortung über, und die Gewährleistungsfrist beginnt.',
+'Vor Produktionsstart: Mitarbeiter unterweisen, Betriebsanweisung aushängen, Wartungsplan in die Instandhaltung übernehmen.'],
+mcq:[['Was prüfst Du bei der Inbetriebnahme zuerst?','Schutzeinrichtungen und Not-Halt','Die Taktzeit unter Volllast','Die Maschinenfähigkeit','Die Oberflächengüte der Teile','Sicherheit kommt vor Leistung. Erst wenn Schutzeinrichtungen wirken, läuft die Maschine mit Werkstück.'],
+['Welches Dokument bestätigt, dass eine neue Maschine die europäischen Sicherheitsanforderungen erfüllt?','Die EG-Konformitätserklärung','Das Abnahmeprotokoll','Der Wartungsplan','Der Lieferschein','Der Hersteller erklärt darin die Übereinstimmung mit den Vorschriften und bringt das CE-Zeichen an.'],
+['Bei der Abnahme zeigt sich ein kleiner Mangel, der die Sicherheit nicht berührt. Was ist richtig?','Mangel mit Termin und Verantwortlichem im Protokoll festhalten','Mündlich absprechen, das genügt','Abnahme auf keinen Fall durchführen','Mangel selbst beheben und nichts notieren','Was nicht im Protokoll steht, ist später kaum durchzusetzen.'],
+['Womit vergleichst Du die Maschine bei der Abnahme?','Mit Lastenheft und Pflichtenheft','Mit dem Prospekt des Herstellers','Mit der alten Maschine','Mit der Rechnung','Dort steht, was vereinbart wurde: Leistung, Genauigkeit, Taktzeit, Ausstattung.']]});
+
+PK('tec','FMEA: Risiken bewerten',{intro:'Mit der Fehlermöglichkeits- und Einflussanalyse suchst Du Fehler, bevor sie auftreten. Ein Team bewertet für jeden möglichen Fehler, wie schwer die Folge ist, wie oft die Ursache auftritt und wie sicher der Fehler entdeckt wird. Daraus folgen Maßnahmen mit klarer Rangfolge.',
+pts:['Arten: Die Konstruktions-FMEA untersucht das Produkt, die Prozess-FMEA die Fertigung und Montage.',
+'Ablauf: Betrachtungsumfang festlegen, Struktur und Funktionen beschreiben, Fehler mit Folge und Ursache sammeln, bewerten, Maßnahmen festlegen, Wirkung prüfen und dokumentieren.',
+'Bewertet wird jeweils von 1 bis 10: Bedeutung B der Fehlerfolge, Auftreten A der Ursache, Entdeckung E. Bei E heißt 10: Der Fehler wird praktisch nicht entdeckt.',
+'Risikoprioritätszahl RPZ = B · A · E. Sie reicht von 1 bis 1000 und ordnet die Risiken.',
+'Vorsicht: Eine hohe Bedeutung (9 oder 10, Gefahr für Menschen) verlangt immer Maßnahmen, auch bei kleiner RPZ.',
+'Neuere FMEA nach dem gemeinsamen Standard von AIAG und VDA verwenden statt der RPZ die Aufgabenpriorität (hoch, mittel, niedrig). Sie gewichtet die Bedeutung am stärksten.',
+'Maßnahmen: zuerst die Ursache vermeiden (A senken), dann die Entdeckung verbessern (E senken). Die Bedeutung ändert sich nur durch eine andere Konstruktion.'],
+mcq:[['Ein Fehler wird mit B = 7, A = 4 und E = 5 bewertet. Wie groß ist die RPZ?','140','16','280','35','RPZ = 7 · 4 · 5 = 140.'],
+['Was bedeutet E = 10?','Der Fehler wird praktisch nicht entdeckt','Der Fehler wird sicher entdeckt','Der Fehler tritt sehr oft auf','Die Folge ist sehr schwer','Bei der Entdeckung ist eine hohe Zahl schlecht: Der Fehler erreicht unbemerkt den Kunden.'],
+['Durch eine Kamera an der Station sinkt E von 8 auf 2. Was ändert sich noch?','Nichts, B und A bleiben gleich','A sinkt ebenfalls','B sinkt ebenfalls','Die RPZ bleibt gleich','Eine Prüfung findet den Fehler, verhindert aber nicht, dass er entsteht.'],
+['Ein Fehler hat B = 10, A = 2, E = 2. Wie gehst Du vor?','Maßnahmen festlegen, weil Menschen gefährdet sind','Nichts tun, die RPZ ist mit 40 niedrig','Nur dokumentieren','Die Bewertung von B senken','Bei Sicherheitsrisiken entscheidet die Bedeutung, nicht das Produkt der drei Zahlen.']]});
+
+PK('tec','Automatisierung & Robotik',{intro:'Roboter übernehmen Arbeiten, die schwer, eintönig, gefährlich oder sehr genau sind. Als Meister planst Du die Zelle mit, sorgst für sicheren Betrieb und rechnest nach, ob Taktzeit und Stückzahl die Investition tragen.',
+pts:['Eine Roboterzelle besteht aus Roboter, Greifer oder Werkzeug, Steuerung, Zuführung und Abtransport, Sensoren und Schutzeinrichtungen.',
+'Bauarten: Knickarmroboter (meist 6 Achsen, sehr beweglich), SCARA (schnell in der Ebene), Portalroboter (große Wege, hohe Lasten).',
+'Kenngrößen: Traglast, Reichweite, Wiederholgenauigkeit, Geschwindigkeit. Zur Traglast zählt auch der Greifer.',
+'Schutz: trennende Schutzzäune mit verriegelter Tür, Lichtvorhänge, Scanner, Zustimmtaster beim Einrichten. Der Roboter darf nur bei geschlossener Schutzeinrichtung im Automatikbetrieb laufen.',
+'Kollaborierende Roboter arbeiten ohne Zaun neben Menschen. Dafür sind Kraft und Geschwindigkeit begrenzt, und die Anwendung braucht eine eigene Risikobeurteilung samt Greifer und Werkstück.',
+'Ausbringung = [[Betriebszeit||Taktzeit]] · Verfügbarkeit. Die Taktzeit der Zelle bestimmt der langsamste Schritt.',
+'Wirtschaftlichkeit: Einsparung an Lohn und Ausschuss gegen Abschreibung, Zinsen, Instandhaltung und Programmieraufwand. Lohnend sind hohe Stückzahlen und Mehrschichtbetrieb.'],
+mcq:[['Eine Zelle läuft 7,5 h je Schicht mit 30 s Taktzeit und 90 % Verfügbarkeit. Wie viele Teile schafft sie je Schicht?','810','900','1000','405','7,5 h · 3600 s/h ÷ 30 s = 900 Takte, davon 90 % = 810 Teile.'],
+['Was gilt für einen kollaborierenden Roboter?','Auch er braucht eine Risikobeurteilung für die ganze Anwendung','Er ist immer sicher und braucht keine Beurteilung','Er darf beliebig schnell fahren','Er darf nur hinter einem Zaun arbeiten','Ein spitzes Werkstück im Greifer kann auch bei begrenzter Kraft verletzen.'],
+['Der Roboter hat 10 kg Traglast, der Greifer wiegt 3 kg. Wie schwer darf das Werkstück höchstens sein?','7 kg','10 kg','13 kg','3 kg','Die Traglast gilt für alles, was am Flansch hängt: Greifer plus Werkstück.'],
+['Welche Betriebsart verlangt beim Einrichten im Schutzbereich einen Zustimmtaster?','Handbetrieb mit reduzierter Geschwindigkeit','Automatikbetrieb','Stillstand','Fernwartung','Der Einrichter hält den Zustimmtaster gedrückt. Lässt er los oder drückt er durch, stoppt der Roboter.']]});
+
+/* ===== Lernlabor Pro, Pakete F3 und T3 (Vorschau 3): Inhalte. Eigene Texte und Aufgaben. ===== */
+
+/* ---------- F3 Qualitätsmanagement ---------- */
+PK('fp','QM-System & Audit',{intro:'Ein Qualitätsmanagementsystem legt fest, wie der Betrieb arbeitet, damit das Ergebnis jedes Mal stimmt. Als Meister setzt Du es in Deinem Bereich um, hältst die Regeln aktuell und stellst Dich im Audit den Fragen. Im Fachgespräch erklärst Du, wie Du das mit Deinen Mitarbeitern lebst.',
+pts:['Die Norm ISO 9001 beschreibt die Anforderungen an ein QM-System. Sie verlangt keine bestimmten Formulare, sondern beherrschte Abläufe und Nachweise.',
+'Grundsätze: Kundenorientierung, Führung, Einbeziehung der Mitarbeiter, Denken in Prozessen, Verbesserung, Entscheiden nach Fakten, gute Beziehungen zu Lieferanten.',
+'Prozessorientierung: Jeder Prozess hat Eingaben, Ergebnisse, einen Verantwortlichen und Kennzahlen. Entscheidend sind die Schnittstellen zwischen den Abteilungen.',
+'Dokumentierte Information: Vorgaben (Arbeits- und Prüfanweisungen) müssen aktuell am Arbeitsplatz liegen, Nachweise (Prüfprotokolle) müssen auffindbar sein.',
+'Auditarten: Systemaudit (das ganze System), Prozessaudit (ein Ablauf), Produktaudit (fertige Teile). Intern durch eigene Auditoren, extern durch Kunden oder die Zertifizierungsstelle.',
+'Ablauf: Auditplan, Eröffnung, Befragen und Nachweise ansehen am Ort des Geschehens, Feststellungen bewerten, Abschlussgespräch, Bericht, Maßnahmen und Nachprüfung.',
+'Eine Abweichung ist kein Vorwurf an eine Person, sondern ein Hinweis auf eine Lücke im Ablauf. Du legst Korrektur, Ursache, Maßnahme, Termin und Verantwortlichen fest.'],
+mcq:[['Was prüft ein Prozessaudit?','Ob ein Ablauf wie festgelegt durchgeführt wird und wirksam ist','Die Maße fertiger Teile','Die Bilanz des Unternehmens','Die Leistung einzelner Mitarbeiter','Der Auditor vergleicht den gelebten Ablauf mit der Vorgabe und fragt nach Nachweisen.'],
+['Im Audit liegt an einer Maschine eine veraltete Arbeitsanweisung. Was ist die richtige Reaktion?','Sofort austauschen und klären, warum die Verteilung nicht funktioniert hat','Den Mitarbeiter abmahnen','Die Anweisung verstecken','Nichts, das ist unwichtig','Die Korrektur behebt den Einzelfall, die Ursachensuche verhindert die Wiederholung.'],
+['Wer führt ein internes Audit durch?','Geschulte Auditoren, die nicht ihren eigenen Bereich prüfen','Immer die Zertifizierungsstelle','Der Kunde','Jeder Mitarbeiter an seinem eigenen Arbeitsplatz','Unabhängigkeit vom geprüften Bereich sichert einen unbefangenen Blick.'],
+['Welche Aussage zur ISO 9001 stimmt?','Sie stellt Anforderungen an das Managementsystem, nicht an das Produkt','Sie legt Toleranzen für Werkstücke fest','Sie schreibt bestimmte Formulare vor','Sie gilt nur für Großbetriebe','Wie ein Betrieb die Anforderungen erfüllt, entscheidet er selbst. Er muss es nachweisen können.']]});
+
+PK('fp','Qualitätswerkzeuge & KVP',{intro:'Wenn ein Fehler auftritt, hilft kein Schnellschuss. Mit wenigen einfachen Werkzeugen sammelst Du Fakten, findest die Ursache und sicherst die Lösung. Im Fachgespräch zeigst Du, dass Du Dein Team dabei einbindest.',
+pts:['Fehlersammelliste und Pareto-Diagramm: Fehler zählen und nach Häufigkeit ordnen. Meist verursachen wenige Fehlerarten den größten Teil der Probleme.',
+'Ishikawa-Diagramm: mögliche Ursachen im Team sammeln, geordnet nach Mensch, Maschine, Material, Methode, Mitwelt und Messung.',
+'5-mal Warum: so lange nachfragen, bis die eigentliche Ursache erreicht ist, an der eine Maßnahme dauerhaft wirkt.',
+'PDCA-Kreis: Plan (planen), Do (ausprobieren), Check (Wirkung prüfen), Act (zum Standard machen oder neu ansetzen).',
+'8D-Bericht bei Reklamationen: Team, Problembeschreibung, Sofortmaßnahme, Ursache, Abstellmaßnahme, Wirksamkeit, Vorbeugung, Abschluss.',
+'KVP: viele kleine Verbesserungen durch die Mitarbeiter selbst, zum Beispiel in kurzen Runden an der Tafel in der Fertigung.',
+'Kennzahlen machen den Erfolg sichtbar: Ausschussquote, Nacharbeitsquote, Reklamationen, Fehlerkosten.'],
+mcq:[['Wofür nutzt Du ein Pareto-Diagramm?','Um die wichtigsten Fehlerarten zu erkennen','Um Ursachen zu sammeln','Um Termine zu planen','Um Messmittel zu überwachen','Die Balken sind nach Größe geordnet. So siehst Du, wo sich der Einsatz am meisten lohnt.'],
+['Was ist beim 8D-Bericht der erste Schritt nach der Problembeschreibung?','Sofortmaßnahmen, damit der Kunde keine fehlerhaften Teile mehr bekommt','Die Ursache dauerhaft abstellen','Den Bericht abschließen','Den Schuldigen suchen','Erst den Kunden schützen (sperren, sortieren), dann in Ruhe die Ursache suchen.'],
+['In welcher Phase des PDCA-Kreises prüfst Du, ob die Maßnahme gewirkt hat?','Check','Plan','Do','Act','Check vergleicht das Ergebnis mit dem Ziel. Erst danach wird die Lösung zum Standard.'],
+['Im Monat wurden 12 500 Teile gefertigt, 250 waren Ausschuss. Wie hoch ist die Ausschussquote?','2 %','0,2 %','5 %','20 %','250 Stück ÷ 12 500 Stück · 100 % = 2 %.']]});
+
+PK('fp','Prüfen, Messen & Fehleranalyse',{intro:'Qualität wird gefertigt und nicht erst am Ende hineingeprüft. Trotzdem brauchst Du Prüfungen an den richtigen Stellen, geeignete Messmittel und den Nachweis, dass Maschine und Prozess die Toleranz sicher einhalten.',
+pts:['Der Prüfplan legt fest: was, wann, wie, womit, wie oft, von wem geprüft wird und was bei einem Fehler geschieht.',
+'Prüfmittel müssen zur Toleranz passen: Die Messunsicherheit sollte höchstens etwa ein Zehntel der Toleranz betragen. Prüfmittel werden gekennzeichnet und regelmäßig kalibriert.',
+'Stichprobe statt 100-%-Prüfung, wenn der Prozess stabil ist. Bei sicherheitskritischen Merkmalen wird jedes Teil geprüft.',
+'Regelkarte: Mittelwerte von Stichproben über die Zeit eintragen. Eingriffsgrenzen zeigen, wann Du eingreifen musst, bevor Ausschuss entsteht.',
+'Prozessfähigkeit: c_p = [[OSG − USG||6 · σ]]. Sie vergleicht die Toleranzbreite mit der Streuung.',
+'c_pk = [[kleinerer Abstand des Mittelwerts zur Grenze||3 · σ]]. Er berücksichtigt zusätzlich die Lage. Üblich ist die Forderung c_pk ≥ 1,33.',
+'Zufällige Einflüsse streuen gleichmäßig. Systematische Einflüsse (Werkzeugverschleiß, Temperatur) verschieben die Lage und lassen sich abstellen.'],
+mcq:[['Toleranz 20,00 mm ± 0,06 mm, Standardabweichung 0,015 mm. Wie groß ist c_p?','1,33','0,67','2,67','4','(20,06 mm − 19,94 mm) ÷ (6 · 0,015 mm) = 0,12 mm ÷ 0,09 mm = 1,33.'],
+['c_p beträgt 1,67, c_pk nur 0,9. Was ist zu tun?','Den Prozess zentrieren, die Streuung ist klein genug','Die Streuung verringern','Die Toleranz erweitern','Nichts, der Prozess ist fähig','Ein guter c_p mit schlechtem c_pk heißt: Der Mittelwert liegt zu nah an einer Grenze.'],
+['Die Mittelwerte auf der Regelkarte steigen sieben Stichproben hintereinander an. Wie reagierst Du?','Ursache suchen, das ist ein Trend, zum Beispiel Werkzeugverschleiß','Abwarten, alle Werte liegen noch in den Grenzen','Die Eingriffsgrenzen erweitern','Die Stichprobe verkleinern','Ein Trend ist ein systematischer Einfluss. Wer jetzt eingreift, verhindert Ausschuss.'],
+['Welches Messmittel passt zu einer Toleranz von 0,02 mm?','Bügelmessschraube mit 0,001 mm Anzeige','Stahlmaßstab','Messschieber mit 0,05 mm Ablesung','Gliedermaßstab','Das Messmittel muss deutlich feiner auflösen als die Toleranz breit ist.']]});
+
+/* ---------- T3 Werkstoffe & Verfahren ---------- */
+PK('tec','Werkstoffe & Wärmebehandlung',{intro:'Der Werkstoff entscheidet, ob ein Bauteil hält, sich fertigen lässt und bezahlbar bleibt. Du liest Stahlbezeichnungen, wählst den Werkstoff nach der Beanspruchung und legst die Wärmebehandlung fest, die ihm die geforderten Eigenschaften gibt.',
+pts:['Baustähle wie S235JR sind nach der Streckgrenze benannt: mindestens 235 N/mm². Sie sind gut schweißbar und werden nicht gehärtet.',
+'Unlegierte Vergütungsstähle wie C45: Die Zahl geteilt durch 100 ist der Kohlenstoffgehalt, hier 0,45 %.',
+'Niedriglegierte Stähle wie 42CrMo4: 0,42 % Kohlenstoff. Die Zahl hinter den Elementen wird durch einen Faktor geteilt, bei Chrom durch 4, also etwa 1 % Chrom.',
+'Hochlegierte Stähle beginnen mit X: X5CrNi18-10 hat 0,05 % Kohlenstoff, 18 % Chrom und 10 % Nickel und ist rostbeständig.',
+'Härten: auf Härtetemperatur erwärmen, halten, abschrecken. Das Gefüge wird hart, aber spröde. Härtbar sind Stähle ab etwa 0,2 % Kohlenstoff.',
+'Vergüten = Härten + Anlassen bei hoher Temperatur. Das Ergebnis ist hohe Festigkeit bei guter Zähigkeit, zum Beispiel für Wellen.',
+'Einsatzhärten: kohlenstoffarmer Stahl wird am Rand aufgekohlt und gehärtet. Die Randschicht ist verschleißfest, der Kern bleibt zäh, zum Beispiel bei Zahnrädern.',
+'Glühen: Spannungsarmglühen baut Spannungen ab, Weichglühen macht gut zerspanbar, Normalglühen stellt ein gleichmäßiges feines Gefüge her.'],
+mcq:[['Wie viel Kohlenstoff enthält der Stahl C60?','0,60 %','6 %','60 %','0,06 %','Bei unlegierten Stählen wird die Kennzahl durch 100 geteilt.'],
+['Eine Antriebswelle soll hohe Festigkeit und gute Zähigkeit haben. Welche Wärmebehandlung wählst Du?','Vergüten','Weichglühen','Nur Härten','Spannungsarmglühen','Nach dem Härten nimmt das Anlassen bei hoher Temperatur die Sprödigkeit und erhält die Festigkeit.'],
+['Ein Zahnrad braucht eine harte Oberfläche und einen zähen Kern. Was passt?','Einsatzhärten','Normalglühen','Durchhärten','Weichglühen','Nur der aufgekohlte Rand wird hart. Der Kern federt Stöße ab.'],
+['Wofür steht 235 in S235JR?','Mindeststreckgrenze 235 N/mm²','Kohlenstoffgehalt 2,35 %','Zugfestigkeit 235 N/mm²','Härte 235 HB','Bis zu dieser Spannung verformt sich der Stahl nur elastisch.']]});
+
+PK('tec','Umformen, Trennen & additive Fertigung',{intro:'Nicht jedes Teil wird gespant. Bleche werden geschnitten, gebogen und gezogen, Einzelteile mit schwieriger Form immer öfter gedruckt. Du vergleichst die Verfahren nach Stückzahl, Werkstoff, Genauigkeit und Kosten und rechnest Kräfte für Presse und Werkzeug nach.',
+pts:['Scherschneiden: Stempel und Schneidplatte trennen das Blech. Schneidkraft F = l · s · τ_aB, also Länge der Schnittlinie mal Blechdicke mal Scherfestigkeit.',
+'Die Scherfestigkeit beträgt etwa das 0,8-Fache der Zugfestigkeit: τ_aB ≈ 0,8 · R_m.',
+'Die Presse wählst Du mit Reserve: Die Schneidkraft sollte höchstens etwa 80 % der Nennkraft betragen.',
+'Biegen: Das Blech federt zurück, deshalb wird überbogen. Ein zu kleiner Biegeradius führt zu Rissen, besonders quer zur Walzrichtung.',
+'Tiefziehen formt aus einer flachen Ronde einen Hohlkörper. Das Ziehverhältnis β = [[D||d]] (Rondendurchmesser durch Stempeldurchmesser) darf einen Grenzwert nicht überschreiten, sonst reißt der Boden.',
+'Laser- und Wasserstrahlschneiden brauchen kein teilespezifisches Werkzeug. Sie lohnen sich für kleine Stückzahlen und häufig wechselnde Formen.',
+'Additive Fertigung baut Teile Schicht für Schicht auf. Stärken: Prototypen, Einzelteile, innere Kanäle. Schwächen: Bauzeit, Oberfläche, Kosten je Stück bei großen Mengen.'],
+mcq:[['Ein Loch mit 200 mm Schnittlinie wird in 2 mm dickes Blech mit τ_aB = 300 N/mm² gestanzt. Wie groß ist die Schneidkraft?','120 kN','60 kN','240 kN','12 kN','F = 200 mm · 2 mm · 300 N/mm² = 120 000 N = 120 kN.'],
+['Warum wird ein Blech beim Biegen etwas überbogen?','Weil es nach dem Entlasten zurückfedert','Weil es sich dabei erwärmt','Weil es sonst zu dick wird','Weil der Stempel verschleißt','Der elastische Anteil der Verformung geht zurück. Das Maß der Rückfederung hängt von Werkstoff und Radius ab.'],
+['Für 20 Blechteile mit wechselnder Kontur suchst Du ein Trennverfahren. Was passt?','Laserschneiden','Scherschneiden mit Folgeverbundwerkzeug','Feinschneiden','Tiefziehen','Der Laser braucht nur ein Programm, kein Werkzeug. Ein Stanzwerkzeug lohnt sich erst bei großen Stückzahlen.'],
+['Ronde 120 mm, Stempel 80 mm. Wie groß ist das Ziehverhältnis?','1,5','0,67','40','2,25','β = 120 mm ÷ 80 mm = 1,5.']]});
+
+PK('tec','Oberflächen & Korrosionsschutz',{intro:'Stahl rostet, sobald Feuchtigkeit und Sauerstoff zusammenkommen. Welchen Schutz ein Bauteil braucht, hängt von der Umgebung und von der geplanten Lebensdauer ab. Du wählst zwischen Konstruktion, Werkstoff und Beschichtung und begründest die Kosten.',
+pts:['Korrosionsarten: gleichmäßige Flächenkorrosion, Lochkorrosion (örtlich und tief), Spaltkorrosion, Kontaktkorrosion zwischen verschiedenen Metallen.',
+'Kontaktkorrosion: Mit einem Elektrolyten (Feuchtigkeit) löst sich das unedlere Metall auf. Abhilfe: gleiche Werkstoffe, Isolierung, Feuchtigkeit fernhalten.',
+'Konstruktiver Schutz: Spalte und Wassersäcke vermeiden, Abläufe vorsehen, gut zugänglich für Beschichtung und Wartung.',
+'Metallische Überzüge: Feuerverzinken (dick, robust), galvanisch Verzinken (dünn, maßgenau), Vernickeln, Verchromen. Zink schützt auch an Kratzern, weil es sich anstelle des Stahls auflöst.',
+'Nichtmetallische Schichten: Lackieren, Pulverbeschichten, Brünieren und Phosphatieren (dünn, meist mit Öl), Eloxieren bei Aluminium.',
+'Ohne Vorbehandlung hält keine Schicht: entfetten, entrosten (Strahlen, Beizen), bei Bedarf Haftgrund.',
+'Schutzdauer einer Zinkschicht ≈ [[Schichtdicke||Abtrag je Jahr]]. Der Abtrag hängt von der Umgebung ab: gering im Innenraum, hoch in Industrie- und Meeresluft.'],
+mcq:[['Eine Zinkschicht ist 80 µm dick, die Umgebung trägt 2 µm je Jahr ab. Wie lange schützt sie etwa?','40 Jahre','160 Jahre','8 Jahre','82 Jahre','80 µm ÷ 2 µm/Jahr = 40 Jahre.'],
+['Eine Stahlschraube sitzt in einem Kupferblech im Freien. Was passiert?','Die Stahlschraube korrodiert bevorzugt','Das Kupferblech löst sich auf','Nichts, beide sind Metalle','Beide korrodieren gleich schnell','Stahl ist unedler als Kupfer. Bei Feuchtigkeit löst sich das unedlere Metall auf.'],
+['Warum schützt Zink Stahl auch an einem Kratzer?','Zink ist unedler und löst sich anstelle des Stahls auf','Zink ist härter als Stahl','Zink fließt in den Kratzer','Zink ist edler als Stahl','Das nennt man kathodischen Schutz. Eine Lackschicht bietet das nicht, dort unterwandert der Rost den Kratzer.'],
+['Welche Schicht wählst Du für ein passgenaues Maschinenteil im Innenraum, das nur leicht geschützt werden muss?','Brünieren und einölen','Feuerverzinken','Dickschichtlack','Pulverbeschichten','Brünieren verändert die Maße praktisch nicht. Feuerverzinken und Lack tragen deutlich auf.']]});
+
+/* ===== Lernlabor Pro, Pakete O3 und F2 (Vorschau 3): Inhalte. Eigene Texte und Aufgaben. Rechtsstand November 2026, vor Verwendung im Kurs gegenprüfen. ===== */
+
+/* ---------- O3 Arbeits-, Umwelt- & Gesundheitsschutz ---------- */
+PK('org','Gefährdungsbeurteilung & Unterweisung',{intro:'Die Gefährdungsbeurteilung ist das wichtigste Werkzeug im Arbeitsschutz. Du ermittelst, was an einem Arbeitsplatz passieren kann, legst Maßnahmen in der richtigen Rangfolge fest und unterweist Deine Mitarbeiter. Als Meister trägst Du dafür in Deinem Bereich die Verantwortung.',
+pts:['Pflicht des Arbeitgebers nach dem Arbeitsschutzgesetz (§ 5 beurteilen, § 6 dokumentieren). Er überträgt Aufgaben schriftlich auf Führungskräfte, also auch auf Dich.',
+'Ablauf: Arbeitsbereiche und Tätigkeiten festlegen, Gefährdungen ermitteln, beurteilen, Maßnahmen festlegen, durchführen, Wirksamkeit prüfen, fortschreiben.',
+'Gefährdungsarten: mechanisch, elektrisch, Gefahrstoffe, Brand und Explosion, Lärm und Vibration, Heben und Tragen, psychische Belastung.',
+'Risiko = Schwere des möglichen Schadens mal Wahrscheinlichkeit. Eine Risikomatrix ordnet die Gefährdungen nach Dringlichkeit.',
+'Rangfolge STOP: Substitution (Gefahr beseitigen oder ersetzen), Technische Maßnahmen, Organisatorische Maßnahmen, Persönliche Schutzausrüstung. PSA ist das letzte Mittel.',
+'Anlässe zur Aktualisierung: neue Maschinen oder Stoffe, geänderte Abläufe, Unfälle und Beinaheunfälle, neue Vorschriften.',
+'Unterweisung: vor Aufnahme der Tätigkeit, bei Veränderungen und danach mindestens einmal jährlich, bei Jugendlichen halbjährlich. Verständlich, am Arbeitsplatz und mit Unterschrift dokumentiert.',
+'Unterstützung holst Du Dir bei der Fachkraft für Arbeitssicherheit, beim Betriebsarzt und beim Sicherheitsbeauftragten. Der Betriebsrat bestimmt mit.'],
+mcq:[['An einer Presse besteht Quetschgefahr. Welche Maßnahme hat nach dem STOP-Prinzip Vorrang?','Zweihandschaltung oder Lichtvorhang einbauen','Schutzhandschuhe ausgeben','Warnschild aufhängen','Mitarbeiter ermahnen','Technische Maßnahmen wirken unabhängig vom Verhalten. Schild und PSA kommen erst danach.'],
+['Wie oft müssen erwachsene Mitarbeiter mindestens unterwiesen werden?','Einmal jährlich','Alle zwei Jahre','Nur bei der Einstellung','Monatlich','Dazu kommen die Unterweisung vor der ersten Tätigkeit und bei jeder Veränderung.'],
+['Wann musst Du eine Gefährdungsbeurteilung überarbeiten?','Wenn eine neue Maschine aufgestellt wird','Nur wenn die Behörde es verlangt','Nie, einmal genügt','Nur nach einem tödlichen Unfall','Jede wesentliche Änderung und jeder Unfall ist ein Anlass.'],
+['Wer ist für die Gefährdungsbeurteilung verantwortlich?','Der Arbeitgeber und die von ihm beauftragten Führungskräfte','Die Fachkraft für Arbeitssicherheit','Der Sicherheitsbeauftragte','Die Berufsgenossenschaft','Fachkraft und Betriebsarzt beraten. Die Verantwortung bleibt in der Linie.']]});
+
+PK('org','Gefahrstoffe & Lagerung',{intro:'Kühlschmierstoffe, Reiniger, Lacke und Öle gehören in der Metallfertigung zum Alltag. Viele davon sind Gefahrstoffe. Du sorgst dafür, dass sie erfasst, gekennzeichnet, sicher gelagert und möglichst durch harmlosere Stoffe ersetzt werden.',
+pts:['Die Gefahrstoffverordnung verlangt eine Gefährdungsbeurteilung, bevor mit dem Stoff gearbeitet wird.',
+'Gefahrstoffverzeichnis: alle Gefahrstoffe im Betrieb mit Bezeichnung, Einstufung, Menge und Arbeitsbereich.',
+'Kennzeichnung nach GHS: rot umrandete Gefahrenpiktogramme, Signalwort (Gefahr oder Achtung), H-Sätze für die Gefahren, P-Sätze für die Sicherheitshinweise.',
+'Das Sicherheitsdatenblatt liefert der Hersteller. Es hat 16 Abschnitte, unter anderem Erste Hilfe, Brandbekämpfung, Lagerung, Schutzausrüstung und Entsorgung.',
+'Betriebsanweisung: kurz, arbeitsplatzbezogen und in verständlicher Sprache. Danach unterweist Du mündlich, mindestens jährlich.',
+'Substitution zuerst: Prüfe, ob ein weniger gefährlicher Stoff oder ein anderes Verfahren möglich ist.',
+'Lagerung: Originalbehälter oder eindeutig gekennzeichnete Gefäße, nie Lebensmittelbehälter. Auffangwannen, Lüftung, Mengen am Arbeitsplatz auf den Tagesbedarf begrenzen.',
+'Zusammenlagerung: Stoffe, die miteinander gefährlich reagieren, getrennt lagern, zum Beispiel brennbare Flüssigkeiten nicht neben brandfördernden Stoffen, Säuren nicht neben Laugen.'],
+mcq:[['Wo findest Du Angaben zur Ersten Hilfe und zur Schutzausrüstung für einen Reiniger?','Im Sicherheitsdatenblatt','Auf dem Lieferschein','Im Gefahrstoffverzeichnis','In der Rechnung','Das Sicherheitsdatenblatt ist die Grundlage für Gefährdungsbeurteilung und Betriebsanweisung.'],
+['Ein Mitarbeiter füllt Reiniger in eine Getränkeflasche um. Wie bewertest Du das?','Verboten, es besteht Verwechslungsgefahr','Erlaubt, wenn er die Flasche beschriftet','Erlaubt für kleine Mengen','Erlaubt, wenn die Flasche im Spind steht','Gefahrstoffe dürfen nie in Behälter, die mit Lebensmitteln verwechselt werden können.'],
+['Was prüfst Du nach der Rangfolge der Maßnahmen als Erstes?','Ob ein weniger gefährlicher Stoff verwendet werden kann','Welche Handschuhe geeignet sind','Ob eine Absaugung möglich ist','Wie oft unterwiesen wird','Substitution steht vor technischen, organisatorischen und persönlichen Maßnahmen.'],
+['Was gehört in ein Gefahrstoffverzeichnis?','Bezeichnung, Einstufung, Menge und Arbeitsbereich','Nur die Preise','Die Namen der Mitarbeiter','Nur die krebserzeugenden Stoffe','Es gibt den Überblick über alle Gefahrstoffe im Betrieb und verweist auf die Sicherheitsdatenblätter.']]});
+
+PK('org','Nach einem Unfall richtig handeln',{intro:'Trotz aller Vorsorge kann ein Unfall passieren. Dann zählen die ersten Minuten. Als Meister sorgst Du für Hilfe, sicherst die Unfallstelle, meldest richtig und klärst danach mit dem Team, wie sich eine Wiederholung verhindern lässt.',
+pts:['Sofort: Eigenschutz beachten, Maschine stillsetzen, Unfallstelle sichern, Notruf 112 absetzen, Erste Hilfe leisten, Rettungskräfte einweisen.',
+'Jede Erste-Hilfe-Leistung wird dokumentiert, zum Beispiel im Verbandbuch. Die Aufzeichnungen werden fünf Jahre aufbewahrt.',
+'Arbeitsunfälle mit mehr als drei Tagen Arbeitsunfähigkeit und tödliche Unfälle sind meldepflichtig. Die Unfallanzeige geht binnen drei Tagen an die Berufsgenossenschaft, der Betriebsrat unterschreibt mit.',
+'Tödliche Unfälle und Unfälle mit mehreren Schwerverletzten werden sofort gemeldet, auch an die Arbeitsschutzbehörde.',
+'Unfalluntersuchung: Was ist geschehen, und warum? Unfallstelle möglichst unverändert lassen, Zeugen befragen, Ursachen nach Technik, Organisation und Person ordnen.',
+'Ziel ist nicht die Schuldfrage, sondern die Vorbeugung. Maßnahmen wieder nach STOP festlegen und die Gefährdungsbeurteilung anpassen.',
+'Mit dem Team sprechen: sachlich informieren, Gerüchten vorbeugen, aus dem Anlass unterweisen. Auch Beinaheunfälle melden lassen und auswerten.',
+'Kennzahl: Tausend-Mann-Quote = [[meldepflichtige Unfälle · 1000||Zahl der Vollarbeiter]].'],
+mcq:[['Ein Mitarbeiter verletzt sich an der Hand und ist fünf Tage krankgeschrieben. Was gilt?','Unfallanzeige binnen drei Tagen an die Berufsgenossenschaft','Keine Meldung nötig','Meldung erst ab sechs Wochen','Nur ein Eintrag im Verbandbuch','Meldepflichtig sind Unfälle mit mehr als drei Tagen Arbeitsunfähigkeit.'],
+['Was tust Du nach einem schweren Unfall an einer Maschine als Erstes?','Maschine stillsetzen und die Unfallstelle sichern, dann Notruf und Erste Hilfe','Die Geschäftsleitung anrufen','Die Unfallanzeige ausfüllen','Zeugen befragen','Erst weitere Gefahren ausschließen, dann helfen. Papier kommt später.'],
+['Ein Betrieb mit 250 Vollarbeitern hatte im Jahr 5 meldepflichtige Unfälle. Wie hoch ist die Tausend-Mann-Quote?','20','2','50','12,5','5 · 1000 ÷ 250 = 20 Unfälle je 1000 Vollarbeiter.'],
+['Warum wertest Du auch Beinaheunfälle aus?','Sie zeigen Gefahren, bevor jemand verletzt wird','Weil sie meldepflichtig sind','Um Mitarbeiter abzumahnen','Für die Lohnabrechnung','Auf jeden schweren Unfall kommen viele Beinaheunfälle mit derselben Ursache.']]});
+
+PK('org','Umwelt- und Energiemanagement',{intro:'Abfall, Abwasser, Abluft und Energieverbrauch kosten Geld und sind gesetzlich geregelt. Als Meister kennst Du die Pflichten in Deinem Bereich, senkst den Verbrauch mit einfachen Maßnahmen und weist die Erfolge mit Kennzahlen nach.',
+pts:['Abfallhierarchie nach dem Kreislaufwirtschaftsgesetz: vermeiden, zur Wiederverwendung vorbereiten, recyceln, sonstig verwerten (zum Beispiel energetisch), beseitigen.',
+'Abfälle getrennt sammeln: Späne nach Werkstoff, Altöl, ölhaltige Putzlappen, Emulsionen. Gefährliche Abfälle brauchen Nachweise über die Entsorgung.',
+'Wassergefährdende Stoffe wie Öl und Kühlschmierstoff stehen in Auffangwannen. Leckagen bindest Du sofort und entsorgst das Bindemittel als gefährlichen Abfall.',
+'Managementsysteme: ISO 14001 für Umwelt, ISO 50001 für Energie. Beide arbeiten wie das Qualitätsmanagement nach dem PDCA-Kreis mit Zielen, Kennzahlen und Audits.',
+'Energiekennzahl: spezifischer Energieverbrauch = [[Energieverbrauch||Ausbringung]], zum Beispiel kWh je Stück. Erst der Bezug auf die Menge macht Monate vergleichbar.',
+'Energiekosten = Leistung · Zeit · Strompreis. Die Grundlast außerhalb der Produktion ist oft der größte unbemerkte Posten.',
+'Schnelle Maßnahmen: Druckluftleckagen beseitigen, Netzdruck senken, Maschinen und Absaugungen außerhalb der Produktion abschalten, Abwärme nutzen, Beleuchtung auf LED umstellen.'],
+mcq:[['Was steht in der Abfallhierarchie an erster Stelle?','Vermeiden','Recyceln','Verbrennen','Beseitigen','Der beste Abfall ist der, der gar nicht entsteht.'],
+['Eine Anlage zieht außerhalb der Produktion 12 kW und steht 5000 h im Jahr ungenutzt. Was kostet das bei 0,20 € je kWh?','12 000 €','1200 €','60 000 €','2400 €','12 kW · 5000 h · 0,20 €/kWh = 12 000 €.'],
+['Im März wurden 42 000 kWh für 60 000 Teile verbraucht. Wie groß ist der spezifische Energieverbrauch?','0,7 kWh je Stück','1,43 kWh je Stück','7 kWh je Stück','0,07 kWh je Stück','42 000 kWh ÷ 60 000 Stück = 0,7 kWh/Stück.'],
+['Wie gehst Du mit ölgetränkten Putzlappen um?','In einem geschlossenen, nicht brennbaren Behälter sammeln und als gefährlichen Abfall entsorgen','In den Restmüll geben','Offen neben der Maschine sammeln','Im Hof verbrennen','Ölige Lappen können sich selbst entzünden und sind gefährlicher Abfall.']]});
+
+/* ---------- F2 Personalentwicklung ---------- */
+PK('fp','Personalbedarf ermitteln',{intro:'Wie viele Mitarbeiter mit welcher Qualifikation braucht Deine Abteilung für das geplante Programm? Die Rechnung dazu ist kurz. Wichtiger ist, was Du daraus machst: einstellen, qualifizieren, umsetzen oder die Arbeit anders verteilen.',
+pts:['Quantitativ: wie viele Mitarbeiter. Qualitativ: mit welchen Kenntnissen. Dazu kommen der Zeitpunkt und der Einsatzort.',
+'Einsatzbedarf = [[Arbeitsvolumen||Arbeitszeit je Mitarbeiter]]. Das Arbeitsvolumen ist Stückzahl mal Zeit je Stück.',
+'Reservebedarf deckt Urlaub, Krankheit und Schulung. Bruttopersonalbedarf = [[Einsatzbedarf||1 − Fehlzeitenquote]].',
+'Nettopersonalbedarf = Bruttopersonalbedarf − vorhandener Bestand + Abgänge − feststehende Zugänge.',
+'Ein positiver Nettobedarf bedeutet Unterdeckung: einstellen, Überstunden, Leiharbeit, qualifizieren, automatisieren. Ein negativer bedeutet Überdeckung: umsetzen, Arbeitszeitkonten, natürliche Fluktuation.',
+'Auf volle Mitarbeiter wird aufgerundet. Teilzeitkräfte zählen mit ihrem Anteil.',
+'Der Betriebsrat ist über die Personalplanung zu unterrichten und kann Vorschläge machen.'],
+mcq:[['Arbeitsvolumen 1800 h im Monat, jeder Mitarbeiter leistet 150 h. Wie groß ist der Einsatzbedarf?','12 Mitarbeiter','15 Mitarbeiter','10 Mitarbeiter','18 Mitarbeiter','1800 h ÷ 150 h = 12 Mitarbeiter.'],
+['Der Einsatzbedarf beträgt 12 Mitarbeiter, die Fehlzeitenquote 20 %. Wie groß ist der Bruttopersonalbedarf?','15 Mitarbeiter','14,4 Mitarbeiter','12 Mitarbeiter','9,6 Mitarbeiter','12 ÷ (1 − 0,2) = 15. Von 15 Mitarbeitern sind im Mittel 12 anwesend.'],
+['Bruttobedarf 15, Bestand 13, ein Mitarbeiter geht in Rente, ein Auszubildender wird fest übernommen. Wie groß ist der Nettobedarf?','2 Mitarbeiter','3 Mitarbeiter','1 Mitarbeiter','4 Mitarbeiter','15 − 13 + 1 − 1 = 2 Mitarbeiter.'],
+['Was beschreibt der qualitative Personalbedarf?','Welche Kenntnisse und Fähigkeiten gebraucht werden','Wie viele Mitarbeiter gebraucht werden','Wann die Mitarbeiter gebraucht werden','Was die Mitarbeiter kosten','Fünf Köpfe helfen nicht, wenn keiner die Maschine programmieren kann.']]});
+
+PK('fp','Qualifizierung & Schulungsplan',{intro:'Neue Maschinen, neue Produkte, Kollegen, die in Rente gehen: Das Können im Team muss mitwachsen. Mit der Qualifikationsmatrix siehst Du auf einen Blick, wo Lücken und Engpässe sind, und planst Schulungen, deren Erfolg Du anschließend prüfst.',
+pts:['Qualifikationsmatrix: Mitarbeiter in den Zeilen, Tätigkeiten in den Spalten, dazu die Stufe, zum Beispiel 0 = keine Kenntnis bis 3 = kann andere anlernen.',
+'Soll-Ist-Vergleich: Für jede Tätigkeit legst Du fest, wie viele Mitarbeiter sie beherrschen müssen. Mindestens zwei, sonst steht die Arbeit bei Urlaub oder Krankheit.',
+'Bedarf ableiten aus Unternehmenszielen, neuer Technik, Altersstruktur, Fehlern und Reklamationen, Mitarbeitergesprächen.',
+'Maßnahmen am Arbeitsplatz: Unterweisung, Arbeitsplatzwechsel, Patensystem. Außerhalb: Seminar, Herstellerschulung, Lehrgang. Dazu Lernen mit digitalen Medien.',
+'Schulungsplan: wer, was, wie, wann, durch wen, Kosten und Vertretung während der Schulung.',
+'Erfolgskontrolle in vier Schritten: Zufriedenheit, Lernerfolg, Anwendung am Arbeitsplatz, Wirkung auf Kennzahlen.',
+'Der Betriebsrat bestimmt bei betrieblichen Bildungsmaßnahmen mit, etwa bei der Auswahl der Teilnehmer.'],
+mcq:[['Nur ein Mitarbeiter kann die Messmaschine programmieren. Was zeigt die Qualifikationsmatrix damit?','Einen Engpass, mindestens ein zweiter Mitarbeiter sollte qualifiziert werden','Dass alles in Ordnung ist','Dass die Messmaschine überflüssig ist','Dass der Mitarbeiter überqualifiziert ist','Fällt er aus, steht die Prüfung. Solche Einzelbesetzungen haben Vorrang im Schulungsplan.'],
+['Woran erkennst Du, ob eine Schulung wirklich gewirkt hat?','Der Mitarbeiter wendet das Gelernte am Arbeitsplatz an und die Kennzahlen verbessern sich','Der Teilnehmer fand das Seminar angenehm','Die Teilnahmebescheinigung liegt vor','Die Schulung war teuer','Zufriedenheit ist nur die erste Stufe. Entscheidend sind Anwendung und Ergebnis.'],
+['Welche Maßnahme ist Lernen am Arbeitsplatz?','Planmäßiger Arbeitsplatzwechsel','Herstellerschulung im Werk des Lieferanten','Meisterlehrgang','Messebesuch','Der Mitarbeiter lernt weitere Arbeitsplätze kennen und wird vielseitiger einsetzbar.'],
+['Was gehört nicht in einen Schulungsplan?','Die Krankheitstage des Mitarbeiters','Thema und Ziel','Termin und Dauer','Kosten und Vertretung','Geplant werden Inhalt, Zeit, Verantwortung und Kosten. Gesundheitsdaten haben dort nichts zu suchen.']]});
+
+PK('fp','Einarbeitung & Unterweisung',{intro:'Die ersten Wochen entscheiden, ob ein neuer Mitarbeiter bleibt und wie schnell er sicher und gut arbeitet. Mit einem Einarbeitungsplan, einem Paten und der Vier-Stufen-Methode bringst Du Struktur hinein. Im Fachgespräch ist das ein häufiges Thema.',
+pts:['Vor dem ersten Tag: Arbeitsplatz, Arbeitskleidung, Zugänge und Unterlagen vorbereiten, Team informieren, Paten benennen.',
+'Erster Tag: persönlich begrüßen, Team und Betrieb vorstellen, Sicherheitsunterweisung vor der ersten Tätigkeit, Ansprechpartner nennen.',
+'Der Einarbeitungsplan legt fest, was der Mitarbeiter bis wann können soll, wer es ihm zeigt und wann Ihr den Stand besprecht.',
+'Der Pate ist ein erfahrener Kollege für die Fragen des Alltags. Die Verantwortung für die Einarbeitung bleibt bei Dir.',
+'Vier-Stufen-Methode: 1 vorbereiten, 2 vormachen und erklären, 3 nachmachen und erklären lassen, 4 selbstständig üben lassen und kontrollieren.',
+'Bei jedem Schritt erklärst Du das Was, das Wie und das Warum. Wer den Grund kennt, hält die Regel eher ein.',
+'Rückmeldegespräche nach der ersten Woche, nach einem Monat und vor Ende der Probezeit: Was läuft gut, was fehlt, wie geht es weiter?'],
+mcq:[['Welche Stufe folgt in der Vier-Stufen-Methode auf das Vormachen?','Nachmachen und erklären lassen','Selbstständig üben','Vorbereiten','Beurteilen','Beim Nachmachen zeigt sich, ob der Mitarbeiter die Schritte und ihren Grund verstanden hat.'],
+['Wann erhält ein neuer Mitarbeiter die Sicherheitsunterweisung?','Vor Aufnahme der Tätigkeit','Nach der Probezeit','Innerhalb des ersten Jahres','Nach dem ersten Unfall','Ohne Unterweisung darf er nicht an die Maschine.'],
+['Welche Aufgabe hat der Pate?','Ansprechpartner im Alltag sein und den Einstieg ins Team erleichtern','Die Probezeit beurteilen','Den Arbeitsvertrag erklären','Die Verantwortung für die Einarbeitung übernehmen','Der Pate unterstützt. Planung, Kontrolle und Beurteilung bleiben beim Meister.'],
+['Ein neuer Mitarbeiter macht in der dritten Woche wiederholt denselben Fehler. Was tust Du zuerst?','Im Gespräch klären, was unklar ist, und den Schritt noch einmal nach der Vier-Stufen-Methode unterweisen','Abmahnen','Die Probezeit beenden','Abwarten','Fehler in der Einarbeitung zeigen meist eine Lücke in der Unterweisung, nicht fehlenden Willen.']]});
+
+/* ===== Lernlabor Pro, Vorschau 3: Rechenaufgaben der neuen Themen, Paket P1 (Situationsaufgaben, Fachgespräch). Eigene Aufgaben. ===== */
+{const m=MI('org','Kapazitäts- und Terminplanung');
+C.push({f:'org',m,name:'Kapazitätsbestand einer Woche',gen:r=>{const T=r.p([5,6]),S=r.p([1,2,3]),h=r.p([7.5,8]),ng=r.step(75,95,5),K=T*S*h*ng/100;
+ return{q:'Eine Maschine läuft an '+T+' Tagen in '+S+(S===1?' Schicht':' Schichten')+' zu je '+nt(h)+' h. Der Nutzungsgrad beträgt '+ng+' %. Wie groß ist der Kapazitätsbestand der Woche?',a:K,u:'h',d:1,tol:0.005,
+ sol:['Kapazitätsbestand = Tage · Schichten · Stunden je Schicht · Nutzungsgrad','Kapazitätsbestand = '+T+' · '+S+' · '+nt(h)+' h · '+nt(ng/100)+' = '+nz(K,1)+' h']}}});
+C.push({f:'org',m,name:'Auslastung',gen:r=>{const tr=r.step(1,4,0.5),x=r.step(200,900,50),te=r.step(2,6,0.5),K=r.p([34,60,64,68,96,102]),B=tr+x*te/60,A=B/K*100;
+ return{q:'Ein Auftrag über '+x+' Stück hat '+nt(tr)+' h Rüstzeit und '+nt(te)+' min Zeit je Einheit. Der Kapazitätsbestand der Woche beträgt '+K+' h. Wie hoch ist die Auslastung?',a:A,u:'%',d:1,tol:0.005,
+ sol:['Kapazitätsbedarf = Rüstzeit + Stückzahl · Zeit je Einheit','Kapazitätsbedarf = '+nt(tr)+' h + '+x+' · '+nt(te)+' min ÷ 60 min/h = '+nz(B,2)+' h','Auslastung = [['+nz(B,2)+' h||'+K+' h]] · 100 % = '+nz(A,1)+' %',A>100?'Die Maschine ist überlastet. Du brauchst Überstunden, eine Zusatzschicht oder verschiebst einen Teil.':'Der Auftrag passt in die Woche.']}}});
+C.push({f:'org',m,name:'Gesamtpuffer im Netzplan',gen:r=>{const faz=r.i(2,20),d=r.i(2,9),p=r.i(0,8),saz=faz+p;
+ return{q:'Ein Vorgang dauert '+d+' Tage. Sein frühester Anfang liegt bei Tag '+faz+', sein spätestes Ende bei Tag '+(saz+d)+'. Wie groß ist der Gesamtpuffer?',a:p,u:'Tage',d:0,tol:0,
+ sol:['SAZ = SEZ − Dauer = '+(saz+d)+' Tage − '+d+' Tage = '+saz+' Tage','Gesamtpuffer = SAZ − FAZ = '+saz+' Tage − '+faz+' Tage = '+p+' Tage',p===0?'Kein Puffer: Der Vorgang liegt auf dem kritischen Weg.':'Um so viele Tage darf sich der Vorgang verschieben, ohne den Endtermin zu gefährden.']}}});}
+{const m=MI('org','Reihenfolgeplanung');
+C.push({f:'org',m,name:'Mittlere Durchlaufzeit nach KOZ',gen:r=>{let t=[r.i(1,4),r.i(5,8),r.i(9,14)];const o=r.p([[1,2,0],[2,0,1],[1,0,2]]),g=o.map(i=>t[i]),f1=t[0],f2=t[0]+t[1],f3=f2+t[2],D=(f1+f2+f3)/3;
+ return{q:'Vor einer Maschine liegen gleichzeitig drei Aufträge mit '+g[0]+' h, '+g[1]+' h und '+g[2]+' h Bearbeitungszeit. Wie groß ist die mittlere Durchlaufzeit, wenn Du nach der Regel „kürzeste Operationszeit“ einplanst?',a:D,u:'h',d:1,tol:0.01,
+ sol:['Reihenfolge: '+t[0]+' h, dann '+t[1]+' h, dann '+t[2]+' h','Fertig nach '+f1+' h, nach '+f1+' h + '+t[1]+' h = '+f2+' h und nach '+f2+' h + '+t[2]+' h = '+f3+' h','Mittlere Durchlaufzeit = [['+f1+' h + '+f2+' h + '+f3+' h||3]] = '+nz(D,1)+' h']}}});
+C.push({f:'org',m,name:'Schlupfzeit',gen:r=>{const L=r.i(12,48),R=r.i(4,L-2),S=L-R;
+ return{q:'Ein Auftrag muss in '+L+' h geliefert werden. Die restliche Bearbeitung dauert '+R+' h. Wie groß ist die Schlupfzeit?',a:S,u:'h',d:0,tol:0,
+ sol:['Schlupfzeit = Zeit bis zum Liefertermin − restliche Bearbeitungszeit','Schlupfzeit = '+L+' h − '+R+' h = '+S+' h']}}});}
+{const m=MI('org','Material: ABC, XYZ, Bestellmenge, Kanban');
+C.push({f:'org',m,name:'Meldebestand',gen:r=>{const v=r.step(20,120,10),t=r.i(3,12),s=v*r.i(1,4),M=v*t+s;
+ return{q:'Von einem Teil werden täglich '+v+' Stück verbraucht. Die Beschaffungszeit beträgt '+t+' Tage, der Sicherheitsbestand '+s+' Stück. Bei welchem Bestand bestellst Du?',a:M,u:'Stück',d:0,tol:0,
+ sol:['Meldebestand = Tagesverbrauch · Beschaffungszeit + Sicherheitsbestand','Meldebestand = '+v+' Stück/Tag · '+t+' Tage + '+s+' Stück = '+M+' Stück']}}});
+C.push({f:'org',m,name:'Optimale Bestellmenge',gen:r=>{const J=r.step(2,12,1)*1000,K=r.step(30,90,10),p=r.p([2,4,5,8,10]),q=r.p([10,15,20,25]),x=Math.sqrt(200*J*K/(p*q));
+ return{q:'Jahresbedarf '+nz(J,0)+' Stück, Kosten je Bestellung '+K+' €, Einstandspreis '+nz(p,2)+' € je Stück, Lagerkostensatz '+q+' %. Wie groß ist die optimale Bestellmenge?',a:x,u:'Stück',d:0,tol:0.01,
+ sol:['x_opt² = [[200 · Jahresbedarf · Kosten je Bestellung||Einstandspreis · Lagerkostensatz]]','x_opt² = [[200 · '+nz(J,0)+' Stück · '+K+' €||'+nz(p,2)+' €/Stück · '+q+']] = '+nz(200*J*K/(p*q),0)+' Stück²','x_opt = √('+nz(200*J*K/(p*q),0)+' Stück²) = '+nz(x,0)+' Stück','Das sind rund '+nz(J/x,1)+' Bestellungen im Jahr.']}}});
+C.push({f:'org',m,name:'Anzahl der Kanban-Karten',gen:r=>{const v=r.step(100,600,50),t=r.p([0.5,1,1.5,2]),s=r.p([10,20,25]),b=r.p([50,80,100,120]),n=v*t*(1+s/100)/b,N=Math.ceil(n-1e-9);
+ return{q:'Tagesverbrauch '+v+' Stück, Wiederbeschaffungszeit '+nt(t)+' Tage, Sicherheitszuschlag '+s+' %, Behälterinhalt '+b+' Stück. Wie viele Kanban-Karten brauchst Du?',a:N,u:'Karten',d:0,tol:0,
+ sol:['Karten = [[Verbrauch je Tag · Wiederbeschaffungszeit · (1 + Sicherheit)||Behälterinhalt]]','Karten = [['+v+' Stück/Tag · '+nt(t)+' Tage · '+nt(1+s/100)+'||'+b+' Stück]] = '+nz(n,2),'Aufgerundet: '+N+' Karten']}}});}
+{const m=MI('org','Zeitwirtschaft: Auftragszeit & Zeitgrad');
+C.push({f:'org',m,name:'Auftragszeit',gen:r=>{const tr=r.step(15,60,5),tg=r.step(2,8,0.5),er=r.p([3,4,5]),v=r.p([8,10,12]),x=r.step(20,200,10),te=tg*(1+(er+v)/100),T=tr+x*te;
+ return{q:'Rüstzeit '+tr+' min, Grundzeit '+nt(tg)+' min je Stück, Erholungszeit '+er+' %, Verteilzeit '+v+' %, Auftragsmenge '+x+' Stück. Wie groß ist die Auftragszeit?',a:T,u:'min',d:1,tol:0.005,
+ sol:['t_e = t_g · (1 + z_er + z_v) = '+nt(tg)+' min · (1 + '+nt(er/100)+' + '+nt(v/100)+') = '+nt(te,3)+' min','t_a = m · t_e = '+x+' · '+nt(te,3)+' min = '+nz(x*te,1)+' min','T = t_r + t_a = '+tr+' min + '+nz(x*te,1)+' min = '+nz(T,1)+' min']}}});
+C.push({f:'org',m,name:'Zeitgrad',gen:r=>{const V=r.step(200,600,20),z=r.p([85,90,95,105,110,115,120,125]),I=Math.round(V/z*100),Z=V/I*100;
+ return{q:'Die Vorgabezeit für einen Auftrag beträgt '+V+' min. Der Mitarbeiter hat '+I+' min gebraucht. Wie hoch ist der Zeitgrad?',a:Z,u:'%',d:1,tol:0.005,
+ sol:['Zeitgrad = [[Vorgabezeit||Istzeit]] · 100 %','Zeitgrad = [['+V+' min||'+I+' min]] · 100 % = '+nz(Z,1)+' %',Z>100?'Der Mitarbeiter war schneller als die Vorgabe.':'Der Mitarbeiter hat länger gebraucht als die Vorgabe. Kläre die Ursache: Störung, Material, Einarbeitung?']}}});}
+{const m=MI('tec','Montageplanung & Fügen');
+C.push({f:'tec',m,name:'Taktzeit und Stationenzahl',gen:r=>{const Z=r.p([420,450,480]),x=r.step(100,300,10),S=r.step(12,30,1),tk=Z/x,n=S/tk,N=Math.ceil(n-1e-9);
+ return{q:'In einer Schicht stehen '+Z+' min zur Verfügung, gefordert sind '+x+' Geräte. Die Montagezeiten ergeben zusammen '+S+' min je Gerät. Wie viele Stationen brauchst Du mindestens?',a:N,u:'Stationen',d:0,tol:0,
+ sol:['Taktzeit = [['+Z+' min||'+x+' Stück]] = '+nz(tk,2)+' min','Stationen = [['+S+' min||'+nz(tk,2)+' min]] = '+nz(n,2),'Aufgerundet: '+N+' Stationen']}}});
+C.push({f:'tec',m,name:'Bandwirkungsgrad',gen:r=>{const tk=r.step(1.5,4,0.5),N=r.i(5,12),S=Math.round(tk*N*r.p([0.8,0.85,0.9,0.95])*10)/10,B=S/(N*tk)*100;
+ return{q:'Eine Montagelinie hat '+N+' Stationen und '+nt(tk)+' min Taktzeit. Die Montagezeiten ergeben zusammen '+nt(S)+' min. Wie hoch ist der Bandwirkungsgrad?',a:B,u:'%',d:1,tol:0.005,
+ sol:['Bandwirkungsgrad = [[Summe der Montagezeiten||Stationen · Taktzeit]] · 100 %','Bandwirkungsgrad = [['+nt(S)+' min||'+N+' · '+nt(tk)+' min]] · 100 % = '+nz(B,1)+' %']}}});}
+{const m=MI('tec','FMEA: Risiken bewerten');
+C.push({f:'tec',m,name:'Risikoprioritätszahl vorher und nachher',gen:r=>{const B=r.i(5,9),A=r.i(4,8),E=r.i(5,9),A2=r.i(1,3),E2=r.i(2,4),R1=B*A*E,R2=B*A2*E2,S=(R1-R2)/R1*100;
+ return{q:'Ein Fehler wird mit B = '+B+', A = '+A+' und E = '+E+' bewertet. Nach den Maßnahmen gelten A = '+A2+' und E = '+E2+'. Um wie viel Prozent sinkt die Risikoprioritätszahl?',a:S,u:'%',d:1,tol:0.005,
+ sol:['RPZ vorher = B · A · E = '+B+' · '+A+' · '+E+' = '+R1,'RPZ nachher = '+B+' · '+A2+' · '+E2+' = '+R2,'Senkung = [['+R1+' − '+R2+'||'+R1+']] · 100 % = '+nz(S,1)+' %','Die Bedeutung B bleibt gleich, weil die Folge des Fehlers dieselbe ist.']}}});}
+{const m=MI('tec','Automatisierung & Robotik');
+C.push({f:'tec',m,name:'Ausbringung einer Roboterzelle',gen:r=>{const h=r.p([7,7.5,8]),t=r.step(20,60,4),V=r.step(80,96,2),n=h*3600/t*V/100;
+ return{q:'Eine Roboterzelle läuft '+nt(h)+' h je Schicht mit '+t+' s Taktzeit und '+V+' % Verfügbarkeit. Wie viele Teile schafft sie je Schicht?',a:Math.floor(n+1e-9),u:'Teile',d:0,tol:0.002,
+ sol:['Takte = [['+nt(h)+' h · 3600 s/h||'+t+' s]] = '+nz(h*3600/t,1),'Ausbringung = '+nz(h*3600/t,1)+' · '+nt(V/100)+' = '+nz(n,1),'Abgerundet: '+Math.floor(n+1e-9)+' Teile je Schicht']}}});
+C.push({f:'tec',m,name:'Amortisation einer Roboterzelle',gen:r=>{const I=r.step(120,300,10)*1000,L=r.step(40,70,5)*1000,S=r.p([1,2,3]),B=r.step(8,20,2)*1000,E=L*S-B,t=I/E;
+ return{q:'Eine Roboterzelle kostet '+nz(I,0)+' €. Sie spart je Schicht '+nz(L,0)+' € Lohnkosten im Jahr, gefahren wird in '+S+(S===1?' Schicht':' Schichten')+'. Die laufenden Kosten für Instandhaltung und Energie betragen '+nz(B,0)+' € im Jahr. Nach wie vielen Jahren ist das Geld zurück?',a:t,u:'Jahre',d:1,tol:0.02,
+ sol:['Jährlicher Rückfluss = '+nz(L,0)+' € · '+S+' − '+nz(B,0)+' € = '+nz(E,0)+' €','Amortisationszeit = [['+nz(I,0)+' €||'+nz(E,0)+' €/Jahr]] = '+nz(t,1)+' Jahre','Hier ist die Einsparung als Rückfluss gerechnet, die Abschreibung ist darin nicht abgezogen.']}}});}
+{const m=MI('fp','Prüfen, Messen & Fehleranalyse');
+C.push({f:'fp',m,name:'Prozessfähigkeit c_p',gen:r=>{const N=r.p([12,20,25,40,50]),T=r.p([0.04,0.05,0.06,0.08,0.1]),s=r.p([0.008,0.01,0.012,0.015,0.02,0.025]),cp=2*T/(6*s);
+ return{q:'Ein Maß ist mit '+nz(N,2)+' mm ± '+nt(T)+' mm toleriert. Die Standardabweichung des Prozesses beträgt '+nt(s)+' mm. Wie groß ist c_p?',a:cp,u:'',d:2,tol:0.01,
+ sol:['c_p = [[OSG − USG||6 · σ]]','c_p = [['+nz(N+T,2)+' mm − '+nz(N-T,2)+' mm||6 · '+nt(s)+' mm]] = [['+nt(2*T)+' mm||'+nt(6*s)+' mm]] = '+nz(cp,2),cp>=1.33?'Die Streuung ist klein genug (c_p ≥ 1,33).':'Die Streuung ist zu groß (c_p unter 1,33).']}}});
+C.push({f:'fp',m,name:'Prozessfähigkeit c_pk',gen:r=>{const N=r.p([20,30,50]),T=r.p([0.06,0.08,0.1]),s=r.p([0.01,0.015,0.02]),o=r.p([-0.03,-0.02,-0.01,0.01,0.02,0.03]),xq=N+o,ab=T-Math.abs(o),ck=ab/(3*s);
+ return{q:'Toleranz '+nz(N,2)+' mm ± '+nt(T)+' mm, Mittelwert '+nz(xq,2)+' mm, Standardabweichung '+nt(s)+' mm. Wie groß ist c_pk?',a:ck,u:'',d:2,tol:0.01,
+ sol:['Abstand zur oberen Grenze = '+nz(N+T,2)+' mm − '+nz(xq,2)+' mm = '+nz(T-o,2)+' mm','Abstand zur unteren Grenze = '+nz(xq,2)+' mm − '+nz(N-T,2)+' mm = '+nz(T+o,2)+' mm','c_pk = [[kleinerer Abstand||3 · σ]] = [['+nz(ab,2)+' mm||3 · '+nt(s)+' mm]] = '+nz(ck,2),ck>=1.33?'Der Prozess ist fähig (c_pk ≥ 1,33).':'Der Prozess ist nicht fähig. Zentrieren oder die Streuung verringern.']}}});}
+{const m=MI('fp','Qualitätswerkzeuge & KVP');
+C.push({f:'fp',m,name:'Ausschussquote und Fehlerkosten',gen:r=>{const x=r.step(4,40,2)*1000,q=r.p([0.5,1,1.5,2,2.5,3,4]),k=r.step(4,30,2),a=x*q/100,K=a*k;
+ return{q:'Im Monat wurden '+nz(x,0)+' Teile gefertigt, die Ausschussquote lag bei '+nt(q)+' %. Jedes Ausschussteil kostet '+k+' €. Wie hoch sind die Ausschusskosten des Monats?',a:K,u:'€',d:0,tol:0.002,
+ sol:['Ausschussteile = '+nz(x,0)+' Stück · '+nt(q)+' % = '+nz(a,0)+' Stück','Ausschusskosten = '+nz(a,0)+' Stück · '+k+' €/Stück = '+nz(K,0)+' €']}}});}
+{const m=MI('tec','Werkstoffe & Wärmebehandlung');
+C.push({f:'tec',m,name:'Stahlbezeichnung lesen',gen:r=>{const s=r.p([['C35',0.35],['C45',0.45],['C60',0.60],['42CrMo4',0.42],['34CrNiMo6',0.34],['16MnCr5',0.16],['25CrMo4',0.25],['51CrV4',0.51]]);
+ return{q:'Wie viel Prozent Kohlenstoff enthält der Stahl '+s[0]+'?',a:s[1],u:'%',d:2,tol:0.001,
+ sol:['Die Kohlenstoffkennzahl steht am Anfang und wird durch 100 geteilt.','Kohlenstoffgehalt = [['+Math.round(s[1]*100)+'||100]] % = '+nz(s[1],2)+' %',s[1]<0.25?'Mit so wenig Kohlenstoff ist das ein Einsatzstahl: Der Rand wird aufgekohlt und gehärtet.':'Mit diesem Kohlenstoffgehalt lässt sich der Stahl härten und vergüten.']}}});}
+{const m=MI('tec','Umformen, Trennen & additive Fertigung');
+C.push({f:'tec',m,name:'Schneidkraft beim Lochen',gen:r=>{const d=r.p([10,16,20,25,30,40,50]),s=r.step(1,5,0.5),Rm=r.p([300,360,400,500,600]),l=Math.PI*d,ta=0.8*Rm,F=l*s*ta/1000;
+ return{q:'In ein '+nt(s)+' mm dickes Blech mit R_m = '+Rm+' N/mm² wird ein rundes Loch mit d = '+d+' mm gestanzt. Wie groß ist die Schneidkraft? Rechne mit τ_aB = 0,8 · R_m.',a:F,u:'kN',d:1,tol:0.01,
+ sol:['l = π · d = π · '+d+' mm = '+nz(l,1)+' mm','τ_aB = 0,8 · '+Rm+' N/mm² = '+nz(ta,0)+' N/mm²','F = l · s · τ_aB = '+nz(l,1)+' mm · '+nt(s)+' mm · '+nz(ta,0)+' N/mm² = '+nz(F*1000,0)+' N','F = '+nz(F,1)+' kN']}}});
+C.push({f:'tec',m,name:'Ziehverhältnis',gen:r=>{const d=r.p([40,50,60,80,100]),b=r.p([1.4,1.5,1.6,1.8,2,2.2]),D=Math.round(d*b);
+ return{q:'Aus einer Ronde mit D = '+D+' mm wird ein Napf mit Stempeldurchmesser d = '+d+' mm gezogen. Wie groß ist das Ziehverhältnis?',a:D/d,u:'',d:2,tol:0.005,
+ sol:['β = [[D||d]] = [['+D+' mm||'+d+' mm]] = '+nz(D/d,2),D/d>2?'Das ist für einen Zug meist zu viel. Plane einen Weiterzug ein.':'Der Wert liegt im üblichen Bereich für den ersten Zug.']}}});}
+{const m=MI('tec','Oberflächen & Korrosionsschutz');
+C.push({f:'tec',m,name:'Schutzdauer einer Zinkschicht',gen:r=>{const d=r.step(45,160,5),a=r.p([0.5,1,1.5,2,3,4]),t=d/a;
+ return{q:'Ein Geländer ist mit '+d+' µm Zink feuerverzinkt. In der Umgebung werden etwa '+nt(a)+' µm je Jahr abgetragen. Wie lange schützt die Schicht ungefähr?',a:t,u:'Jahre',d:0,tol:0.02,
+ sol:['Schutzdauer = [[Schichtdicke||Abtrag je Jahr]]','Schutzdauer = [['+d+' µm||'+nt(a)+' µm/Jahr]] = '+nz(t,0)+' Jahre']}}});}
+{const m=MI('org','Nach einem Unfall richtig handeln');
+C.push({f:'org',m,name:'Tausend-Mann-Quote',gen:r=>{const V=r.step(80,600,20),n=r.i(1,12),Q=n*1000/V;
+ return{q:'Ein Betrieb mit '+V+' Vollarbeitern hatte im Jahr '+n+' meldepflichtige Arbeitsunfälle. Wie hoch ist die Tausend-Mann-Quote?',a:Q,u:'',d:1,tol:0.005,
+ sol:['Tausend-Mann-Quote = [[meldepflichtige Unfälle · 1000||Vollarbeiter]]','Tausend-Mann-Quote = [['+n+' · 1000||'+V+']] = '+nz(Q,1)]}}});}
+{const m=MI('org','Umwelt- und Energiemanagement');
+C.push({f:'org',m,name:'Kosten der Grundlast',gen:r=>{const P=r.step(4,30,2),h=r.step(3000,5000,200),pr=r.p([0.18,0.2,0.22,0.25]),K=P*h*pr;
+ return{q:'Eine Fertigungslinie zieht außerhalb der Produktion '+P+' kW. Das sind '+h+' h im Jahr. Was kostet diese Grundlast bei einem angenommenen Strompreis von '+nz(pr,2)+' € je kWh?',a:K,u:'€',d:0,tol:0.002,
+ sol:['Energie = P · t = '+P+' kW · '+h+' h = '+nz(P*h,0)+' kWh','Kosten = '+nz(P*h,0)+' kWh · '+nz(pr,2)+' €/kWh = '+nz(K,0)+' €']}}});
+C.push({f:'org',m,name:'Spezifischer Energieverbrauch',gen:r=>{const x=r.step(20,90,5)*1000,e=r.step(4,16,1)/10,E=Math.round(x*e),e2=r.step(2,Math.round(e*10)-1,1)/10,S=(e-e2)/e*100;
+ return{q:'Im Vorjahr brauchte die Abteilung '+nz(E,0)+' kWh für '+nz(x,0)+' Teile. Ziel sind '+nt(e2)+' kWh je Stück. Um wie viel Prozent muss der spezifische Verbrauch sinken?',a:S,u:'%',d:1,tol:0.005,
+ sol:['Spezifischer Verbrauch = [['+nz(E,0)+' kWh||'+nz(x,0)+' Stück]] = '+nt(e)+' kWh/Stück','Senkung = [['+nt(e)+' kWh/Stück − '+nt(e2)+' kWh/Stück||'+nt(e)+' kWh/Stück]] · 100 % = '+nz(S,1)+' %']}}});}
+{const m=MI('fp','Personalbedarf ermitteln');
+C.push({f:'fp',m,name:'Bruttopersonalbedarf',gen:r=>{const x=r.step(2000,9000,500),t=r.step(10,30,2),h=r.p([140,150,160]),f=r.p([10,15,20,25]),V=x*t/60,E=V/h,B=E/(1-f/100),N=Math.ceil(B-1e-9);
+ return{q:'Im Monat sollen '+nz(x,0)+' Teile mit je '+t+' min gefertigt werden. Ein Mitarbeiter leistet '+h+' h im Monat, die Fehlzeitenquote beträgt '+f+' %. Wie viele Mitarbeiter brauchst Du (aufgerundet)?',a:N,u:'Mitarbeiter',d:0,tol:0,
+ sol:['Arbeitsvolumen = '+nz(x,0)+' · '+t+' min ÷ 60 min/h = '+nz(V,0)+' h','Einsatzbedarf = [['+nz(V,0)+' h||'+h+' h]] = '+nz(E,2),'Bruttopersonalbedarf = [['+nz(E,2)+'||1 − '+nt(f/100)+']] = '+nz(B,2),'Aufgerundet: '+N+' Mitarbeiter']}}});
+C.push({f:'fp',m,name:'Nettopersonalbedarf',gen:r=>{const B=r.i(12,40),Be=B-r.i(-2,5),ab=r.i(0,3),zu=r.i(0,2),N=B-Be+ab-zu;
+ return{q:'Bruttopersonalbedarf '+B+' Mitarbeiter, Bestand '+Be+'. Im Planungszeitraum gehen '+ab+' Mitarbeiter ab, '+zu+' Zugänge stehen schon fest. Wie groß ist der Nettopersonalbedarf? (Eine Überdeckung gibst Du mit Minus an.)',a:N,u:'Mitarbeiter',d:0,tol:0,
+ sol:['Nettobedarf = Bruttobedarf − Bestand + Abgänge − Zugänge','Nettobedarf = '+B+' − '+Be+' + '+ab+' − '+zu+' = '+N,N>0?'Unterdeckung: einstellen, qualifizieren oder Arbeit anders verteilen.':N<0?'Überdeckung: umsetzen oder Arbeitszeitkonten nutzen.':'Bedarf und Bestand passen zusammen.']}}});}
+
+/* ---------- Paket P1: weitere Situationsaufgaben (eigene Fälle) ---------- */
+CASES.push(
+{f:'tec',t:'Montagelinie für Getriebemotoren',txt:'Dein Betrieb montiert Getriebemotoren. Wegen eines neuen Kunden steigt der Bedarf auf 180 Stück je Schicht. Eine Schicht hat 450 min Arbeitszeit. Die Montagezeiten ergeben zusammen 22 min je Gerät. Das Lagerschild wird mit Schrauben befestigt, das Ritzel mit einer Pressverbindung gefügt. Am Bandende soll ein Roboter die 9 kg schweren Geräte auf Paletten stapeln.',
+tasks:[{q:'Berechne die Taktzeit der Linie.',a:'Taktzeit = verfügbare Arbeitszeit ÷ Stückzahl = 450 min ÷ 180 Stück = 2,5 min je Gerät.',p:2},
+{q:'Wie viele Stationen brauchst Du mindestens, und wie hoch ist der Bandwirkungsgrad?',a:'Stationen = 22 min ÷ 2,5 min = 8,8, aufgerundet 9 Stationen. Bandwirkungsgrad = 22 min ÷ (9 · 2,5 min) · 100 % = 97,8 %. Die Linie ist sehr eng getaktet, Störungen schlagen sofort durch.',p:5},
+{q:'Die Schrauben am Lagerschild lösen sich im Feld gelegentlich. Bewerte in einer Prozess-FMEA mit B = 8, A = 4, E = 6 und nenne je eine Maßnahme für A und E.',a:'RPZ = 8 · 4 · 6 = 192. Auftreten senken: gesteuerter Schrauber mit Drehmoment- und Drehwinkelüberwachung, Schraubensicherung. Entdeckung verbessern: Schraubkurve je Gerät speichern, bei Abweichung Band anhalten. Danach neu bewerten, zum Beispiel A = 2, E = 2, RPZ = 32.',p:6},
+{q:'Der Palettierroboter hat 12 kg Traglast, der Greifer wiegt 2,5 kg. Reicht das? Nenne außerdem drei Schutzmaßnahmen für die Zelle.',a:'Last am Flansch = 9 kg + 2,5 kg = 11,5 kg, das liegt knapp unter 12 kg. Die Reserve ist klein, deshalb Schwerpunktlage und Beschleunigung mit dem Hersteller prüfen. Schutz: trennender Schutzzaun mit verriegelter Tür, Lichtvorhang an der Palettenentnahme, Not-Halt, Zustimmtaster für das Einrichten mit reduzierter Geschwindigkeit.',p:6},
+{q:'Nenne vier Punkte, die Du vor Produktionsstart der neuen Linie erledigst.',a:'Gefährdungsbeurteilung erstellen und Schutzeinrichtungen prüfen. Probelauf mit Abnahmeteilen und Taktzeitnachweis. Abnahmeprotokoll mit offenen Punkten. Mitarbeiter unterweisen und Betriebsanweisungen aushängen. Wartungsplan an die Instandhaltung geben. Prüfplan und Erstteilfreigabe festlegen.',p:4},
+{q:'Zwei Monteure müssen für die Linie neu angelernt werden. Wie gehst Du vor?',a:'Einarbeitungsplan mit Zielen und Terminen, erfahrenen Kollegen als Paten benennen. Jeden Arbeitsschritt nach der Vier-Stufen-Methode unterweisen: vorbereiten, vormachen und erklären, nachmachen und erklären lassen, üben lassen. Zuerst an einer ruhigen Station einsetzen, nach einer Woche Rückmeldegespräch, Unterweisung dokumentieren.',p:4}]},
+{f:'tec',t:'Stanzteil aus Bandstahl: Presse, Werkstoff, Oberfläche',txt:'Ein Halter aus 3 mm dickem Stahlblech (R_m = 400 N/mm²) soll künftig gestanzt werden. Die Schnittlinie ist 320 mm lang. Vorhanden ist eine Exzenterpresse mit 400 kN Nennkraft. Die Halter werden im Außenbereich verbaut und sollen 20 Jahre halten. Die Jahresmenge beträgt 60 000 Stück.',
+tasks:[{q:'Berechne die Schneidkraft. Rechne mit τ_aB = 0,8 · R_m.',a:'τ_aB = 0,8 · 400 N/mm² = 320 N/mm². F = l · s · τ_aB = 320 mm · 3 mm · 320 N/mm² = 307 200 N = 307,2 kN.',p:4},
+{q:'Reicht die Presse aus, wenn die Schneidkraft höchstens 80 % der Nennkraft betragen soll?',a:'Zulässig sind 0,8 · 400 kN = 320 kN. Die Schneidkraft von 307,2 kN liegt darunter, die Presse reicht knapp. Reserve schaffen zum Beispiel durch einen schrägen Schliff am Stempel, der die Kraftspitze senkt.',p:3},
+{q:'Bisher wurden die Halter lasergeschnitten. Nenne je zwei Vorteile von Stanzen und Laserschneiden für diese Stückzahl.',a:'Stanzen: sehr kurze Zeit je Teil, niedrige Stückkosten bei großen Mengen. Laserschneiden: kein teilespezifisches Werkzeug, Änderungen der Kontur sofort möglich. Bei 60 000 Stück im Jahr und fester Kontur spricht die Rechnung für das Stanzen, wenn das Werkzeug über die Menge bezahlt wird.',p:4},
+{q:'Die Zinkschicht soll 20 Jahre halten, der Abtrag beträgt in der Umgebung etwa 2 µm je Jahr. Welche Schichtdicke brauchst Du mindestens, und welches Verfahren passt?',a:'Schichtdicke = 2 µm/Jahr · 20 Jahre = 40 µm. Galvanisch verzinkte Schichten sind dafür in der Regel zu dünn. Passend ist Feuerverzinken, dessen Schichten üblicherweise darüber liegen.',p:4},
+{q:'Die Halter werden mit Edelstahlschrauben befestigt. Welches Risiko besteht, und was tust Du dagegen?',a:'Kontaktkorrosion: Bei Feuchtigkeit löst sich das unedlere Metall auf, hier zuerst das Zink, dann der Stahl am Schraubenloch. Abhilfe: verzinkte Schrauben verwenden oder die Werkstoffe mit Kunststoffscheiben trennen und Feuchtigkeit fernhalten.',p:4},
+{q:'Beim Stanzen entsteht Lärm von über 85 dB(A). Nenne Maßnahmen in der richtigen Rangfolge.',a:'Nach STOP: Lärm an der Quelle mindern (anderes Verfahren, schräger Schliff, Dämpfung im Werkzeug). Technisch: Presse kapseln, Schallschutzwände. Organisatorisch: Lärmbereich kennzeichnen, Aufenthaltszeit begrenzen, Vorsorge anbieten. Persönlich: Gehörschutz stellen und das Tragen durchsetzen. Dazu unterweisen.',p:5}]},
+{f:'org',t:'Zusatzauftrag: Kapazität, Material und Personal',txt:'Ein Kunde fragt 1200 Flanschplatten an, Lieferung in zwei Wochen. Bearbeitet werden sie auf einem Bearbeitungszentrum, das in zwei Schichten an fünf Tagen je 8 h läuft, Nutzungsgrad 85 %. Für die beiden Wochen sind bereits 96 h belegt. Rüstzeit 3 h, Zeit je Einheit 2 min. Das Rohmaterial hat eine Beschaffungszeit von 4 Arbeitstagen.',
+tasks:[{q:'Berechne den Kapazitätsbestand für die zwei Wochen.',a:'Kapazitätsbestand = 10 Tage · 2 Schichten · 8 h · 0,85 = 136 h.',p:3},
+{q:'Berechne den Kapazitätsbedarf des Zusatzauftrags.',a:'Kapazitätsbedarf = 3 h + 1200 · 2 min ÷ 60 min/h = 3 h + 40 h = 43 h.',p:3},
+{q:'Kannst Du den Auftrag annehmen? Berechne die Auslastung und schlage bei Bedarf einen Ausgleich vor.',a:'Bedarf gesamt = 96 h + 43 h = 139 h. Auslastung = 139 h ÷ 136 h · 100 % = 102,2 %. Es fehlen 3 h. Ausgleich: eine Samstagsschicht oder Überstunden (Betriebsrat beteiligen), einen weniger dringenden Auftrag verschieben oder einen Teil fremd vergeben.',p:6},
+{q:'Bis wann muss das Rohmaterial spätestens bestellt sein, wenn die Bearbeitung drei Arbeitstage vor dem Liefertermin beginnen soll?',a:'Die Bearbeitung beginnt an Arbeitstag 7 (10 − 3). Mit 4 Arbeitstagen Beschaffungszeit muss die Bestellung spätestens am Ende von Arbeitstag 3 hinausgehen, besser früher, damit ein Tag Puffer für Wareneingang und Prüfung bleibt.',p:4},
+{q:'Welche Prioritätsregel wählst Du in diesen zwei Wochen für das Bearbeitungszentrum? Begründe.',a:'Bei über 100 % Auslastung zählt der Termin. Passend ist die Regel „frühester Liefertermin“ oder die Schlupfzeitregel. Die Regel „kürzeste Operationszeit“ würde zwar die mittlere Durchlaufzeit senken, lange Aufträge mit festem Termin aber gefährden.',p:4},
+{q:'Die Mitarbeiter sollen samstags arbeiten. Wie gehst Du vor?',a:'Früh und offen informieren, Grund und Dauer nennen. Betriebsrat beteiligen, er bestimmt bei Mehrarbeit mit. Arbeitszeitgesetz einhalten (Höchstarbeitszeit, Ruhezeit). Zuerst Freiwillige fragen, Belastung fair verteilen, Ausgleich über Zuschlag oder Freizeit klären und sich danach bedanken.',p:5}]},
+{f:'org',t:'Kühlschmierstoff: Kosten, Gefahrstoff, Umwelt',txt:'In Deiner Abteilung laufen acht Drehmaschinen mit wassergemischtem Kühlschmierstoff. Zwei Mitarbeiter klagen über gerötete Haut an den Händen. Der Verbrauch an Konzentrat beträgt 2400 l im Jahr zu 4,50 € je Liter, die Entsorgung der verbrauchten Emulsion kostet 9600 € im Jahr. Ein Lieferant bietet eine Pflegeanlage für 18 000 € an, die Verbrauch und Entsorgung um jeweils 40 % senken soll.',
+tasks:[{q:'Berechne die jährlichen Kosten für Konzentrat und Entsorgung.',a:'Konzentrat = 2400 l · 4,50 €/l = 10 800 €. Gesamt = 10 800 € + 9600 € = 20 400 € im Jahr.',p:3},
+{q:'Berechne die jährliche Einsparung durch die Pflegeanlage und die Amortisationszeit. Laufende Kosten der Anlage: 1200 € im Jahr.',a:'Einsparung = 40 % · 20 400 € = 8160 €. Abzüglich laufender Kosten: 8160 € − 1200 € = 6960 € im Jahr. Amortisationszeit = 18 000 € ÷ 6960 €/Jahr = 2,6 Jahre.',p:5},
+{q:'Welche Schritte leitest Du wegen der Hautbeschwerden ein?',a:'Betroffene zum Betriebsarzt schicken, Vorfall dokumentieren. Gefährdungsbeurteilung für die Tätigkeit prüfen und anpassen. Sicherheitsdatenblatt und Zustand der Emulsion prüfen (Konzentration, pH-Wert, Keime). Maßnahmen nach STOP: hautverträglicheren Kühlschmierstoff prüfen, Spritzschutz und Absaugung, Hautschutzplan mit Schutz, Reinigung und Pflege, geeignete Handschuhe, wo keine Einzugsgefahr besteht. Unterweisen.',p:6},
+{q:'Was muss am Arbeitsplatz zum Kühlschmierstoff vorhanden sein?',a:'Betriebsanweisung in verständlicher Sprache, Kennzeichnung der Behälter, Zugang zum Sicherheitsdatenblatt, Hautschutzplan, Eintrag im Gefahrstoffverzeichnis, Nachweis der Unterweisung.',p:4},
+{q:'Wie lagerst und entsorgst Du Konzentrat und verbrauchte Emulsion richtig?',a:'Konzentrat in Originalgebinden auf Auffangwannen lagern, vor Frost schützen. Verbrauchte Emulsion getrennt sammeln, nicht in den Kanal geben. Sie ist gefährlicher Abfall und geht mit Nachweis an einen zugelassenen Entsorger. Ausgelaufenes sofort binden.',p:4},
+{q:'Mit welchen zwei Kennzahlen weist Du den Erfolg der Pflegeanlage nach?',a:'Zum Beispiel Konzentratverbrauch in Litern je 1000 gefertigte Teile und Entsorgungsmenge in Litern je Monat, jeweils im Vergleich zum Vorjahr. Dazu die Standzeit der Emulsion in Wochen.',p:3}]});
+
+/* ---------- Paket P1: weitere Fragen für das Fachgespräch ---------- */
+ORAL.push(
+['fp','Im internen Audit wird in Deiner Abteilung eine Abweichung festgestellt. Wie gehst Du damit um?','Sachlich annehmen, nicht rechtfertigen. Sofort korrigieren, Ursache im Team suchen (zum Beispiel 5-mal Warum), Maßnahme mit Termin und Verantwortlichem festlegen, Wirksamkeit prüfen und dem Auditor zurückmelden.'],
+['fp','Wie führst Du in Deinem Team einen kontinuierlichen Verbesserungsprozess ein?','Ziel und Nutzen erklären, kurze regelmäßige Runden an der Tafel, Vorschläge sichtbar sammeln, schnell entscheiden und umsetzen, Erfolge zeigen und anerkennen, mit Kennzahlen nachhalten.'],
+['fp','Die Ausschussquote an einer Maschine steigt. Wie gehst Du systematisch vor?','Fakten sammeln (Fehlerarten, Zeitpunkt, Schicht, Material), Pareto-Auswertung, Ursachen im Team mit Ishikawa sammeln, Hauptursache prüfen, Maßnahme nach PDCA einführen, Wirkung an der Kennzahl prüfen, Standard anpassen.'],
+['fp','Wie planst Du die Einarbeitung eines neuen Maschinenbedieners?','Arbeitsplatz vorbereiten, Pate benennen, Sicherheitsunterweisung am ersten Tag, Einarbeitungsplan mit Zielen je Woche, Unterweisung nach der Vier-Stufen-Methode, Rückmeldegespräche nach einer Woche, einem Monat und vor Ende der Probezeit.'],
+['fp','Ein erfahrener Mitarbeiter geht in einem Jahr in Rente. Was tust Du?','Wissen und Aufgaben erfassen (Qualifikationsmatrix), Nachfolger auswählen, Übergabe planen, beide gemeinsam arbeiten lassen, Erfahrungswissen dokumentieren, Schulungen einplanen, Personalabteilung und Betriebsrat einbinden.'],
+['fp','Wie prüfst Du, ob eine Schulung etwas gebracht hat?','Vorher Ziel festlegen. Danach Rückmeldung des Teilnehmers, Lernerfolg prüfen, Anwendung am Arbeitsplatz beobachten und nach einigen Wochen die Wirkung an Kennzahlen wie Ausschuss oder Rüstzeit ablesen.'],
+['fp','Der Personalbedarf steigt für drei Monate deutlich. Welche Möglichkeiten hast Du?','Überstunden und Arbeitszeitkonten, Umsetzung aus anderen Bereichen, befristete Einstellung oder Leiharbeit, Fremdvergabe. Dabei Qualifikation, Einarbeitungszeit, Kosten und die Beteiligung des Betriebsrats beachten.'],
+['tec','Wie gehst Du bei der Inbetriebnahme einer neuen Maschine vor?','Unterlagen prüfen (Betriebsanleitung, Konformitätserklärung), Aufstellung und Anschlüsse, Schutzeinrichtungen und Not-Halt, Funktionen einzeln, Probelauf, Abnahmeteile messen, Protokoll, Gefährdungsbeurteilung und Unterweisung vor Produktionsstart.'],
+['tec','Wann lohnt sich ein Roboter, und was beachtest Du bei der Sicherheit?','Bei hohen Stückzahlen, Mehrschichtbetrieb, schweren, eintönigen oder gefährlichen Arbeiten. Sicherheit: Risikobeurteilung, trennende oder berührungslos wirkende Schutzeinrichtungen, sichere Betriebsarten zum Einrichten, Unterweisung.'],
+['tec','Wie wählst Du den Werkstoff und die Wärmebehandlung für eine hoch belastete Welle?','Nach der Beanspruchung: wechselnde Biegung und Verdrehung verlangen Festigkeit und Zähigkeit, also einen Vergütungsstahl wie 42CrMo4, vergütet. Lagersitze bei Bedarf randschichtgehärtet. Dazu Zerspanbarkeit, Verfügbarkeit und Kosten prüfen.'],
+['tec','Was ist eine FMEA, und wann setzt Du sie ein?','Eine vorbeugende Analyse möglicher Fehler im Team. Bewertet werden Bedeutung, Auftreten und Entdeckung. Einsatz bei neuen Produkten und Prozessen, bei Änderungen und nach schweren Fehlern. Aus der Bewertung folgen Maßnahmen mit Verantwortlichem und Termin.'],
+['org','Ein Auftrag droht den Termin zu reißen. Was tust Du?','Stand und Ursache klären, Engpass bestimmen, Möglichkeiten prüfen (Überstunden, Zusatzschicht, Reihenfolge ändern, Los teilen, Fremdvergabe), Kosten abwägen, früh mit Vertrieb und Kunde sprechen, Entscheidung umsetzen und nachhalten.'],
+['org','Wie senkst Du die Durchlaufzeit in Deiner Abteilung?','Liegezeiten angehen: kleinere Lose, überlappende Fertigung, Engpass entlasten, Rüstzeiten verkürzen, Material rechtzeitig bereitstellen, Bestände im Umlauf begrenzen, zum Beispiel mit Kanban.'],
+['org','Ein Mitarbeiter verletzt sich an einer Maschine. Wie handelst Du?','Maschine stillsetzen, Unfallstelle sichern, Erste Hilfe und Notruf. Danach dokumentieren, bei mehr als drei Tagen Ausfall Unfallanzeige, Ursache untersuchen, Maßnahmen festlegen, Gefährdungsbeurteilung anpassen, Team informieren und unterweisen.'],
+['org','Wie führst Du einen neuen Gefahrstoff in Deinem Bereich ein?','Vorher prüfen, ob es einen weniger gefährlichen Ersatz gibt. Sicherheitsdatenblatt anfordern, Gefährdungsbeurteilung, Schutzmaßnahmen nach STOP, Betriebsanweisung, Eintrag ins Gefahrstoffverzeichnis, Lagerung klären, Mitarbeiter unterweisen.'],
+['org','Wie senkst Du den Energieverbrauch Deiner Abteilung, ohne zu investieren?','Grundlast messen, Maschinen, Absaugung und Druckluft außerhalb der Produktion abschalten, Leckagen suchen und beseitigen, Netzdruck prüfen, Mitarbeiter einbinden und den Verbrauch je Stück als Kennzahl aushängen.']);
+
 
 const FACH=['tec','org','fp'];
 const $=s=>document.querySelector(s);
@@ -2589,7 +3027,7 @@ home=function(v){home5(v);
  if(warn)v.append(warn);
 };
 
-{const vf=document.querySelector('#view+p.sub');if(vf){vf.className='ftr';vf.removeAttribute('style');vf.innerHTML='🔒 Dein Lernstand bleibt auf Deinem Gerät · keine Konten · kein Tracking<br>© 2026 Dr. rer. nat. Markus Baum · Vorschau 2 · Eigene Aufgaben, keine Nachbildung von IHK-Prüfungen · Weitergabe nur mit Erlaubnis'}}
+{const vf=document.querySelector('#view+p.sub');if(vf){vf.className='ftr';vf.removeAttribute('style');vf.innerHTML='🔒 Dein Lernstand bleibt auf Deinem Gerät · keine Konten · kein Tracking<br>© 2026 Dr. rer. nat. Markus Baum · Version 2 · Eigene Aufgaben, keine Nachbildung von IHK-Prüfungen · Weitergabe nur mit Erlaubnis'}}
 /* Menüband wie im Lernlabor: Start · Lernen · Üben & Prüfen · Ich */
 const nav5=nav;
 nav=function(){nav5();const bs=document.querySelectorAll('#fs button');if(bs[1]&&!FACH.includes(tab)){const s=bs[1].querySelectorAll('span');if(s[1])s[1].textContent='Lernen'}if(bs[2]){const s=bs[2].querySelectorAll('span');if(s[1])s[1].textContent='Üben & Prüfen'}};
@@ -2716,7 +3154,7 @@ body.subpg .brand .bpro{font-size:.5em}
 const SB=s=>String(s).replace(/>([^<]*_[^<]*)</g,(q,t)=>'>'+SUBS(t)+'<');
 const S=(d,t,f)=>({d,t,f:k=>SB(f(k))}),SKZ=(f,l)=>SKZ0(k=>SB(f(k)),l);
 /* Formel in einer Zeile mit echtem Bruchstrich und tiefgestellten Indizes (a_p → a mit tiefem p) */
-const SUBS=s=>String(s).replace(/([A-Za-zη])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
+const SUBS=s=>String(s).replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
 const RAW=s=>String(s).replace(/_/g,'');
 const FORM=(x,y,parts,a='start',c='einf',fs=19)=>{const W=parts.map(p=>typeof p==='string'?TW(RAW(p),fs):Math.max(TW(RAW(p.n),fs),TW(RAW(p.d),fs))+12),tot=W.reduce((s,w)=>s+w,0);let cx=a==='middle'?x-tot/2:x,s='',st='white-space:pre;font-size:'+fs+'px';
  parts.forEach((p,i)=>{if(typeof p==='string')s+=T(cx,y,SUBS(p),c,'start',st);else{const m=cx+W[i]/2;s+=T(m,y-9,SUBS(p.n),c,'middle','font-size:'+fs+'px')+`<path d="M${F(cx+1)} ${F(y-3)}h${F(W[i]-2)}" stroke="var(--ink)" stroke-width="1.6"/>`+T(m,y+17,SUBS(p.d),c,'middle','font-size:'+fs+'px')}cx+=W[i]});return s};
@@ -3189,10 +3627,386 @@ Object.assign(ERK,{
 'Delegation & Führungsstil':['Delegation ist kein Abschieben. Der Mitarbeiter bekommt eine Aufgabe mit allem, was er zum Handeln braucht, und der Meister bleibt für Auswahl und Begleitung verantwortlich.','Im Fachgespräch fragt der Prüfer gern: Wem übertragen Sie die Aufgabe und wie? Begründe mit Können und Wollen des Mitarbeiters.',['Nur die Aufgabe übertragen, aber keine Befugnisse.','Ständig nachkontrollieren und eingreifen.','Einen Stil für alle Mitarbeiter und alle Lagen verwenden.']],
 'Konflikte im Team':['Konflikte sind normal. Gefährlich wird es, wenn sie verdeckt bleiben und eskalieren. Je früher Du eingreifst, desto einfacher die Lösung.','Im Fachgespräch zählt eine klare Reihenfolge: wahrnehmen, Einzelgespräche, gemeinsames Gespräch, Vereinbarung, nachhalten.',['Partei ergreifen, bevor beide Seiten gehört wurden.','Den Konflikt in der großen Runde austragen.','Vereinbarung ohne Folgetermin.']],
 'Motivation & Anerkennung':['Motivation lässt sich nicht befehlen. Ein Meister kann aber Bedingungen schaffen, unter denen Leute gern und gut arbeiten, und Bremsen entfernen.','Im Fachgespräch zählt, dass Du die Theorie mit einer konkreten Maßnahme verbindest: Was tust Du morgen mit diesem Mitarbeiter?',['Nur an Geld denken.','Pauschal und selten loben.','Hygienefaktoren und Motivatoren verwechselt.']]});
-}
 
+/* ===== Vorschau 3, Pakete O2 und T4: Vermuten, Kurz erklärt, Skizze, Regler mit Auftrag ===== */
+const PL=(pts,col,w=3,da='')=>`<path d="M${pts.map(p=>F(p[0])+' '+F(p[1])).join('L')}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linejoin="round"${da?` stroke-dasharray="${da}"`:''}/>`;
+const HB=(x,y,w,h,fr,col,lab,val)=>L(x,y-7,lab,'start',15,'var(--ink)',600)+RC(x,y,w,h,'var(--card)','var(--line)',6,1.2)+RC(x,y,Math.max(2,w*Math.min(1,Math.max(0,fr))),h,col,'none',6,0)+L(x+w,y-7,val,'end',16,'var(--ink)',700);
+const MK=(x,y,h,t)=>`<path d="M${F(x)} ${F(y-5)}v${h+10}" stroke="var(--ink)" stroke-width="2"/>`+L(x,y+h+20,t,'middle',13,'var(--ink)',700);
+const BOX=(x,y,w,h,t,c='b',fs=14,t2)=>RC(x,y,w,h,`color-mix(in srgb,${CC(c)} 16%,var(--card))`,CC(c),7,1.5)+L(x+w/2,y+h/2+(t2?-4:5),t,'middle',fs,'var(--ink)',700)+(t2?L(x+w/2,y+h/2+15,t2,'middle',12.5,'var(--mute)',500):'');
+
+/* ---------- O2: Kapazitäts- und Terminplanung ---------- */
+const kapBild=(B,K,ti)=>{const x0=150,W=290,mx=Math.max(120,B,K)*1.05,X=h=>x0+W*h/mx,ok=B<=K;let s=ti?L(240,30,ti,'middle',16,'var(--ink)',700):'';
+ s+=L(x0-10,92,'Bestand','end',15,'var(--ink)',600)+RC(x0,70,X(K)-x0,34,`color-mix(in srgb,${CC('b')} 55%,var(--card))`,'var(--ink)',4,1)+L(X(K)+6,92,nz(K,0)+' h','start',15,'var(--ink)',700);
+ s+=L(x0-10,152,'Bedarf','end',15,'var(--ink)',600)+RC(x0,130,X(Math.min(B,K))-x0,34,`color-mix(in srgb,${CC('g')} 55%,var(--card))`,'var(--ink)',4,1)+(B>K?RC(X(K),130,X(B)-X(K),34,`color-mix(in srgb,${CC('r')} 60%,var(--card))`,'var(--ink)',4,1):'')+L(X(B)+6,152,nz(B,0)+' h','start',15,ok?'var(--ink)':'var(--red)',700);
+ s+=`<path d="M${F(X(K))} 58V180" stroke="var(--ink)" stroke-width="1.6" stroke-dasharray="5 4"/>`+L(240,214,'Auslastung '+nz(B/K*100,0)+' %','middle',20,ok?(B/K>=.8?'var(--ok)':'var(--ink)'):'var(--red)',800)+L(240,238,ok?(B/K>.95?'machbar, aber ohne Reserve':'machbar'):'Überlast: '+nz(B-K,0)+' h fehlen','middle',14,'var(--mute)',500);return s};
+const npBild=k=>{const N=(x,y,n,d,cr)=>RC(x,y,84,46,cr?`color-mix(in srgb,${CC('r')} 16%,var(--card))`:'var(--card)',cr?CC('r'):'var(--ink)',6,cr?2:1.3)+L(x+42,y+20,n,'middle',14,'var(--ink)',700)+L(x+42,y+38,d,'middle',13,'var(--mute)',500);
+ return L(240,26,'Netzplan mit kritischem Weg','middle',16,'var(--ink)',700)+N(20,104,'A Rohteil','3 Tage',1)+N(140,48,'B Drehen','4 Tage',1)+N(140,160,'C Spannen','2 Tage',0)+N(260,104,'D Fräsen','5 Tage',1)+N(380,104,'E Prüfen','1 Tag',1)
+ +AW(104,118,140,82,CC('r'),2.4)+AW(104,136,140,176,'var(--ink)',1.6)+AW(224,82,260,116,CC('r'),2.4)+AW(224,176,260,140,'var(--ink)',1.6)+AW(344,127,380,127,CC('r'),2.4)
+ +L(240,236,'kritischer Weg A, B, D, E: 13 Tage','middle',15,CC('r'),700)+L(240,256,'C hat 2 Tage Puffer','middle',14,'var(--mute)',500)};
+X['Kapazitäts- und Terminplanung']={
+ v:['Eine Maschine ist diese Woche zu 110 % ausgelastet. Was bedeutet das?',['Sie läuft 10 % schneller als sonst.','Der Plan ist ohne Ausgleich nicht zu schaffen.','Sie hat 10 % Reserve.','Der Nutzungsgrad ist zu niedrig angesetzt.'],1,'Der Bedarf ist größer als der Bestand. Ohne Überstunden, Zusatzschicht, Verschieben oder Fremdvergabe reißt ein Termin.'],
+ ein:[S(12,'Der Kapazitätsbestand sagt, wie viele Stunden eine Maschine in der Woche wirklich leisten kann.',k=>TITLE('Kapazitätsbestand')+OP(ph(k,.05,.4),TX(240,104,'Tage · Schichten · Stunden · Nutzungsgrad',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,180,['5 · 2 · 8 h · 0,85 = 68 h'],'middle',undefined,22))),
+  S(12,'Der Kapazitätsbedarf ist die Zeit, die Deine Aufträge brauchen: Rüsten plus Stückzahl mal Zeit je Einheit.',k=>TITLE('Kapazitätsbedarf')+OP(ph(k,.05,.4),TX(240,104,'Rüstzeit + Stückzahl · Zeit je Einheit',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,180,['2 h + 900 · 4 min = 62 h'],'middle',undefined,22))),
+  S(13,'Beides stellst Du gegenüber. Liegt der Bedarf über dem Bestand, gleichst Du aus.',LIST('Überlast ausgleichen',[['Überstunden, Zusatzschicht','1','Bestand erhöhen'],['Auftrag verschieben, Los teilen','2','Bedarf verlagern'],['Fremdvergabe','3','Bedarf abgeben']])),
+  S(13,'Im Netzplan zeigt der kritische Weg, welche Vorgänge keinen Puffer haben. Dort darf nichts liegen bleiben.',npBild)],
+ skz:[[SKZ(npBild,'Skizze Netzplan'),'Der längste Weg durch den Netzplan bestimmt die Projektdauer. Vorgang C kann zwei Tage später beginnen, ohne dass sich der Endtermin verschiebt.']],
+ sim:{t:'Wochenplanung am Bearbeitungszentrum',fix:'5 Arbeitstage, 8 h je Schicht, Nutzungsgrad 85 %, Rüstzeit 2 h',
+  c:[{k:'m',l:'Stückzahl',u:'Stück',min:300,max:1500,st:50,v:900},{k:'te',l:'Zeit je Einheit',u:'min',min:2,max:6,st:.5,v:4},{k:'S',l:'Schichten',u:'',opts:[1,2,3],v:0}],
+  calc:v=>{const K=5*8*v.S*.85,B=2+v.m*v.te/60;return{K,B,A:B/K*100}},
+  rows:(v,r)=>[['Kapazitätsbestand',nz(r.K,0)+' h'],['Kapazitätsbedarf',nz(r.B,1)+' h'],['Auslastung',nz(r.A,1)+' %',r.A>=80&&r.A<=95?'g':'r'],['Stückzahl',nz(v.m,0)+' Stück',v.m>=900?'g':'r']],
+  svg:(v,r)=>kapBild(r.B,r.K,'Bedarf und Bestand in der Woche'),
+  auf:{z:'Mindestens 900 Stück bei 80 bis 95 % Auslastung.',t:'Der Kunde braucht in dieser Woche mindestens 900 Stück. Plane so, dass die Auslastung zwischen 80 % und 95 % liegt: hoch genug, damit sich die Schicht lohnt, mit Reserve für Störungen.',h:'Tipp: Eine zweite Schicht verdoppelt den Bestand. Eine kürzere Zeit je Einheit (bessere Vorrichtung, anderes Werkzeug) senkt den Bedarf.',ok:(v,r)=>v.m>=900&&r.A>=80&&r.A<=95}}};
+
+/* ---------- O2: Reihenfolgeplanung ---------- */
+const ganttRf=k=>{const x0=80,sc=21,row=(y,n,seq,mid)=>{let x=x0,s=L(x0-10,y+20,n,'end',15,'var(--ink)',700);seq.forEach(([t,h,c])=>{s+=RC(x,y,h*sc,30,`color-mix(in srgb,${CC(c)} 50%,var(--card))`,'var(--ink)',3,1)+L(x+h*sc/2,y+20,t,'middle',14,'var(--ink)',700);x+=h*sc});return s+L(x0+15*sc+6,y+20,'∅ '+mid,'start',15,'var(--ink)',700)};
+ let s=L(240,28,'Drei Aufträge, zwei Reihenfolgen','middle',16,'var(--ink)',700)+row(62,'FIFO',[['A 8 h',8,'r'],['B 2 h',2,'g'],['C 5 h',5,'b']],'11 h')+row(132,'KOZ',[['B 2 h',2,'g'],['C 5 h',5,'b'],['A 8 h',8,'r']],'8 h');
+ for(let h=0;h<=15;h+=5)s+=`<path d="M${x0+h*sc} 176v8" stroke="var(--ink)" stroke-width="1.4"/>`+L(x0+h*sc,202,h+' h','middle',13,'var(--mute)',500);
+ return s+`<path d="M${x0} 176H${x0+15*sc}" stroke="var(--ink)" stroke-width="1.4"/>`+L(240,238,'Kurze Aufträge zuerst: Im Mittel sind alle früher fertig.','middle',14,'var(--mute)',500)};
+X['Reihenfolgeplanung']={
+ v:['Vor der Maschine warten drei Aufträge mit 8 h, 2 h und 5 h. In welcher Reihenfolge sind sie im Mittel am schnellsten fertig?',['In der Reihenfolge des Eingangs','Der längste zuerst','Der kürzeste zuerst','Die Reihenfolge ist egal'],2,'Kurze Aufträge halten die anderen nur kurz auf. Die Gesamtzeit bleibt 15 h, aber die mittlere Durchlaufzeit sinkt von 11 h auf 8 h.'],
+ ein:[S(12,'Wer zuerst kommt, legt eine Prioritätsregel fest. Jede Regel verfolgt ein anderes Ziel.',CARDS('Prioritätsregeln',[['📥','FIFO','nach Eingang','b'],['⚡','KOZ','kürzeste Zeit zuerst','g'],['📅','Liefertermin','dringendster zuerst','r'],['⏳','Schlupfzeit','kleinster Puffer zuerst','y']],{cols:2})),
+  S(14,'Mit der kürzesten Operationszeit zuerst sinkt die mittlere Durchlaufzeit. Lange Aufträge warten dafür länger.',ganttRf),
+  S(13,'Die Schlupfzeit zeigt, wie viel Luft ein Auftrag noch hat. Wenig Schlupf heißt: zuerst einplanen.',k=>TITLE('Schlupfzeit')+OP(ph(k,.05,.4),TX(240,100,'Zeit bis zum Termin − Restbearbeitung',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,176,['12 h − 10 h = 2 h Schlupf'],'middle',undefined,22))),
+  S(12,'Ähnliche Teile hintereinander sparen Rüstzeit. Achte darauf, dass kein dringender Auftrag dadurch zu spät kommt.',VS('Rüstoptimiert fertigen',{h:'Vorteil',c:'g',l:['weniger Rüstzeit','mehr Kapazität','weniger Anlaufteile']},{h:'Risiko',c:'r',l:['Termine rutschen','höhere Bestände','Eilaufträge stören']}))],
+ skz:[[SKZ(ganttRf,'Skizze Reihenfolge'),'Dieselben drei Aufträge: nach Eingang sind sie nach 8 h, 10 h und 15 h fertig, nach der KOZ-Regel nach 2 h, 7 h und 15 h.']]};
+
+/* ---------- O2: Material ---------- */
+const sgBild=k=>{const c=CHT({xm:30,ym:1000,xt:[0,10,20,30],yt:[250,500,750,1000],xl:'Tage',yl:'Bestand in Stück'});let s=c.s,p=[];
+ for(let i=0;i<3;i++){p.push([c.px(i*10),c.py(900)],[c.px(i*10+10),c.py(200)])}s+=PL(p,'var(--flow)',3)+LN(c,0,480,30,480,'var(--amber)',2.4,'7 5')+L(c.X1,c.py(480)-7,'Meldebestand','end',14,'#a16207',700)+LN(c,0,200,30,200,'var(--red)',2.4,'3 4')+L(c.X1,c.py(200)+17,'Sicherheitsbestand','end',14,'var(--red)',700);
+ return s+DOT(c.px(6),c.py(480),'var(--amber)')+L(c.px(6)+8,c.py(480)-10,'bestellen','start',13,'var(--ink)',700)+DOT(c.px(10),c.py(200),'var(--ok)')+L(c.px(10)+8,c.py(900)+4,'Lieferung','start',13,'var(--ink)',700)};
+X['Material: ABC, XYZ, Bestellmenge, Kanban']={
+ v:['Du bestellst ein Teil künftig nur noch halb so oft, dafür jeweils die doppelte Menge. Was passiert mit den Kosten?',['Bestell- und Lagerkosten sinken.','Die Bestellkosten sinken, die Lagerkosten steigen.','Beide steigen.','Es ändert sich nichts.'],1,'Weniger Bestellvorgänge sparen Bestellkosten. Dafür liegt im Mittel doppelt so viel Ware im Lager und bindet Geld.'],
+ ein:[S(13,'Die ABC-Analyse ordnet die Teile nach ihrem Wert. Wenige A-Teile machen den größten Teil des Verbrauchswertes aus.',BARS('Anteil am Verbrauchswert (Beispiel)',[['A-Teile',78,'78 %','r'],['B-Teile',16,'16 %','y'],['C-Teile',6,'6 %','g']],{lx:120,max:100,note:'Bei den A-Teilen lohnt sich genaue Planung am meisten.'})),
+  S(13,'Der Meldebestand deckt den Verbrauch während der Beschaffung und hält den Sicherheitsbestand zurück.',sgBild),
+  S(13,'Bei der optimalen Bestellmenge ist die Summe aus Bestellkosten und Lagerkosten am kleinsten.',VS('Zwei Kosten ziehen gegeneinander',{h:'kleine Bestellmenge',c:'b',l:['viele Bestellungen','hohe Bestellkosten','wenig Lagerkosten']},{h:'große Bestellmenge',c:'y',l:['wenige Bestellungen','wenig Bestellkosten','hohe Lagerkosten']},{note:'Das Minimum liegt dort, wo beide gleich groß sind.'})),
+  S(12,'Bei Kanban holt die Fertigung nur nach, was verbraucht wurde. Der leere Behälter ist der Bestellauftrag.',FLOW('Kanban-Kreis',[['📦','Behälter leer','Karte geht zurück','r'],['🏭','Nachfertigen','genau ein Behälter','b'],['🚚','Liefern','an den Verbrauchsort','g']],{y:70,h:128}))],
+ skz:[[SKZ(sgBild,'Skizze Lagerbestand'),'Der Bestand sinkt gleichmäßig. Beim Meldebestand wird bestellt, die Lieferung trifft ein, wenn der Sicherheitsbestand erreicht ist.']],
+ sim:{t:'Bestellmenge für ein Normteil',fix:'Jahresbedarf 6000 Stück, Einstandspreis 8 € je Stück, Lagerkostensatz 20 %',
+  c:[{k:'x',l:'Bestellmenge',u:'Stück',min:100,max:2000,st:50,v:200},{k:'kb',l:'Kosten je Bestellung',u:'€',min:30,max:90,st:10,v:60}],
+  calc:v=>{const n=6000/v.x,BK=n*v.kb,LK=v.x/2*8*.2,G=BK+LK,xo=Math.sqrt(200*6000*v.kb/(8*20));return{n,BK,LK,G,xo}},
+  rows:(v,r)=>[['Bestellungen im Jahr',nz(r.n,1),r.n<=10?'g':'r'],['Bestellkosten',nz(r.BK,0)+' €'],['Lagerkosten',nz(r.LK,0)+' €'],['Gesamtkosten',nz(r.G,0)+' €',r.G<=1100?'g':'r']],
+  svg:(v,r)=>{const c=CHT({xm:2000,ym:2400,xt:[0,500,1000,1500,2000],yt:[600,1200,1800,2400],xl:'Bestellmenge in Stück',yl:'Kosten in € pro Jahr'});let s=c.s,a=[],b=[],g=[];
+   for(let x=100;x<=2000;x+=25){const BK=6000/x*v.kb,LK=x*.8;a.push([c.px(x),c.py(BK)]);b.push([c.px(x),c.py(LK)]);g.push([c.px(x),c.py(BK+LK)])}
+   s+=PL(a,CC('b'),2.2)+PL(b,'var(--amber)',2.2)+PL(g,'var(--ink)',3)+LN(c,0,1100,2000,1100,'var(--ok)',1.8,'6 4')+L(c.X1,c.py(1100)+15,'Ziel 1100 €','end',13,'var(--ok)',700);
+   s+=`<path d="M${F(c.px(v.x))} ${c.Y0}V${F(c.py(r.G))}" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="4 3"/>`+DOT(c.px(v.x),c.py(r.G),r.G<=1100&&r.n<=10?'var(--ok)':'var(--red)',7);
+   return s+L(c.px(1990),c.py(1650)-30,'Lager','end',13,'#a16207',700)+L(c.px(1990),c.py(6000/2000*v.kb)-8,'Bestellen','end',13,CC('b'),700)+L(c.px(1500),c.py(6000/1500*v.kb+1200)-9,'Summe','end',13,'var(--ink)',700)},
+  auf:{z:'Höchstens 1100 € Gesamtkosten und höchstens 10 Bestellungen im Jahr.',t:'Der Einkauf will höchstens 10 Bestellungen im Jahr auslösen, das Controlling höchstens 1100 € für Bestellen und Lagern zahlen. Finde eine Bestellmenge, die beides erfüllt.',h:'Tipp: Suche die Stelle, an der die Summenkurve am tiefsten liegt. Dort sind Bestellkosten und Lagerkosten etwa gleich groß.',ok:(v,r)=>r.G<=1100&&r.n<=10}}};
+
+/* ---------- O2: Zeitwirtschaft ---------- */
+const zwBild=k=>L(240,26,'Gliederung der Auftragszeit','middle',16,'var(--ink)',700)+BOX(170,40,140,36,'Auftragszeit T','a',15)+BOX(40,104,150,36,'Rüstzeit t_r','b')+BOX(290,104,150,36,'Ausführungszeit t_a','g')+BOX(290,164,150,34,'m · t_e','g',14)
+ +BOX(204,218,84,46,'t_g','y',14,'Grundzeit')+BOX(296,218,84,46,'t_er','y',14,'Erholung')+BOX(388,218,84,46,'t_v','y',14,'Verteilzeit')
+ +PL([[240,76],[240,90],[115,90],[115,104]],'var(--ink)',1.5)+PL([[240,90],[365,90],[365,104]],'var(--ink)',1.5)+PL([[365,140],[365,164]],'var(--ink)',1.5)+PL([[365,198],[365,208],[246,208],[246,218]],'var(--ink)',1.5)+PL([[338,208],[338,218]],'var(--ink)',1.5)+PL([[365,208],[430,208],[430,218]],'var(--ink)',1.5)
+ +L(115,160,'einmal je Auftrag','middle',13,'var(--mute)',500);
+X['Zeitwirtschaft: Auftragszeit & Zeitgrad']={
+ v:['Für einen Auftrag sind 400 min vorgegeben. Der Mitarbeiter braucht 320 min. Wie hoch ist der Zeitgrad?',['80 %','100 %','125 %','180 %'],2,'Zeitgrad = Vorgabezeit ÷ Istzeit = 400 min ÷ 320 min = 125 %. Über 100 % heißt: schneller als die Vorgabe.'],
+ ein:[S(13,'Die Auftragszeit besteht aus der Rüstzeit, die einmal anfällt, und der Ausführungszeit für alle Teile.',k=>TITLE('Auftragszeit')+OP(ph(k,.05,.4),FORM(240,104,['T = t_r + m · t_e'],'middle',undefined,24))+OP(ph(k,.45,.85),FORM(240,180,['T = 30 min + 50 · 4 min = 230 min'],'middle',undefined,20))),
+  S(13,'Die Zeit je Einheit enthält neben der Grundzeit auch Zuschläge für Erholung und für Verteilzeiten.',BARS('Zeit je Einheit',[['Grundzeit t_g',5,'5,00 min','b'],['Erholung 4 %',.2,'0,20 min','g'],['Verteilzeit 10 %',.5,'0,50 min','y'],['t_e',5.7,'5,70 min','a']],{lx:200,max:6.5})),
+  S(13,'Bei der Zeitaufnahme beurteilst Du den Leistungsgrad. Daraus wird die Normalzeit.',k=>TITLE('Von der Istzeit zur Normalzeit')+OP(ph(k,.05,.4),TX(240,104,'Normalzeit = Istzeit · Leistungsgrad',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,180,['2 min · 1,10 = 2,2 min'],'middle',undefined,22))),
+  S(12,'Der Zeitgrad vergleicht die Vorgabe mit der gebrauchten Zeit.',k=>TITLE('Zeitgrad')+OP(ph(k,.05,.4),FORM(240,108,['Zeitgrad = ',{n:'Vorgabezeit',d:'Istzeit'},' · 100 %'],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'400 min',d:'320 min'},' · 100 % = 125 %'],'middle')))],
+ skz:[[SKZ(zwBild,'Skizze Auftragszeit'),'Die Rüstzeit gliedert sich genauso in Grundzeit, Erholungszeit und Verteilzeit.']],
+ sim:{t:'Auftragszeit für 100 Gehäuse',fix:'Auftragsmenge 100 Stück, eine Schicht hat 480 min',
+  c:[{k:'tr',l:'Rüstzeit',u:'min',min:15,max:60,st:5,v:45},{k:'tg',l:'Grundzeit je Stück',u:'min',min:3,max:5,st:.1,v:4.2},{k:'z',l:'Zuschlag Erholung und Verteilzeit',u:'%',min:10,max:20,st:1,v:15}],
+  calc:v=>{const te=v.tg*(1+v.z/100),ta=100*te,T=v.tr+ta;return{te,ta,T}},
+  rows:(v,r)=>[['Zeit je Einheit',nz(r.te,2)+' min'],['Ausführungszeit',nz(r.ta,0)+' min'],['Auftragszeit',nz(r.T,0)+' min',r.T<=480?'g':'r'],['Reserve in der Schicht',nz(480-r.T,0)+' min',r.T<=480?'g':'r']],
+  svg:(v,r)=>{const x0=40,W=400,sc=W/600,ok=r.T<=480,g=100*v.tg,zu=r.ta-g;let s=L(240,34,'Passt der Auftrag in eine Schicht?','middle',16,'var(--ink)',700);
+   s+=RC(x0,90,v.tr*sc,46,`color-mix(in srgb,${CC('b')} 55%,var(--card))`,'var(--ink)',3,1)+RC(x0+v.tr*sc,90,g*sc,46,`color-mix(in srgb,${CC('g')} 55%,var(--card))`,'var(--ink)',3,1)+RC(x0+(v.tr+g)*sc,90,zu*sc,46,`color-mix(in srgb,${CC('y')} 60%,var(--card))`,'var(--ink)',3,1);
+   s+=`<path d="M${F(x0+480*sc)} 70V160" stroke="${ok?'var(--ok)':'var(--red)'}" stroke-width="2.4" stroke-dasharray="6 4"/>`+L(x0+480*sc,62,'Schichtende 480 min','middle',14,ok?'var(--ok)':'var(--red)',700);
+   s+=L(x0+(v.tr+g/2)*sc,118,'100 · Grundzeit','middle',14,'var(--ink)',700)+L(x0,180,'Rüsten','start',13,CC('b'),700)+L(x0+150,180,'Grundzeit','start',13,CC('g'),700)+L(x0+290,180,'Zuschläge','start',13,'#a16207',700);
+   return s+L(240,228,'T = '+nz(r.T,0)+' min','middle',22,ok?'var(--ok)':'var(--red)',800)},
+  auf:{z:'Bring die Auftragszeit auf höchstens 480 min.',t:'Der Auftrag über 100 Gehäuse soll in einer Schicht fertig werden. Prüfe, wo Du ansetzt: schneller rüsten (Rüstwagen, voreingestellte Werkzeuge), kürzere Grundzeit (bessere Vorrichtung) oder weniger Verteilzeit (Material liegt bereit).',h:'Tipp: Die Grundzeit wirkt hundertfach, die Rüstzeit nur einmal.',ok:(v,r)=>r.T<=480}}};
+
+/* ---------- T4: Montageplanung & Fügen ---------- */
+const vgBild=k=>{const N=(x,y,n,t)=>`<circle cx="${x}" cy="${y}" r="24" fill="color-mix(in srgb,${CC('b')} 14%,var(--card))" stroke="${CC('b')}" stroke-width="1.6"/>`+L(x,y+1,n,'middle',15,'var(--ink)',700)+L(x,y+15,t,'middle',11.5,'var(--mute)',500);
+ return L(240,26,'Vorranggraph einer Montage','middle',16,'var(--ink)',700)+N(50,130,'1','Gehäuse')+N(160,76,'2','Lager')+N(160,184,'3','Dichtung')+N(270,76,'4','Welle')+N(360,130,'5','Deckel')+N(440,130,'6','Prüfen')
+ +AW(72,119,138,87)+AW(72,141,138,173)+AW(184,76,246,76)+AW(291,88,340,117)+AW(183,177,338,138)+AW(384,130,416,130)+L(240,244,'Der Deckel kommt erst, wenn Welle und Dichtung sitzen.','middle',14,'var(--mute)',500)};
+X['Montageplanung & Fügen']={
+ v:['Eine Montagelinie soll in 450 min genau 150 Geräte liefern. Wie viel Zeit hat jede Station je Gerät?',['1,5 min','3 min','4,5 min','20 min'],1,'Taktzeit = 450 min ÷ 150 Stück = 3 min. In diesem Takt wandert das Gerät von Station zu Station.'],
+ ein:[S(13,'Der Vorranggraph zeigt, was vor was montiert werden muss. Daraus entsteht die Reihenfolge.',vgBild),
+  S(13,'Die Taktzeit gibt vor, wie lange jede Station für ein Gerät Zeit hat.',k=>TITLE('Taktzeit')+OP(ph(k,.05,.4),FORM(240,108,['Taktzeit = ',{n:'verfügbare Zeit',d:'Stückzahl'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'450 min',d:'150 Stück'},' = 3 min'],'middle'))),
+  S(13,'Die Summe der Montagezeiten geteilt durch die Taktzeit ergibt die Zahl der Stationen. Es wird aufgerundet.',k=>TITLE('Stationen')+OP(ph(k,.05,.4),FORM(240,108,['Stationen = ',{n:'Summe der Montagezeiten',d:'Taktzeit'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'20 min',d:'3 min'},' = 6,67, also 7'],'middle'))),
+  S(12,'Beim Fügen entscheidest Du zuerst: Muss die Verbindung später wieder gelöst werden?',VS('Fügeverfahren',{h:'lösbar',c:'g',l:['Schrauben','Stifte, Bolzen','Passfeder']},{h:'unlösbar',c:'r',l:['Schweißen, Löten','Kleben','Nieten, Pressen']}))],
+ skz:[[SKZ(vgBild,'Skizze Vorranggraph'),'Schritte ohne Pfeil zwischen sich (hier 2 und 3) können gleichzeitig oder in beliebiger Reihenfolge laufen.']],
+ sim:{t:'Montagelinie auslegen',fix:'450 min Arbeitszeit je Schicht',
+  c:[{k:'x',l:'Geräte je Schicht',u:'Stück',min:100,max:400,st:10,v:240},{k:'S',l:'Summe der Montagezeiten',u:'min',min:8,max:30,st:1,v:18}],
+  calc:v=>{const tk=450/v.x,n=Math.ceil(v.S/tk-1e-9),bw=v.S/(n*tk)*100;return{tk,n,bw}},
+  rows:(v,r)=>[['Taktzeit',nz(r.tk,2)+' min'],['Stationen',String(r.n),r.n<=8?'g':'r'],['Bandwirkungsgrad',nz(r.bw,1)+' %',r.bw>=90?'g':'r'],['Geräte je Schicht',String(v.x),v.x>=250?'g':'r']],
+  svg:(v,r)=>{const n=r.n,per=Math.min(n,10),w=Math.min(40,400/per-6),x0=240-(per*(w+6)-6)/2,fill=v.S/n/r.tk;let s=L(240,30,'Stationen der Linie (Takt '+nz(r.tk,2)+' min)','middle',16,'var(--ink)',700);
+   for(let i=0;i<n;i++){const row=Math.floor(i/10),x=x0+(i%10)*(w+6),y=56+row*84,c=i<8?'g':'r';s+=RC(x,y,w,64,'var(--card)',CC(c),5,1.5)+RC(x+2,y+2+60*(1-fill),w-4,60*fill,`color-mix(in srgb,${CC(c)} 50%,var(--card))`,'none',3,0)+L(x+w/2,y+58,String(i+1),'middle',13,'var(--ink)',700)}
+   return s+L(240,n>10?246:176,'Füllung der Kästen: Anteil der Taktzeit, der genutzt wird','middle',13,'var(--mute)',500)+(n>10?'':L(240,222,nz(r.bw,1)+' % Bandwirkungsgrad','middle',21,r.bw>=90?'var(--ok)':'var(--red)',800))},
+  auf:{z:'Mindestens 250 Geräte mit höchstens 8 Stationen und mindestens 90 % Bandwirkungsgrad.',t:'Die Halle bietet Platz für höchstens 8 Stationen. Gefordert sind mindestens 250 Geräte je Schicht. Der Bandwirkungsgrad soll bei mindestens 90 % liegen, damit keine Station viel Leerlauf hat.',h:'Tipp: Kürzere Montagezeiten erreichst Du durch vormontierte Baugruppen und montagegerechte Konstruktion.',ok:(v,r)=>v.x>=250&&r.n<=8&&r.bw>=90}}};
+
+/* ---------- T4: Inbetriebnahme & Abnahme ---------- */
+const ibBild=STAIRS('Schritt für Schritt zur Abnahme',[['Sichtprüfung','Anschlüsse'],['Schutz','Not-Halt'],['Leerlauf','Funktionen'],['Probelauf','unter Last'],['Abnahme','Protokoll']],{lo:'ohne Werkstück',up:'mit Abnahmeteilen',top:100});
+X['Inbetriebnahme & Abnahme']={
+ v:['Die neue Maschine ist aufgestellt und angeschlossen. Was prüfst Du, bevor zum ersten Mal ein Werkstück gespannt wird?',['Die Taktzeit','Die Maßhaltigkeit der Teile','Schutzeinrichtungen und Not-Halt','Die Stückkosten'],2,'Erst wenn Schutztüren, Verriegelungen und Not-Halt sicher wirken, läuft die Maschine unter Last.'],
+ ein:[S(12,'Vor dem ersten Einschalten prüfst Du Aufstellung, Anschlüsse und Unterlagen.',LIST('Vor dem Einschalten',[['Aufstellung und Ausrichtung','ok'],['Strom, Luft, Hydraulik, Kühlschmierstoff','ok'],['Transportsicherungen entfernt','ok'],['Betriebsanleitung, Konformitätserklärung','ok']])),
+  S(13,'Dann steigerst Du Schritt für Schritt: erst Sicherheit, dann Funktion, dann Leistung.',ibBild),
+  S(13,'Bei der Abnahme vergleichst Du die Maschine mit dem, was bestellt wurde.',CARDS('Abnahme: was wird nachgewiesen?',[['📐','Genauigkeit','Abnahmeteile messen','b'],['⏱️','Leistung','Taktzeit, Stückzahl','g'],['🛡️','Sicherheit','Schutzeinrichtungen','r'],['📄','Unterlagen','vollständig','y']],{cols:2})),
+  S(12,'Das Protokoll hält Ergebnisse und offene Punkte fest. Erst danach gehst Du in die Produktion.',FLOW('Nach der Abnahme',[['📝','Protokoll','Mängel mit Termin','y'],['👷','Unterweisung','Betriebsanweisung','b'],['🔧','Wartungsplan','an Instandhaltung','g']],{y:70,h:128}))],
+ skz:[[SKZ(ibBild,'Skizze Inbetriebnahme'),'Jede Stufe setzt voraus, dass die vorige ohne Befund abgeschlossen ist.']]};
+
+/* ---------- T4: FMEA ---------- */
+const fmBild=(B,A,E,ti)=>{const R=B*A*E,col=R>125?'var(--red)':R>100?'var(--amber)':'var(--ok)',bar=(y,n,v,c)=>L(60,y+19,n,'start',15,'var(--ink)',600)+[...Array(10)].map((_,i)=>RC(190+i*22,y,18,26,i<v?`color-mix(in srgb,${CC(c)} 65%,var(--card))`:'var(--card)','var(--line)',3,1)).join('')+L(424,y+20,String(v),'middle',17,'var(--ink)',800);
+ return L(240,28,ti,'middle',16,'var(--ink)',700)+bar(50,'Bedeutung B',B,'r')+bar(92,'Auftreten A',A,'y')+bar(134,'Entdeckung E',E,'b')+L(240,206,'RPZ = '+B+' · '+A+' · '+E+' = '+R,'middle',24,col,800)+L(240,236,R>125?'hohes Risiko: Maßnahmen nötig':R>100?'noch zu hoch':'Risiko deutlich gesenkt','middle',14,'var(--mute)',500)};
+X['FMEA: Risiken bewerten']={
+ v:['An einer Station wird eine Kamera eingebaut, die jedes fehlerhafte Teil erkennt. Welche Bewertung der FMEA verbessert sich?',['Die Bedeutung B','Das Auftreten A','Die Entdeckung E','Alle drei'],2,'Die Kamera findet den Fehler, bevor er zum Kunden geht. Der Fehler entsteht aber genauso oft, und seine Folge wäre dieselbe.'],
+ ein:[S(13,'Die FMEA fragt im Team: Was kann schiefgehen, was wären die Folgen, und woran liegt es?',FLOW('Vom Fehler zur Maßnahme',[['⚠️','Fehler','was kann passieren?','r'],['🔍','Folge, Ursache','warum, wie schlimm?','y'],['🔢','Bewertung','B, A, E','b'],['🛠️','Maßnahme','wer, bis wann?','g']],{y:66,h:132})),
+  S(13,'Drei Bewertungen von 1 bis 10. Bei der Entdeckung ist die 10 schlecht: Der Fehler bleibt unbemerkt.',CARDS('Drei Bewertungen',[['💥','Bedeutung B','Wie schwer ist die Folge?','r'],['🔁','Auftreten A','Wie oft tritt die Ursache auf?','y'],['👁️','Entdeckung E','Wird der Fehler gefunden?','b']])),
+  S(12,'Das Produkt der drei Zahlen ist die Risikoprioritätszahl. Sie ordnet die Risiken.',k=>TITLE('Risikoprioritätszahl')+OP(ph(k,.05,.4),FORM(240,104,['RPZ = B · A · E'],'middle',undefined,24))+OP(ph(k,.45,.85),FORM(240,180,['RPZ = 8 · 6 · 7 = 336'],'middle',undefined,22))),
+  S(13,'Zuerst die Ursache vermeiden, dann die Entdeckung verbessern. Danach bewertest Du neu.',k=>fmBild(8,2,3,'Nach den Maßnahmen'))],
+ skz:[[SKZ(k=>fmBild(8,6,7,'Beispiel: Schraube nicht angezogen'),'Skizze FMEA-Bewertung'),'Vor den Maßnahmen. Die Bedeutung bleibt auch danach bei 8, weil die Folge des Fehlers dieselbe ist.']],
+ sim:{t:'Risiko senken: Schraube am Lagerschild',fix:'Bedeutung B = 8 (Ausfall beim Kunden), sie ändert sich nur durch eine andere Konstruktion',
+  c:[{k:'A',l:'Auftreten A',u:'',min:1,max:10,st:1,v:6},{k:'E',l:'Entdeckung E',u:'',min:1,max:10,st:1,v:7}],
+  calc:v=>({R:8*v.A*v.E}),
+  rows:(v,r)=>[['Bedeutung B','8'],['Auftreten A',String(v.A)],['Entdeckung E',String(v.E)],['RPZ',String(r.R),r.R<=100?'g':'r']],
+  svg:(v,r)=>fmBild(8,v.A,v.E,'Bewertung der Fehlerursache'),
+  auf:{z:'Senke die RPZ auf höchstens 100.',t:'Die Schraube am Lagerschild wird gelegentlich nicht richtig angezogen. Lege Maßnahmen fest: Ein gesteuerter Schrauber senkt das Auftreten, eine Überwachung der Schraubkurve verbessert die Entdeckung. Bringe die RPZ auf höchstens 100.',h:'Tipp: Vermeiden ist besser als Entdecken. Senke zuerst A.',ok:(v,r)=>r.R<=100}}};
+
+/* ---------- T4: Automatisierung & Robotik ---------- */
+const rzBild=k=>{let s=L(240,24,'Roboterzelle von oben','middle',16,'var(--ink)',700);
+ s+=`<rect x="70" y="44" width="340" height="176" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-dasharray="9 5" rx="4"/>`+`<circle cx="240" cy="132" r="72" fill="color-mix(in srgb,${CC('y')} 12%,transparent)" stroke="${CC('y')}" stroke-width="1.3" stroke-dasharray="4 4"/>`;
+ s+=`<circle cx="240" cy="132" r="15" fill="var(--amber)" stroke="var(--ink)" stroke-width="1.5"/><path d="M240 132L286 100L312 116" stroke="var(--ink)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="306" y="108" width="14" height="16" fill="var(--ink)" rx="2"/>`;
+ s+=BOX(96,62,70,34,'Zuführung','b',12.5)+BOX(318,150,76,40,'Maschine','g',13)+BOX(96,170,70,34,'Palette','b',12.5);
+ s+=`<path d="M70 110V156" stroke="var(--card)" stroke-width="5"/><path d="M70 110V156" stroke="${CC('r')}" stroke-width="3" stroke-dasharray="3 4"/>`+L(62,138,'Lichtvorhang','end',12.5,CC('r'),700).replace('<text','<text transform="rotate(-90 58 134)"').replace('text-anchor="end"','text-anchor="middle"');
+ s+=`<path d="M210 220H270" stroke="var(--card)" stroke-width="5"/><path d="M210 220L262 238" stroke="var(--ink)" stroke-width="2.4"/>`+L(240,258,'Tür mit Verriegelung','middle',13,'var(--ink)',700)+L(404,38,'Schutzzaun','end',13,'var(--ink)',700)+L(240,64,'Arbeitsraum','middle',12.5,'#a16207',700);return s};
+X['Automatisierung & Robotik']={
+ v:['Eine Roboterzelle läuft technisch mit 30 s Taktzeit, steht aber 10 % der Zeit wegen Störungen. Wie wirkt sich das auf die Ausbringung aus?',['Gar nicht, die Taktzeit zählt.','Sie sinkt um 10 %.','Sie sinkt um 30 %.','Sie steigt, weil der Roboter sich erholt.'],1,'Ausbringung = Betriebszeit ÷ Taktzeit · Verfügbarkeit. Mit 90 % Verfügbarkeit bleiben 90 % der möglichen Teile.'],
+ ein:[S(12,'Eine Roboterzelle ist mehr als der Roboter: Greifer, Zuführung, Steuerung und Schutz gehören dazu.',CARDS('Bausteine einer Zelle',[['🦾','Roboter','Traglast, Reichweite','a'],['✋','Greifer','zählt zur Traglast','b'],['📦','Zuführung','Teile lagerichtig','g'],['🛡️','Schutz','Zaun, Lichtvorhang','r']],{cols:2})),
+  S(13,'Im Automatikbetrieb darf niemand in den Arbeitsraum. Zaun, verriegelte Tür und Lichtvorhang sichern das.',rzBild),
+  S(13,'Die Ausbringung hängt an Taktzeit und Verfügbarkeit.',k=>TITLE('Ausbringung je Schicht')+OP(ph(k,.05,.4),FORM(240,108,['Teile = ',{n:'Betriebszeit',d:'Taktzeit'},' · Verfügbarkeit'],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'27 000 s',d:'30 s'},' · 0,9 = 810'],'middle'))),
+  S(12,'Kollaborierende Roboter arbeiten ohne Zaun. Sicher ist das nur mit begrenzter Kraft und eigener Risikobeurteilung.',VS('Mit oder ohne Zaun?',{h:'Industrieroboter',c:'b',l:['schnell, hohe Last','Schutzzaun nötig','große Stückzahlen']},{h:'Cobot',c:'g',l:['langsam, kleine Last','neben dem Menschen','Greifer mitbeurteilen']}))],
+ skz:[[SKZ(rzBild,'Skizze Roboterzelle'),'Öffnet jemand die Tür oder greift durch den Lichtvorhang, stoppt der Roboter. Eingerichtet wird nur mit Zustimmtaster und reduzierter Geschwindigkeit.']],
+ sim:{t:'Ausbringung einer Roboterzelle',fix:'7,5 h Betriebszeit je Schicht',
+  c:[{k:'t',l:'Taktzeit',u:'s',min:20,max:60,st:2,v:48},{k:'V',l:'Verfügbarkeit',u:'%',min:80,max:98,st:1,v:85},{k:'S',l:'Schichten',u:'',opts:[1,2,3],v:0}],
+  calc:v=>{const n=v.S*27000/v.t*v.V/100;return{n,max:v.S*27000/v.t}},
+  rows:(v,r)=>[['Takte je Tag',nz(r.max,0)],['Teile je Tag',nz(Math.floor(r.n),0),r.n>=1200?'g':'r'],['Verlust durch Stillstand',nz(r.max-r.n,0)+' Teile'],['Schichten',String(v.S),v.S<=2?'g':'r']],
+  svg:(v,r)=>{const x0=40,W=400,mx=4200;let s=L(240,30,'Teile je Tag','middle',16,'var(--ink)',700);
+   s+=HB(x0,76,W,30,r.max/mx,`color-mix(in srgb,${CC('b')} 55%,var(--card))`,'möglich bei 100 % Verfügbarkeit',nz(r.max,0))+HB(x0,150,W,30,r.n/mx,r.n>=1200?'var(--ok)':'var(--amber)','tatsächlich',nz(Math.floor(r.n),0))+MK(x0+W*1200/mx,150,30,'Ziel 1200');
+   return s+L(240,240,v.S+(v.S===1?' Schicht':' Schichten')+', Takt '+v.t+' s, Verfügbarkeit '+v.V+' %','middle',14,'var(--mute)',500)},
+  auf:{z:'Mindestens 1200 Teile je Tag mit höchstens zwei Schichten.',t:'Der Kunde ruft täglich 1200 Teile ab. Eine dritte Schicht will die Geschäftsleitung vermeiden. Zeige, mit welcher Taktzeit und Verfügbarkeit zwei Schichten reichen.',h:'Tipp: Eine kürzere Taktzeit kostet meist Geld (schnellerer Greifer, zweite Spannstelle). Verfügbarkeit gewinnst Du durch Wartung und schnelle Störungsbeseitigung.',ok:(v,r)=>r.n>=1200&&v.S<=2}}};
+
+/* ===== Vorschau 3, Pakete F3, T3, O3, F2: Vermuten, Kurz erklärt, Skizze, Regler mit Auftrag ===== */
+
+/* ---------- F3: QM-System & Audit ---------- */
+const pdcaQ=CYC('',[['Plan','Ziele, Abläufe'],['Do','umsetzen'],['Check','Audit, Kennzahlen'],['Act','verbessern']],{cy:136,r:92,sx:1.75,sy:1.1,mid:'QM-System'});
+X['QM-System & Audit']={
+ v:['Im Audit findet der Auditor an Deiner Maschine eine veraltete Arbeitsanweisung. Was bedeutet das?',['Der Mitarbeiter hat einen Fehler gemacht und wird abgemahnt.','Der Ablauf zur Verteilung der Unterlagen hat eine Lücke.','Das Zertifikat ist sofort verloren.','Nichts, solange die Teile gut sind.'],1,'Eine Abweichung zeigt eine Schwäche im Ablauf. Du korrigierst sofort und klärst, warum die neue Fassung nicht angekommen ist.'],
+ ein:[S(12,'Ein QM-System regelt, wie gearbeitet wird, damit das Ergebnis jedes Mal stimmt. Es läuft im Kreis aus Planen, Umsetzen, Prüfen und Verbessern.',pdcaQ),
+  S(13,'Jeder Ablauf im Betrieb ist ein Prozess mit Eingabe, Ergebnis, Verantwortlichem und Kennzahl.',FLOW('Prozess',[['📥','Eingabe','Auftrag, Material','b'],['⚙️','Prozess','Verantwortlicher, Regeln','a'],['📤','Ergebnis','Teil, Nachweis','g']],{y:70,h:128})),
+  S(13,'Audits prüfen, ob die Regeln gelebt werden und wirken. Es gibt drei Arten.',CARDS('Auditarten',[['🏢','Systemaudit','das ganze QM-System','a'],['🔄','Prozessaudit','ein Ablauf','b'],['🔩','Produktaudit','fertige Teile','g']])),
+  S(13,'Nach dem Audit zählt, was aus den Feststellungen wird.',LIST('Abweichung bearbeiten',[['Sofort korrigieren','1','Einzelfall beheben'],['Ursache suchen','2','warum konnte das passieren?'],['Maßnahme festlegen','3','wer, bis wann?'],['Wirksamkeit prüfen','4','ist es dauerhaft abgestellt?']]))],
+ skz:[[SKZ(pdcaQ,'Skizze PDCA im QM-System'),'Audits und Kennzahlen gehören zum Schritt Check. Ohne den Schritt Act bleibt alles beim Alten.']]};
+
+/* ---------- F3: Qualitätswerkzeuge & KVP ---------- */
+const parBild=k=>{const d=[['Maß',42],['Grat',27],['Kratzer',14],['Lunker',9],['Rest',8]],x0=78,bw=58,Y0=216,sc=1.55;let s=L(240,26,'Pareto-Diagramm: Fehler eines Monats','middle',16,'var(--ink)',700),cum=0,pts=[];
+ d.forEach(([n,v],i)=>{const x=x0+i*(bw+10);s+=RC(x,Y0-v*sc,bw,v*sc,`color-mix(in srgb,${CC(i<2?'r':'b')} 55%,var(--card))`,'var(--ink)',2,1)+L(x+bw/2,Y0+18,n,'middle',13.5,'var(--ink)',600)+L(x+bw/2,v>20?Y0-v*sc+18:Y0-v*sc-6,v+' %','middle',13,'var(--ink)',700);cum+=v;pts.push([x+bw/2,Y0-cum*sc])});
+ s+=`<path d="M${x0-8} 50V${Y0}H${x0+5*(bw+10)}" stroke="var(--ink)" stroke-width="1.5" fill="none"/>`+PL([[x0+bw/2,Y0-42*sc]].concat(pts.slice(1)),'var(--amber)',2.4)+pts.map(p=>DOT(p[0],p[1],'var(--amber)',4.5)).join('');
+ return s+L(pts[1][0]+10,pts[1][1]+14,'69 % aus zwei Fehlerarten','start',13.5,'#a16207',700)+L(240,256,'Hier zuerst ansetzen: Maß und Grat','middle',14,'var(--mute)',500)};
+const ishBild=k=>{let s=L(240,24,'Ishikawa-Diagramm','middle',16,'var(--ink)',700)+AW(40,140,372,140,'var(--ink)',3)+BOX(374,118,96,44,'Problem','r',14,'Maß zu groß');
+ [['Mensch',80,1,'Einweisung?'],['Maschine',190,1,'Spiel?'],['Material',300,1,'Charge?'],['Methode',80,0,'Reihenfolge?'],['Mitwelt',190,0,'Wärme?'],['Messung',300,0,'Lehre?']].forEach(([n,x,up,q])=>{s+=PL([[x,up?80:204],[x+46,140]],'var(--ink)',1.8)+L(x,up?56:244,n,'middle',14.5,'var(--ink)',700)+L(x,up?73:226,q,'middle',12.5,'var(--mute)',500)});
+ return s};
+X['Qualitätswerkzeuge & KVP']={
+ v:['An einer Linie treten zwölf verschiedene Fehlerarten auf. Womit beginnst Du?',['Mit allen gleichzeitig.','Mit der Fehlerart, die sich am leichtesten beheben lässt.','Mit den wenigen Fehlerarten, die den größten Anteil ausmachen.','Mit der Fehlerart, die zuletzt aufgetreten ist.'],2,'Meist verursachen wenige Fehlerarten den größten Teil des Ausschusses. Das Pareto-Diagramm zeigt sie.'],
+ ein:[S(13,'Erst zählen, dann ordnen: Das Pareto-Diagramm zeigt, welche Fehlerarten den größten Anteil haben.',parBild),
+  S(13,'Im Ishikawa-Diagramm sammelt das Team mögliche Ursachen, geordnet nach sechs Bereichen.',ishBild),
+  S(13,'Mit fünfmal Warum kommst Du vom Symptom zur Ursache, an der eine Maßnahme dauerhaft wirkt.',LIST('5-mal Warum',[['Maß zu groß','?','Werkzeug verschlissen'],['Warum verschlissen?','?','zu spät gewechselt'],['Warum zu spät?','?','kein Standzeitzähler'],['Maßnahme','ok','Zähler einrichten']])),
+  S(12,'Jede Verbesserung läuft durch den PDCA-Kreis. Erst wenn sie wirkt, wird sie zum Standard.',CYC('',[['Plan','Ziel, Ursache'],['Do','ausprobieren'],['Check','Wirkung prüfen'],['Act','Standard']],{cy:136,r:92,sx:1.75,sy:1.1,mid:'KVP'}))],
+ skz:[[SKZ(parBild,'Skizze Pareto-Diagramm'),'Balken nach Größe geordnet, die Linie summiert die Anteile. Zwei Fehlerarten machen hier schon 69 % aus.'],[SKZ(ishBild,'Skizze Ishikawa-Diagramm'),'Die sechs Äste helfen, keine Richtung zu vergessen. Die vermuteten Ursachen werden danach einzeln geprüft.']]};
+
+/* ---------- F3: Prüfen, Messen & Fehleranalyse ---------- */
+const gkBild=(mu,sg,ti)=>{const x0=40,x1=440,lo=49.84,hi=50.16,X=v=>x0+(x1-x0)*(v-lo)/(hi-lo),Y0=206,H=150,ck=Math.min(50.1-mu,mu-49.9)/(3*sg),ok=ck>=1.33-1e-9,g=x=>Math.exp(-.5*((x-mu)/sg)**2),sc=Math.min(1,.012/sg);let p=[],s=ti?L(240,24,ti,'middle',16,'var(--ink)',700):'';
+ for(let v=lo;v<=hi+1e-9;v+=.002)p.push([X(v),Y0-H*sc*g(v)]);
+ s+=`<rect x="${F(X(49.9))}" y="40" width="${F(X(50.1)-X(49.9))}" height="${Y0-40}" fill="color-mix(in srgb,var(--ok) 9%,transparent)"/>`;
+ s+=`<path d="M${F(X(lo))} ${Y0}L${p.map(q=>F(q[0])+' '+F(q[1])).join('L')}L${F(X(hi))} ${Y0}Z" fill="color-mix(in srgb,${ok?'var(--ok)':'var(--red)'} 28%,transparent)" stroke="${ok?'var(--ok)':'var(--red)'}" stroke-width="2.4"/>`;
+ s+=`<path d="M${x0} ${Y0}H${x1}" stroke="var(--ink)" stroke-width="1.5"/>`+[49.9,50.1].map((v,i)=>`<path d="M${F(X(v))} 40V${Y0+6}" stroke="var(--red)" stroke-width="2.2" stroke-dasharray="6 4"/>`+L(X(v),Y0+22,(i?'OSG ':'USG ')+nz(v,2),'middle',13.5,'var(--red)',700)).join('');
+ s+=`<path d="M${F(X(mu))} ${F(Y0-H*sc)}V${Y0+6}" stroke="var(--ink)" stroke-width="1.6"/>`+L(X(mu),Y0-H*sc-7,'x','middle',14,'var(--ink)',700)+`<path d="M${F(X(mu)-4.5)} ${F(Y0-H*sc-17.5)}h9" stroke="var(--ink)" stroke-width="1.5"/>`;
+ return s+L(240,254,'c_pk = '+nz(ck,2)+(ok?' (fähig)':' (nicht fähig)'),'middle',19,ok?'var(--ok)':'var(--red)',800).replace('c_pk','c<tspan baseline-shift="sub" style="font-size:.7em">pk</tspan>')};
+X['Prüfen, Messen & Fehleranalyse']={
+ v:['Ein Prozess streut sehr wenig, sein Mittelwert liegt aber nah an der oberen Toleranzgrenze. Was ist die richtige Maßnahme?',['Die Streuung weiter verringern','Den Prozess auf die Toleranzmitte einstellen','Die Toleranz erweitern','Jedes Teil prüfen'],1,'Die Streuung ist schon klein genug. Es fehlt nur die richtige Lage, zum Beispiel durch eine Werkzeugkorrektur.'],
+ ein:[S(12,'Der Prüfplan beantwortet sechs Fragen. So prüft jede Schicht dasselbe auf dieselbe Weise.',CARDS('Prüfplan',[['🎯','Was?','Merkmal, Toleranz','a'],['📏','Womit?','Prüfmittel','b'],['🕒','Wann, wie oft?','Stichprobe','y'],['👤','Wer?','Werker, Prüfer','g'],['📝','Nachweis?','Protokoll','b'],['⛔','Bei Fehler?','sperren, melden','r']],{cols:3})),
+  S(13,'c_p vergleicht die Toleranzbreite mit der Streuung des Prozesses.',k=>TITLE('Prozessfähigkeit c_p')+OP(ph(k,.05,.4),FORM(240,108,['c_p = ',{n:'OSG − USG',d:'6 · σ'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'0,2 mm',d:'6 · 0,02 mm'},' = 1,67'],'middle'))),
+  S(13,'c_pk berücksichtigt auch die Lage. Liegt der Mittelwert neben der Mitte, wird der kleinere Abstand zur Grenze knapp.',k=>gkBild(50.04,.02,'Mittelwert 50,04 mm, σ = 0,02 mm')),
+  S(12,'Die Regelkarte zeigt, wann Du eingreifen musst, bevor Ausschuss entsteht.',LIST('Eingreifen bei',[['Wert außerhalb der Eingriffsgrenze','⚠️'],['Trend: sieben Werte steigend oder fallend','📈'],['sieben Werte auf einer Seite der Mitte','↔️']]))],
+ skz:[[SKZ(k=>gkBild(50,.02,'Zentriert: Mittelwert 50,00 mm, σ = 0,02 mm'),'Skizze Prozessfähigkeit'),'Toleranz 50 mm ± 0,1 mm. Liegt die Verteilung in der Mitte, sind c_p und c_pk gleich groß, hier 1,67.']],
+ sim:{t:'Prozess fähig machen',fix:'Bohrung 50 mm ± 0,1 mm (USG 49,90 mm, OSG 50,10 mm)',
+  c:[{k:'mu',l:'Mittelwert',u:'mm',min:49.94,max:50.08,st:.01,v:50.05},{k:'sg',l:'Standardabweichung σ',u:'mm',min:.01,max:.04,st:.005,v:.02}],
+  calc:v=>{const cp=.2/(6*v.sg),ck=Math.min(50.1-v.mu,v.mu-49.9)/(3*v.sg);return{cp,ck}},
+  rows:(v,r)=>[['c_p (Streuung)',nz(r.cp,2),r.cp>=1.33-1e-9?'g':'r'],['c_pk (Streuung und Lage)',nz(r.ck,2),r.ck>=1.33-1e-9?'g':'r'],['Abstand zur oberen Grenze',nz(50.1-v.mu,2)+' mm'],['Abstand zur unteren Grenze',nz(v.mu-49.9,2)+' mm']],
+  svg:(v,r)=>gkBild(v.mu,v.sg,'Verteilung der Messwerte'),
+  auf:{z:'Erreiche c_pk ≥ 1,33.',t:'Der Kunde verlangt für die Bohrung einen Fähigkeitsnachweis mit c_pk von mindestens 1,33. Der Prozess liegt im Moment zu weit oben. Zentriere ihn über die Werkzeugkorrektur oder verringere die Streuung, zum Beispiel durch eine stabilere Aufspannung.',h:'Tipp: Zentrieren kostet fast nichts. Die Streuung zu verringern ist meist aufwendiger.',ok:(v,r)=>r.ck>=1.33-1e-9}}};
+
+/* ---------- T3: Werkstoffe & Wärmebehandlung ---------- */
+const wbBild=k=>{const c=CHT({xm:10,ym:1000,xt:[],yt:[200,400,600,800],xl:'Zeit',yl:'Temperatur in °C'});let s=c.s;
+ s+=PL([[c.px(0),c.py(20)],[c.px(1.6),c.py(850)],[c.px(3.2),c.py(850)],[c.px(3.5),c.py(40)],[c.px(4.6),c.py(40)],[c.px(5.8),c.py(580)],[c.px(8),c.py(580)],[c.px(9.8),c.py(20)]],'var(--flow)',3.2);
+ return s+L(c.px(2.4),c.py(850)-9,'Härtetemperatur halten','middle',13.5,'var(--ink)',700)+L(c.px(3.05),c.py(180),'abschrecken','end',12.5,CC('b'),700)+L(c.px(6.9),c.py(580)-9,'anlassen','middle',13.5,'var(--ink)',700)+L(c.px(8.2),c.py(220),'abkühlen','end',12.5,'var(--mute)',500)
+ +`<path d="M${F(c.px(.1))} ${c.Y0+14}H${F(c.px(4.4))}" stroke="${CC('r')}" stroke-width="3"/>`+L(c.px(2.2),c.Y0+32,'Härten','middle',14,CC('r'),700)+`<path d="M${F(c.px(4.7))} ${c.Y0+14}H${F(c.px(9.8))}" stroke="${CC('g')}" stroke-width="3"/>`+L(c.px(7.2),c.Y0+32,'Anlassen','middle',14,CC('g'),700)};
+X['Werkstoffe & Wärmebehandlung']={
+ v:['Ein Stahlteil wird gehärtet und danach nicht mehr angelassen. Welche Eigenschaft hat es?',['Sehr hart, aber spröde','Weich und zäh','Hart und zäh zugleich','Unverändert'],0,'Nach dem Abschrecken ist der Stahl hart und spröde. Erst das Anlassen gibt ihm Zähigkeit zurück.'],
+ ein:[S(13,'Die Stahlbezeichnung verrät die Zusammensetzung. Die Zahl am Anfang ist der Kohlenstoffgehalt mal 100.',k=>TITLE('42CrMo4 lesen')+OP(ph(k,.05,.3),TX(240,96,'42 → 0,42 % Kohlenstoff',440,'ein3','middle'))+OP(ph(k,.35,.6),TX(240,146,'Cr, Mo → Chrom und Molybdän',440,'ein3','middle'))+OP(ph(k,.65,.9),TX(240,196,'4 ÷ 4 → etwa 1 % Chrom',440,'ein3','middle'))),
+  S(13,'Beim Härten wird erwärmt, gehalten und abgeschreckt. Anlassen danach macht den Stahl wieder zäh.',wbBild),
+  S(13,'Je nach Bauteil wählst Du das Verfahren.',CARDS('Welches Verfahren?',[['🔩','Vergüten','Wellen, Schrauben: fest und zäh','b'],['⚙️','Einsatzhärten','Zahnräder: harter Rand, zäher Kern','y'],['✂️','Härten','Werkzeuge: hart','r'],['🌡️','Glühen','Spannungen abbauen, weich machen','g']],{cols:2})),
+  S(12,'Die Wahl des Werkstoffs folgt aus der Beanspruchung, der Fertigung und den Kosten.',LIST('Werkstoff wählen',[['Beanspruchung','1','Kraft, Verschleiß, Temperatur'],['Fertigung','2','zerspanbar, schweißbar, härtbar?'],['Umgebung','3','Korrosion'],['Kosten und Verfügbarkeit','4','']]))],
+ skz:[[SKZ(wbBild,'Skizze Vergüten'),'Temperaturverlauf beim Vergüten: Härten und Anlassen bei hoher Temperatur. Die Werte hängen vom Stahl ab und stehen im Werkstoffdatenblatt.']]};
+
+/* ---------- T3: Umformen, Trennen & additive Fertigung ---------- */
+const stBild=(s_,ti,y=150,ph=54,nt_=true)=>{const t=Math.max(6,s_*7);let s=ti?L(240,24,ti,'middle',16,'var(--ink)',700):'';
+ s+=`<defs>${GR('stg','#8b95a1','#d5dbe2')}</defs>`+RC(190,40,100,y-40,'url(#stg)','var(--ink)',3,1.4)+L(240,96,'Stempel','middle',14,'#111827',700);
+ s+=RC(60,y,360,t,`color-mix(in srgb,${CC('b')} 45%,var(--card))`,'var(--ink)',1,1.4)+L(66,y-6,'Blech','start',13.5,'var(--ink)',700);
+ s+=RC(60,y+t,126,ph,'color-mix(in srgb,var(--ink) 25%,var(--card))','var(--ink)',2,1.4)+RC(294,y+t,126,ph,'color-mix(in srgb,var(--ink) 25%,var(--card))','var(--ink)',2,1.4)+L(123,y+t+ph/2+5,'Schneidplatte','middle',13,'var(--ink)',700);
+ s+=`<path d="M190 ${y}v${F(t)}M290 ${y}v${F(t)}" stroke="var(--red)" stroke-width="3"/>`+(nt_?L(240,y+t+ph+26,'Schnittlinie l (rot), Blechdicke s','middle',13,'var(--mute)',500):'');
+ return s+`<path d="M432 ${y}v${F(t)}M427 ${y}h10M427 ${F(y+t)}h10" stroke="var(--ink)" stroke-width="1.6" fill="none"/>`+L(444,y+t/2+5,'s','start',14,'var(--ink)',700)};
+X['Umformen, Trennen & additive Fertigung']={
+ v:['Du stanzt dasselbe Loch in doppelt so dickes Blech aus demselben Werkstoff. Was passiert mit der Schneidkraft?',['Sie bleibt gleich.','Sie verdoppelt sich.','Sie vervierfacht sich.','Sie halbiert sich.'],1,'Die Schneidkraft ist Schnittlinie mal Blechdicke mal Scherfestigkeit. Doppelte Dicke heißt doppelte Scherfläche.'],
+ ein:[S(13,'Beim Scherschneiden trennt der Stempel das Blech entlang der Schnittlinie.',k=>stBild(4,'Scherschneiden')),
+  S(13,'Die Schneidkraft ist die Scherfläche mal die Scherfestigkeit des Werkstoffs.',k=>TITLE('Schneidkraft')+OP(ph(k,.05,.4),FORM(240,104,['F = l · s · τ_aB'],'middle',undefined,24))+OP(ph(k,.45,.85),FORM(240,180,['200 mm · 2 mm · 300 N/mm² = 120 kN'],'middle',undefined,19))),
+  S(13,'Welches Trennverfahren passt, entscheidet vor allem die Stückzahl.',VS('Stanzen oder Lasern?',{h:'Stanzen',c:'b',l:['Werkzeug teuer','Sekunden je Teil','große Stückzahlen']},{h:'Laserschneiden',c:'g',l:['kein Werkzeug','Kontur frei wählbar','kleine Stückzahlen']})),
+  S(12,'Additive Fertigung baut Schicht für Schicht auf. Sie lohnt sich, wo andere Verfahren an Grenzen stoßen.',CARDS('3D-Druck: wann?',[['🧪','Prototyp','in Tagen statt Wochen','b'],['1️⃣','Einzelteil','Ersatzteil, Vorrichtung','g'],['🌀','Innere Kanäle','Kühlung im Werkzeug','y'],['📈','Großserie','meist zu teuer','r']],{cols:2}))],
+ skz:[[SKZ(k=>stBild(4,'Scherschneiden im Schnitt'),'Skizze Scherschneiden'),'Die Scherfläche ist die Schnittlinie mal die Blechdicke. Bei einem runden Loch ist die Schnittlinie der Umfang.']],
+ sim:{t:'Reicht die Presse?',fix:'Exzenterpresse mit 400 kN Nennkraft, zulässig sind 80 % (320 kN), τ_aB = 0,8 · R_m',
+  c:[{k:'l',l:'Länge der Schnittlinie',u:'mm',min:100,max:600,st:10,v:400},{k:'s',l:'Blechdicke',u:'mm',min:1,max:6,st:.5,v:4},{k:'Rm',l:'Zugfestigkeit R_m',u:'N/mm²',opts:[270,360,420,520,700],v:1}],
+  calc:v=>{const ta=.8*v.Rm,F_=v.l*v.s*ta/1000;return{ta,F:F_,A:F_/400*100}},
+  rows:(v,r)=>[['Scherfestigkeit',nz(r.ta,0)+' N/mm²'],['Scherfläche',nz(v.l*v.s,0)+' mm²'],['Schneidkraft',nz(r.F,1)+' kN',r.F<=320?'g':'r'],['Auslastung der Presse',nz(r.A,0)+' %',r.F<=320?'g':'r']],
+  svg:(v,r)=>{const ok=r.F<=320;return stBild(v.s,'',108,30,false)+HB(60,232,360,18,r.F/600,ok?'var(--ok)':'var(--red)','Schneidkraft',nz(r.F,0)+' kN')+MK(60+360*320/600,232,18,'')+L(60+360*320/600,223,'320 kN','middle',12.5,'var(--ink)',700)+L(240,26,ok?'Die Presse reicht':'Die Presse ist überlastet','middle',16,ok?'var(--ok)':'var(--red)',700)},
+  auf:{z:'Bleib mit mindestens 3 mm Blechdicke unter 320 kN.',t:'Der Halter braucht aus Festigkeitsgründen mindestens 3 mm Blechdicke. Die Presse darf mit höchstens 320 kN belastet werden. Finde eine Kombination aus Schnittlinie, Blechdicke und Werkstoff, die passt.',h:'Tipp: Eine kürzere Schnittlinie erreichst Du, indem Du die Kontur in zwei Hübe aufteilst. Ein weicherer Werkstoff senkt die Kraft ebenfalls.',ok:(v,r)=>v.s>=3&&r.F<=320}}};
+
+/* ---------- T3: Oberflächen & Korrosionsschutz ---------- */
+const kkBild=k=>{let s=L(240,24,'Kontaktkorrosion','middle',16,'var(--ink)',700);
+ s+=RC(60,150,360,44,'#c98a5a','var(--ink)',2,1.4)+L(80,178,'Kupferblech (edler)','start',14,'#111827',700)+RC(206,96,68,18,'#9aa3ad','var(--ink)',3,1.4)+RC(224,114,32,96,'#9aa3ad','var(--ink)',2,1.4)+L(286,108,'Stahlschraube (unedler)','start',14,'var(--ink)',700);
+ s+=`<path d="M150 150q20-34 52-36h76q32 2 52 36z" fill="color-mix(in srgb,${CC('b')} 30%,transparent)" stroke="${CC('b')}" stroke-width="1.4"/>`+L(150,140,'Wasser','end',13.5,CC('b'),700);
+ s+=[[214,90],[230,84],[250,84],[266,90]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#b45309"/>`).join('')+L(240,70,'Rost: Der Stahl löst sich auf','middle',13.5,'#b45309',700);
+ return s+L(240,236,'Zwei Metalle + Feuchtigkeit: Das unedlere korrodiert.','middle',14,'var(--mute)',500)};
+X['Oberflächen & Korrosionsschutz']={
+ v:['Ein verzinktes Stahlblech bekommt einen tiefen Kratzer bis auf den Stahl. Was passiert im Regen?',['Der Stahl rostet am Kratzer sofort stark.','Das Zink löst sich langsam auf und schützt den Stahl am Kratzer weiter.','Nichts, Zink ist edler als Stahl.','Die ganze Zinkschicht platzt ab.'],1,'Zink ist unedler als Stahl und opfert sich. Dieser Schutz wirkt auch an kleinen Verletzungen der Schicht.'],
+ ein:[S(12,'Korrosion braucht Feuchtigkeit und Sauerstoff. Sie tritt in verschiedenen Formen auf.',CARDS('Korrosionsarten',[['▭','Fläche','gleichmäßiger Abtrag','b'],['🕳️','Lochfraß','örtlich, tief','r'],['〰️','Spalt','unter Scheiben, in Fugen','y'],['🔗','Kontakt','zwei verschiedene Metalle','a']],{cols:2})),
+  S(13,'Berühren sich zwei verschiedene Metalle bei Feuchtigkeit, löst sich das unedlere auf.',kkBild),
+  S(13,'Schutz beginnt bei der Konstruktion. Dann folgen Werkstoff und Beschichtung.',LIST('Schutz in drei Stufen',[['Konstruktion','1','keine Spalte, Wasser läuft ab'],['Werkstoff','2','nichtrostender Stahl, Aluminium'],['Beschichtung','3','Zink, Lack, Pulver']])),
+  S(12,'Die Schutzdauer einer Zinkschicht hängt an Dicke und Umgebung.',k=>TITLE('Schutzdauer')+OP(ph(k,.05,.4),FORM(240,108,['Schutzdauer ≈ ',{n:'Schichtdicke',d:'Abtrag je Jahr'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'80 µm',d:'2 µm/Jahr'},' = 40 Jahre'],'middle')))],
+ skz:[[SKZ(kkBild,'Skizze Kontaktkorrosion'),'Abhilfe: gleiche Werkstoffe wählen, die Metalle mit einer Kunststoffscheibe trennen oder die Feuchtigkeit fernhalten.']],
+ sim:{t:'Zinkschicht für ein Geländer auslegen',fix:'Richtwerte für den Abtrag von Zink je Jahr: Innenraum 0,5 µm, Landluft 1 µm, Stadtluft 2 µm, Industrie und Küste 4 µm. Im Einzelfall gelten die Angaben aus Norm und Lieferant.',
+  c:[{k:'d',l:'Schichtdicke',u:'µm',min:10,max:200,st:5,v:60},{k:'a',l:'Abtrag je Jahr (Umgebung)',u:'µm',opts:[.5,1,2,4],v:2}],
+  calc:v=>({t:v.d/v.a}),
+  rows:(v,r)=>[['Umgebung',['Innenraum','Landluft','Stadtluft','Industrie, Küste'][[.5,1,2,4].indexOf(v.a)],v.a===4?'g':'r'],['Schichtdicke',v.d+' µm',v.d<=150?'g':'r'],['Schutzdauer',nz(r.t,0)+' Jahre',r.t>=25?'g':'r']],
+  svg:(v,r)=>{const ok=r.t>=25,h=Math.max(3,v.d*.28);let s=L(240,26,'Schicht und Schutzdauer','middle',16,'var(--ink)',700);
+   s+=`<defs>${GR('zng','#a9b4bf','#e3e8ee')}</defs>`+RC(60,96,360,46,'#6b7280','var(--ink)',2,1.4)+L(240,125,'Stahl','middle',14,'#fff',700)+RC(60,96-h,360,h,'url(#zng)','var(--ink)',1,1.2)+L(430,96-h/2+5,'Zink','start',13.5,'var(--ink)',700)+L(60,96-h-8,v.d+' µm','start',14,'var(--ink)',700);
+   return s+HB(60,196,360,24,r.t/60,ok?'var(--ok)':'var(--amber)','Schutzdauer',nz(r.t,0)+' Jahre')+MK(60+360*25/60,196,24,'25 Jahre')},
+  auf:{z:'Mindestens 25 Jahre an der Küste mit höchstens 150 µm.',t:'Das Geländer steht in einem Industriegebiet an der Küste (Abtrag etwa 4 µm je Jahr) und soll mindestens 25 Jahre ohne Nacharbeit halten. Der Verzinker liefert wirtschaftlich höchstens 150 µm. Stelle die Umgebung ein und lege die Schichtdicke fest.',h:'Tipp: Schutzdauer mal Abtrag je Jahr ergibt die nötige Schichtdicke.',ok:(v,r)=>v.a===4&&r.t>=25&&v.d<=150}}};
+
+/* ---------- O3: Gefährdungsbeurteilung & Unterweisung ---------- */
+const gbKreis=CYC('Gefährdungsbeurteilung',[['Tätigkeit','festlegen'],['Gefährdung','ermitteln'],['beurteilen','Risiko'],['Maßnahmen','festlegen'],['umsetzen',''],['Wirksamkeit','prüfen']],{cy:156,sy:1.04,sx:2.2,w:116});
+const stopBild=STAIRS('Rangfolge der Maßnahmen: STOP',[['Persönlich','Schutzausrüstung'],['Organisatorisch','Regeln, Zeiten'],['Technisch','Schutzgitter'],['Substitution','Gefahr beseitigen']],{lo:'letztes Mittel',up:'zuerst prüfen',top:100});
+X['Gefährdungsbeurteilung & Unterweisung']={
+ v:['An einer Schleifmaschine entsteht gefährlicher Staub. Welche Maßnahme prüfst Du zuerst?',['Staubmasken ausgeben','Ein Warnschild anbringen','Ein staubarmes Verfahren oder eine Absaugung an der Entstehungsstelle','Die Arbeitszeit an der Maschine verkürzen'],2,'Erst die Gefahr beseitigen oder technisch abfangen. Organisatorische Regeln und Schutzausrüstung kommen danach.'],
+ ein:[S(13,'Die Gefährdungsbeurteilung läuft in festen Schritten und wird fortgeschrieben, sobald sich etwas ändert.',gbKreis),
+  S(12,'Das Risiko ergibt sich aus der Schwere des möglichen Schadens und der Wahrscheinlichkeit.',CARDS('Risiko einschätzen',[['💥','Schwere','Wie schlimm kann es werden?','r'],['🎲','Wahrscheinlichkeit','Wie oft, wie lange?','y'],['🚦','Risiko','hoch: sofort handeln','a']])),
+  S(13,'Bei den Maßnahmen gilt eine feste Rangfolge. Schutzausrüstung ist das letzte Mittel.',stopBild),
+  S(12,'Unterwiesen wird vor der ersten Tätigkeit, bei Änderungen und danach mindestens einmal im Jahr.',LIST('Unterweisung',[['vor Aufnahme der Tätigkeit','ok'],['bei Änderungen und nach Unfällen','ok'],['mindestens jährlich, Jugendliche halbjährlich','ok'],['verständlich, mit Unterschrift','ok']]))],
+ skz:[[SKZ(stopBild,'Skizze STOP-Prinzip'),'Von oben nach unten prüfen. Je weiter unten die Maßnahme, desto mehr hängt der Schutz vom Verhalten des Einzelnen ab.']]};
+
+/* ---------- O3: Gefahrstoffe & Lagerung ---------- */
+const ghsBild=k=>{const P=(x,y,sym,t)=>`<path d="M${x} ${y-30}l30 30l-30 30l-30-30z" fill="#fff" stroke="#dc2626" stroke-width="4" stroke-linejoin="round"/>`+L(x,y+8,sym,'middle',22,'#111827',800)+L(x,y+52,t,'middle',13,'var(--ink)',600);
+ return L(240,24,'Kennzeichnung nach GHS (Auswahl)','middle',16,'var(--ink)',700)+P(84,88,'🔥','entzündbar')+P(188,88,'!','reizend')+P(292,88,'☠','giftig')+P(396,88,'🧪','ätzend')
+ +BOX(60,166,170,42,'Signalwort','r',14,'Gefahr oder Achtung')+BOX(250,166,170,42,'H- und P-Sätze','b',14,'Gefahr, Sicherheit')+L(240,240,'Rote Raute, schwarzes Symbol auf weißem Grund','middle',13.5,'var(--mute)',500)};
+X['Gefahrstoffe & Lagerung']={
+ v:['Ein neuer Reiniger soll eingesetzt werden. Was tust Du, bevor die erste Flasche geöffnet wird?',['Nichts, der Lieferant haftet.','Sicherheitsdatenblatt lesen und die Gefährdung beurteilen','Handschuhe austeilen, das genügt','Den Reiniger in kleine Flaschen umfüllen'],1,'Erst informieren und beurteilen, dann Schutzmaßnahmen und Betriebsanweisung, dann unterweisen. Erst danach wird der Stoff verwendet.'],
+ ein:[S(12,'Gefahrstoffe erkennst Du an der Kennzeichnung auf dem Gebinde.',ghsBild),
+  S(13,'Vom Sicherheitsdatenblatt führt ein fester Weg bis zur Unterweisung am Arbeitsplatz.',FLOW('Vom Datenblatt zur Unterweisung',[['📄','Datenblatt','vom Hersteller','b'],['🔍','Beurteilung','Gefährdung, Ersatz?','y'],['📋','Anweisung','am Arbeitsplatz','a'],['👷','Unterweisung','mündlich','g']],{y:66,h:132})),
+  S(12,'Auch hier gilt die Rangfolge. Zuerst fragst Du, ob es mit einem harmloseren Stoff geht.',stopBild),
+  S(13,'Im Lager zählen Ordnung und Trennung.',LIST('Sicher lagern',[['Originalgebinde, gekennzeichnet','ok'],['Auffangwanne, Lüftung','ok'],['nur Tagesbedarf am Arbeitsplatz','ok'],['Unverträgliches getrennt','ok','z. B. brennbar und brandfördernd']]))],
+ skz:[[SKZ(ghsBild,'Skizze Gefahrstoffkennzeichnung'),'Vereinfachte Darstellung. Die verbindlichen Piktogramme und Sätze stehen auf dem Etikett und im Sicherheitsdatenblatt.']]};
+
+/* ---------- O3: Nach einem Unfall ---------- */
+const rkBild=FLOW('Rettungskette',[['🛑','Sichern','Maschine aus, Eigenschutz','r'],['📞','Notruf 112','wo, was, wie viele','y'],['🩹','Erste Hilfe','bis Hilfe kommt','g'],['🚑','Einweisen','Rettungsdienst','b']],{y:66,h:132});
+X['Nach einem Unfall richtig handeln']={
+ v:['Ein Kollege gerät mit der Hand in eine laufende Maschine und ist verletzt. Was tust Du als Erstes?',['Die Unfallanzeige schreiben','Die Maschine stillsetzen und die Unfallstelle sichern','Den Betriebsleiter suchen','Fotos machen'],1,'Zuerst weitere Gefahr ausschließen, auch für Dich selbst. Dann Notruf und Erste Hilfe.'],
+ ein:[S(12,'In den ersten Minuten zählt die Reihenfolge: sichern, melden, helfen.',rkBild),
+  S(13,'Danach wird dokumentiert und gemeldet. Die Frist für die Unfallanzeige ist kurz.',LIST('Dokumentieren und melden',[['Jede Erste Hilfe eintragen','1','Verbandbuch, 5 Jahre aufbewahren'],['Mehr als 3 Tage Ausfall','2','Unfallanzeige binnen 3 Tagen'],['Tödlich oder mehrere Schwerverletzte','3','sofort melden']])),
+  S(13,'Die Untersuchung fragt nach dem Warum, nicht nach dem Schuldigen.',CARDS('Ursachen suchen',[['⚙️','Technik','Schutz fehlte, defekt?','b'],['📋','Organisation','Regel, Unterweisung, Zeitdruck?','y'],['👤','Person','Wissen, Können, Verhalten?','a']])),
+  S(12,'Aus dem Unfall folgen Maßnahmen. Das Team erfährt sachlich, was geschehen ist und was sich ändert.',FLOW('Damit es nicht wieder passiert',[['🛠️','Maßnahmen','nach STOP','g'],['📑','Beurteilung','anpassen','b'],['🗣️','Team','informieren, unterweisen','y']],{y:70,h:128}))],
+ skz:[[SKZ(rkBild,'Skizze Rettungskette'),'Jedes Glied zählt. Beim Notruf nennst Du Ort, Geschehen und Zahl der Verletzten und wartest auf Rückfragen.']]};
+
+/* ---------- O3: Umwelt- und Energiemanagement ---------- */
+const abfBild=STAIRS('Abfallhierarchie',[['Beseitigen','Deponie'],['Verwerten','z. B. Energie'],['Recyceln','Späne, Altöl'],['Wieder nutzen','Behälter'],['Vermeiden','zuerst']],{lo:'letzte Wahl',up:'erste Wahl',top:100});
+X['Umwelt- und Energiemanagement']={
+ v:['Eine Fertigungslinie zieht nachts und am Wochenende 20 kW, obwohl nichts gefertigt wird. Was kostet das ungefähr im Jahr bei 0,20 € je kWh und 4760 Stunden?',['etwa 1900 €','etwa 9500 €','etwa 19 000 €','etwa 95 000 €'],2,'20 kW · 4760 h = 95 200 kWh. Mal 0,20 €/kWh sind das 19 040 €. Die Grundlast wird oft unterschätzt.'],
+ ein:[S(13,'Beim Abfall gilt eine feste Rangfolge. Vermeiden steht ganz oben.',abfBild),
+  S(13,'Energiekosten sind Leistung mal Zeit mal Preis. Die Zeit außerhalb der Produktion ist lang.',k=>TITLE('Kosten der Grundlast')+OP(ph(k,.05,.4),TX(240,100,'Kosten = Leistung · Zeit · Strompreis',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,176,['20 kW · 4760 h · 0,20 €/kWh = 19 040 €'],'middle',undefined,18))),
+  S(12,'Erst der Bezug auf die gefertigte Menge macht den Verbrauch vergleichbar.',k=>TITLE('Energiekennzahl')+OP(ph(k,.05,.4),FORM(240,108,['spez. Verbrauch = ',{n:'Energieverbrauch',d:'Ausbringung'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'42 000 kWh',d:'60 000 Stück'},' = 0,7 kWh/Stück'],'middle'))),
+  S(12,'Viele Einsparungen kosten fast nichts. Du brauchst nur Aufmerksamkeit und klare Regeln.',LIST('Schnell wirksam',[['Leckagen in der Druckluft beseitigen','ok'],['Abschalten außerhalb der Produktion','ok'],['Netzdruck prüfen und senken','ok'],['Verbrauch je Stück aushängen','ok']]))],
+ skz:[[SKZ(abfBild,'Skizze Abfallhierarchie'),'Von oben nach unten prüfen. Beseitigt wird nur, was sich nicht vermeiden, wiederverwenden oder verwerten lässt.']],
+ sim:{t:'Grundlast außerhalb der Produktion senken',fix:'4760 Stunden im Jahr ohne Produktion, angenommener Strompreis 0,20 € je kWh',
+  c:[{k:'P',l:'Grundlast der Linie',u:'kW',min:5,max:30,st:1,v:20},{k:'a',l:'Anteil der Zeit, in der abgeschaltet ist',u:'%',min:0,max:100,st:5,v:0}],
+  calc:v=>{const E=v.P*4760*(1-v.a/100),K=E*.2,K0=v.P*4760*.2;return{E,K,K0}},
+  rows:(v,r)=>[['Energie außerhalb der Produktion',nz(r.E,0)+' kWh'],['Kosten im Jahr',nz(r.K,0)+' €',r.K<=6000?'g':'r'],['Einsparung durch Abschalten',nz(r.K0-r.K,0)+' €']],
+  svg:(v,r)=>{const x0=40,W=400,mx=30000;return L(240,30,'Kosten der Grundlast im Jahr','middle',16,'var(--ink)',700)+HB(x0,80,W,30,r.K0/mx,`color-mix(in srgb,${CC('r')} 50%,var(--card))`,'ohne Abschalten',nz(r.K0,0)+' €')+HB(x0,156,W,30,r.K/mx,r.K<=6000?'var(--ok)':'var(--amber)','mit Abschalten',nz(r.K,0)+' €')+MK(x0+W*6000/mx,156,30,'Ziel 6000 €')+L(240,244,'Grundlast '+v.P+' kW, abgeschaltet in '+v.a+' % der Zeit','middle',14,'var(--mute)',500)},
+  auf:{z:'Senke die Kosten der Grundlast auf höchstens 6000 € im Jahr.',t:'Die Geschäftsleitung will die Kosten außerhalb der Produktion auf höchstens 6000 € im Jahr drücken. Du kannst die Grundlast selbst senken (Leckagen, Absaugung, Kühlung) und Anlagen nachts und am Wochenende abschalten.',h:'Tipp: Ganz abschalten geht selten, weil manche Anlagen warm bleiben müssen. Kombiniere beide Wege.',ok:(v,r)=>r.K<=6000}}};
+
+/* ---------- F2: Personalbedarf ---------- */
+const pbBild=(E,B,Be,ti)=>{const x0=150,W=270,mx=Math.max(20,B,Be)*1.08,X=n=>x0+W*n/mx,net=Math.ceil(B-1e-9)-Be,row=(y,n,v,c,t)=>L(x0-10,y+21,n,'end',15,'var(--ink)',600)+RC(x0,y,X(v)-x0,30,`color-mix(in srgb,${CC(c)} 55%,var(--card))`,'var(--ink)',4,1)+L(x0+8,y+21,t,'start',15,'#111827',700);
+ return L(240,28,ti,'middle',16,'var(--ink)',700)+row(50,'Einsatzbedarf',E,'b',nz(E,1))+row(96,'Bruttobedarf',B,'y',nz(B,1))+row(142,'Bestand',Be,'g',String(Be))+`<path d="M${F(X(Be))} 44V180" stroke="var(--ink)" stroke-width="1.6" stroke-dasharray="5 4"/>`
+ +L(240,216,net>0?'Es fehlen '+net+' Mitarbeiter':net<0?(-net)+' Mitarbeiter mehr als nötig':'Bestand und Bedarf passen','middle',20,net>0?'var(--red)':'var(--ok)',800)+L(240,240,'Bruttobedarf aufgerundet: '+Math.ceil(B-1e-9),'middle',14,'var(--mute)',500)};
+X['Personalbedarf ermitteln']={
+ v:['Für das Programm brauchst Du rechnerisch jeden Tag 12 Mitarbeiter an den Maschinen. Die Fehlzeitenquote beträgt 20 %. Wie viele Mitarbeiter brauchst Du insgesamt?',['12','14,4','15','10'],2,'12 ÷ (1 − 0,2) = 15. Von 15 Mitarbeitern sind im Mittel 80 %, also 12, anwesend. 12 · 1,2 = 14,4 wäre zu wenig.'],
+ ein:[S(12,'Der Einsatzbedarf folgt aus der Arbeit, die anfällt, und der Zeit, die ein Mitarbeiter leistet.',k=>TITLE('Einsatzbedarf')+OP(ph(k,.05,.4),FORM(240,108,['Einsatzbedarf = ',{n:'Arbeitsvolumen',d:'Arbeitszeit je Mitarbeiter'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'1800 h',d:'150 h'},' = 12'],'middle'))),
+  S(13,'Urlaub, Krankheit und Schulung verlangen eine Reserve. Daraus wird der Bruttopersonalbedarf.',k=>TITLE('Bruttopersonalbedarf')+OP(ph(k,.05,.4),FORM(240,108,['Bruttobedarf = ',{n:'Einsatzbedarf',d:'1 − Fehlzeitenquote'}],'middle'))+OP(ph(k,.45,.85),FORM(240,194,['= ',{n:'12',d:'1 − 0,2'},' = 15'],'middle'))),
+  S(13,'Der Nettobedarf vergleicht mit dem Bestand und rechnet Abgänge und feste Zugänge ein.',k=>TITLE('Nettopersonalbedarf')+OP(ph(k,.05,.4),TX(240,100,'Brutto − Bestand + Abgänge − Zugänge',450,'ein3','middle'))+OP(ph(k,.45,.85),FORM(240,176,['15 − 13 + 1 − 1 = 2'],'middle',undefined,24))),
+  S(12,'Aus dem Ergebnis leitest Du Maßnahmen ab.',VS('Was tun?',{h:'Unterdeckung',c:'r',l:['einstellen, übernehmen','Überstunden, Leiharbeit','qualifizieren']},{h:'Überdeckung',c:'b',l:['umsetzen','Arbeitszeitkonten','Fluktuation nutzen']}))],
+ skz:[[SKZ(k=>pbBild(12,15,13,'Beispiel aus „Kurz erklärt“'),'Skizze Personalbedarf'),'Die gestrichelte Linie zeigt den Bestand. Reicht der Balken des Bruttobedarfs darüber hinaus, fehlen Mitarbeiter.']],
+ sim:{t:'Personalbedarf einer Abteilung',fix:'Bestand 12 Mitarbeiter, jeder leistet 150 h im Monat',
+  c:[{k:'x',l:'Stückzahl im Monat',u:'Stück',min:3000,max:8000,st:250,v:6000},{k:'t',l:'Zeit je Stück',u:'min',min:14,max:26,st:1,v:20},{k:'f',l:'Fehlzeitenquote',u:'%',min:5,max:25,st:1,v:20}],
+  calc:v=>{const V=v.x*v.t/60,E=V/150,B=E/(1-v.f/100);return{V,E,B,N:Math.ceil(B-1e-9)-12}},
+  rows:(v,r)=>[['Arbeitsvolumen',nz(r.V,0)+' h'],['Einsatzbedarf',nz(r.E,2)],['Bruttobedarf',nz(r.B,2)],['Nettobedarf',(r.N>0?'+':'')+r.N+' Mitarbeiter',r.N<=0?'g':'r'],['Stückzahl',nz(v.x,0),v.x>=5000?'g':'r']],
+  svg:(v,r)=>pbBild(r.E,r.B,12,'Bedarf und Bestand'),
+  auf:{z:'Schaffe mindestens 5000 Stück mit den vorhandenen 12 Mitarbeitern.',t:'Neueinstellungen sind in diesem Jahr nicht genehmigt. Gefordert sind mindestens 5000 Stück im Monat. Prüfe, was Du beeinflussen kannst: die Zeit je Stück (Arbeitsplatzgestaltung, Vorrichtungen) und die Fehlzeiten (Gesundheitsschutz, Rückkehrgespräche, Urlaubsplanung).',h:'Tipp: Eine Minute weniger je Stück spart bei 5000 Stück gut 83 Stunden im Monat.',ok:(v,r)=>v.x>=5000&&r.N<=0}}};
+
+/* ---------- F2: Qualifizierung ---------- */
+const qmBild=k=>{const T=['Drehen','Fräsen','Messen','Rüsten'],M=[['Aydin',[3,2,1,3]],['Becker',[2,0,0,1]],['Celik',[1,3,0,2]],['Dorn',[0,1,3,0]]],col=['var(--card)',`color-mix(in srgb,${CC('y')} 35%,var(--card))`,`color-mix(in srgb,${CC('g')} 35%,var(--card))`,`color-mix(in srgb,${CC('g')} 75%,var(--card))`];let s=L(240,24,'Qualifikationsmatrix','middle',16,'var(--ink)',700);
+ T.forEach((t,j)=>s+=L(170+j*76,54,t,'middle',14,'var(--ink)',700));M.forEach(([n,v],i)=>{s+=L(120,86+i*38,n,'end',14.5,'var(--ink)',600);v.forEach((q,j)=>s+=RC(136+j*76,64+i*38,68,32,col[q],j===2&&q<3?'var(--red)':'var(--line)',5,j===2&&q<3?2:1.2)+L(170+j*76,85+i*38,String(q),'middle',15,'var(--ink)',700))});
+ return s+L(240,236,'Messen beherrscht nur Dorn: Engpass','middle',14.5,'var(--red)',700)+L(240,256,'0 keine Kenntnis, 3 kann andere anlernen','middle',13,'var(--mute)',500)};
+X['Qualifizierung & Schulungsplan']={
+ v:['Nur ein Mitarbeiter Deiner Schicht kann die Messmaschine programmieren. Wie bewertest Du das?',['Gut, so gibt es keine Verwechslungen.','Als Engpass: Fällt er aus, steht die Prüfung.','Unwichtig, solange er gesund ist.','Als Zeichen, dass die Messmaschine zu schwierig ist.'],1,'Jede wichtige Tätigkeit sollten mindestens zwei Mitarbeiter beherrschen. Sonst hängt die Abteilung an einer Person.'],
+ ein:[S(13,'Die Qualifikationsmatrix zeigt auf einen Blick, wer was kann und wo es eng wird.',qmBild),
+  S(12,'Der Bedarf entsteht aus dem Vergleich: Was wird gebraucht, was ist vorhanden?',FLOW('Vom Bedarf zur Schulung',[['🎯','Soll','Anforderungen','a'],['📊','Ist','Matrix','b'],['🔍','Lücke','wer, was?','r'],['📅','Plan','wann, wie?','g']],{y:66,h:132})),
+  S(13,'Gelernt wird am Arbeitsplatz oder außerhalb. Beides hat seinen Platz.',VS('Lernort',{h:'am Arbeitsplatz',c:'g',l:['Unterweisung','Arbeitsplatzwechsel','Pate']},{h:'außerhalb',c:'b',l:['Seminar','Herstellerschulung','Lehrgang']})),
+  S(12,'Ob die Schulung gewirkt hat, zeigt sich in vier Stufen. Die letzte zählt am meisten.',LIST('Erfolg prüfen',[['Zufriedenheit','1','Rückmeldebogen'],['Lernerfolg','2','Test, Arbeitsprobe'],['Anwendung','3','am Arbeitsplatz beobachten'],['Wirkung','4','Ausschuss, Rüstzeit']]))],
+ skz:[[SKZ(qmBild,'Skizze Qualifikationsmatrix'),'Rot umrandet ist die Spalte mit dem Engpass. Hier setzt der Schulungsplan zuerst an.']]};
+
+/* ---------- F2: Einarbeitung ---------- */
+const vsBild=STAIRS('Vier-Stufen-Methode',[['1 Vorbereiten','Platz, Ziel'],['2 Vormachen','und erklären'],['3 Nachmachen','erklären lassen'],['4 Üben','kontrollieren']],{lo:'Unterweiser aktiv',up:'Mitarbeiter aktiv',top:100});
+X['Einarbeitung & Unterweisung']={
+ v:['Du hast einem neuen Mitarbeiter einen Arbeitsschritt vorgemacht und erklärt. Was kommt als Nächstes?',['Er arbeitet allein weiter, Du gehst.','Er macht den Schritt nach und erklärt dabei, was er tut und warum.','Du machst es noch dreimal vor.','Er unterschreibt die Unterweisung.'],1,'Beim Nachmachen und Erklären siehst Du, ob er Schritt und Grund verstanden hat, und kannst sofort korrigieren.'],
+ ein:[S(12,'Gute Einarbeitung beginnt vor dem ersten Tag.',LIST('Vor dem ersten Tag',[['Arbeitsplatz und Kleidung bereit','ok'],['Team informiert','ok'],['Pate benannt','ok'],['Einarbeitungsplan fertig','ok']])),
+  S(13,'Der erste Tag prägt. Sicherheit kommt vor der ersten Tätigkeit.',FLOW('Der erste Tag',[['👋','Begrüßen','persönlich','g'],['🛡️','Sicherheit','Unterweisung','r'],['👥','Team','Pate, Ansprechpartner','b'],['🗺️','Plan','erste Woche','y']],{y:66,h:132})),
+  S(13,'Arbeitsschritte vermittelst Du in vier Stufen. Der Mitarbeiter wird von Stufe zu Stufe aktiver.',vsBild),
+  S(12,'Regelmäßige Rückmeldung zeigt beiden Seiten, wo die Einarbeitung steht.',k=>ML5.H.TL('Rückmeldegespräche',{y:150,ticks:[[.08,'Start'],[.24,'1 Woche'],[.5,'1 Monat'],[.9,'vor Ende Probezeit']],spans:[[.08,.9,'Einarbeitung nach Plan','g']],marks:[[.24,'','b'],[.5,'','b'],[.9,'','r']],note:'Was läuft gut, was fehlt, wie geht es weiter?'})(k))],
+ skz:[[SKZ(vsBild,'Skizze Vier-Stufen-Methode'),'Bei jedem Schritt erklärst Du das Was, das Wie und das Warum.']]};
+
+/* ---------- Verstehen, Im Betrieb, Typische Fehler ---------- */
+Object.assign(ERK,{
+'Kapazitäts- und Terminplanung':['Kapazitätsplanung ist ein Vergleich in Stunden: Was die Aufträge brauchen gegen das, was Maschine und Personal leisten können.','In der Prüfung folgt auf die Rechnung fast immer die Frage nach Maßnahmen. Nenne mehrere und wäge Kosten und Machbarkeit ab.',['Nutzungsgrad vergessen und mit der vollen Schichtzeit gerechnet.','Minuten und Stunden gemischt.','Rüstzeit nicht zum Bedarf gezählt.']],
+'Reihenfolgeplanung':['Die Gesamtzeit bleibt bei jeder Reihenfolge gleich. Es ändert sich, wann die einzelnen Aufträge fertig sind.','Begründe Deine Regel mit dem Ziel: Termintreue, kurze Durchlaufzeit oder wenig Rüsten. Eilaufträge brauchen klare Spielregeln.',['Mittlere Durchlaufzeit aus den Bearbeitungszeiten statt aus den Fertigstellungszeitpunkten gebildet.','Schlupfzeit mit dem Liefertermin verwechselt.','Nur gerüstet optimiert und Termine übersehen.']],
+'Material: ABC, XYZ, Bestellmenge, Kanban':['Material steuerst Du mit unterschiedlichem Aufwand: genau bei teuren, einfach bei billigen Teilen.','Die optimale Bestellmenge ist ein Richtwert. Verpackungseinheiten, Mindestmengen, Rabatte und Lagerplatz verschieben sie in der Praxis.',['Sicherheitsbestand beim Meldebestand vergessen.','Lagerkostensatz als Dezimalzahl in die Formel mit der 200 eingesetzt.','Kanban-Karten abgerundet statt aufgerundet.']],
+'Zeitwirtschaft: Auftragszeit & Zeitgrad':['Die Auftragszeit ist ein Baukasten: Die Rüstzeit zählt einmal, die Zeit je Einheit so oft wie die Stückzahl.','Vorgabezeiten sind Grundlage für Kalkulation, Terminplanung und Entlohnung. Halte sie aktuell, wenn sich Verfahren ändern.',['Zuschläge auf die Auftragszeit statt auf die Grundzeit gerechnet.','Zeitgrad umgekehrt gebildet (Istzeit durch Vorgabezeit).','Rüstzeit mit der Stückzahl multipliziert.']],
+'Montageplanung & Fügen':['Die Taktzeit folgt aus dem Kundenbedarf. Die Stationenzahl folgt aus der Arbeit, die in diesen Takt passen muss.','Ein hoher Bandwirkungsgrad ist wirtschaftlich, lässt aber wenig Luft. Plane Springer und Puffer für Störungen ein.',['Stationenzahl abgerundet.','Taktzeit als Stückzahl durch Zeit gerechnet.','Vorrangbeziehungen beim Aufteilen der Arbeit übersehen.']],
+'Inbetriebnahme & Abnahme':['Inbetriebnahme ist Steigern in Stufen: erst sicher, dann funktionsfähig, dann leistungsfähig.','Was im Abnahmeprotokoll fehlt, lässt sich später kaum einfordern. Nimm Dir die Zeit und das Lastenheft dazu.',['Unter Zeitdruck Schutzeinrichtungen überbrückt.','Mängel nur mündlich besprochen.','Produktion gestartet, bevor unterwiesen wurde.']],
+'FMEA: Risiken bewerten':['Die FMEA ist Teamarbeit vor dem Fehler. Die Zahl ordnet nur, entscheidend sind die Maßnahmen.','Im Betrieb lebt die FMEA: Nach Reklamationen und Änderungen wird sie angepasst und neu bewertet.',['Entdeckung falsch herum bewertet (10 für sicher entdeckt).','Bedeutung nach einer Prüfmaßnahme gesenkt.','Nur auf die RPZ geschaut und eine hohe Bedeutung übersehen.']],
+'Automatisierung & Robotik':['Automatisierung lohnt sich über die Stückzahl. Die Zelle ist nur so schnell wie ihr langsamster Schritt und nur so gut wie ihre Verfügbarkeit.','Als Meister sorgst Du für geschulte Einrichter, klare Regeln bei Störungen und regelmäßige Prüfung der Schutzeinrichtungen.',['Verfügbarkeit bei der Ausbringung vergessen.','Greifergewicht bei der Traglast übersehen.','Cobot ohne eigene Risikobeurteilung eingesetzt.']],
+'QM-System & Audit':['Ein QM-System beschreibt, wie der Betrieb arbeiten will, und prüft regelmäßig, ob er es tut.','Bereite Dein Team auf Audits vor: Jeder kennt seine Anweisungen und weiß, wo die Nachweise liegen. Ehrliche Antworten sind besser als geschönte.',['Audit als Kontrolle von Personen verstanden.','Nur den Einzelfall korrigiert, die Ursache nicht gesucht.','Veraltete Unterlagen am Arbeitsplatz gelassen.']],
+'Qualitätswerkzeuge & KVP':['Die Werkzeuge bauen aufeinander auf: zählen, ordnen, Ursachen sammeln, prüfen, verbessern, sichern.','Verbesserung braucht Führung: Zeit geben, Vorschläge ernst nehmen, schnell entscheiden und Erfolge zeigen.',['Sofort Maßnahmen beschlossen, ohne die Ursache zu prüfen.','Beim ersten Warum aufgehört.','Maßnahme eingeführt, aber die Wirkung nie geprüft.']],
+'Prüfen, Messen & Fehleranalyse':['Fähigkeit hat zwei Seiten: Die Streuung muss klein genug sein, und die Lage muss stimmen.','Mit der Regelkarte greifst Du ein, bevor Ausschuss entsteht. Das gelingt nur, wenn die Werker selbst eintragen und reagieren dürfen.',['Bei c_pk den größeren statt den kleineren Abstand genommen.','Im Nenner 6 σ und 3 σ vertauscht.','Messmittel gewählt, das zu grob für die Toleranz ist.']],
+'Werkstoffe & Wärmebehandlung':['Kohlenstoff macht Stahl härtbar, Legierungselemente verbessern Durchhärtung, Festigkeit und Beständigkeit.','Lege die Wärmebehandlung mit der Härterei und nach dem Werkstoffdatenblatt fest. Plane Aufmaß für den Verzug ein.',['Kennzahl bei legierten Stählen nicht durch den Faktor geteilt.','Härten und Vergüten gleichgesetzt.','Baustahl härten wollen.']],
+'Umformen, Trennen & additive Fertigung':['Die Schneidkraft hängt an der Scherfläche und am Werkstoff. Beides kannst Du beeinflussen.','Das Verfahren wählst Du über die Stückzahl: Werkzeugkosten verteilen sich nur bei großen Mengen.',['Fläche des Lochs statt Umfang mal Dicke verwendet.','Mit der Zugfestigkeit statt mit der Scherfestigkeit gerechnet.','Presse ohne Reserve ausgelegt.']],
+'Oberflächen & Korrosionsschutz':['Korrosionsschutz ist eine Frage der Umgebung und der geplanten Lebensdauer.','Kläre vor der Bestellung Schichtdicke, Maßänderung und Vorbehandlung mit dem Beschichter. Passungen und Gewinde brauchen besondere Beachtung.',['Edleres und unedleres Metall verwechselt.','Schichtdicke bei Passmaßen nicht berücksichtigt.','Beschichtet, ohne zu entfetten und zu entrosten.']],
+'Gefährdungsbeurteilung & Unterweisung':['Die Gefährdungsbeurteilung fragt vor dem Unfall, was passieren kann, und legt fest, was dagegen getan wird.','Beziehe die Mitarbeiter ein: Sie kennen die Schwachstellen am Arbeitsplatz am besten und halten Regeln eher ein, die sie mitgestaltet haben.',['Mit Schutzausrüstung begonnen statt mit der Gefahrenquelle.','Beurteilung einmal erstellt und nie fortgeschrieben.','Unterweisung ohne Nachweis.']],
+'Gefahrstoffe & Lagerung':['Der Weg ist immer gleich: erfassen, informieren, beurteilen, ersetzen oder schützen, anweisen, unterweisen.','Halte Verzeichnis und Betriebsanweisungen aktuell. Neue Stoffe kommen erst nach der Freigabe in die Fertigung.',['In Lebensmittelbehälter umgefüllt.','Sicherheitsdatenblatt abgeheftet, aber nicht ausgewertet.','Unverträgliche Stoffe zusammen gelagert.']],
+'Nach einem Unfall richtig handeln':['Erst Menschen schützen und helfen, dann melden und dokumentieren, dann Ursachen finden und abstellen.','Im Fachgespräch punktest Du mit der Reihenfolge und damit, dass Du das Team danach nicht vergisst.',['Unfallstelle verändert, bevor sie aufgenommen wurde.','Meldefrist versäumt.','Schuldigen gesucht statt Ursachen.']],
+'Umwelt- und Energiemanagement':['Was Du misst und auf die Stückzahl beziehst, kannst Du steuern. Das gilt für Energie genauso wie für Abfall.','Mach Verbrauch sichtbar und beteilige die Schichten. Kleine Regeln, etwa wer am Freitag abschaltet, bringen viel.',['Verbrauch ohne Bezug zur Menge verglichen.','kW und kWh verwechselt.','Gefährliche Abfälle mit anderen vermischt.']],
+'Personalbedarf ermitteln':['Erst die Arbeit in Stunden, dann die Köpfe, dann die Reserve, dann der Vergleich mit dem Bestand.','Der Bedarf ist auch eine Frage der Qualifikation. Prüfe, ob die vorhandenen Mitarbeiter die Arbeit übernehmen können.',['Fehlzeiten aufgeschlagen statt durch (1 − Quote) geteilt.','Abgänge beim Nettobedarf abgezogen statt addiert.','Abgerundet statt aufgerundet.']],
+'Qualifizierung & Schulungsplan':['Qualifizierung folgt dem Bedarf des Betriebs und den Zielen der Mitarbeiter. Die Matrix macht beides sichtbar.','Verbinde den Schulungsplan mit den Mitarbeitergesprächen. Wer weiß, wohin er sich entwickeln kann, bleibt eher.',['Schulung ohne Ziel und ohne Erfolgskontrolle.','Immer dieselben Mitarbeiter geschult.','Vertretung während der Schulung nicht geplant.']],
+'Einarbeitung & Unterweisung':['Einarbeitung ist geplantes Lernen: klare Ziele, ein fester Ansprechpartner und regelmäßige Rückmeldung.','Im Fachgespräch nennst Du die Vier-Stufen-Methode mit einem Beispiel aus Deinem Bereich und vergisst die Dokumentation nicht.',['Neuen Mitarbeiter am ersten Tag sich selbst überlassen.','Nur vorgemacht, nicht nachmachen lassen.','Sicherheitsunterweisung auf später verschoben.']]});
+
+}
 /* ---------- Bruchstrich in Merkbox und Lösungsweg: [[Zähler||Nenner]] ---------- */
-const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zη])_([A-Za-z0-9äöüß]+)/g,'$1<sub>$2</sub>');
+const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<sub>$2</sub>');
 const fixFR=root=>root.querySelectorAll('#mbx li, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
 new MutationObserver(()=>fixFR(document)).observe(document.getElementById('view'),{childList:true,subtree:true});
 
@@ -3203,7 +4017,7 @@ function simPanel(key,Sm){const p=el('<h2>🎛️ Ausprobieren: '+esc(Sm.t)+'</h
  const v={};Sm.c.forEach(c=>v[c.k]=c.opts?c.opts[c.v]:c.v);
  const g=el('','simg'),sv=el('','simsv'),cs=el('','simc');
  const done=()=>!!lsG(AK)[key];
- const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufi">🎯</span><span class="aufz"><b>Auftrag:</b> '+esc(Sm.auf.z)+'</span><span class="aufa">▾</span></button><div class="aufb" hidden><p>'+esc(Sm.auf.t)+'</p><p class="sub">'+esc(Sm.auf.h)+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
+ const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufi">🎯</span><span class="aufz"><b>Auftrag:</b> '+FRX(esc(Sm.auf.z))+'</span><span class="aufa">▾</span></button><div class="aufb" hidden><p>'+FRX(esc(Sm.auf.t))+'</p><p class="sub">'+FRX(esc(Sm.auf.h))+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
  au.querySelector('.aufk').onclick=e=>{const b=au.querySelector('.aufb');b.hidden=!b.hidden;e.currentTarget.setAttribute('aria-expanded',!b.hidden)};
  cs.append(au);
  Sm.c.forEach(c=>{const w=el('<label class="rg"><span class="rgl">'+FRX(esc(c.l))+'</span><b class="rgv"></b><input type="range" min="'+(c.opts?0:c.min)+'" max="'+(c.opts?c.opts.length-1:c.max)+'" step="'+(c.opts?1:c.st)+'" value="'+c.v+'"></label>','');
