@@ -1,0 +1,38 @@
+/* ===== Lernlabor Pro: Marke Anthrazit/Schmiedeorange, Regler mit Auftrag, Bruchstrich ===== */
+:root[data-brand=pro]{--brand:#c2410c;--logo:#1f2937;--logo2:#fb923c}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light])[data-brand=pro]{--brand:#fb923c}}
+:root[data-theme=dark][data-brand=pro]{--brand:#fb923c}
+.brand .bpro{display:inline-block;font-size:.42em;font-weight:800;letter-spacing:.06em;background:var(--logo2);color:var(--logo);border-radius:6px;padding:.22em .4em .18em;margin-left:.35em;vertical-align:.6em}
+body.subpg .brand .bpro{font-size:.5em}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 .15em;font-size:.95em}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}.fr>span:last-child{padding:0 .25em}
+#mbx li,.sol div{white-space:normal}
+.psim .simg{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:720px){.psim .simg{grid-template-columns:minmax(0,1fr)}}
+.psim .simsv svg{width:100%;height:auto;display:block;background:color-mix(in srgb,var(--bg) 60%,var(--card));border:1px solid var(--line);border-radius:12px}
+.psim .rg{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin:10px 0 4px;font-size:15px}
+.psim .rg input{grid-column:1/-1;width:100%;accent-color:var(--acc)}
+
+.psim table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}
+.psim td{padding:5px 4px;border-top:1px solid var(--line)}.psim td:last-child{text-align:right;font-weight:600}
+.psim tr.tg td:last-child{color:var(--ok)}.psim tr.tr td:last-child{color:var(--red)}
+.psim .simfx{font-size:13px;margin-top:8px}
+.auf{--aufc:#4f46e5;--auft:#4338ca;border:1px solid color-mix(in srgb,var(--aufc) 40%,var(--line));border-left:4px solid var(--aufc);background:color-mix(in srgb,var(--aufc) 8%,var(--card));border-radius:12px;padding:2px 12px;margin-bottom:6px}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .auf{--aufc:#818cf8;--auft:#a5b4fc}}
+:root[data-theme=dark] .auf{--aufc:#818cf8;--auft:#a5b4fc}
+.auf.aufok{--aufc:var(--ok);--auft:var(--ok)}
+.aufk{display:flex;gap:8px;align-items:center;width:100%;font:inherit;font-size:15px;text-align:left;color:var(--ink);background:none;border:0;padding:8px 0;cursor:pointer}
+.aufk b{color:var(--auft)}.aufz{flex:1}.aufa{color:var(--mute)}.aufk[aria-expanded=true] .aufa{transform:rotate(180deg)}
+.aufb p{margin:4px 0 8px}.aufr{margin:0 0 6px;font-weight:600;color:var(--ok)}.aufr:empty{display:none}
+.aufflash{animation:aufflash .7s ease-out}@keyframes aufflash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@media(prefers-reduced-motion:reduce){.aufflash{animation:none}}
+.wip{border-left:4px solid var(--amber)}.wip p{margin:2px 0 8px}
+.hqa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}@media(max-width:720px){.hqa{grid-template-columns:1fr}}
+.hqa>div{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:10px 12px;background:var(--card)}.hqa b{display:block}.hqa small{color:var(--mute)}
+/* Einleitungstext wie im Lernlabor (v301/v302): Blocksatz mit Silbentrennung, am Handy zweizeilig mit „…“ und mehr/weniger */
+.tdesc{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+.tdesc.cl{display:block;-webkit-line-clamp:unset;max-height:3em;line-height:1.5;overflow:hidden;position:relative;cursor:pointer}
+.tdesc.cl.ov{-webkit-mask-image:linear-gradient(#000,#000),linear-gradient(to right,#000 calc(100% - 2.4em),transparent calc(100% - 1.3em));mask-image:linear-gradient(#000,#000),linear-gradient(to right,#000 calc(100% - 2.4em),transparent calc(100% - 1.3em));-webkit-mask-size:100% 1.5em,100% 1.5em;mask-size:100% 1.5em,100% 1.5em;-webkit-mask-position:0 0,0 1.5em;mask-position:0 0,0 1.5em;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.tdots{display:block;position:relative;height:0;pointer-events:none}.tdots::after{content:'…';position:absolute;right:0;bottom:6px;font-size:16px;line-height:24px}
+.tdesc:not(.cl.ov)+.tdots{display:none}
+@media(min-width:900px){.tdesc.cl{max-height:none;-webkit-mask-image:none;mask-image:none;cursor:auto}.tdots{display:none}}
