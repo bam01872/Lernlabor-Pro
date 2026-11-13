@@ -1,0 +1,17 @@
+{
+ "name": "Lernlabor Pro: Handlungsspezifische Qualifikationen",
+ "short_name": "Lernlabor Pro",
+ "description": "Lernen und Üben für die Handlungsspezifischen Qualifikationen der Industriemeister Metall",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#eef0f2",
+ "theme_color": "#23272e",
+ "lang": "de",
+ "icons": [
+  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}
