@@ -4,7 +4,7 @@
 const SB=s=>String(s).replace(/>([^<]*_[^<]*)</g,(q,t)=>'>'+SUBS(t)+'<');
 const S=(d,t,f)=>({d,t,f:k=>SB(f(k))}),SKZ=(f,l)=>SKZ0(k=>SB(f(k)),l);
 /* Formel in einer Zeile mit echtem Bruchstrich und tiefgestellten Indizes (a_p → a mit tiefem p) */
-const SUBS=s=>String(s).replace(/([A-Za-zη])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
+const SUBS=s=>String(s).replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
 const RAW=s=>String(s).replace(/_/g,'');
 const FORM=(x,y,parts,a='start',c='einf',fs=19)=>{const W=parts.map(p=>typeof p==='string'?TW(RAW(p),fs):Math.max(TW(RAW(p.n),fs),TW(RAW(p.d),fs))+12),tot=W.reduce((s,w)=>s+w,0);let cx=a==='middle'?x-tot/2:x,s='',st='white-space:pre;font-size:'+fs+'px';
  parts.forEach((p,i)=>{if(typeof p==='string')s+=T(cx,y,SUBS(p),c,'start',st);else{const m=cx+W[i]/2;s+=T(m,y-9,SUBS(p.n),c,'middle','font-size:'+fs+'px')+`<path d="M${F(cx+1)} ${F(y-3)}h${F(W[i]-2)}" stroke="var(--ink)" stroke-width="1.6"/>`+T(m,y+17,SUBS(p.d),c,'middle','font-size:'+fs+'px')}cx+=W[i]});return s};
@@ -201,7 +201,7 @@ X['Mitarbeitergespräche führen']={
  skz:[[SKZ(gsSkizze,'Skizze Gesprächsablauf'),'Vier Schritte, die in jedes Mitarbeitergespräch gehören.']]};
 
 /* ---------- Bruchstrich in Merkbox und Lösungsweg: [[Zähler||Nenner]] ---------- */
-const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zη])_([A-Za-z0-9äöüß]+)/g,'$1<sub>$2</sub>');
+const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<sub>$2</sub>');
 const fixFR=root=>root.querySelectorAll('#mbx li, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
 new MutationObserver(()=>fixFR(document)).observe(document.getElementById('view'),{childList:true,subtree:true});
 
@@ -212,7 +212,7 @@ function simPanel(key,Sm){const p=el('<h2>🎛️ Ausprobieren: '+esc(Sm.t)+'</h
  const v={};Sm.c.forEach(c=>v[c.k]=c.opts?c.opts[c.v]:c.v);
  const g=el('','simg'),sv=el('','simsv'),cs=el('','simc');
  const done=()=>!!lsG(AK)[key];
- const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufi">🎯</span><span class="aufz"><b>Auftrag:</b> '+esc(Sm.auf.z)+'</span><span class="aufa">▾</span></button><div class="aufb" hidden><p>'+esc(Sm.auf.t)+'</p><p class="sub">'+esc(Sm.auf.h)+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
+ const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufi">🎯</span><span class="aufz"><b>Auftrag:</b> '+FRX(esc(Sm.auf.z))+'</span><span class="aufa">▾</span></button><div class="aufb" hidden><p>'+FRX(esc(Sm.auf.t))+'</p><p class="sub">'+FRX(esc(Sm.auf.h))+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
  au.querySelector('.aufk').onclick=e=>{const b=au.querySelector('.aufb');b.hidden=!b.hidden;e.currentTarget.setAttribute('aria-expanded',!b.hidden)};
  cs.append(au);
  Sm.c.forEach(c=>{const w=el('<label class="rg"><span class="rgl">'+FRX(esc(c.l))+'</span><b class="rgv"></b><input type="range" min="'+(c.opts?0:c.min)+'" max="'+(c.opts?c.opts.length-1:c.max)+'" step="'+(c.opts?1:c.st)+'" value="'+c.v+'"></label>','');

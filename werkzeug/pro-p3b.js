@@ -1,0 +1,82 @@
+/* ===== Lernlabor Pro, Pakete F3 und T3 (Vorschau 3): Inhalte. Eigene Texte und Aufgaben. ===== */
+
+/* ---------- F3 Qualitätsmanagement ---------- */
+PK('fp','QM-System & Audit',{intro:'Ein Qualitätsmanagementsystem legt fest, wie der Betrieb arbeitet, damit das Ergebnis jedes Mal stimmt. Als Meister setzt Du es in Deinem Bereich um, hältst die Regeln aktuell und stellst Dich im Audit den Fragen. Im Fachgespräch erklärst Du, wie Du das mit Deinen Mitarbeitern lebst.',
+pts:['Die Norm ISO 9001 beschreibt die Anforderungen an ein QM-System. Sie verlangt keine bestimmten Formulare, sondern beherrschte Abläufe und Nachweise.',
+'Grundsätze: Kundenorientierung, Führung, Einbeziehung der Mitarbeiter, Denken in Prozessen, Verbesserung, Entscheiden nach Fakten, gute Beziehungen zu Lieferanten.',
+'Prozessorientierung: Jeder Prozess hat Eingaben, Ergebnisse, einen Verantwortlichen und Kennzahlen. Entscheidend sind die Schnittstellen zwischen den Abteilungen.',
+'Dokumentierte Information: Vorgaben (Arbeits- und Prüfanweisungen) müssen aktuell am Arbeitsplatz liegen, Nachweise (Prüfprotokolle) müssen auffindbar sein.',
+'Auditarten: Systemaudit (das ganze System), Prozessaudit (ein Ablauf), Produktaudit (fertige Teile). Intern durch eigene Auditoren, extern durch Kunden oder die Zertifizierungsstelle.',
+'Ablauf: Auditplan, Eröffnung, Befragen und Nachweise ansehen am Ort des Geschehens, Feststellungen bewerten, Abschlussgespräch, Bericht, Maßnahmen und Nachprüfung.',
+'Eine Abweichung ist kein Vorwurf an eine Person, sondern ein Hinweis auf eine Lücke im Ablauf. Du legst Korrektur, Ursache, Maßnahme, Termin und Verantwortlichen fest.'],
+mcq:[['Was prüft ein Prozessaudit?','Ob ein Ablauf wie festgelegt durchgeführt wird und wirksam ist','Die Maße fertiger Teile','Die Bilanz des Unternehmens','Die Leistung einzelner Mitarbeiter','Der Auditor vergleicht den gelebten Ablauf mit der Vorgabe und fragt nach Nachweisen.'],
+['Im Audit liegt an einer Maschine eine veraltete Arbeitsanweisung. Was ist die richtige Reaktion?','Sofort austauschen und klären, warum die Verteilung nicht funktioniert hat','Den Mitarbeiter abmahnen','Die Anweisung verstecken','Nichts, das ist unwichtig','Die Korrektur behebt den Einzelfall, die Ursachensuche verhindert die Wiederholung.'],
+['Wer führt ein internes Audit durch?','Geschulte Auditoren, die nicht ihren eigenen Bereich prüfen','Immer die Zertifizierungsstelle','Der Kunde','Jeder Mitarbeiter an seinem eigenen Arbeitsplatz','Unabhängigkeit vom geprüften Bereich sichert einen unbefangenen Blick.'],
+['Welche Aussage zur ISO 9001 stimmt?','Sie stellt Anforderungen an das Managementsystem, nicht an das Produkt','Sie legt Toleranzen für Werkstücke fest','Sie schreibt bestimmte Formulare vor','Sie gilt nur für Großbetriebe','Wie ein Betrieb die Anforderungen erfüllt, entscheidet er selbst. Er muss es nachweisen können.']]});
+
+PK('fp','Qualitätswerkzeuge & KVP',{intro:'Wenn ein Fehler auftritt, hilft kein Schnellschuss. Mit wenigen einfachen Werkzeugen sammelst Du Fakten, findest die Ursache und sicherst die Lösung. Im Fachgespräch zeigst Du, dass Du Dein Team dabei einbindest.',
+pts:['Fehlersammelliste und Pareto-Diagramm: Fehler zählen und nach Häufigkeit ordnen. Meist verursachen wenige Fehlerarten den größten Teil der Probleme.',
+'Ishikawa-Diagramm: mögliche Ursachen im Team sammeln, geordnet nach Mensch, Maschine, Material, Methode, Mitwelt und Messung.',
+'5-mal Warum: so lange nachfragen, bis die eigentliche Ursache erreicht ist, an der eine Maßnahme dauerhaft wirkt.',
+'PDCA-Kreis: Plan (planen), Do (ausprobieren), Check (Wirkung prüfen), Act (zum Standard machen oder neu ansetzen).',
+'8D-Bericht bei Reklamationen: Team, Problembeschreibung, Sofortmaßnahme, Ursache, Abstellmaßnahme, Wirksamkeit, Vorbeugung, Abschluss.',
+'KVP: viele kleine Verbesserungen durch die Mitarbeiter selbst, zum Beispiel in kurzen Runden an der Tafel in der Fertigung.',
+'Kennzahlen machen den Erfolg sichtbar: Ausschussquote, Nacharbeitsquote, Reklamationen, Fehlerkosten.'],
+mcq:[['Wofür nutzt Du ein Pareto-Diagramm?','Um die wichtigsten Fehlerarten zu erkennen','Um Ursachen zu sammeln','Um Termine zu planen','Um Messmittel zu überwachen','Die Balken sind nach Größe geordnet. So siehst Du, wo sich der Einsatz am meisten lohnt.'],
+['Was ist beim 8D-Bericht der erste Schritt nach der Problembeschreibung?','Sofortmaßnahmen, damit der Kunde keine fehlerhaften Teile mehr bekommt','Die Ursache dauerhaft abstellen','Den Bericht abschließen','Den Schuldigen suchen','Erst den Kunden schützen (sperren, sortieren), dann in Ruhe die Ursache suchen.'],
+['In welcher Phase des PDCA-Kreises prüfst Du, ob die Maßnahme gewirkt hat?','Check','Plan','Do','Act','Check vergleicht das Ergebnis mit dem Ziel. Erst danach wird die Lösung zum Standard.'],
+['Im Monat wurden 12 500 Teile gefertigt, 250 waren Ausschuss. Wie hoch ist die Ausschussquote?','2 %','0,2 %','5 %','20 %','250 Stück ÷ 12 500 Stück · 100 % = 2 %.']]});
+
+PK('fp','Prüfen, Messen & Fehleranalyse',{intro:'Qualität wird gefertigt und nicht erst am Ende hineingeprüft. Trotzdem brauchst Du Prüfungen an den richtigen Stellen, geeignete Messmittel und den Nachweis, dass Maschine und Prozess die Toleranz sicher einhalten.',
+pts:['Der Prüfplan legt fest: was, wann, wie, womit, wie oft, von wem geprüft wird und was bei einem Fehler geschieht.',
+'Prüfmittel müssen zur Toleranz passen: Die Messunsicherheit sollte höchstens etwa ein Zehntel der Toleranz betragen. Prüfmittel werden gekennzeichnet und regelmäßig kalibriert.',
+'Stichprobe statt 100-%-Prüfung, wenn der Prozess stabil ist. Bei sicherheitskritischen Merkmalen wird jedes Teil geprüft.',
+'Regelkarte: Mittelwerte von Stichproben über die Zeit eintragen. Eingriffsgrenzen zeigen, wann Du eingreifen musst, bevor Ausschuss entsteht.',
+'Prozessfähigkeit: c_p = [[OSG − USG||6 · σ]]. Sie vergleicht die Toleranzbreite mit der Streuung.',
+'c_pk = [[kleinerer Abstand des Mittelwerts zur Grenze||3 · σ]]. Er berücksichtigt zusätzlich die Lage. Üblich ist die Forderung c_pk ≥ 1,33.',
+'Zufällige Einflüsse streuen gleichmäßig. Systematische Einflüsse (Werkzeugverschleiß, Temperatur) verschieben die Lage und lassen sich abstellen.'],
+mcq:[['Toleranz 20,00 mm ± 0,06 mm, Standardabweichung 0,015 mm. Wie groß ist c_p?','1,33','0,67','2,67','4','(20,06 mm − 19,94 mm) ÷ (6 · 0,015 mm) = 0,12 mm ÷ 0,09 mm = 1,33.'],
+['c_p beträgt 1,67, c_pk nur 0,9. Was ist zu tun?','Den Prozess zentrieren, die Streuung ist klein genug','Die Streuung verringern','Die Toleranz erweitern','Nichts, der Prozess ist fähig','Ein guter c_p mit schlechtem c_pk heißt: Der Mittelwert liegt zu nah an einer Grenze.'],
+['Die Mittelwerte auf der Regelkarte steigen sieben Stichproben hintereinander an. Wie reagierst Du?','Ursache suchen, das ist ein Trend, zum Beispiel Werkzeugverschleiß','Abwarten, alle Werte liegen noch in den Grenzen','Die Eingriffsgrenzen erweitern','Die Stichprobe verkleinern','Ein Trend ist ein systematischer Einfluss. Wer jetzt eingreift, verhindert Ausschuss.'],
+['Welches Messmittel passt zu einer Toleranz von 0,02 mm?','Bügelmessschraube mit 0,001 mm Anzeige','Stahlmaßstab','Messschieber mit 0,05 mm Ablesung','Gliedermaßstab','Das Messmittel muss deutlich feiner auflösen als die Toleranz breit ist.']]});
+
+/* ---------- T3 Werkstoffe & Verfahren ---------- */
+PK('tec','Werkstoffe & Wärmebehandlung',{intro:'Der Werkstoff entscheidet, ob ein Bauteil hält, sich fertigen lässt und bezahlbar bleibt. Du liest Stahlbezeichnungen, wählst den Werkstoff nach der Beanspruchung und legst die Wärmebehandlung fest, die ihm die geforderten Eigenschaften gibt.',
+pts:['Baustähle wie S235JR sind nach der Streckgrenze benannt: mindestens 235 N/mm². Sie sind gut schweißbar und werden nicht gehärtet.',
+'Unlegierte Vergütungsstähle wie C45: Die Zahl geteilt durch 100 ist der Kohlenstoffgehalt, hier 0,45 %.',
+'Niedriglegierte Stähle wie 42CrMo4: 0,42 % Kohlenstoff. Die Zahl hinter den Elementen wird durch einen Faktor geteilt, bei Chrom durch 4, also etwa 1 % Chrom.',
+'Hochlegierte Stähle beginnen mit X: X5CrNi18-10 hat 0,05 % Kohlenstoff, 18 % Chrom und 10 % Nickel und ist rostbeständig.',
+'Härten: auf Härtetemperatur erwärmen, halten, abschrecken. Das Gefüge wird hart, aber spröde. Härtbar sind Stähle ab etwa 0,2 % Kohlenstoff.',
+'Vergüten = Härten + Anlassen bei hoher Temperatur. Das Ergebnis ist hohe Festigkeit bei guter Zähigkeit, zum Beispiel für Wellen.',
+'Einsatzhärten: kohlenstoffarmer Stahl wird am Rand aufgekohlt und gehärtet. Die Randschicht ist verschleißfest, der Kern bleibt zäh, zum Beispiel bei Zahnrädern.',
+'Glühen: Spannungsarmglühen baut Spannungen ab, Weichglühen macht gut zerspanbar, Normalglühen stellt ein gleichmäßiges feines Gefüge her.'],
+mcq:[['Wie viel Kohlenstoff enthält der Stahl C60?','0,60 %','6 %','60 %','0,06 %','Bei unlegierten Stählen wird die Kennzahl durch 100 geteilt.'],
+['Eine Antriebswelle soll hohe Festigkeit und gute Zähigkeit haben. Welche Wärmebehandlung wählst Du?','Vergüten','Weichglühen','Nur Härten','Spannungsarmglühen','Nach dem Härten nimmt das Anlassen bei hoher Temperatur die Sprödigkeit und erhält die Festigkeit.'],
+['Ein Zahnrad braucht eine harte Oberfläche und einen zähen Kern. Was passt?','Einsatzhärten','Normalglühen','Durchhärten','Weichglühen','Nur der aufgekohlte Rand wird hart. Der Kern federt Stöße ab.'],
+['Wofür steht 235 in S235JR?','Mindeststreckgrenze 235 N/mm²','Kohlenstoffgehalt 2,35 %','Zugfestigkeit 235 N/mm²','Härte 235 HB','Bis zu dieser Spannung verformt sich der Stahl nur elastisch.']]});
+
+PK('tec','Umformen, Trennen & additive Fertigung',{intro:'Nicht jedes Teil wird gespant. Bleche werden geschnitten, gebogen und gezogen, Einzelteile mit schwieriger Form immer öfter gedruckt. Du vergleichst die Verfahren nach Stückzahl, Werkstoff, Genauigkeit und Kosten und rechnest Kräfte für Presse und Werkzeug nach.',
+pts:['Scherschneiden: Stempel und Schneidplatte trennen das Blech. Schneidkraft F = l · s · τ_aB, also Länge der Schnittlinie mal Blechdicke mal Scherfestigkeit.',
+'Die Scherfestigkeit beträgt etwa das 0,8-Fache der Zugfestigkeit: τ_aB ≈ 0,8 · R_m.',
+'Die Presse wählst Du mit Reserve: Die Schneidkraft sollte höchstens etwa 80 % der Nennkraft betragen.',
+'Biegen: Das Blech federt zurück, deshalb wird überbogen. Ein zu kleiner Biegeradius führt zu Rissen, besonders quer zur Walzrichtung.',
+'Tiefziehen formt aus einer flachen Ronde einen Hohlkörper. Das Ziehverhältnis β = [[D||d]] (Rondendurchmesser durch Stempeldurchmesser) darf einen Grenzwert nicht überschreiten, sonst reißt der Boden.',
+'Laser- und Wasserstrahlschneiden brauchen kein teilespezifisches Werkzeug. Sie lohnen sich für kleine Stückzahlen und häufig wechselnde Formen.',
+'Additive Fertigung baut Teile Schicht für Schicht auf. Stärken: Prototypen, Einzelteile, innere Kanäle. Schwächen: Bauzeit, Oberfläche, Kosten je Stück bei großen Mengen.'],
+mcq:[['Ein Loch mit 200 mm Schnittlinie wird in 2 mm dickes Blech mit τ_aB = 300 N/mm² gestanzt. Wie groß ist die Schneidkraft?','120 kN','60 kN','240 kN','12 kN','F = 200 mm · 2 mm · 300 N/mm² = 120 000 N = 120 kN.'],
+['Warum wird ein Blech beim Biegen etwas überbogen?','Weil es nach dem Entlasten zurückfedert','Weil es sich dabei erwärmt','Weil es sonst zu dick wird','Weil der Stempel verschleißt','Der elastische Anteil der Verformung geht zurück. Das Maß der Rückfederung hängt von Werkstoff und Radius ab.'],
+['Für 20 Blechteile mit wechselnder Kontur suchst Du ein Trennverfahren. Was passt?','Laserschneiden','Scherschneiden mit Folgeverbundwerkzeug','Feinschneiden','Tiefziehen','Der Laser braucht nur ein Programm, kein Werkzeug. Ein Stanzwerkzeug lohnt sich erst bei großen Stückzahlen.'],
+['Ronde 120 mm, Stempel 80 mm. Wie groß ist das Ziehverhältnis?','1,5','0,67','40','2,25','β = 120 mm ÷ 80 mm = 1,5.']]});
+
+PK('tec','Oberflächen & Korrosionsschutz',{intro:'Stahl rostet, sobald Feuchtigkeit und Sauerstoff zusammenkommen. Welchen Schutz ein Bauteil braucht, hängt von der Umgebung und von der geplanten Lebensdauer ab. Du wählst zwischen Konstruktion, Werkstoff und Beschichtung und begründest die Kosten.',
+pts:['Korrosionsarten: gleichmäßige Flächenkorrosion, Lochkorrosion (örtlich und tief), Spaltkorrosion, Kontaktkorrosion zwischen verschiedenen Metallen.',
+'Kontaktkorrosion: Mit einem Elektrolyten (Feuchtigkeit) löst sich das unedlere Metall auf. Abhilfe: gleiche Werkstoffe, Isolierung, Feuchtigkeit fernhalten.',
+'Konstruktiver Schutz: Spalte und Wassersäcke vermeiden, Abläufe vorsehen, gut zugänglich für Beschichtung und Wartung.',
+'Metallische Überzüge: Feuerverzinken (dick, robust), galvanisch Verzinken (dünn, maßgenau), Vernickeln, Verchromen. Zink schützt auch an Kratzern, weil es sich anstelle des Stahls auflöst.',
+'Nichtmetallische Schichten: Lackieren, Pulverbeschichten, Brünieren und Phosphatieren (dünn, meist mit Öl), Eloxieren bei Aluminium.',
+'Ohne Vorbehandlung hält keine Schicht: entfetten, entrosten (Strahlen, Beizen), bei Bedarf Haftgrund.',
+'Schutzdauer einer Zinkschicht ≈ [[Schichtdicke||Abtrag je Jahr]]. Der Abtrag hängt von der Umgebung ab: gering im Innenraum, hoch in Industrie- und Meeresluft.'],
+mcq:[['Eine Zinkschicht ist 80 µm dick, die Umgebung trägt 2 µm je Jahr ab. Wie lange schützt sie etwa?','40 Jahre','160 Jahre','8 Jahre','82 Jahre','80 µm ÷ 2 µm/Jahr = 40 Jahre.'],
+['Eine Stahlschraube sitzt in einem Kupferblech im Freien. Was passiert?','Die Stahlschraube korrodiert bevorzugt','Das Kupferblech löst sich auf','Nichts, beide sind Metalle','Beide korrodieren gleich schnell','Stahl ist unedler als Kupfer. Bei Feuchtigkeit löst sich das unedlere Metall auf.'],
+['Warum schützt Zink Stahl auch an einem Kratzer?','Zink ist unedler und löst sich anstelle des Stahls auf','Zink ist härter als Stahl','Zink fließt in den Kratzer','Zink ist edler als Stahl','Das nennt man kathodischen Schutz. Eine Lackschicht bietet das nicht, dort unterwandert der Rost den Kratzer.'],
+['Welche Schicht wählst Du für ein passgenaues Maschinenteil im Innenraum, das nur leicht geschützt werden muss?','Brünieren und einölen','Feuerverzinken','Dickschichtlack','Pulverbeschichten','Brünieren verändert die Maße praktisch nicht. Feuerverzinken und Lack tragen deutlich auf.']]});
