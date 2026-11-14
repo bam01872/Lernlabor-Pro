@@ -312,3 +312,93 @@ SIMX('Elektrische Antriebe & Frequenzumrichter',{
   return s+L(240,256,r.sp>0?'Der Umrichter spart '+nz(r.sp,0)+' € im Jahr.':'Bei voller Luftmenge spart der Umrichter nichts.','middle',15,r.am<=1?'var(--ok)':'var(--ink)',700)},
  tick:(E,v,r,t,dt,st)=>{const q=v.q/100;st.a=(st.a||0)+dt*420;st.b=(st.b||0)+dt*420*q;st.o=(st.o||0)+dt*90*q;
   A(E.imp1,'transform','rotate('+F(st.a%360)+' 56 124)');A(E.imp2,'transform','rotate('+F(st.b%360)+' 290 124)');['air1','air2'].forEach(k=>{A(E[k],'stroke-dashoffset',F(-st.o%19));A(E[k],'stroke-width',F(2+4*q))})}})}
+
+/* ===== Paket Chemie ===== */
+const TRI=u=>Math.abs(((u%2)+2)%2-1);
+/* ---------- Produktkühler: Produkt im Rohr, Kühlwasser im Mantel im Gegenstrom ---------- */
+{const tc=T=>MXC('var(--red)',F(10+CL((T-15)/80,0,1)*62));
+SIMX('Wärme & Energiebilanz',{
+ svg:(v,r)=>{const ok=r.m3<=4&&v.ta<=35,wc='color-mix(in srgb,var(--flow) 38%,var(--card))',ww=`color-mix(in srgb,var(--red) ${F(CL((v.ta-15)/25,0,1)*55)}%,${wc})`;
+  let s=`<defs><linearGradient id="wtp"><stop offset="0" stop-color="${tc(v.t1)}"/><stop offset="1" stop-color="${tc(30)}"/></linearGradient><linearGradient id="wtw"><stop offset="0" stop-color="${ww}"/><stop offset="1" stop-color="${wc}"/></linearGradient></defs>`;
+  s+=L(24,30,'Produktkühler im Gegenstrom','start',15,'var(--ink)',700);
+  s+=RC(172,50,26,36,ww,'var(--ink)',0,2)+RC(342,154,26,36,wc,'var(--ink)',0,2)+RC(150,80,240,80,'url(#wtw)','var(--ink)',10,2.4);
+  s+=RC(36,108,408,24,'url(#wtp)','var(--ink)',0,2)+`<path d="M446 111l14 9l-14 9z" fill="var(--red)"/>`;
+  s+=`<path data-a="pf" d="M40 120H440" stroke="var(--card)" stroke-width="3.4" stroke-dasharray="10 12" stroke-linecap="round" opacity=".9" fill="none"/>`;
+  s+=`<path data-a="wf" d="M355 188V146H164M376 94H185V54" stroke="var(--flow)" stroke-width="${F(2+CL(r.m3,0,12)/12*4)}" stroke-dasharray="8 8" stroke-linecap="round" fill="none"/>`;
+  s+=L(24,100,'Produkt '+v.t1+' °C','start',13.5,'var(--red)',700)+L(444,100,'30 °C','end',13.5,'var(--red)',700);
+  s+=L(206,66,v.ta+' °C','start',13.5,'var(--flow)',700)+L(334,186,'Kühlwasser 15 °C','end',13.5,'var(--flow)',700);
+  return s+HB(40,222,400,14,r.m3/12,ok?'var(--ok)':'var(--red)','Kühlwasserbedarf',nz(r.m3,1)+' m³/h')+MK(40+400*4/12,222,14,'Netz: 4 m³/h')},
+ tick:(E,v,r,t,dt,st)=>{st.a=(st.a||0)+v.mp/2000*55*dt;st.b=(st.b||0)+CL(r.m3,.6,12)*13*dt;A(E.pf,'stroke-dashoffset',F(-st.a%22));A(E.wf,'stroke-dashoffset',F(-st.b%16))}})}
+
+/* ---------- Rohrleitung: Behälter, Pumpe, Rohr in der gewählten Nennweite, die Strömung läuft mit der Geschwindigkeit ---------- */
+{const yc=136;
+SIMX('Fördern: Pumpen & Rohrleitungen',{
+ svg:(v,r)=>{const ok=r.w>=1&&r.w<=2,c=ok?'var(--ok)':'var(--red)',h=8+v.d/125*30,a1=Math.PI*.22,a2=a1+CL(r.dp/3,0,1)*Math.PI*.72,ym=yc-h/2-20;
+  let s=L(24,30,'DN '+v.d+', '+v.V+' m³/h','start',15,'var(--ink)',700);
+  s+=RC(20,66,62,94,'var(--card)','var(--ink)',4,2.2)+RC(22,92,58,66,MXC('var(--flow)',30),'none',2,0)+`<path d="M82 ${yc}H100" stroke="var(--ink)" stroke-width="7"/>`;
+  s+=RC(134,yc-h/2,306,h,MXC('var(--flow)',20),'var(--ink)',3,2)+`<path d="M442 ${yc-9}l14 9l-14 9z" fill="var(--flow)"/>`;
+  s+=`<path data-a="fl" d="M140 ${yc}H436${h>22?`M140 ${F(yc-h/3.4)}H436M140 ${F(yc+h/3.4)}H436`:''}" stroke="var(--flow)" stroke-width="${h>22?2.6:3}" stroke-dasharray="12 10" stroke-linecap="round" fill="none"/>`;
+  s+=`<circle cx="116" cy="${yc}" r="19" fill="var(--card)" stroke="var(--ink)" stroke-width="2.2"/><g data-a="imp">`+[0,1,2].map(k=>`<path d="M116 ${yc}L${F(116+15*Math.cos(k*TAU/3))} ${F(yc+15*Math.sin(k*TAU/3))}" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round"/>`).join('')+`</g><circle cx="116" cy="${yc}" r="4" fill="var(--ink)"/>`+L(116,yc+36,'Pumpe','middle',13,'var(--ink)',600);
+  s+=`<path d="M176 ${F(yc-h/2)}V${F(ym+13)}M410 ${F(yc-h/2)}V${F(ym+13)}" stroke="var(--ink)" stroke-width="3"/>`+MANO(176,F(ym),a1)+MANO(410,F(ym),a2);
+  s+=`<path d="M196 ${F(ym+4)}H390M196 ${F(ym-1)}v10M390 ${F(ym-1)}v10" stroke="var(--mute)" stroke-width="1.4" fill="none"/>`+L(293,ym-4,'100 m, Druckverlust '+nz(r.dp,r.dp<10?2:0)+' bar','middle',13,'var(--ink)',600);
+  return s+HB(40,214,400,14,r.w/4,c,'Geschwindigkeit','v = '+nz(r.w,2)+' m/s')+MK(140,214,14,'1 m/s')+MK(240,214,14,'2 m/s')},
+ tick:(E,v,r,t,dt,st)=>{st.o=(st.o||0)+CL(r.w*45,6,420)*dt;A(E.fl,'stroke-dashoffset',F(-st.o%22));st.a=(st.a||0)+v.V*9*dt;A(E.imp,'transform','rotate('+F(st.a%360)+' 116 '+yc+')')}})}
+
+/* ---------- Verdünnen: Lauge und Wasser laufen in den Ansatzbehälter, der Rührer mischt ---------- */
+{const T=6.4,ph=t=>{const u=(t+3.6)%T;return u<.7?0:u<3.2?(u-.7)/2.5:1};
+SIMX('Stöchiometrie & Stoffbilanz',{
+ svg:(v,r)=>{const ok=r.mg>=990&&r.mg<=1010&&Math.abs(r.wM-20)<=.5,c=ok?'var(--ok)':'var(--red)',cl=MXC('var(--acc)',v.w1===50?72:46),cw=MXC('var(--flow)',28),cm=MXC('var(--acc)',F(8+r.wM*1.28));
+  let s=L(24,34,'Lauge '+v.w1+' %, '+v.m1+' kg','start',13.5,'var(--ink)',700)+L(362,34,'Wasser, '+v.m2+' kg','middle',13.5,'var(--ink)',700);
+  s+=`<defs><clipPath id="mxc"><path d="M186 104V176Q186 203 240 203Q294 203 294 176V104Z"/></clipPath></defs>`;
+  s+=RC(40,44,80,80,'var(--card)','var(--ink)',4,2.2)+`<rect data-a="l1" x="42" y="122" width="76" height="0" fill="${cl}"/>`+RC(330,44,80,80,'var(--card)','var(--ink)',4,2.2)+`<rect data-a="l2" x="332" y="122" width="76" height="0" fill="${cw}"/>`;
+  s+=`<path d="M120 112H212V126M330 112H268V126" stroke="${STEEL}" stroke-width="6" fill="none" stroke-linejoin="round"/>`;
+  s+=`<path data-a="s1" d="M212 128V200" stroke="${cl}" stroke-width="4" stroke-dasharray="6 5" opacity="0"/><path data-a="s2" d="M268 128V200" stroke="var(--flow)" stroke-width="4" stroke-dasharray="6 5" opacity="0"/>`;
+  const hm=98*r.mg/2000;s+=`<rect data-a="lm" clip-path="url(#mxc)" x="186" y="${F(203-hm)}" width="108" height="${F(hm)}" fill="${cm}"/><path d="M185 100V176Q185 204 240 204Q295 204 295 176V100" fill="none" stroke="var(--ink)" stroke-width="2.6"/>`;
+  s+=RC(230,80,20,14,'#46505e','var(--ink)',3,1.6)+`<path d="M240 94V190" stroke="var(--ink)" stroke-width="3"/><path data-a="rb" d="M220 190H260M224 183v14M256 183v14" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  s+=L(24,158,'Mischung','start',13,'var(--mute)',600)+L(24,178,nz(r.mg,0)+' kg','start',16,'var(--ink)',700)+L(24,198,nz(r.wM,1)+' %','start',16,c,700);
+  return s+HB(40,228,400,13,r.wM/50,c,'Gehalt der Mischung','')+MK(40+400*20/50,228,13,'Ziel 20 %')},
+ tick:(E,v,r,t,dt,st)=>{const p=ph(t),h1=76*v.m1/1000*(1-p),h2=76*v.m2/1000*(1-p),hm=98*r.mg/2000*p,on=p>0&&p<1;
+  A(E.l1,'y',F(122-h1));A(E.l1,'height',F(h1));A(E.l2,'y',F(122-h2));A(E.l2,'height',F(h2));A(E.lm,'y',F(203-hm));A(E.lm,'height',F(hm));
+  st.o=(st.o||0)+60*dt;A(E.s1,'opacity',on&&v.m1>0?1:0);A(E.s2,'opacity',on&&v.m2>0?1:0);A(E.s1,'stroke-dashoffset',F(-st.o%11));A(E.s2,'stroke-dashoffset',F(-st.o%11));
+  st.a=(st.a||0)+dt*(p>=1?2.2:5);A(E.rb,'transform','translate(240 0) scale('+F(Math.cos(st.a))+' 1) translate(-240 0)')}})}
+
+/* ---------- Umsatz & Ausbeute: Im Rührkessel werden Teilchen des Edukts im Zeitraffer zu Produkt oder Nebenprodukt ---------- */
+{const N=36,T=7,P=[];for(let i=0;i<N;i++)P.push([58+((i*37)%100)/100*104,106+((i*61+17)%100)/100*74,(i*.618034)%1,i*2.4,(i*23)%N]);
+SIMX('Reaktionstechnik: Umsatz & Ausbeute',{
+ svg:(v,r)=>{const ok=r.A>=80&&v.T<=110;let s=L(214,36,v.T>110?v.T+' °C: Zersetzung':v.T+' °C, '+nt(v.tau)+' h','start',15,v.T>110?'var(--red)':'var(--ink)',700);
+  s+=`<path d="M40 60V176Q40 206 110 206Q180 206 180 176V60Z" fill="var(--card)" stroke="var(--ink)" stroke-width="2.6"/><path d="M42 96V176Q42 204 110 204Q178 204 178 176V96Z" fill="${MXC('var(--red)',F(6+(v.T-60)/60*26))}"/>`;
+  s+=RC(100,38,20,14,'#46505e','var(--ink)',3,1.6)+`<path d="M110 52V192" stroke="var(--ink)" stroke-width="3"/><path data-a="rb" d="M90 192H130M94 185v14M126 185v14" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  P.forEach((q,i)=>{s+=`<circle data-a="p${i}" cx="${F(q[0])}" cy="${F(q[1])}" r="4.6" fill="var(--flow)" stroke="var(--card)" stroke-width="1"/>`});
+  s+=HB(214,74,226,14,r.U/100,'var(--mute)','Umsatz',nz(r.U,0)+' %')+HB(214,122,226,14,r.S/100,'var(--amber)','Selektivität',nz(r.S,0)+' %')+HB(214,170,226,14,r.A/100,ok?'var(--ok)':'var(--red)','Ausbeute',nz(r.A,0)+' %')+MK(214+226*.8,170,14,'Ziel 80 %');
+  s+=`<text data-a="clk" x="214" y="226" style="font-size:13px;font-weight:700;fill:var(--mute)">Zeitraffer: nach ${nz(v.tau,1)} h</text>`;
+  return s+DOT(46,247,'var(--flow)',5)+L(56,252,'Edukt','start',13,'var(--ink)',600)+DOT(126,247,'var(--ok)',5)+L(136,252,'Produkt','start',13,'var(--ink)',600)+DOT(226,247,'var(--amber)',5)+L(236,252,'Nebenprodukt','start',13,'var(--ink)',600)},
+ tick:(E,v,r,t,dt,st)=>{const u=(t+5)%T,pr=Math.min(1,u/4.5),k=.4*Math.pow(2,(v.T-80)/10),n=(1-Math.exp(-k*v.tau*pr))*N,S=r.S/100;st.j=(st.j||0)+dt*(1.6+(v.T-60)/60*4);st.a=(st.a||0)+dt*4;
+  P.forEach((q,i)=>{const e=E['p'+i];A(e,'cx',F(q[0]+4*Math.sin(st.j*1.3+q[3])));A(e,'cy',F(q[1]+4*Math.cos(st.j+q[3]*2)));A(e,'fill',q[4]+.5<n?(q[2]<S?'var(--ok)':'var(--amber)'):'var(--flow)')});
+  TXT(E.clk,'Zeitraffer: nach '+nz(v.tau*pr,1)+' h');A(E.rb,'transform','translate(110 0) scale('+F(Math.cos(st.a))+' 1) translate(-110 0)')}})}
+
+/* ---------- Gasgesetze: Die Teilchen im Behälter werden mit der Temperatur schneller, mehr Fülldruck heißt mehr Teilchen ---------- */
+{const Q=[];for(let i=0;i<22;i++)Q.push([(i*.37)%2,(i*.59+.3)%2,.55+((i*29)%10)/14,.5+((i*13)%10)/15]);
+SIMX('Gasgesetze',{
+ svg:(v,r)=>{const n=Math.round(v.pf*2);let s=X['Gasgesetze'].sim.svgA(v,r);for(let i=0;i<n;i++)s+=`<circle data-a="g${i}" cx="${F(100+198*TRI(Q[i][0]))}" cy="${F(126+76*TRI(Q[i][1]))}" r="4.2" fill="var(--flow)" stroke="var(--card)" stroke-width=".8"/>`;return s},
+ tick:(E,v,r,t,dt,st)=>{st.p=(st.p||0)+dt*(.25+1.5*v.t/80);const n=Math.round(v.pf*2);for(let i=0;i<n;i++){const q=Q[i],e=E['g'+i];A(e,'cx',F(100+198*TRI(q[0]+st.p*q[2])));A(e,'cy',F(126+76*TRI(q[1]+st.p*q[3]*2.2)))}}})}
+
+/* ---------- Wärmepumpe: Das Kältemittel läuft im Kreis, der Verdichter dreht, die Wärmeströme sind so dick wie ihre Leistung ---------- */
+SIMX('Kältemaschine & Wärmepumpe',{
+ svg:(v,r)=>{const ok=r.P<=10,qs=40-r.P,hot='var(--red)',cold='var(--flow)';
+  let s=`<path d="M380 108V66H100V112" stroke="${MXC(hot,40)}" stroke-width="9" fill="none" stroke-linejoin="round"/><path d="M100 144V190H380V148" stroke="${MXC(cold,40)}" stroke-width="9" fill="none" stroke-linejoin="round"/>`;
+  s+=`<path data-a="fh" d="M380 108V66H100V112" stroke="${hot}" stroke-width="3" stroke-dasharray="7 9" stroke-linecap="round" fill="none"/><path data-a="fc" d="M100 144V190H380V148" stroke="${cold}" stroke-width="3" stroke-dasharray="7 9" stroke-linecap="round" fill="none"/>`;
+  s+=RC(150,52,180,28,MXC(hot,22),hot,7,1.8)+L(240,71,'Verflüssiger '+v.to+' °C','middle',13.5,'var(--ink)',700)+RC(150,176,180,28,MXC(cold,22),cold,7,1.8)+L(240,195,'Verdampfer '+v.tu+' °C','middle',13.5,'var(--ink)',700);
+  s+=`<path d="M88 114h24l-24 28h24z" fill="var(--card)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>`+L(82,133,'Ventil','end',13,'var(--ink)',600);
+  s+=`<circle cx="380" cy="128" r="21" fill="var(--card)" stroke="var(--ink)" stroke-width="2.2"/><g data-a="vd">`+[0,1,2,3].map(k=>`<path d="M380 128L${F(380+16*Math.cos(k*TAU/4))} ${F(128+16*Math.sin(k*TAU/4))}" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>`).join('')+`</g><circle cx="380" cy="128" r="4" fill="var(--ink)"/>`+L(352,133,'Verdichter','end',13,'var(--ink)',600);
+  s+=L(200,122,'Leistungszahl','middle',13,'var(--mute)',600)+L(200,147,nz(r.cop,1),'middle',22,ok?'var(--ok)':'var(--ink)',800);
+  const ar=(x,y0,y1,w,c,n)=>`<g data-a="${n}"><path d="M${x} ${y0}V${y1+9}" stroke="${c}" stroke-width="${F(w)}"/><path d="M${x} ${y1}l${F(-w/2-5)} 11h${F(w+10)}z" fill="${c}"/></g>`;
+  s+=ar(180,50,24,10,hot,'a1')+L(198,40,'Heizwärme 40 kW','start',13.5,hot,700)+ar(180,236,208,Math.max(2,qs/4),cold,'a2')+L(198,228,'aus der Quelle '+nz(qs,1)+' kW','start',13.5,cold,700);
+  s+=`<g data-a="a3"><path d="M452 128H414" stroke="${AMB}" stroke-width="${F(Math.max(2,r.P/4))}"/><path d="M403 128l11 ${F(-r.P/8-5)}v${F(r.P/4+10)}z" fill="${AMB}"/></g>`+L(456,108,'Strom','end',13,AMB,700)+L(456,160,nz(r.P,1)+' kW','end',13.5,ok?'var(--ok)':'var(--red)',700);
+  return s},
+ tick:(E,v,r,t,dt,st)=>{st.o=(st.o||0)+48*dt;A(E.fh,'stroke-dashoffset',F(-st.o%16));A(E.fc,'stroke-dashoffset',F(-st.o%16));st.a=(st.a||0)+dt*(120+r.P*22);A(E.vd,'transform','rotate('+F(st.a%360)+' 380 128)');
+  const q=.75+.25*Math.sin(t*3);A(E.a1,'opacity',F(q));A(E.a2,'opacity',F(q));A(E.a3,'opacity',F(q))}});
+
+/* ---------- Zulaufreaktion: Das Edukt tropft zu, der Rührer dreht, das Kühlmittel strömt durch den Mantel ---------- */
+SIMX('Wärmebilanz am Reaktor',{
+ svg:(v,r)=>X['Wärmebilanz am Reaktor'].sim.svgA(v,r)+`<path data-a="rb" d="M132 200h56M138 192l-6 16M182 192l6 16" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path data-a="dr" d="M110 64V112" stroke="var(--acc)" stroke-width="${F(2.4+v.md/500*3.6)}" stroke-dasharray="3 ${F(22-v.md/500*15)}" stroke-linecap="round" fill="none"/><path data-a="kf" d="M92 231Q120 242 160 242Q242 242 242 192V116" stroke="var(--flow)" stroke-width="3" stroke-dasharray="6 9" stroke-linecap="round" fill="none"/>`,
+ tick:(E,v,r,t,dt,st)=>{st.a=(st.a||0)+dt*4.5;A(E.rb,'transform','translate(160 0) scale('+F(Math.cos(st.a))+' 1) translate(-160 0)');st.d=(st.d||0)+dt*70;A(E.dr,'stroke-dashoffset',F(-st.d%(25-v.md/500*15)));st.k=(st.k||0)+dt*46;A(E.kf,'stroke-dashoffset',F(-st.k%15))}});
