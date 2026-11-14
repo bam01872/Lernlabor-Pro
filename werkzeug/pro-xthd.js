@@ -11,13 +11,13 @@ if(FR==='ch'){const TI=t=>L(240,26,t,'middle',16,'var(--ink)',700),MX=(c,p)=>`co
  LI=(x1,y1,x2,y2,c='var(--ink)',w=2,da='')=>`<path d="M${F(x1)} ${F(y1)}L${F(x2)} ${F(y2)}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linecap="round"${da?` stroke-dasharray="${da}"`:''}/>`;
 
 /* ---------- Gasgesetze: liegender Druckbehälter mit Manometer und Thermometer ---------- */
-const kesselBild=(pe,t,ti)=>{const w=Math.min(1,Math.max(0,(t-0)/80)),hot=Math.round(8+w*34),zu=pe>11;let s=TI(ti||'Abgesperrter Druckbehälter');
+const kesselBild=(pe,t,ti,np)=>{const w=Math.min(1,Math.max(0,(t-0)/80)),hot=Math.round(8+w*34),zu=pe>11;let s=TI(ti||'Abgesperrter Druckbehälter');
  s+=`<defs><linearGradient id="kg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${MX('r',hot+16)}"/><stop offset=".5" stop-color="${MX('r',hot)}"/><stop offset="1" stop-color="${MX('r',hot+22)}"/></linearGradient></defs>`;
  s+=`<path d="M92 114H300A24 50 0 0 1 300 214H92A24 50 0 0 1 92 114Z" fill="url(#kg1)" stroke="var(--ink)" stroke-width="2.4"/><path d="M300 114A24 50 0 0 0 300 214" fill="none" stroke="var(--ink)" stroke-width="1.4" opacity=".55"/>`;
  s+=`<path d="M112 216l-10 26h30l-8-26M270 216l-8 26h30l-10-26" fill="var(--mute)" stroke="var(--ink)" stroke-width="1.6"/>`+LI(60,243,340,243,'var(--ink)',2);
  /* Teilchen: Pfeile werden mit der Temperatur länger */
  const P=[[112,146,1,.4],[150,188,-.6,-.8],[186,138,.9,.5],[222,184,-1,.2],[258,150,.3,1],[286,186,-.8,-.6],[136,170,.7,-.7],[240,128,-.4,.9]],pl=7+w*17;
- P.forEach(q=>{const n=Math.hypot(q[2],q[3]);s+=`<circle cx="${q[0]}" cy="${q[1]}" r="4.2" fill="var(--flow)"/>`+LI(q[0],q[1],q[0]+q[2]/n*pl,q[1]+q[3]/n*pl,'var(--flow)',2)});
+ if(!np)P.forEach(q=>{const n=Math.hypot(q[2],q[3]);s+=`<circle cx="${q[0]}" cy="${q[1]}" r="4.2" fill="var(--flow)"/>`+LI(q[0],q[1],q[0]+q[2]/n*pl,q[1]+q[3]/n*pl,'var(--flow)',2)});
  /* Manometer */
  const a=Math.PI*(1.15-1.3*Math.min(1,pe/16)),mx=196,my=74;
  s+=LI(mx,100,mx,114,'var(--ink)',5)+`<circle cx="${mx}" cy="${my}" r="26" fill="var(--card)" stroke="${zu?'var(--red)':'var(--ink)'}" stroke-width="${zu?3.4:2.4}"/>`;
@@ -26,7 +26,7 @@ const kesselBild=(pe,t,ti)=>{const w=Math.min(1,Math.max(0,(t-0)/80)),hot=Math.r
  s+=LI(mx,my,mx+19*Math.cos(a),my-19*Math.sin(a),'var(--red)',2.6)+`<circle cx="${mx}" cy="${my}" r="3" fill="var(--ink)"/>`;
  s+=L(232,66,'Überdruck','start',13,'var(--mute)',500)+L(232,86,nz(pe,1)+' bar','start',17,zu?'var(--red)':'var(--ink)',700);
  /* Sicherheitsventil */
- s+=LI(120,104,120,114,'var(--ink)',5)+`<path d="M110 104h20l-6-16h-8z" fill="var(--amber)" stroke="var(--ink)" stroke-width="1.6"/>`+L(120,76,zu?'bläst ab':'','middle',13,'var(--red)',700)+(zu?LI(113,84,107,70,'var(--red)',2)+LI(127,84,133,70,'var(--red)',2):'');
+ s+=LI(120,104,120,114,'var(--ink)',5)+`<path d="M110 104h20l-6-16h-8z" fill="var(--amber)" stroke="var(--ink)" stroke-width="1.6"/>`+L(100,84,zu?'bläst ab':'','end',13,'var(--red)',700)+(zu?LI(113,84,107,70,'var(--red)',2)+LI(127,84,133,70,'var(--red)',2):'');
  /* Thermometer */
  const ty=206-110*w;s+=RC(398,84,14,126,'var(--card)','var(--ink)',7,2)+`<circle cx="405" cy="216" r="13" fill="var(--red)" stroke="var(--ink)" stroke-width="2"/>`+`<rect x="401.5" y="${F(ty)}" width="7" height="${F(210-ty)}" fill="var(--red)"/>`;
  s+=L(405,66,'Temperatur','middle',13,'var(--mute)',500)+L(405,254,nz(t,0)+' °C','middle',17,'var(--ink)',700);return s};
@@ -41,7 +41,7 @@ X['Gasgesetze']={
   c:[{k:'pf',l:'Fülldruck bei 20 °C',u:'bar',min:6,max:11,st:0.5,v:10},{k:'t',l:'Temperatur',u:'°C',min:0,max:80,st:5,v:20}],
   calc:v=>{const pa=(v.pf+1)*(v.t+273)/293;return{pa,pe:pa-1}},
   rows:(v,r)=>[['Überdruck im Behälter',nz(r.pe,2)+' bar',r.pe<=11?'g':'r'],['Absoluter Druck',nz(r.pa,2)+' bar'],['Temperatur',(v.t+273)+' K']],
-  svg:(v,r)=>kesselBild(r.pe,v.t),
+  svg:(v,r)=>kesselBild(r.pe,v.t),svgA:(v,r)=>kesselBild(r.pe,v.t,null,1),
   auf:{z:'Bei 60 °C höchstens 11 bar, Fülldruck mindestens 8 bar.',t:'Der Behälter steht im Sommer unter dem Hallendach und wird bis zu 60 °C warm. Wähle den Fülldruck (mindestens 8 bar, sonst reicht der Vorrat nicht) so, dass der Druck auch bei 60 °C nicht über 11 bar steigt.',h:'Tipp: Stelle zuerst die Temperatur auf 60 °C und senke dann den Fülldruck.',ok:(v,r)=>v.t>=60&&r.pe<=11&&v.pf>=8}}};
 
 /* ---------- Erster Hauptsatz: Zylinder mit Kolben ---------- */
@@ -206,18 +206,18 @@ X['Sieden & Kondensieren']={
   auf:{z:'Höchstens 60 °C, mindestens 300 kg/h, höchstens 250 kW.',t:'Eine wässrige Produktlösung darf höchstens 60 °C warm werden. Es sollen mindestens 300 kg Wasser je Stunde verdampfen, der Heizdampf liefert höchstens 250 kW.',h:'Tipp: Senke zuerst den Druck, bis die Siedetemperatur passt.',ok:(v,r)=>r.ts<=60&&v.m>=300&&r.P<=250}}};
 
 /* ---------- Rührkessel mit Kühlmantel (Reaktionswärme, Wärmebilanz) ---------- */
-const kessel=(heat,kalt)=>{let s=`<path d="M70 104V192Q70 250 160 250Q250 250 250 192V104Z" fill="${MX('b',kalt?34:20)}" stroke="var(--ink)" stroke-width="2.2"/>`;
+const kessel=(heat,kalt,nb)=>{let s=`<path d="M70 104V192Q70 250 160 250Q250 250 250 192V104Z" fill="${MX('b',kalt?34:20)}" stroke="var(--ink)" stroke-width="2.2"/>`;
  s+=`<path d="M86 62V190Q86 234 160 234Q234 234 234 190V62Z" fill="var(--card)" stroke="var(--ink)" stroke-width="2.6"/><path d="M88 112V190Q88 232 160 232Q232 232 232 190V112Z" fill="${MX('r',10+Math.round(Math.min(1,Math.max(0,heat))*50))}"/>`;
- s+=RC(146,34,28,20,MX('m',60),'var(--ink)',3,1.8)+LI(160,54,160,200,'var(--ink)',3)+`<path d="M132 200h56M138 192l-6 16M182 192l6 16" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+ s+=RC(146,34,28,20,MX('m',60),'var(--ink)',3,1.8)+LI(160,54,160,200,'var(--ink)',3)+(nb?'':`<path d="M132 200h56M138 192l-6 16M182 192l6 16" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>`);
  s+=AW(110,26,110,60,'var(--ink)',3)+L(102,40,'Zulauf','end',13,'var(--ink)',600);
  s+=AW(30,236,68,236,'var(--flow)',3.4)+AW(252,112,286,112,'var(--flow)',3.4)+L(26,258,'Kühlung','start',13,'var(--flow)',700);return s};
 const rwBild=(Q,dT)=>{const ok=dT<=50,c=ok?'var(--ok)':'var(--red)';let s=kessel(dT/120);
  s+=L(300,56,'Wärme der Charge','start',13,'var(--mute)',500)+L(300,80,nz(Q,0)+' MJ','start',21,CC('r'),700);
  s+=HB(300,150,160,18,dT/150,c,'ohne Kühlung','+ '+nz(dT,0)+' K')+MK(300+160*50/150,150,18,'50 K');
  s+=L(300,222,ok?'bleibt beherrschbar':'zu viel für diesen Ansatz','start',14,c,700);return s};
-const rbBild=(QR,T)=>{const ok=T>=60&&T<=80,c=ok?'var(--ok)':'var(--red)';let s=kessel((T-20)/100,1);
- s+=HB(300,62,160,18,QR/220,CC('r'),'Reaktion','+ '+nz(QR,0)+' kW')+HB(300,122,160,18,QR/220,'var(--flow)','Kühlung','− '+nz(QR,0)+' kW');
- s+=HB(300,186,160,18,(T-20)/100,c,'Im Reaktor',nz(T,0)+' °C')+MK(300+160*.4,186,18,'60')+MK(300+160*.6,186,18,'80');
+const rbBild=(QR,T,nb)=>{const ok=T>=60&&T<=80,c=ok?'var(--ok)':'var(--red)';let s=kessel((T-20)/100,1,nb);const dy=nb?10:0;
+ s+=HB(300,62+dy,160,18,QR/220,CC('r'),'Reaktion','+ '+nz(QR,0)+' kW')+HB(300,122+dy,160,18,QR/220,'var(--flow)','Kühlung','− '+nz(QR,0)+' kW');
+ s+=HB(300,186+dy,160,18,(T-20)/100,c,'Im Reaktor',nz(T,0)+' °C')+MK(300+160*.4,186+dy,18,'60')+MK(300+160*.6,186+dy,18,'80');
  s+=L(462,256,ok?'im Sollbereich':T<60?'zu kalt, Edukt reichert sich an':'zu heiß','end',13,c,700);return s};
 X['Reaktionswärme & Enthalpie']={
  v:['500 kg Edukt reagieren exotherm. Die Kühlung fällt aus, die ganze Wärme bleibt im Ansatz. Was begrenzt die Erwärmung am ehesten?',['Ein heller Anstrich des Kessels','Eine große Ansatzmasse, also viel Lösemittel','Ein schnellerer Rührer','Ein kleinerer Kessel'],1,'Dieselbe Wärme verteilt sich auf mehr Masse und erwärmt sie weniger. Verdünnen ist deshalb ein Sicherheitskonzept.'],
@@ -249,7 +249,7 @@ X['Wärmebilanz am Reaktor']={
   c:[{k:'md',l:'Dosierung',u:'kg/h',min:50,max:500,st:50,v:400},{k:'tk',l:'Kühlmitteltemperatur',u:'°C',min:5,max:40,st:5,v:10}],
   calc:v=>{const QR=v.md*1500/3600;return{QR,T:v.tk+QR/4}},
   rows:(v,r)=>[['Temperatur im Reaktor',nz(r.T,0)+' °C',r.T>=60&&r.T<=80?'g':'r'],['Wärme aus der Reaktion',nz(r.QR,0)+' kW'],['Dosierung',v.md+' kg/h',v.md>=300?'g':'r']],
-  svg:(v,r)=>rbBild(r.QR,r.T),
+  svg:(v,r)=>rbBild(r.QR,r.T),svgA:(v,r)=>rbBild(r.QR,r.T,1),
   auf:{z:'Mindestens 300 kg/h dosieren, Reaktor zwischen 60 und 80 °C.',t:'Die Anlage soll mindestens 300 kg/h Edukt umsetzen. Die Temperatur im Reaktor muss zwischen 60 °C und 80 °C liegen: Darunter reichert sich Edukt an, darüber zersetzt sich das Produkt.',h:'Tipp: Zu kaltes Kühlmittel ist auch ein Fehler. Stelle Dosierung und Kühlmittel zusammen ein.',ok:(v,r)=>v.md>=300&&r.T>=60&&r.T<=80}}};
 
 Object.assign(ERK,{
