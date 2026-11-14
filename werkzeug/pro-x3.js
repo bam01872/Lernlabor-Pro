@@ -87,9 +87,9 @@ X['Zeitwirtschaft: Auftragszeit & Zeitgrad']={
   auf:{z:'Bring die Auftragszeit auf höchstens 480 min.',t:'Der Auftrag über 100 Gehäuse soll in einer Schicht fertig werden. Prüfe, wo Du ansetzt: schneller rüsten (Rüstwagen, voreingestellte Werkzeuge), kürzere Grundzeit (bessere Vorrichtung) oder weniger Verteilzeit (Material liegt bereit).',h:'Tipp: Die Grundzeit wirkt hundertfach, die Rüstzeit nur einmal.',ok:(v,r)=>r.T<=480}}};
 
 /* ---------- T4: Montageplanung & Fügen ---------- */
-const vgBild=k=>{const N=(x,y,n,t)=>`<circle cx="${x}" cy="${y}" r="24" fill="color-mix(in srgb,${CC('b')} 14%,var(--card))" stroke="${CC('b')}" stroke-width="1.6"/>`+L(x,y+1,n,'middle',15,'var(--ink)',700)+L(x,y+15,t,'middle',11.5,'var(--mute)',500);
- return L(240,26,'Vorranggraph einer Montage','middle',16,'var(--ink)',700)+N(50,130,'1','Gehäuse')+N(160,76,'2','Lager')+N(160,184,'3','Dichtung')+N(270,76,'4','Welle')+N(360,130,'5','Deckel')+N(440,130,'6','Prüfen')
- +AW(72,119,138,87)+AW(72,141,138,173)+AW(184,76,246,76)+AW(291,88,340,117)+AW(183,177,338,138)+AW(384,130,416,130)+L(240,244,'Der Deckel kommt erst, wenn Welle und Dichtung sitzen.','middle',14,'var(--mute)',500)};
+const vgBild=k=>{const N=(x,y,n,t)=>`<circle cx="${x}" cy="${y}" r="24" fill="color-mix(in srgb,${CC('b')} 14%,var(--card))" stroke="${CC('b')}" stroke-width="1.6"/>`+L(x,y+6,n,'middle',17,'var(--ink)',700)+L(x,y+40,t,'middle',13,'var(--mute)',600);
+ return L(240,26,'Vorranggraph einer Montage','middle',16,'var(--ink)',700)+N(50,130,'1','Gehäuse')+N(160,76,'2','Lager')+N(160,168,'3','Dichtung')+N(270,76,'4','Welle')+N(360,130,'5','Deckel')+N(440,130,'6','Prüfen')
+ +AW(72,119,138,87)+AW(72,141,138,158)+AW(184,76,246,76)+AW(291,88,340,117)+AW(183,163,338,136)+AW(384,130,416,130)+L(240,244,'Der Deckel kommt erst, wenn Welle und Dichtung sitzen.','middle',14,'var(--mute)',500)};
 X['Montageplanung & Fügen']={
  v:['Eine Montagelinie soll in 450 min genau 150 Geräte liefern. Wie viel Zeit hat jede Station je Gerät?',['1,5 min','3 min','4,5 min','20 min'],1,'Taktzeit = 450 min ÷ 150 Stück = 3 min. In diesem Takt wandert das Gerät von Station zu Station.'],
  ein:[S(13,'Der Vorranggraph zeigt, was vor was montiert werden muss. Daraus entsteht die Reihenfolge.',vgBild),

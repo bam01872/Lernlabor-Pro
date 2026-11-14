@@ -224,3 +224,7 @@ body.subpg .brand .bpro{font-size:.5em}
 :where(#view,#nm) :where(p,li,.skc,.aufz,.tdesc){text-align:justify;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 :where(#view) :where(.kc,td,th,.chip,.simb,.mm,.wlh) :where(p,li){text-align:start}
 :where(#view) :where(.crumb,.crumb *){text-align:start;-webkit-hyphens:manual;hyphens:manual}
+/* Version 11: Silbentrennung überall nach Wörterbuch, kein Bruch mitten im Wort */
+#view,#nm{-webkit-hyphens:auto;hyphens:auto}
+#view input,#view textarea,#view select,#view code{-webkit-hyphens:manual;hyphens:manual}
+@media(max-width:380px){.ftile{grid-template-columns:minmax(0,1fr);row-gap:4px}.ftile .fi{grid-row:auto}.ftile small.fz,.ftile>*{grid-column:1}.ftile small{-webkit-hyphens:auto;hyphens:auto}}
