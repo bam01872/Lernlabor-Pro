@@ -14,7 +14,7 @@ def rep(a,b,cnt=1,rx=False):
     else:
         assert a in s,('fehlt',a[:60]);s=s.replace(a,b) if cnt==0 else s.replace(a,b,cnt)
 # Daten
-rep("const FACH=['reha','beha','mikp','zib'];",rd('pro-data.js')+'\n'+rd('pro-pakete.js')+'\n'+''.join(rd('pro-p3'+c+'.js')+'\n' for c in 'abcd')+''.join(rd(n+'.js')+'\n' for n in ['pro-fr','pro-el1','pro-el2','pro-ch1','pro-ch2','pro-ib','pro-a1'])+"\nconst FACH=['tec','org','fp'];")
+rep("const FACH=['reha','beha','mikp','zib'];",rd('pro-data.js')+'\n'+rd('pro-pakete.js')+'\n'+''.join(rd('pro-p3'+c+'.js')+'\n' for c in 'abcd')+''.join(rd(n+'.js')+'\n' for n in ['pro-fr','pro-el1','pro-el2','pro-ch1','pro-ch2','pro-ib','pro-a1','pro-thd'])+"\nconst FACH=['tec','org','fp'];")
 rep("modSel={reha:0,beha:0,mikp:0,zib:0}","modSel={tec:0,org:0,fp:0}")
 rep("const FEM={reha:'⚖️',beha:'💶',mikp:'📊',zib:'🤝'}","const FEM={tec:FRD[FR].em,org:'📋',fp:'🤝'}")
 rep(r"const GRP=\{reha:.*?\nconst SUBT=\{[^\n]*\n",
@@ -81,7 +81,7 @@ s=s.replace('meisterlabor-','lernlabor-pro-').replace('Meisterlabor Basis','Lern
 s=s.replace('Lernplattform für die Basisqualifikationen im Industriemeister. Vier Fächer','Lernplattform für die Hauptqualifikation im Industriemeister. Drei Handlungsbereiche')
 # Zusatz: Stil und Mustermodule
 i=s.rfind('</script>')+len('</script>')
-ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa'])+'\n}\n'+mk,1)
+ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa','pro-xthd'])+'\n}\n'+mk,1)
 s=s[:i]+'\n<style>'+rd('pro.css')+'</style>\n<script>'+ml+'</script>'+s[i:]
 for k in ["const SK='lernlabor-pro-basis-v1'","'lernlabor-pro-rf'","'lernlabor-pro-pred'","'lernlabor-pro-last'","'lernlabor-pro-auf'"]:
     assert k in s,k;s=s.replace(k,k+'+FRS')
