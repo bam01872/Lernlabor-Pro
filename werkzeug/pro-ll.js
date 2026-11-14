@@ -16,16 +16,18 @@ const accL=setAcc;setAcc=function(f){accL(f);document.documentElement.classList.
 /* ---------- Adressen: #thema/<name>, #ueben, #im-betrieb … ---------- */
 const slug=t=>t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const SL={},SN={};FACH.forEach(f=>D[f].modules.forEach((m,i)=>{let s=slug(m.t);if(SL[s])s=f+'-'+s;SL[s]=[f,i];SN[f+':'+i]=s}));
-const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent'};
+const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'glossar',formeln:'formelsammlung',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent'};
 const RT=Object.fromEntries(Object.entries(RN).map(([a,b])=>[b,a]));
 let ROUT=false;
-const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
+const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='fall'?'pruefungsaufgaben/'+(fIdx+1):tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
 const link=r=>location.origin+location.pathname+'?fr='+FR+(r?'#'+r:'');
 function sync(){if(ROUT)return;const r=route(),want=r?'#'+r:'';if(location.hash===want||(!want&&!location.hash))return;
  try{history.replaceState(Object.assign({},history.state,{y:scrollY}),'');history.pushState({y:0},'',want||location.pathname+location.search)}catch(e){}}
 function openRoute(h){h=decodeURIComponent((h||'').replace(/^#/,''));const [a,...b]=h.split('/'),r=b.join('/');
  if(a==='thema'&&SL[r]){modSel[SL[r][0]]=SL[r][1];go(SL[r][0])}
+ else if(a==='pruefungsaufgaben'){const n=parseInt(r,10);if(n>=1&&n<=CASES.length)fIdx=n-1;go('fall')}
  else if(RT[a]&&(a!=='dozent'||DOZENT))go(RT[a]);else go('home')}
+window.llSync=sync;window.llRoute=route;
 addEventListener('popstate',e=>{ROUT=true;try{openRoute(location.hash)}finally{ROUT=false}const y=e.state&&e.state.y||0;requestAnimationFrame(()=>scrollTo(0,y))});
 
 /* ---------- Ich: Lernstand, Lernfortschritt senden, Meine Kurstermine, Tutorial, Sonstiges ---------- */
@@ -121,11 +123,12 @@ const calcL=calcHTML;calcHTML=function(c,onDone,mod){const w=calcL(c,onDone,mod)
   if(!/^Nicht ganz/.test(tx))return;fails++;
   let u=NaN;if(!t.dt){let s=inp.value.trim();s=s.indexOf(',')>=0?s.replace(/\./g,'').replace(',','.'):s;u=parseFloat(s)}
   fb.textContent='✗ Noch nicht. '+(t.dt?'Prüfe Startdatum, Fristbeginn und Feiertage.':hint(u,t.a,t.u));
+  if(fails===1&&!w.querySelector('.wlr')){const mt=D[c.f]&&D[c.f].modules[c.m],E=mt&&typeof ERK!=='undefined'&&ERK[mt.t];if(E&&E[2]&&E[2].length){const wl=document.createElement('div');wl.className='wlr';wl.innerHTML='<p class="wlh"><b>Woran lag es?</b> Tippe an, was passiert sein könnte.</p>'+E[2].map(x=>'<button type="button" class="chip" aria-pressed="false">'+esc(x).replace(/([A-Za-zσλμϑΔεηṁ])_([A-Za-z0-9äöü]+)/g,'$1<sub>$2</sub>')+'</button>').join('')+'<p class="sub wlt" hidden>Gut erkannt. Rechne mit diesem Punkt im Kopf noch einmal.</p>';wl.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{wl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));wl.querySelector('.wlt').hidden=false});fb.after(wl)}}
   if(fails===1){sol.hidden=true;lock()}else{sol.hidden=true;unlock();fb.textContent+=' Jetzt kannst Du den Lösungsweg ansehen.'}});
  return w};
 
 /* ---------- MOB-01: Skizzenschrift am Handy (aus dem Lernlabor, für alle Zeichnungen der Themenseite) ---------- */
-const MIN=10,CAP=1.6,GP=2,hit=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>-GP&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>-GP;
+const MIN=11,CAP=2,GP=2,hit=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>-GP&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>-GP;
 const hit0=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>.5&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>.5;
 const sym=t=>{const x=t.textContent.trim();return x.length<=2&&!/[A-Za-zÄÖÜäöü]/.test(x)};
 function boost(s){if(innerWidth>700)return;const vb=s.viewBox&&s.viewBox.baseVal;if(!vb||!vb.width)return;
@@ -134,7 +137,7 @@ function boost(s){if(innerWidth>700)return;const vb=s.viewBox&&s.viewBox.baseVal
  T.forEach(t=>{if(t.dataset.fb!=null){t.style.fontSize=t.dataset.fb;delete t.dataset.fb}});
  const fs0=T.map(t=>parseFloat(getComputedStyle(t).fontSize)||12);
  const sz=(t,v)=>{if(t.dataset.fb==null)t.dataset.fb=t.style.fontSize;t.style.fontSize=v},un=t=>{if(t.dataset.fb!=null){t.style.fontSize=t.dataset.fb;delete t.dataset.fb}};
- let f=fs0.map((x,i)=>x*k<MIN&&!sym(T[i])?Math.min(MIN/k,x*CAP)/x:1);if(f.every(x=>x===1))return;
+ let f=fs0.map((x,i)=>x*k<MIN&&!sym(T[i])&&!T[i].querySelector('.fru,[data-fru]')&&!T[i].hasAttribute('data-fru')?Math.min(MIN/k,x*CAP)/x:1);if(f.every(x=>x===1))return;
  const P=T.map((_,i)=>i),fd=i=>P[i]===i?i:(P[i]=fd(P[i])),fw=T.map(t=>getComputedStyle(t).fontWeight),ax=T.map(t=>parseFloat(t.getAttribute('x'))),ay=T.map(t=>parseFloat(t.getAttribute('y')));
  for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++)if(fs0[i]===fs0[j]&&fw[i]===fw[j]&&(Math.abs(ay[i]-ay[j])<1||Math.abs(ax[i]-ax[j])<1))P[fd(i)]=fd(j);
  const eq=()=>{const m={};f.forEach((x,i)=>{const r=fd(i);m[r]=Math.min(m[r]??9,x)});f=f.map((_,i)=>m[fd(i)])};eq();
@@ -172,5 +175,5 @@ const sq=q('#q');const ph=()=>{if(sq)sq.placeholder=innerWidth<480?'Suchen …':
 {const a=document.createElement('a');a.className='skipl';a.href='#';a.textContent='Zum Inhalt springen';a.onclick=e=>{e.preventDefault();const h=q('#view h2,#view h3');if(h){if(!h.hasAttribute('tabindex'))h.setAttribute('tabindex','-1');h.scrollIntoView({block:'start'});h.focus({preventScroll:true})}};document.body.prepend(a)}
 
 /* ---------- Start: Adresse aus dem Link öffnen ---------- */
-if(location.hash){ROUT=true;try{openRoute(location.hash)}finally{ROUT=false}}else nav();
+if(location.hash&&!/^#(glossar|formelsammlung)$/.test(location.hash)){ROUT=true;try{openRoute(location.hash)}finally{ROUT=false}}else nav();
 })();
