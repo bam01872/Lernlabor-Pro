@@ -40,9 +40,9 @@ pts:['Isochor: Das Volumen bleibt gleich, zum Beispiel im geschlossenen Behälte
 'Im p-V-Diagramm ist die Fläche unter der Kurve die Arbeit. Die Adiabate verläuft steiler als die Isotherme, deshalb braucht ungekühltes Verdichten mehr Arbeit. Abhilfe: Kühlung und mehrere Stufen mit Zwischenkühlung.'],
 fo:['Isotherm: p_1 · V_1 = p_2 · V_2',
 'Verdichtungsverhältnis: ε = [[V_1||V_2]]',
-'Adiabat (Luft): T_2 = T_1 · ε^{0,4}'],
+'Adiabat (ideales Gas): T_2 = T_1 · ε^{κ − 1}, für Luft κ = 1,4, also ε^{0,4}'],
 mcq:[['Welche Zustandsänderung läuft in einem verschlossenen Druckluftbehälter ab, der in der Sonne steht?','Isochor','Isobar','Isotherm','Adiabat','Das Volumen des Behälters bleibt gleich, Druck und Temperatur steigen.'],
-['Luft wird schnell und ohne Kühlung auf ein Achtel ihres Volumens verdichtet. Was passiert mit der Temperatur?','Sie steigt auf mehrere hundert Grad','Sie bleibt gleich','Sie sinkt','Sie steigt nur um wenige Grad','Adiabat: T₂ = T₁ · ε^{0,4}. Mit 293 K und ε = 8 kommen rund 673 K heraus, also etwa 400 °C.'],
+['Luft wird schnell und ohne Kühlung auf ein Achtel ihres Volumens verdichtet. Was passiert mit der Temperatur?','Sie steigt auf mehrere hundert Grad','Sie bleibt gleich','Sie sinkt','Sie steigt nur um wenige Grad','Adiabat: T₂ = T₁ · ε^{κ − 1} mit κ = 1,4 für Luft, also ε^{0,4}. Mit 293 K und ε = 8 kommen rund 673 K heraus, also etwa 400 °C.'],
 ['Warum verdichtet man Druckluft für hohe Drücke in zwei Stufen mit Zwischenkühlung?','Man spart Antriebsarbeit und vermeidet zu hohe Temperaturen','Damit mehr Kondensat entsteht','Weil eine Stufe keinen Druck halten kann','Damit die Luft feuchter wird','Durch die Kühlung liegt der Verlauf näher an der Isotherme. Die Fläche im p-V-Diagramm und damit die Arbeit wird kleiner.'],
 ['Was zeigt die Fläche unter der Kurve im p-V-Diagramm?','Die Volumenänderungsarbeit','Die Temperatur','Die Wärmekapazität','Den Wirkungsgrad','Arbeit ist Druck mal Volumenänderung, im Diagramm eine Fläche.']]}),
 TM({t:'Wärmeleitung & Dämmung',intro:'Durch Behälterwände, Dampfleitungen und Ofenwände fließt ständig Wärme nach draußen. Wie viel, hängt vom Werkstoff, von der Dicke, der Fläche und dem Temperaturunterschied ab. Mit Dämmung sparst Du Energie und senkst die Temperatur an Oberflächen, die Mitarbeiter berühren können.',
@@ -120,7 +120,7 @@ pts:['Exotherm: Die Reaktion gibt Wärme ab, die Reaktionsenthalpie ΔH_R ist ne
 'Endotherm: Die Reaktion nimmt Wärme auf, ΔH_R ist positiv. Es muss geheizt werden.',
 'Die molare Reaktionsenthalpie steht in [[kJ||mol]] und gilt für den Formelumsatz der Reaktionsgleichung.',
 'Rechenweg in zwei Schritten: erst die Stoffmenge aus Masse und molarer Masse (Stöchiometrie), dann die Wärme aus Stoffmenge und Reaktionsenthalpie. Ein Fehler im ersten Schritt zieht sich durch.',
-'Aus Tabellenwerten: Reaktionsenthalpie = Bildungsenthalpien der Produkte minus Bildungsenthalpien der Edukte, jeweils mal der Zahl aus der Reaktionsgleichung. Elemente haben die Bildungsenthalpie null.',
+'Aus Tabellenwerten: Reaktionsenthalpie = Bildungsenthalpien der Produkte minus Bildungsenthalpien der Edukte, jeweils mal der Zahl aus der Reaktionsgleichung. Elemente haben im Standardzustand (25 °C, 1 bar) in ihrer stabilsten Form die Bildungsenthalpie null. Nicht verwechseln mit dem Normzustand (0 °C, 1,013 bar).',
 'Die adiabate Temperaturerhöhung sagt, um wie viel sich der Ansatz erwärmt, wenn die Kühlung ausfällt. Sie ist eine wichtige Kennzahl für die Sicherheit.'],
 fo:['Stoffmenge: n = [[m||M]]',
 'Reaktionswärme: Q = n · ΔH_R',
@@ -129,7 +129,7 @@ fo:['Stoffmenge: n = [[m||M]]',
 mcq:[['Eine Reaktion hat ΔH_R = −120 kJ/mol. Was bedeutet das?','Sie ist exotherm und gibt je Formelumsatz 120 kJ ab','Sie ist endotherm und braucht 120 kJ','Sie läuft nicht ab','Sie kühlt den Kessel','Das negative Vorzeichen zeigt: Das System gibt Energie ab.'],
 ['Was brauchst Du zuerst, um die Wärme einer Charge zu berechnen?','Die umgesetzte Stoffmenge in mol','Die Farbe des Produkts','Den Durchmesser des Kessels','Die Drehzahl des Rührers','Die Reaktionsenthalpie gilt je mol. Die Stoffmenge kommt aus Masse und molarer Masse.'],
 ['Wozu dient die adiabate Temperaturerhöhung?','Sie zeigt, wie heiß der Ansatz ohne Kühlung würde','Sie gibt die Heizleistung des Mantels an','Sie ist die Siedetemperatur des Lösemittels','Sie beschreibt die Raumtemperatur','Ist sie groß, kann ein Kühlausfall zu Sieden, Druckaufbau oder Zersetzung führen.'],
-['Welche Bildungsenthalpie haben Elemente wie O₂ oder N₂ im Normzustand?','Null','Immer −100 kJ/mol','Immer +100 kJ/mol','Das hängt vom Hersteller ab','So ist der Bezugspunkt der Tabellen festgelegt.']]});
+['Welche Bildungsenthalpie haben Elemente wie O₂ oder N₂ im Standardzustand (25 °C, 1 bar)?','Null','Immer −100 kJ/mol','Immer +100 kJ/mol','Das hängt vom Hersteller ab','So ist der Bezugspunkt der Tabellen festgelegt.']]});
 TM({t:'Wärmebilanz am Reaktor',intro:'Im Reaktor stehen sich zwei Wärmeströme gegenüber: die Wärme, die die Reaktion erzeugt, und die Wärme, die der Kühlmantel abführt. Solange beide gleich sind, bleibt die Temperatur stabil. Kippt die Bilanz, kann die Reaktion durchgehen.',
 pts:['Stabiler Betrieb: erzeugte Wärme = abgeführte Wärme. Dann bleibt die Reaktortemperatur gleich.',
 'Wärmeerzeugung: Sie hängt davon ab, wie viel Stoff je Zeit reagiert. Bei Zulaufverfahren steuerst Du sie über die Dosierung.',
@@ -153,9 +153,9 @@ FRD.ch.subt+=', Thermodynamik';
 C.push({f,m,name:'Behälterdruck nach Erwärmen',gen:r=>{const pe=r.step(6,10,0.5),t1=r.p([10,15,20]),t2=r.step(40,70,5),p2=(pe+1)*(t2+273)/(t1+273);
  return{q:'Ein Druckluftbehälter wird bei '+t1+' °C auf '+nt(pe)+' bar Überdruck gefüllt und abgesperrt. Im Sommer erwärmt er sich auf '+t2+' °C. Welchen Überdruck zeigt das Manometer dann?',a:p2-1,u:'bar',d:2,tol:0.01,
  sol:['p_1 = '+nt(pe)+' bar + 1 bar = '+nt(pe+1)+' bar (absolut)','T_1 = '+t1+' °C + 273 K = '+(t1+273)+' K, T_2 = '+t2+' °C + 273 K = '+(t2+273)+' K','V bleibt gleich: p_2 = p_1 · [[T_2||T_1]] = '+nt(pe+1)+' bar · [['+(t2+273)+' K||'+(t1+273)+' K]] = '+nz(p2,2)+' bar','p_e2 = '+nz(p2,2)+' bar − 1 bar = '+nz(p2-1,2)+' bar']}}});
-C.push({f,m,name:'Angesaugte Luft für einen Behälter',gen:r=>{const V=r.p([250,500,750,1000]),pe=r.step(6,11,1),Va=V*(pe+1)/1000;
- return{q:'Ein leerer Druckluftbehälter mit '+V+' l Inhalt (Anfangsdruck 1 bar absolut) wird auf '+pe+' bar Überdruck gefüllt. Wie viel Luft (bei 1 bar und gleicher Temperatur) muss der Kompressor dafür ansaugen? Die Luft im Behälter am Anfang zählt mit.',a:Va,u:'m³',d:2,tol:0.01,
- sol:['p_2 = '+pe+' bar + 1 bar = '+(pe+1)+' bar (absolut)','Gleiche Temperatur: p_1 · V_1 = p_2 · V_2, also V_1 = [[p_2 · V_2||p_1]] = [['+(pe+1)+' bar · '+V+' l||1 bar]] = '+nz(V*(pe+1),0)+' l','Gesamte Luftmenge: '+nz(V*(pe+1),0)+' l = '+nz(Va,2)+' m³, davon war '+nz(V/1000,2)+' m³ schon im Behälter']}}});
+C.push({f,m,name:'Angesaugte Luft für einen Behälter',gen:r=>{const V=r.p([250,500,750,1000]),pe=r.step(6,11,1),Va=V*pe/1000;
+ return{q:'Ein Druckluftbehälter mit '+V+' l Inhalt enthält am Anfang nur Umgebungsluft (1 bar absolut). Er wird auf '+pe+' bar Überdruck gefüllt. Wie viel Luft (bei 1 bar und gleicher Temperatur) muss der Kompressor dafür ansaugen?',a:Va,u:'m³',d:2,tol:0.01,
+ sol:['p_2 = '+pe+' bar + 1 bar = '+(pe+1)+' bar (absolut)','Gleiche Temperatur: p_1 · V_1 = p_2 · V_2, also V_1 = [[p_2 · V_2||p_1]] = [['+(pe+1)+' bar · '+V+' l||1 bar]] = '+nz(V*(pe+1),0)+' l','Davon waren '+V+' l schon im Behälter. Angesaugt: '+nz(V*(pe+1),0)+' l − '+V+' l = '+nz(V*pe,0)+' l = '+nz(Va,2)+' m³']}}});
 C.push({f,m,name:'Allgemeine Gasgleichung',gen:r=>{const V1=r.step(2,10,1),p1=r.p([1,2,3]),t1=r.p([15,20,25]),V2=r.step(0.5,V1/2,0.5),t2=r.step(60,150,10),p2=p1*V1*(t2+273)/(V2*(t1+273));
  return{q:'In einem Zylinder werden '+nt(V1)+' l Luft mit '+p1+' bar (absolut) und '+t1+' °C auf '+nt(V2)+' l verdichtet. Danach hat die Luft '+t2+' °C. Wie groß ist der absolute Enddruck?',a:p2,u:'bar',d:2,tol:0.01,
  sol:['T_1 = '+(t1+273)+' K, T_2 = '+(t2+273)+' K','p_2 = p_1 · [[V_1||V_2]] · [[T_2||T_1]]','p_2 = '+p1+' bar · [['+nt(V1)+' l||'+nt(V2)+' l]] · [['+(t2+273)+' K||'+(t1+273)+' K]] = '+nz(p2,2)+' bar']}}});}
@@ -175,7 +175,7 @@ C.push({f,m,name:'Isotherm verdichten',gen:r=>{const V1=r.step(2,12,1),p1=1,p2=r
  sol:['Isotherm: p_1 · V_1 = p_2 · V_2','V_2 = [[p_1 · V_1||p_2]] = [[1 bar · '+V1+' l||'+p2+' bar]] = '+nz(V2,2)+' l']}}});
 C.push({f,m,name:'Endtemperatur beim schnellen Verdichten',gen:r=>{const e=r.p([3,4,5,6,8]),t1=r.p([10,20,30]),T2=(t1+273)*Math.pow(e,0.4);
  return{q:'Luft mit '+t1+' °C wird schnell und ohne Kühlung (adiabat) im Verhältnis ε = '+e+' verdichtet. Welche Temperatur hat sie am Ende?',a:T2-273,u:'°C',d:0,tol:0.01,
- sol:['T_1 = '+t1+' °C + 273 K = '+(t1+273)+' K','T_2 = T_1 · ε^{0,4} = '+(t1+273)+' K · '+e+'^{0,4} = '+(t1+273)+' K · '+nz(Math.pow(e,0.4),3)+' = '+nz(T2,0)+' K','ϑ_2 = '+nz(T2,0)+' K − 273 K = '+nz(T2-273,0)+' °C']}}});}
+ sol:['T_1 = '+t1+' °C + 273 K = '+(t1+273)+' K','T_2 = T_1 · ε^{κ − 1} mit κ = 1,4 für Luft: T_2 = '+(t1+273)+' K · '+e+'^{0,4} = '+(t1+273)+' K · '+nz(Math.pow(e,0.4),3)+' = '+nz(T2,0)+' K','ϑ_2 = '+nz(T2,0)+' K − 273 K = '+nz(T2-273,0)+' °C']}}});}
 {const m=m0('Wärmeleitung & Dämmung');
 C.push({f,m,name:'Wärmestrom durch eine Ofenwand',gen:r=>{const l=r.p([0.04,0.05,0.08]),A=r.step(2,8,0.5),d=r.step(50,200,25),dT=r.step(150,500,50),Qd=l*A*dT/(d/1000);
  return{q:'Die Dämmung einer Ofenwand ist '+d+' mm dick (λ = '+nt(l)+' W/(m · K)), die Fläche beträgt '+nt(A)+' m². Innen an der Dämmung herrschen '+(dT+30)+' °C, außen 30 °C. Wie groß ist der Wärmestrom durch die Dämmung?',a:Qd,u:'W',d:0,tol:0.01,
@@ -208,8 +208,8 @@ C.push({f,m,name:'Antrieb der Kältemaschine',gen:r=>{const Q0=r.step(5,60,5),e=
  return{q:'Ein Kaltwassersatz soll '+Q0+' kW Wärme aus dem Kühlwasser einer Maschine abführen. Seine Leistungszahl als Kältemaschine beträgt '+nt(e)+'. Welche Antriebsleistung braucht er, und wie viel Wärme gibt er am Verflüssiger ab?',a:P,u:'kW',d:2,tol:0.01,
  sol:['P = [[Q̇_zu||ε_K]] = [['+Q0+' kW||'+nt(e)+']] = '+nz(P,2)+' kW','Q̇_ab = Q̇_zu + P = '+Q0+' kW + '+nz(P,2)+' kW = '+nz(Q0+P,2)+' kW']}}});
 C.push({f,m,name:'Ideale Leistungszahl',gen:r=>{const tu=r.p([-5,0,5,10,20]),to=r.p([35,45,55]),e=(to+273)/(to-tu);
- return{q:'Eine Wärmepumpe holt Wärme bei '+tu+' °C und gibt sie bei '+to+' °C ab. Wie groß ist die ideale Leistungszahl (Carnot)?',a:e,u:'',d:2,tol:0.01,
- sol:['T_o = '+(to+273)+' K, T_o − T_u = '+to+' °C − ('+tu+' °C) = '+(to-tu)+' K','ε_WP = [[T_o||T_o − T_u]] = [['+(to+273)+' K||'+(to-tu)+' K]] = '+nz(e,2),'Reale Wärmepumpen erreichen etwa die Hälfte davon.']}}});}
+ return{q:'Eine Wärmepumpe holt Wärme bei '+nz(tu,0)+' °C und gibt sie bei '+to+' °C ab. Wie groß ist die ideale Leistungszahl (Carnot)?',a:e,u:'',d:2,tol:0.01,
+ sol:['T_o = '+(to+273)+' K, T_o − T_u = '+to+' °C − ('+nz(tu,0)+' °C) = '+(to-tu)+' K','ε_WP = [[T_o||T_o − T_u]] = [['+(to+273)+' K||'+(to-tu)+' K]] = '+nz(e,2),'Reale Wärmepumpen erreichen etwa die Hälfte davon.']}}});}
 
 }
 
@@ -226,7 +226,7 @@ C.push({f,m,name:'Leistung des Verdampfers',gen:r=>{const S=r.p([['Ethanol',840]
  sol:['Q̇ = ṁ · r = '+ms+' kg/h · '+S[1]+' kJ/kg = '+nz(ms*S[1],0)+' kJ/h','Q̇ = '+nz(ms*S[1],0)+' kJ/h : 3600 s/h = '+nz(P,1)+' kW']}}});}
 {const m=m0('Reaktionswärme & Enthalpie');
 C.push({f,m,name:'Wärme einer Charge',gen:r=>{const M=r.p([40,60,80,100,120]),ms=r.step(100,800,50),dH=r.step(40,180,10),n=ms*1000/M,Q=n*dH/1000;
- return{q:'In einer Charge werden '+ms+' kg eines Edukts (M = '+M+' g/mol) vollständig umgesetzt. Die Reaktionsenthalpie beträgt −'+dH+' kJ/mol. Wie viel Wärme wird frei?',a:Q,u:'MJ',d:0,tol:0.01,
+ return{q:'In einer Charge werden '+ms+' kg eines Edukts (M = '+M+' g/mol) vollständig umgesetzt. Die Reaktionsenthalpie beträgt −'+dH+' kJ je mol Edukt. Wie viel Wärme wird frei (als Betrag)?',a:Q,u:'MJ',d:0,tol:0.01,
  sol:['n = [[m||M]] = [['+nz(ms*1000,0)+' g||'+M+' g/mol]] = '+nz(n,0)+' mol','Q = n · ΔH_R = '+nz(n,0)+' mol · (−'+dH+' kJ/mol) = −'+nz(n*dH,0)+' kJ','Es werden '+nz(Q,0)+' MJ frei (Vorzeichen minus: Wärme wird abgegeben).']}}});
 C.push({f,m,name:'Reaktionsenthalpie aus Tabellenwerten',gen:r=>{const a=-r.step(50,150,10),b=-r.step(100,300,10),c=-r.step(400,700,10),dH=c-(a+b);
  return{q:'Für die Reaktion A + B → C stehen im Tabellenbuch die Bildungsenthalpien: A '+nz(a,0)+' kJ/mol, B '+nz(b,0)+' kJ/mol, C '+nz(c,0)+' kJ/mol. Wie groß ist die Reaktionsenthalpie?',a:dH,u:'kJ/mol',d:0,tol:0.005,
@@ -236,11 +236,13 @@ C.push({f,m,name:'Adiabate Temperaturerhöhung',gen:r=>{const Q=r.step(100,900,5
  sol:['ΔT_ad = [[Q||m_ges · c]] = [['+nz(Q*1000,0)+' kJ||'+mg+' kg · '+nt(c)+' kJ/(kg · K)]] = '+nz(dT,1)+' K']}}});}
 {const m=m0('Wärmebilanz am Reaktor');
 C.push({f,m,name:'Wärmeerzeugung beim Dosieren',gen:r=>{const md=r.step(100,600,50),M=r.p([50,80,100]),dH=r.step(60,160,10),n=md*1000/M,P=n*dH/3600;
- return{q:'In einen Reaktor werden '+md+' kg/h Edukt (M = '+M+' g/mol) dosiert, das sofort abreagiert (ΔH_R = −'+dH+' kJ/mol). Welche Wärmeleistung muss die Kühlung abführen?',a:P,u:'kW',d:1,tol:0.01,
- sol:['ṅ = [[ṁ||M]] = [['+nz(md*1000,0)+' g/h||'+M+' g/mol]] = '+nz(n,0)+' mol/h','Q̇_R = ṅ · ΔH_R = '+nz(n,0)+' mol/h · '+dH+' kJ/mol = '+nz(n*dH,0)+' kJ/h (wird frei)','Q̇_R = '+nz(n*dH,0)+' kJ/h : 3600 s/h = '+nz(P,1)+' kW']}}});
+ return{q:'In einen Reaktor werden '+md+' kg/h Edukt (M = '+M+' g/mol) dosiert, das sofort abreagiert (ΔH_R = −'+dH+' kJ je mol Edukt). Welche Wärmeleistung muss die Kühlung abführen?',a:P,u:'kW',d:1,tol:0.01,
+ sol:['ṅ = [[ṁ||M]] = [['+nz(md*1000,0)+' g/h||'+M+' g/mol]] = '+nz(n,0)+' mol/h','Q̇_R = ṅ · ΔH_R = '+nz(n,0)+' mol/h · (−'+dH+' kJ/mol) = −'+nz(n*dH,0)+' kJ/h, es werden also '+nz(n*dH,0)+' kJ/h frei','Q̇_R = '+nz(n*dH,0)+' kJ/h : 3600 s/h = '+nz(P,1)+' kW']}}});
 C.push({f,m,name:'Kühlleistung des Mantels',gen:r=>{const k=r.p([300,400,500]),A=r.step(8,24,2),tr=r.step(60,90,5),tk=r.p([20,25,30]),P=k*A*(tr-tk)/1000;
  return{q:'Ein Rührkessel hat '+A+' m² Kühlfläche, k = '+k+' W/(m² · K). Der Inhalt hat '+tr+' °C, das Kühlmittel im Mittel '+tk+' °C. Welche Wärmeleistung führt der Mantel ab?',a:P,u:'kW',d:1,tol:0.01,
  sol:['Δϑ = '+tr+' °C − '+tk+' °C = '+(tr-tk)+' K','Q̇_K = k · A · Δϑ = '+k+' W/(m² · K) · '+A+' m² · '+(tr-tk)+' K = '+nz(P*1000,0)+' W = '+nz(P,1)+' kW']}}});}
 }
 ORAL.push(['tec','Bei einer exothermen Zulaufreaktion steigt die Temperatur trotz voll geöffneter Kühlung weiter. Wie gehst Du vor?','Dosierung sofort stoppen, Rührer weiterlaufen lassen, Notkühlung nutzen, Leitwarte und Vorgesetzte informieren, nach Betriebsanweisung handeln (Reaktionsstopper, Entspannen, Alarmplan). Danach Ursache klären: Kühlwasser, Regelventil, Dosierrate, Anreicherung von Edukt. Ereignis dokumentieren und mit der Schicht besprechen.']);
 }
+/* Rechtsstand: Themen mit Gesetzen, Verordnungen oder Normen bekommen eine Stand-Zeile (Fachprüfung HQ-001) */
+['tec','org','fp'].forEach(f=>D[f]&&D[f].modules.forEach(m=>{if(/(Gesetz|[Vv]erordnung|ArbSchG|ArbZG|BetrSichV|GefStoffV|DGUV|TRGS|TRBS|\bADR\b|\bDIN\b|\bVDE\b|\bISO\b|\bEN \d|REACH|CLP|BetrVG|Richtlinie|§)/.test(m.intro+' '+m.pts.join(' '))&&!m.pts.some(p=>p.startsWith('Rechtsstand')))m.pts.push('Rechtsstand: November 2026. Gesetze, Verordnungen und Normen ändern sich. Prüfe vor der Prüfung die gültige Fassung.')}));

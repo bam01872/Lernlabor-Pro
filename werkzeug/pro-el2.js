@@ -129,8 +129,8 @@ C.push({f:tec,m,name:'Übertragungszeit einer Sicherung',gen:r=>{const D=r.step(
  return{q:'Eine Sicherungsdatei mit '+D+' MB soll über eine Verbindung mit '+v+' Mbit/s übertragen werden. Wie lange dauert das mindestens?',a:t,u:'s',d:0,tol:0.01,
  sol:['Datenmenge in Bit: '+D+' MB · 8 = '+nz(D*8,0)+' Mbit','t = [[Datenmenge||Datenrate]] = [['+nz(D*8,0)+' Mbit||'+v+' Mbit/s]] = '+nz(t,0)+' s'+(t>=120?' (rund '+nz(t/60,0)+' min)':'')]}}});}
 {const m=MI(tec,'Funktionale Sicherheit von Steuerungen');
-C.push({f:tec,m,name:'Mindestabstand des Lichtvorhangs',gen:r=>{const T=r.step(80,300,10),d=r.p([14,20,30]),Cz=8*(d-14),S=2000*T/1000+Cz;
- return{q:'Eine Presse braucht vom Unterbrechen des Lichtvorhangs bis zum Stillstand '+T+' ms. Der Lichtvorhang hat '+d+' mm Auflösung. Rechne mit K = 2000 mm/s und C = 8 · (d − 14 mm). Wie groß ist der Mindestabstand?',a:S,u:'mm',d:0,tol:0.005,
- sol:['C = 8 · ('+d+' mm − 14 mm) = '+Cz+' mm','S = K · T + C = 2000 mm/s · '+nt(T/1000)+' s + '+Cz+' mm = '+nz(S,0)+' mm','Ist dafür kein Platz, muss die Nachlaufzeit kürzer werden, zum Beispiel durch eine bessere Bremse.']}}});}
+C.push({f:tec,m,name:'Mindestabstand des Lichtvorhangs',gen:r=>{const T=r.step(80,300,10),d=r.p([14,20,30]),Cz=8*(d-14),S1=2000*T/1000+Cz,gr=S1>500,S=gr?Math.max(500,1600*T/1000+Cz):Math.max(100,S1);
+ return{q:'Eine Presse braucht vom Unterbrechen des Lichtvorhangs bis zum Stillstand '+T+' ms. Der Lichtvorhang hat '+d+' mm Auflösung. Rechne mit K = 2000 mm/s und C = 8 · (d − 14 mm). Ergeben sich mehr als 500 mm, rechne neu mit K = 1600 mm/s (mindestens 500 mm). Wie groß ist der Mindestabstand?',a:S,u:'mm',d:0,tol:0.005,
+ sol:['C = 8 · ('+d+' mm − 14 mm) = '+Cz+' mm','S = K · T + C = 2000 [[mm||s]] · '+nt(T/1000)+' s + '+Cz+' mm = '+nz(S1,0)+' mm'].concat(gr?['Mehr als 500 mm, also mit K = 1600 [[mm||s]]: S = 1600 [[mm||s]] · '+nt(T/1000)+' s + '+Cz+' mm = '+nz(1600*T/1000+Cz,0)+' mm'+(1600*T/1000+Cz<500?', mindestens aber 500 mm':''),'S = '+nz(S,0)+' mm']:['Höchstens 500 mm, K = 2000 [[mm||s]] gilt: S = '+nz(S,0)+' mm']).concat(['Ist dafür kein Platz, muss die Nachlaufzeit kürzer werden, zum Beispiel durch eine bessere Bremse.'])}}});}
 }
 }
