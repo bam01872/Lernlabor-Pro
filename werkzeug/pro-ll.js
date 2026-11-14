@@ -164,7 +164,7 @@ function boost(s){if(innerWidth>700)return;const vb=s.viewBox&&s.viewBox.baseVal
    for(const b of B){if(b===box[i]||ob[i].some(x=>x[0]===b)||ins(b,R0[i]))continue;if(Math.min(r.right,b.right)-Math.max(r.left,b.left)>1&&Math.min(r.bottom,b.bottom)-Math.max(r.top,b.top)>1&&!ins(b,r)){bad.add(i);break}}}
   for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){if(f[i]===1&&f[j]===1)continue;const kk=i*4096+j;if(old.has(kk)?ia(R[i],R[j])>ov0[kk]*1.05+.5:hit(R[i],R[j])){bad.add(i);bad.add(j)}}
   if(!bad.size)break;bad.forEach(i=>{f[i]=it<3?1+(f[i]-1)/2:1;if(f[i]<1.04)f[i]=1});eq();if(it===3)T.forEach((t,i)=>{if(f[i]>1)sz(t,(fs0[i]*f[i])+'px');else un(t)})}}
-let BQ=new Set(),BF=0;const bq=s=>{BQ.add(s);if(!BF)BF=requestAnimationFrame(()=>requestAnimationFrame(()=>{BF=0;const a=[...BQ];BQ.clear();a.forEach(x=>{if(x.isConnected)try{boost(x)}catch(e){}})}))};
+let BQ=new Set(),BF=0;const bq=s=>{BQ.add(s);if(!BF)BF=requestAnimationFrame(()=>requestAnimationFrame(()=>{BF=0;const a=[...BQ];BQ.clear();a.forEach(x=>{if(x.isConnected){try{boost(x)}catch(e){}try{if(window.llFitSvg)llFitSvg(x)}catch(e){}}})}))};
 const SVQ='.skb svg.mlsk,.simsv svg';
 new MutationObserver(ms=>{if(innerWidth>700)return;for(const m of ms)for(const n of m.addedNodes){if(n.nodeType!==1)continue;
  if(n.matches(SVQ))bq(n);else if(n.querySelector&&n.querySelector('svg'))n.querySelectorAll(SVQ).forEach(bq)}}).observe(q('#view'),{childList:true,subtree:true});
