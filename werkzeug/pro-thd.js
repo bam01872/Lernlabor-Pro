@@ -101,7 +101,50 @@ mcq:[['Welches Bauteil gibt im Kältekreis die Wärme an die warme Seite ab?','D
 ['Eine Wärmepumpe nimmt 2,5 kW elektrisch auf und hat die Leistungszahl 4. Welche Heizleistung liefert sie?','10 kW','6,5 kW','1,6 kW','4 kW','Q̇ = ε · P = 4 · 2,5 kW = 10 kW. Davon stammen 7,5 kW aus der Umwelt.'],
 ['Warum sinkt die Leistungszahl einer Luft-Wärmepumpe im Winter?','Der Temperaturhub zwischen Außenluft und Heizwasser wird größer','Der Strom wird teurer','Das Kältemittel wird schwerer','Der Verdichter läuft langsamer','Je größer der Abstand zwischen kalter und warmer Seite, desto mehr Arbeit braucht jedes kW Wärme.'],
 ['Ein Instandhalter ohne Zertifikat will Kältemittel in eine Klimaanlage nachfüllen. Was sagst Du?','Nicht erlaubt, das dürfen nur zertifizierte Fachleute','Erlaubt, wenn er Schutzhandschuhe trägt','Erlaubt, wenn die Anlage klein ist und es schnell geht','Erlaubt, wenn der Meister danebensteht','Für Arbeiten am Kältekreis mit fluorierten Kältemitteln ist eine Zertifizierung vorgeschrieben.']]});
-FRD.ch.grp.splice(1,0,['Thermodynamik',[T0+0,T0+1,T0+2,T0+3,T0+4,T0+5,T0+6]]);
+TM({t:'Sieden & Kondensieren',intro:'Verdampfen und Kondensieren sind die Grundlage von Destillation, Rektifikation, Eindampfen und Dampfheizung. Entscheidend ist: Die Siedetemperatur hängt vom Druck ab, und beim Phasenwechsel wird sehr viel Wärme umgesetzt, ohne dass sich die Temperatur ändert.',
+pts:['Eine Flüssigkeit siedet, wenn ihr Dampfdruck so groß ist wie der Druck über ihr. Wasser siedet bei 1013 mbar bei 100 °C.',
+'Weniger Druck, niedrigere Siedetemperatur: Unter Vakuum lassen sich temperaturempfindliche Stoffe schonend destillieren. Mehr Druck, höhere Siedetemperatur: So erreicht Heizdampf höhere Temperaturen.',
+'Beim Sieden bleibt die Temperatur gleich, bis alles verdampft ist. Die zugeführte Wärme steckt als Verdampfungswärme r im Dampf.',
+'Beim Kondensieren gibt der Dampf genau diese Wärme wieder ab. Deshalb heizt man mit kondensierendem Dampf, und deshalb braucht der Kondensator einer Kolonne so viel Kühlwasser.',
+'Rechenwerte für r bei Siedetemperatur und Normaldruck in [[kJ||kg]]: Wasser 2257, Ethanol 840, Aceton 525, Toluol 360.',
+'Verbrühungen durch Dampf sind schwer, weil der Dampf auf der Haut kondensiert und dabei seine Verdampfungswärme abgibt.'],
+fo:['Verdampfen oder Kondensieren: Q = m · r',
+'Aufheizen und Verdampfen: Q = m · c · ΔT + m · r',
+'Wärmestrom: Q̇ = ṁ · r'],
+mcq:[['Wie ändert sich die Siedetemperatur, wenn der Druck in der Kolonne gesenkt wird?','Sie sinkt','Sie steigt','Sie bleibt gleich','Sie springt auf 100 °C','Die Flüssigkeit siedet, sobald ihr Dampfdruck den Druck über ihr erreicht. Bei kleinerem Druck ist das schon bei tieferer Temperatur der Fall.'],
+['Ein Kessel mit siedendem Wasser wird weiter beheizt. Was passiert mit der Temperatur des Wassers?','Sie bleibt gleich, bis alles verdampft ist','Sie steigt gleichmäßig weiter','Sie sinkt','Sie schwankt stark','Die zugeführte Wärme wird als Verdampfungswärme gebraucht, nicht zum Erwärmen.'],
+['Warum heizt man in der Chemie gern mit kondensierendem Sattdampf?','Er gibt beim Kondensieren viel Wärme bei gleichbleibender Temperatur ab','Er ist billiger als Wasser','Er kann nicht zu heiß werden, egal bei welchem Druck','Er braucht keine Rohrleitungen','Die Kondensationswärme ist groß, und die Temperatur lässt sich über den Dampfdruck einstellen.'],
+['Warum wird ein temperaturempfindliches Produkt im Vakuum destilliert?','Weil es dann bei niedrigerer Temperatur siedet','Weil Vakuum besser kühlt','Weil es dann schneller reagiert','Weil dann kein Kondensator nötig ist','Der niedrigere Druck senkt die Siedetemperatur, das Produkt wird geschont.']]});
+TM({t:'Reaktionswärme & Enthalpie',intro:'Jede chemische Reaktion setzt Wärme frei oder braucht Wärme. Wie viel, sagt die Reaktionsenthalpie. Zusammen mit der Stöchiometrie rechnest Du aus, welche Wärme eine Charge entwickelt und wie stark sich der Kessel ohne Kühlung erwärmen würde.',
+pts:['Exotherm: Die Reaktion gibt Wärme ab, die Reaktionsenthalpie ΔH_R ist negativ. Es muss gekühlt werden.',
+'Endotherm: Die Reaktion nimmt Wärme auf, ΔH_R ist positiv. Es muss geheizt werden.',
+'Die molare Reaktionsenthalpie steht in [[kJ||mol]] und gilt für den Formelumsatz der Reaktionsgleichung.',
+'Rechenweg in zwei Schritten: erst die Stoffmenge aus Masse und molarer Masse (Stöchiometrie), dann die Wärme aus Stoffmenge und Reaktionsenthalpie. Ein Fehler im ersten Schritt zieht sich durch.',
+'Aus Tabellenwerten: Reaktionsenthalpie = Bildungsenthalpien der Produkte minus Bildungsenthalpien der Edukte, jeweils mal der Zahl aus der Reaktionsgleichung. Elemente haben die Bildungsenthalpie null.',
+'Die adiabate Temperaturerhöhung sagt, um wie viel sich der Ansatz erwärmt, wenn die Kühlung ausfällt. Sie ist eine wichtige Kennzahl für die Sicherheit.'],
+fo:['Stoffmenge: n = [[m||M]]',
+'Reaktionswärme: Q = n · ΔH_R',
+'Aus Bildungsenthalpien: ΔH_R = ΣΔH_B(Produkte) − ΣΔH_B(Edukte)',
+'Adiabate Temperaturerhöhung: ΔT_ad = [[Q||m_ges · c]]'],
+mcq:[['Eine Reaktion hat ΔH_R = −120 kJ/mol. Was bedeutet das?','Sie ist exotherm und gibt je Formelumsatz 120 kJ ab','Sie ist endotherm und braucht 120 kJ','Sie läuft nicht ab','Sie kühlt den Kessel','Das negative Vorzeichen zeigt: Das System gibt Energie ab.'],
+['Was brauchst Du zuerst, um die Wärme einer Charge zu berechnen?','Die umgesetzte Stoffmenge in mol','Die Farbe des Produkts','Den Durchmesser des Kessels','Die Drehzahl des Rührers','Die Reaktionsenthalpie gilt je mol. Die Stoffmenge kommt aus Masse und molarer Masse.'],
+['Wozu dient die adiabate Temperaturerhöhung?','Sie zeigt, wie heiß der Ansatz ohne Kühlung würde','Sie gibt die Heizleistung des Mantels an','Sie ist die Siedetemperatur des Lösemittels','Sie beschreibt die Raumtemperatur','Ist sie groß, kann ein Kühlausfall zu Sieden, Druckaufbau oder Zersetzung führen.'],
+['Welche Bildungsenthalpie haben Elemente wie O₂ oder N₂ im Normzustand?','Null','Immer −100 kJ/mol','Immer +100 kJ/mol','Das hängt vom Hersteller ab','So ist der Bezugspunkt der Tabellen festgelegt.']]});
+TM({t:'Wärmebilanz am Reaktor',intro:'Im Reaktor stehen sich zwei Wärmeströme gegenüber: die Wärme, die die Reaktion erzeugt, und die Wärme, die der Kühlmantel abführt. Solange beide gleich sind, bleibt die Temperatur stabil. Kippt die Bilanz, kann die Reaktion durchgehen.',
+pts:['Stabiler Betrieb: erzeugte Wärme = abgeführte Wärme. Dann bleibt die Reaktortemperatur gleich.',
+'Wärmeerzeugung: Sie hängt davon ab, wie viel Stoff je Zeit reagiert. Bei Zulaufverfahren steuerst Du sie über die Dosierung.',
+'Wärmeabfuhr: Sie wächst mit Wärmedurchgang k, Kühlfläche A und dem Abstand zwischen Reaktor- und Kühlmitteltemperatur.',
+'Durchgehen: Mit steigender Temperatur wird die Reaktion schneller (Faustregel: etwa doppelt so schnell je 10 K) und erzeugt mehr Wärme. Die Kühlung wächst nur gleichmäßig mit. Ab einem Punkt holt sie die Reaktion nicht mehr ein.',
+'Typische Auslöser: Kühlwasserausfall, Rührerausfall, zu schnelle Dosierung, Anreicherung von unreagiertem Edukt bei zu kalter Fahrweise.',
+'Schutz: Temperaturregelung auf das Kühlwasserventil, Verriegelung der Dosierung bei zu hoher Temperatur oder Rührerausfall, Notkühlung, Reaktionsstopper, Druckentlastung. Im Störfall zuerst die Dosierung stoppen.'],
+fo:['Wärmeerzeugung: Q̇_R = ṅ · ΔH_R',
+'Wärmeabfuhr: Q̇_K = k · A · (ϑ_R − ϑ_K)',
+'Stabil, wenn: Q̇_R = Q̇_K'],
+mcq:[['Die Reaktortemperatur steigt, obwohl das Kühlwasserventil ganz offen ist. Was tust Du zuerst?','Die Dosierung stoppen','Den Rührer abstellen','Mehr Edukt zugeben, damit es schneller fertig ist','Abwarten','Ohne Zulauf kommt kein neuer Brennstoff für die Reaktion nach. Der Rührer muss weiterlaufen, sonst bricht die Wärmeabfuhr ein.'],
+['Warum ist der Ausfall des Rührers bei einer exothermen Reaktion gefährlich?','Die Wärme wird schlechter an die Kühlfläche gebracht, und Edukt kann sich anreichern','Der Kessel wird leichter','Die Reaktion hört sofort auf','Das Kühlwasser wird wärmer','Ohne Durchmischung bricht der Wärmeübergang ein, es entstehen heiße Zonen.'],
+['Warum kann eine Reaktion durchgehen?','Die Wärmeerzeugung steigt mit der Temperatur viel stärker als die Wärmeabfuhr','Weil Kühlwasser brennbar ist','Weil der Mantel zu groß ist','Weil die Temperatur sinkt','Die Reaktion beschleunigt sich selbst, die Kühlung wächst nur gleichmäßig mit dem Temperaturabstand.'],
+['Bei einem Zulaufverfahren wird versehentlich zu kalt gefahren und trotzdem weiter dosiert. Was ist das Risiko?','Unreagiertes Edukt reichert sich an und reagiert später auf einmal','Keines, kalt ist immer sicher','Das Produkt friert ein','Der Rührer läuft schneller','Die angesammelte Menge kann beim Erwärmen schlagartig reagieren und mehr Wärme freisetzen, als die Kühlung schafft.']]});
+FRD.ch.grp.splice(1,0,['Thermodynamik',['Gasgesetze','Erster Hauptsatz','Zustandsänderungen','Sieden & Kondensieren','Reaktionswärme & Enthalpie','Wärmebilanz am Reaktor','Wärmeleitung & Dämmung','Konvektion & Strahlung','Kreisprozesse & Wirkungsgrad','Kältemaschine & Wärmepumpe'].map(t=>D.tec.modules.findIndex(x=>x.t===t))]);
 FRD.ch.subt+=', Thermodynamik';
 
 /* ---------- Rechenaufgaben ---------- */
@@ -173,4 +216,31 @@ C.push({f,m,name:'Ideale Leistungszahl',gen:r=>{const tu=r.p([-5,0,5,10,20]),to=
 /* ---------- Fachgespräch ---------- */
 ORAL.push(['tec','Ein Mitarbeiter misst mit der Wärmebildkamera an einer blanken Welle nur 35 °C, obwohl das Lager heiß läuft. Was erklärst Du ihm?','Blankes Metall hat einen kleinen Emissionsgrad und spiegelt die Umgebung, die Kamera zeigt zu niedrig an. Emissionsgrad passend einstellen oder Messstelle mit mattem Lack oder Klebeband versehen, an einer matten Gehäusestelle messen, Vergleich mit Kontaktthermometer.'],
 ['tec','Warum ist eine Wärmepumpe für die Hallenheizung nicht immer die beste Lösung?','Die Leistungszahl hängt vom Temperaturhub ab: Kalte Quelle und hohe Vorlauftemperatur (zum Beispiel alte Heizkörper) verschlechtern sie. Gut sind niedrige Vorlauftemperaturen und warme Quellen wie Abwärme. Dazu Stromanschluss, Kosten, Platz, Kältemittelvorschriften und Wartung bedenken.']);
+{const f='tec',m0=n=>MI(f,n);
+{const m=m0('Sieden & Kondensieren');
+C.push({f,m,name:'Aufheizen und Verdampfen',gen:r=>{const ms=r.step(200,2000,100),t1=r.p([15,20,25]),Q1=ms*4.18*(100-t1),Q2=ms*2257,Q=(Q1+Q2)/1000;
+ return{q:''+ms+' kg Wasser von '+t1+' °C sollen bei Normaldruck auf 100 °C erwärmt und vollständig verdampft werden (c = 4,18 kJ/(kg · K), r = 2257 kJ/kg). Wie viel Wärme ist insgesamt nötig?',a:Q,u:'MJ',d:0,tol:0.01,
+ sol:['Aufheizen: Q_1 = m · c · ΔT = '+ms+' kg · 4,18 kJ/(kg · K) · '+(100-t1)+' K = '+nz(Q1,0)+' kJ','Verdampfen: Q_2 = m · r = '+ms+' kg · 2257 kJ/kg = '+nz(Q2,0)+' kJ','Q = Q_1 + Q_2 = '+nz(Q1+Q2,0)+' kJ = '+nz(Q,0)+' MJ']}}});
+C.push({f,m,name:'Leistung des Verdampfers',gen:r=>{const S=r.p([['Ethanol',840],['Aceton',525],['Toluol',360]]),ms=r.step(200,1500,100),P=ms*S[1]/3600;
+ return{q:'Ein Verdampfer soll je Stunde '+ms+' kg '+S[0]+' bei Siedetemperatur verdampfen (r = '+S[1]+' kJ/kg). Welche Heizleistung braucht er?',a:P,u:'kW',d:1,tol:0.01,
+ sol:['Q̇ = ṁ · r = '+ms+' kg/h · '+S[1]+' kJ/kg = '+nz(ms*S[1],0)+' kJ/h','Q̇ = '+nz(ms*S[1],0)+' kJ/h : 3600 s/h = '+nz(P,1)+' kW']}}});}
+{const m=m0('Reaktionswärme & Enthalpie');
+C.push({f,m,name:'Wärme einer Charge',gen:r=>{const M=r.p([40,60,80,100,120]),ms=r.step(100,800,50),dH=r.step(40,180,10),n=ms*1000/M,Q=n*dH/1000;
+ return{q:'In einer Charge werden '+ms+' kg eines Edukts (M = '+M+' g/mol) vollständig umgesetzt. Die Reaktionsenthalpie beträgt −'+dH+' kJ/mol. Wie viel Wärme wird frei?',a:Q,u:'MJ',d:0,tol:0.01,
+ sol:['n = [[m||M]] = [['+nz(ms*1000,0)+' g||'+M+' g/mol]] = '+nz(n,0)+' mol','Q = n · ΔH_R = '+nz(n,0)+' mol · (−'+dH+' kJ/mol) = −'+nz(n*dH,0)+' kJ','Es werden '+nz(Q,0)+' MJ frei (Vorzeichen minus: Wärme wird abgegeben).']}}});
+C.push({f,m,name:'Reaktionsenthalpie aus Tabellenwerten',gen:r=>{const a=-r.step(50,150,10),b=-r.step(100,300,10),c=-r.step(400,700,10),dH=c-(a+b);
+ return{q:'Für die Reaktion A + B → C stehen im Tabellenbuch die Bildungsenthalpien: A '+nz(a,0)+' kJ/mol, B '+nz(b,0)+' kJ/mol, C '+nz(c,0)+' kJ/mol. Wie groß ist die Reaktionsenthalpie?',a:dH,u:'kJ/mol',d:0,tol:0.005,
+ sol:['ΔH_R = ΔH_B(C) − (ΔH_B(A) + ΔH_B(B))','ΔH_R = '+nz(c,0)+' kJ/mol − ('+nz(a,0)+' kJ/mol + ('+nz(b,0)+' kJ/mol)) = '+nz(dH,0)+' kJ/mol',dH<0?'Negativ: Die Reaktion ist exotherm.':'Positiv: Die Reaktion ist endotherm.']}}});
+C.push({f,m,name:'Adiabate Temperaturerhöhung',gen:r=>{const Q=r.step(100,900,50),mg=r.step(2000,8000,500),c=r.p([2.5,3,3.5,4.18]),dT=Q*1000/(mg*c);
+ return{q:'Eine Reaktion setzt '+Q+' MJ frei. Der Ansatz hat '+mg+' kg und c = '+nt(c)+' kJ/(kg · K). Um wie viel Kelvin würde er sich erwärmen, wenn die Kühlung ausfällt?',a:dT,u:'K',d:1,tol:0.01,
+ sol:['ΔT_ad = [[Q||m_ges · c]] = [['+nz(Q*1000,0)+' kJ||'+mg+' kg · '+nt(c)+' kJ/(kg · K)]] = '+nz(dT,1)+' K']}}});}
+{const m=m0('Wärmebilanz am Reaktor');
+C.push({f,m,name:'Wärmeerzeugung beim Dosieren',gen:r=>{const md=r.step(100,600,50),M=r.p([50,80,100]),dH=r.step(60,160,10),n=md*1000/M,P=n*dH/3600;
+ return{q:'In einen Reaktor werden '+md+' kg/h Edukt (M = '+M+' g/mol) dosiert, das sofort abreagiert (ΔH_R = −'+dH+' kJ/mol). Welche Wärmeleistung muss die Kühlung abführen?',a:P,u:'kW',d:1,tol:0.01,
+ sol:['ṅ = [[ṁ||M]] = [['+nz(md*1000,0)+' g/h||'+M+' g/mol]] = '+nz(n,0)+' mol/h','Q̇_R = ṅ · ΔH_R = '+nz(n,0)+' mol/h · '+dH+' kJ/mol = '+nz(n*dH,0)+' kJ/h (wird frei)','Q̇_R = '+nz(n*dH,0)+' kJ/h : 3600 s/h = '+nz(P,1)+' kW']}}});
+C.push({f,m,name:'Kühlleistung des Mantels',gen:r=>{const k=r.p([300,400,500]),A=r.step(8,24,2),tr=r.step(60,90,5),tk=r.p([20,25,30]),P=k*A*(tr-tk)/1000;
+ return{q:'Ein Rührkessel hat '+A+' m² Kühlfläche, k = '+k+' W/(m² · K). Der Inhalt hat '+tr+' °C, das Kühlmittel im Mittel '+tk+' °C. Welche Wärmeleistung führt der Mantel ab?',a:P,u:'kW',d:1,tol:0.01,
+ sol:['Δϑ = '+tr+' °C − '+tk+' °C = '+(tr-tk)+' K','Q̇_K = k · A · Δϑ = '+k+' W/(m² · K) · '+A+' m² · '+(tr-tk)+' K = '+nz(P*1000,0)+' W = '+nz(P,1)+' kW']}}});}
+}
+ORAL.push(['tec','Bei einer exothermen Zulaufreaktion steigt die Temperatur trotz voll geöffneter Kühlung weiter. Wie gehst Du vor?','Dosierung sofort stoppen, Rührer weiterlaufen lassen, Notkühlung nutzen, Leitwarte und Vorgesetzte informieren, nach Betriebsanweisung handeln (Reaktionsstopper, Entspannen, Alarmplan). Danach Ursache klären: Kühlwasser, Regelventil, Dosierrate, Anreicherung von Edukt. Ereignis dokumentieren und mit der Schicht besprechen.']);
 }
