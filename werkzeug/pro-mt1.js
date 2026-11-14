@@ -127,5 +127,5 @@ C.push({f:'tec',m,name:'Fernwartung oder Einsatz vor Ort',gen:r=>{const n=r.p([1
 add('Bussysteme & industrielle Netzwerke','IO-Link verbindet einzelne Sensoren und Aktoren Punkt zu Punkt mit einem Master und überträgt neben dem Schaltsignal auch Parameter und Diagnose. CAN und CANopen sind in Antrieben, mobilen Maschinen und Teilsystemen verbreitet. Beim Gerätetausch übernimmt der Master die Parameter, wenn das so eingerichtet ist.');
 add('SPS: Aufbau & Programmierung','In der Mechatronik gehört zur Steuerung fast immer eine Schrittkette mit Betriebsarten: Automatik, Einrichten, Grundstellungsfahrt. Für die Fehlersuche zählt, dass Schritte und Weiterschaltbedingungen an der Bedienstation sichtbar sind.');
 add('Sensoren & Aktoren','Aktoren in mechatronischen Anlagen sind meist Pneumatikzylinder mit Ventilinsel, Elektrozylinder und Servoachsen. Endlagen werden mit Zylinderschaltern abgefragt, deren Einstellung nach jedem Zylindertausch zu prüfen ist.');
-add('Inbetriebnahme & Abnahme','Rechtsstand: Ab 20. Januar 2027 gilt die EU-Maschinenverordnung 2023/1230 anstelle der Maschinenrichtlinie 2006/42/EG. Für Abnahmen nach diesem Datum bitte den aktuellen Stand prüfen.');}
+}
 }

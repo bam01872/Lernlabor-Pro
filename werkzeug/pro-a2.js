@@ -2,6 +2,10 @@
    Beispiele aus der Fachrichtung, Situationsaufgaben und Fachgespräch für Kunststoff & Kautschuk, Mechatronik und Logistik.
    Eigene Texte und Aufgaben. Zahlen sind Beispielwerte. Rechtliche Angaben sind eine Lernhilfe und keine Rechtsberatung;
    maßgeblich sind die aktuellen Vorschriften und die Festlegungen im Betrieb. ===== */
+/* Rechtsstand Maschinenverordnung in den bestehenden Themen (Metall, Elektrotechnik, Mechatronik) */
+{const add=(t,p)=>{const i=MI('tec',t);if(i>=0)D.tec.modules[i].pts.push(p)};
+add('Inbetriebnahme & Abnahme','Rechtsstand: Bis 19. Januar 2027 gilt die Maschinenrichtlinie 2006/42/EG, ab 20. Januar 2027 die EU-Maschinenverordnung 2023/1230. Neu sind unter anderem Betriebsanleitungen in digitaler Form und Anforderungen an Software und an den Schutz vor Manipulation. Für Abnahmen nach diesem Datum bitte den aktuellen Stand prüfen.');
+add('Funktionale Sicherheit von Steuerungen','Rechtsstand: Ab 20. Januar 2027 gilt die EU-Maschinenverordnung 2023/1230 anstelle der Maschinenrichtlinie 2006/42/EG. Sie stellt auch Anforderungen an sicherheitsrelevante Software und an den Schutz der Steuerung vor Manipulation. Welche Ausgabe der DIN EN ISO 13849-1 anzuwenden ist, bitte am aktuellen Stand prüfen.');}
 OM({t:'Rüsten verkürzen (SMED)',intro:'Jede Minute Rüsten ist eine Minute, in der die Anlage nichts verdient. Du zerlegst einen Rüstvorgang, trennst Vorbereitung von Stillstand und rechnest aus, was kürzere Rüstzeiten bringen.',
 pts:['Rüstzeit zählt vom letzten Gutteil des alten Auftrags bis zum ersten Gutteil des neuen. Dazu gehören auch Anfahren, Einstellen und die Freigabe des ersten Teils.',
 'Internes Rüsten geht nur bei stehender Anlage (Werkzeug wechseln). Externes Rüsten geht bei laufender Anlage (Werkzeug bereitstellen, vorwärmen, Material holen).',

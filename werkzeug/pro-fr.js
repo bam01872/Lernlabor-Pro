@@ -9,7 +9,7 @@ const FRD={
   og:['Betriebliches Kostenwesen','Planung, Steuerung & Kommunikation','Arbeits-, Umwelt- & Gesundheitsschutz'],
   tnm:'Betriebs-, Fertigungs- & Montage­technik',
   subt:'Situationsaufgabe Technik: Instandhaltung, Hydraulik, Zerspanung, Werkstoffe, Montage, FMEA',
-  hq:[['Situationsaufgabe Technik','schriftlich · Kern: Betriebs-, Fertigungs- und Montagetechnik, dazu Teile aus Organisation und Führung'],['Situationsaufgabe Organisation','schriftlich · Kern: Kostenwesen, Planung und Steuerung, Arbeits-, Umwelt- und Gesundheitsschutz'],['Fachgespräch','mündlich · Kern: Führung und Personal']],hqn:''},
+  hq:[['Situationsaufgabe Technik','schriftlich · Kern: Betriebs-, Fertigungs- und Montagetechnik, dazu Teile aus Organisation und Führung'],['Situationsaufgabe Organisation','schriftlich · Kern: Kostenwesen, Planung und Steuerung, Arbeits-, Umwelt- und Gesundheitsschutz'],['Fachgespräch','mündlich · Kern: Führung und Personal']],hqn:'Nach der Verordnung von 1997 dauern die schriftlichen Situationsaufgaben je mindestens vier Stunden, das Fachgespräch 45 bis 60 Minuten. Maßgeblich sind die Angaben Deiner IHK.'},
  el:{em:'⚡',first:0,ox:[[],[],['Verantwortliche Elektrofachkraft & Organisation']],
   grp:[['Infrastruktursysteme & Betriebstechnik',[0,1,2,3,4,5,6]],['Automatisierungs- & Informationstechnik',[7,8,9,10,11,12,13]]],
   og:['Betriebliches Kostenwesen','Planung, Steuerung & Kommunikation','Arbeits-, Umwelt- & Gesundheitsschutz'],

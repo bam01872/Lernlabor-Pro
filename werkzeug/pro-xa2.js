@@ -128,7 +128,7 @@ X['Logistikkosten & Lagerkennzahlen']={
 const fpC=v=>{const Ke=v.Fx*1000+v.km*1000*.45,Ks=v.km*1000*v.sp;return{Ke,Ks,kr:v.Fx*1000/(v.sp-.45),d:Ks-Ke}};
 const fpB=(v,r)=>{const c=CHT({X0:66,X1:452,Y0:218,Y1:68,xm:120,ym:250,xt:[0,20,40,60,80,100,120],yt:[50,100,150,200,250],xl:'Fahrleistung in 1000 km je Jahr',yl:'Kosten in 1000 €'});let s=c.s;
  s+=LN(c,0,v.Fx,120,v.Fx+120*.45,CC('b'),3)+LN(c,0,0,Math.min(120,250/v.sp),Math.min(250,120*v.sp),CC('y'),3);
- const kk=r.kr/1000;if(kk<=120)s+=LN(c,kk,0,kk,kk*v.sp,'var(--mute)',1.4,'4 4')+L(c.px(kk)+(kk<=60?6:-6),c.py(0)-8,'gleich teuer bei rund '+nz(Math.round(r.kr/100)*100,0)+' km',kk<=60?'start':'end',11.5,'var(--mute)',700);
+ const kk=r.kr/1000;if(kk<=120)s+=LN(c,kk,0,kk,kk*v.sp,'var(--mute)',1.4,'4 4')+L(c.px(kk)+(kk<=75?6:-6),c.py(0)-8,'gleich teuer: '+nz(Math.round(r.kr/100)*100,0)+' km',kk<=75?'start':'end',11.5,'var(--mute)',700);
  s+=DOT(c.px(v.km),c.py(r.Ke/1000),CC('b'),6)+DOT(c.px(v.km),c.py(Math.min(250,r.Ks/1000)),CC('y'),6);
  s+=P('M66 18h18',CC('b'),3)+L(88,22,'eigener Lkw','start',12,CC('b'),700)+P('M186 18h18',CC('y'),3)+L(208,22,'Spedition','start',12,'var(--ink)',700)+L(452,22,r.d>0?'eigener Lkw günstiger':'Spedition günstiger','end',12.5,r.d>0?CC('b'):'var(--ink)',800);return s};
 X['Fuhrpark oder Spedition']={
