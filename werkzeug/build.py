@@ -14,7 +14,7 @@ def rep(a,b,cnt=1,rx=False):
     else:
         assert a in s,('fehlt',a[:60]);s=s.replace(a,b) if cnt==0 else s.replace(a,b,cnt)
 # Daten
-rep("const FACH=['reha','beha','mikp','zib'];",rd('pro-data.js')+'\n'+rd('pro-pakete.js')+'\n'+''.join(rd('pro-p3'+c+'.js')+'\n' for c in 'abcd')+''.join(rd(n+'.js')+'\n' for n in ['pro-fr','pro-el1','pro-el2','pro-ch1','pro-ch2','pro-ib','pro-a1'])+"\nconst FACH=['tec','org','fp'];")
+rep("const FACH=['reha','beha','mikp','zib'];",rd('pro-data.js')+'\n'+rd('pro-pakete.js')+'\n'+''.join(rd('pro-p3'+c+'.js')+'\n' for c in 'abcd')+''.join(rd(n+'.js')+'\n' for n in ['pro-fr','pro-el1','pro-el2','pro-ch1','pro-ch2','pro-ib','pro-a1','pro-thd'])+"\nconst FACH=['tec','org','fp'];")
 rep("modSel={reha:0,beha:0,mikp:0,zib:0}","modSel={tec:0,org:0,fp:0}")
 rep("const FEM={reha:'⚖️',beha:'💶',mikp:'📊',zib:'🤝'}","const FEM={tec:FRD[FR].em,org:'📋',fp:'🤝'}")
 rep(r"const GRP=\{reha:.*?\nconst SUBT=\{[^\n]*\n",
@@ -33,7 +33,7 @@ Object.assign(ERK,{'Zerspanung: Drehen':['Alle Rechnungen hängen an zwei Größ
 """,rx=True)
 rep(r"f:\{reha:\[.*?x:\{[^}]*\}\};","f:{tec:[],org:[],fp:[]},x:{}};",rx=True)
 rep("n:'IM TZ 11/2026 Regenstauf'","n:''")
-rep(r"const NEU='.*?';\n","const NEU='<h3>🆕 Version 4 (14.11.2026)</h3><ul><li>Bedienung wie im Lernlabor: „Thema wechseln“ mit zwei Wischleisten, vier Schritte in einer Zeile, „Üben“ am Schluss.</li><li>Regler mit Zahlenfeld zum Eintippen, Ergebnisse als Kacheln, Knöpfe „Üben“, „Favorit“ und „Mehr“.</li><li>Nachschlagen mit Wichtiges, Grundgleichungen, Verstehen und typische Fehler, Alle Werte und Meine Notiz.</li><li>Einheiten mit echtem Bruchstrich.</li></ul><h3>Version 3 (14.11.2026)</h3><ul><li>Drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Du wählst Deine Fachrichtung auf der Startseite, der Lernstand wird je Fachrichtung getrennt gemerkt.</li><li>Je 14 neue Technikthemen für Elektrotechnik und Chemie, dazu Zusatzthemen in der Organisation.</li><li>Neu unter Prüfen: „Im Betrieb“ mit je fünf mehrstufigen Aufgaben, die Technik, Organisation und Führung verbinden.</li><li>Jedes Thema zeigt jetzt die Kästen Wichtiges, Gleichungen und Typische Fehlerquellen.</li></ul>';\n",rx=True)
+rep(r"const NEU='.*?';\n","const NEU='<h3>🆕 Version 5 (14.11.2026)</h3><ul><li>Chemie: neues Gebiet „Thermodynamik“ mit zehn Themen, von den Gasgesetzen über Sieden und Kondensieren und die Reaktionswärme bis zur Wärmebilanz am Reaktor.</li><li>Neun neue Regler mit Auftrag und 25 neue Rechenaufgaben.</li></ul><h3>Version 4 (14.11.2026)</h3><ul><li>Bedienung wie im Lernlabor: „Thema wechseln“ mit zwei Wischleisten, vier Schritte in einer Zeile, „Üben“ am Schluss.</li><li>Regler mit Zahlenfeld zum Eintippen, Ergebnisse als Kacheln, Knöpfe „Üben“, „Favorit“ und „Mehr“.</li><li>Nachschlagen mit Wichtiges, Grundgleichungen, Verstehen und typische Fehler, Alle Werte und Meine Notiz.</li><li>Einheiten mit echtem Bruchstrich.</li></ul><h3>Version 3 (14.11.2026)</h3><ul><li>Drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Du wählst Deine Fachrichtung auf der Startseite, der Lernstand wird je Fachrichtung getrennt gemerkt.</li><li>Je 14 neue Technikthemen für Elektrotechnik und Chemie, dazu Zusatzthemen in der Organisation.</li><li>Neu unter Prüfen: „Im Betrieb“ mit je fünf mehrstufigen Aufgaben, die Technik, Organisation und Führung verbinden.</li><li>Jedes Thema zeigt jetzt die Kästen Wichtiges, Gleichungen und Typische Fehlerquellen.</li></ul>';\n",rx=True)
 rep("lf=L&&D[L[0]]&&D[L[0]].modules[L[1]]?L:['reha',0]","lf=L&&D[L[0]]&&D[L[0]].modules[L[1]]?L:['tec',FRD[FR].first]")
 rep("reha:()=>fach('reha'),beha:()=>fach('beha'),mikp:()=>fach('mikp'),zib:()=>fach('zib')","tec:()=>fach('tec'),org:()=>fach('org'),fp:()=>fach('fp')")
 rep("const res=()=>t.dt?fD(t.dt):nf(t.a,t.d,t.ng)","const res=()=>t.dt?fD(t.dt):nz(t.a,t.d)")
@@ -70,7 +70,7 @@ rep('<span class="b1">MEISTER</span>','<span class="b1">LERN</span>')
 rep('</svg>R</span></span><span class="bs">Basisqualifikationen · Verstehen. Anwenden. Bestehen.</span>','</svg>R</span><span class="bpro">PRO</span></span><span class="bs">Hauptqualifikation · Verstehen. Anwenden. Bestehen.</span>')
 rep('placeholder="Modul oder Stichwort suchen, z. B. Kündigung, BAB, FMEA"','placeholder="Thema oder Formel …"')
 rep(r'<p class="sub" style="margin-top:24px;font-size:13px">.*?</p>','<p class="sub" style="margin-top:24px;font-size:13px">Vorschau.</p>',rx=True)
-rep("© 2026 Dr. rer. nat. Markus Baum · Version 5 · Eigene Aufgaben","© 2026 Dr. rer. nat. Markus Baum · Version 4 · Eigene Aufgaben")
+rep("© 2026 Dr. rer. nat. Markus Baum · Version 5 · Eigene Aufgaben","© 2026 Dr. rer. nat. Markus Baum · Version 5 · Eigene Aufgaben")
 rep("let brand='bordeaux';","let brand='pro';")
 rep("const BRN={bordeaux:'Bordeaux',","const BRN={pro:'Pro',bordeaux:'Bordeaux',")
 rep('<h2>✏️ Skizze</h2>','<h2 class="vh">Skizze</h2>')
@@ -81,7 +81,7 @@ s=s.replace('meisterlabor-','lernlabor-pro-').replace('Meisterlabor Basis','Lern
 s=s.replace('Lernplattform für die Basisqualifikationen im Industriemeister. Vier Fächer','Lernplattform für die Hauptqualifikation im Industriemeister. Drei Handlungsbereiche')
 # Zusatz: Stil und Mustermodule
 i=s.rfind('</script>')+len('</script>')
-ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa'])+'\n}\n'+mk,1)
+ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa','pro-xthd'])+'\n}\n'+mk,1)
 s=s[:i]+'\n<style>'+rd('pro.css')+'</style>\n<script>'+ml+'</script>'+s[i:]
 for k in ["const SK='lernlabor-pro-basis-v1'","'lernlabor-pro-rf'","'lernlabor-pro-pred'","'lernlabor-pro-last'","'lernlabor-pro-auf'"]:
     assert k in s,k;s=s.replace(k,k+'+FRS')
