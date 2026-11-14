@@ -237,7 +237,17 @@ function simPanel(key,Sm,hk){hk=hk||{};const p=el('<h2>Werte einstellen</h2><p c
  bt.querySelector('[data-a=a]').onclick=()=>{const A=lsG(AK);delete A[key];lsS(AK,A);const o=lsG(RFK);if(o[key]){delete o[key].r;lsS(RFK,o)}bt.querySelector('.more').open=false;paintRF(key);up(true)};
  const tb=el('','simk');cs.append(bt,tb);
  g.append(sv,cs);p.append(g);p._fix=Sm.fix;
- function up(quiet){const r=Sm.calc(v);sv.innerHTML='<svg viewBox="0 0 480 270" class="mlsk" role="img" aria-label="'+esc(Sm.t)+'">'+Sm.svg(v,r)+'</svg>';
+ /* Bewegte Zeichnung: svg() liefert das Bild mit benannten Teilen (data-a), tick() verschiebt nur deren Attribute.
+    So entstehen je Bild keine neuen Knoten, und Bruchstriche und Handyschrift werden nicht bei jedem Bild neu gerechnet. */
+ const AN=Sm.tick?{st:{t:Sm.t0||0},E:{},r:null,run:!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches),vis:false,raf:0,last:0}:null;
+ if(AN){const pb=AN.pb=document.createElement('button');pb.type='button';pb.className='simpp';
+  const lab=()=>{pb.textContent=AN.run?'⏸':'▶';pb.setAttribute('aria-label',AN.run?'Bewegung anhalten':'Bewegung abspielen');pb.title=AN.run?'Anhalten':'Abspielen'};lab();
+  const fr=ts=>{AN.raf=0;if(!p.isConnected||!AN.run||!AN.vis){AN.last=0;return}const dt=AN.last?Math.min(.05,(ts-AN.last)/1000):0;AN.last=ts;AN.st.t+=dt;try{Sm.tick(AN.E,v,AN.r,AN.st.t,dt,AN.st)}catch(e){}AN.raf=requestAnimationFrame(fr)};
+  AN.step=dt=>{AN.st.t+=dt;try{Sm.tick(AN.E,v,AN.r,AN.st.t,dt,AN.st)}catch(e){}};AN.kick=()=>{if(!AN.raf&&AN.run&&AN.vis)AN.raf=requestAnimationFrame(fr)};
+  pb.onclick=()=>{AN.run=!AN.run;lab();AN.kick()};
+  if(window.IntersectionObserver)new IntersectionObserver(es=>{AN.vis=es[es.length-1].isIntersecting;AN.kick()}).observe(sv);else{AN.vis=true;setTimeout(AN.kick,300)}
+  AN.draw=r=>{AN.r=r;AN.E={};sv.querySelectorAll('[data-a]').forEach(e=>AN.E[e.getAttribute('data-a')]=e);try{Sm.tick(AN.E,v,r,AN.st.t,0,AN.st)}catch(e){}sv.append(pb);AN.kick()};p._an=AN}
+ function up(quiet){const r=Sm.calc(v);sv.innerHTML='<svg viewBox="0 0 480 270" class="mlsk" role="img" aria-label="'+esc(Sm.t)+'">'+Sm.svg(v,r)+'</svg>';if(AN)AN.draw(r);
   const R=Sm.rows(v,r);tb.innerHTML=R.map(x=>'<div class="kc'+(x[2]?' t'+x[2]:'')+'"><b>'+esc(x[1])+'</b><span>'+FRX(esc(x[0]))+'</span></div>').join('');
   p._all=()=>'<table>'+Sm.c.map(c=>'<tr><td>'+FRX(esc(c.l))+'</td><td>'+esc((c.lab?c.lab[c.opts.indexOf(v[c.k])]:c.opts?nt(v[c.k],2):nz(v[c.k],(String(c.st||1).split('.')[1]||'').length))+(c.u?' '+c.u:''))+'</td></tr>').join('')+R.map(x=>'<tr'+(x[2]?' class="t'+x[2]+'"':'')+'><td>'+FRX(esc(x[0]))+'</td><td>'+esc(x[1])+'</td></tr>').join('')+'</table>';
   hk.all&&hk.all(p._all());

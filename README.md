@@ -23,6 +23,7 @@ Stand: Version 9 (14.11.2026): Antworten bleiben gespeichert, Formelzeichen an d
   - `pro-a2.js`, `pro-xa2.js`: Rüsten (SMED), Zusatzthemen der Organisation, Situationsaufgaben und Fachgespräch der drei neuen Fachrichtungen
   - `pro-ib.js`, `pro-ib2.js`: Aufgaben „Im Betrieb“ für alle Fachrichtungen
   - `pro-a1.js`, `pro-xa.js`: Zusatzthemen und Fachbeispiele in der Organisation, Situationsaufgaben, Fachgespräch
+  - `pro-anim.js`: bewegte Regler-Zeichnungen, Paket Metall (Getriebe, Hydraulik, Instandhaltung, Zustandsüberwachung, Sauggreifer, Drehen, Fräsen, Scherschneiden, Verzinken, Montagelinie, Roboterzelle). `svg()` baut das Bild, `tick()` bewegt nur Attribute benannter Teile (`data-a`)
   - `pro.css`: Gestaltung
   - `pro-l9.js`: Version 9, übrige Punkte aus dem UI-Audit (Antworten speichern, Formelzeichen, Reglerwerte behalten, Schrittleiste, Startseite, Lernstand, Glossar, Formelsammlung, Rückweg aus Im Betrieb)
   - `pro-ll.js`: Version 8, Bedienung wie im Lernlabor (Adressen, Teilen/QR, eine Zeichnung, Rechenaufgaben, Menüs, Darstellung, Skizzenschrift am Handy)

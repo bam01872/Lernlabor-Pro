@@ -93,7 +93,7 @@ rep("else if(c==='g'){const t=$('#mbx');","else if(c==='g'){const t=$('#sim')||$
 rep('<meta name="theme-color" content="#1f2937">','<meta name="theme-color" content="#1f2937"><script>try{var m=localStorage.getItem("lernlabor-pro-ansicht")||"hell";if(m!=="geraet")document.documentElement.setAttribute("data-theme",m==="dunkel"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>',cnt=0)
 # Zusatz: Stil und Mustermodule
 i=s.rfind('</script>')+len('</script>')
-ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa','pro-xthd','pro-xku','pro-xmt','pro-xlo','pro-xa2'])+'\n}\n'+mk,1)
+ml=rd('pro-ml5.js');mk='/* ---------- Bruchstrich';assert mk in ml;x2=rd('pro-x2.js').rstrip();assert x2.endswith('}');ml=ml.replace(mk,x2[:-1]+rd('pro-x3.js')+rd('pro-x4.js')+''.join(rd(n+'.js') for n in ['pro-xe1','pro-xe2','pro-xc1','pro-xc2','pro-xa','pro-xthd','pro-xku','pro-xmt','pro-xlo','pro-xa2','pro-anim'])+'\n}\n'+mk,1)
 s=s[:i]+'\n<style>'+rd('pro.css')+'</style>\n<script>'+ml+'</script>\n<script>'+rd('qrcode.js')+'</script>\n<script>'+rd('pro-ll.js')+'</script>\n<script>'+rd('pro-l9.js')+'</script>'+s[i:]
 for k in ["const SK='lernlabor-pro-basis-v1'","'lernlabor-pro-rf'","'lernlabor-pro-pred'","'lernlabor-pro-last'","'lernlabor-pro-auf'"]:
     assert k in s,k;s=s.replace(k,k+'+FRS')
