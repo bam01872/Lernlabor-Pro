@@ -402,3 +402,17 @@ SIMX('Kältemaschine & Wärmepumpe',{
 SIMX('Wärmebilanz am Reaktor',{
  svg:(v,r)=>X['Wärmebilanz am Reaktor'].sim.svgA(v,r)+`<path data-a="rb" d="M132 200h56M138 192l-6 16M182 192l6 16" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path data-a="dr" d="M110 64V112" stroke="var(--acc)" stroke-width="${F(2.4+v.md/500*3.6)}" stroke-dasharray="3 ${F(22-v.md/500*15)}" stroke-linecap="round" fill="none"/><path data-a="kf" d="M92 231Q120 242 160 242Q242 242 242 192V116" stroke="var(--flow)" stroke-width="3" stroke-dasharray="6 9" stroke-linecap="round" fill="none"/>`,
  tick:(E,v,r,t,dt,st)=>{st.a=(st.a||0)+dt*4.5;A(E.rb,'transform','translate(160 0) scale('+F(Math.cos(st.a))+' 1) translate(-160 0)');st.d=(st.d||0)+dt*70;A(E.dr,'stroke-dashoffset',F(-st.d%(25-v.md/500*15)));st.k=(st.k||0)+dt*46;A(E.kf,'stroke-dashoffset',F(-st.k%15))}});
+
+/* ===== Paket Kunststoff & Kautschuk ===== */
+/* ---------- Trockentrichter: Ein markiertes Korn wandert im Zeitraffer durch den Trichter (1 s im Bild = 1 h) ---------- */
+{const o=X['Trocknen, Fördern & Dosieren']&&X['Trocknen, Fördern & Dosieren'].sim.svg;
+if(o)SIMX('Trocknen, Fördern & Dosieren',{
+ svg:(v,r)=>o(v,r)+`<circle data-a="kn" cx="236" cy="200" r="5.5" fill="var(--red)" stroke="var(--ink)" stroke-width="1.4"/>`+L(80,214,'markiertes Korn','middle',12,'var(--mute)',600)+`<text data-a="kt" x="80" y="234" text-anchor="middle" style="font-size:14px;font-weight:800;fill:var(--ink)">seit ${nz(r.tv,1)} h</text>`,
+ tick:(E,v,r,t,dt,st)=>{const tv=Math.min(r.tv,12),T=tv+1.4,u=(t+tv+.2)%T,p=Math.min(1,u/tv),top=210-130*Math.min(1,v.V/200)+6,y=top+(246-top)*p,k=Math.max(0,(y-200)/46);
+  A(E.kn,'cy',F(y));A(E.kn,'cx',F(220+22*(1-k)*Math.cos(p*5)));A(E.kn,'fill',p*r.tv>=4?'var(--ok)':'var(--red)');TXT(E.kt,'seit '+nz(Math.min(r.tv,p*r.tv),1)+' h')}})}
+
+/* ---------- Rheologie: Die Schmelze steigt vom Anschnitt in den Deckel, schnell eingespritzt geht es schneller ---------- */
+{const o=X['Rheologie: Fließverhalten der Schmelze']&&X['Rheologie: Fließverhalten der Schmelze'].sim.svg,T=4.6;
+if(o)SIMX('Rheologie: Fließverhalten der Schmelze',{
+ svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2),
+ tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=3.2-2.2*v.sp/100,u=(t+d+.5)%(d+1.6),p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
