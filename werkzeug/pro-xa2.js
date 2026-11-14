@@ -100,5 +100,67 @@ X['Instandhaltungsstrategien & Ersatzteile']={
 Object.assign(ERK,{'Instandhaltungsstrategien & Ersatzteile':['Jedes Bauteil bekommt die Strategie, die zu den Folgen seines Ausfalls passt. Zustandsüberwachung erlaubt lange Nutzung bei kleinem Risiko. Ersatzteile werden nach Kritikalität und Lieferzeit gelagert.','Du teilst die Bauteile Deiner Anlagen in Klassen ein, legst Strategie und Ersatzteilbestand fest und überprüfst beides mit den Störungsdaten. Die Bediener bindest Du über tägliche Pflege ein.',['Alle Teile gleich behandeln','Nur nach Kalender tauschen, ohne den Zustand anzusehen','Ersatzteile nach Preis statt nach Kritikalität lagern','Stillstandskosten in der Rechnung vergessen']]});
 }
 /*MT*/
+if(FR==='lo'){
+/* ---------- Lagerkennzahlen ---------- */
+const lkC=v=>{const U=v.JV*1e6/(v.B*1000);return{U,D:360/U,K:v.B*1000*v.z/100}};
+const lkB=(v,r)=>{let s=TI('Bestand, Umschlag und Lagerkosten');const ok=r.U>=8,ok2=r.K<=60000;
+ /* Regal, gefüllt nach Bestand */
+ const n=Math.round(v.B/50);for(let i=0;i<20;i++){const cx=i%5,cy=Math.floor(i/5),x=30+cx*34,y=148-cy*30;s+=RC(x,y,30,24,i<n?MX('b',40):'var(--card)','var(--line)',2,1.2)}
+ s+=P('M26 54V176M200 54V176M26 176H200','var(--ink)',2.4)+L(113,196,'Bestand '+nz(v.B,0)+' T€','middle',12.5,'var(--ink)',700);
+ s+=RC(220,48,116,60,MX(ok?'g':'y',16),CC(ok?'g':'y'),8,1.8)+L(278,68,'Umschlag','middle',12,'var(--mute)',600)+L(278,97,nz(r.U,1)+'-mal','middle',20,'var(--ink)',800);
+ s+=RC(346,48,116,60,'var(--card)','var(--ink)',8,1.6)+L(404,68,'Lagerdauer','middle',12,'var(--mute)',600)+L(404,97,nz(r.D,0)+' Tage','middle',20,'var(--ink)',800);
+ s+=RC(220,118,242,60,MX(ok2?'g':'r',14),CC(ok2?'g':'r'),8,1.8)+L(341,138,'Lagerkosten im Jahr','middle',12,'var(--mute)',600)+L(341,167,nz(r.K,0)+' €','middle',20,'var(--ink)',800);
+ s+=XSTK(30,216,420,16,[[Math.min(r.D,120),'b','']],120)+L(30,250,'0','start',11,'var(--mute)',500)+L(450,250,'120 Tage','end',11,'var(--mute)',500)+P(`M${30+420*45/120} 210V238`,'var(--ok)',2.4)+L(30+420*45/120,250,'45 Tage','middle',11.5,'var(--ok)',700);return s};
+X['Logistikkosten & Lagerkennzahlen']={
+ v:['Zwei Lager haben denselben Jahresverbrauch. Lager A hat den doppelten mittleren Bestand von Lager B. Was gilt?',['A schlägt doppelt so oft um','A bindet doppelt so viel Kapital und schlägt halb so oft um','Beide sind gleich wirtschaftlich','B hat höhere Lagerkosten'],1,'Umschlagshäufigkeit ist Verbrauch geteilt durch Bestand. Doppelter Bestand heißt halber Umschlag und doppelte Lagerkosten.'],
+ ein:[S(13,'Logistikkosten entstehen in vier Blöcken.',CARDS('Vier Kostenblöcke',[['📦','Bestände','Kapital, Zinsen','b'],['🏭','Lager','Fläche, Technik','m'],['🧑‍🔧','Handhabung','Personal','y'],['🚚','Transport','Fracht','g']])),
+  S(13,'Die Umschlagshäufigkeit zeigt, wie oft der Bestand im Jahr erneuert wird.',k=>TITLE('Umschlagshäufigkeit')+OP(ph(k,.05,.4),FO(240,104,[{n:'Jahresverbrauch',d:'mittlerer Lagerbestand'}],20))+OP(ph(k,.45,.85),FO(240,190,[{n:'3 000 000 €',d:'600 000 €'},' = 5'],20))),
+  S(13,'Daraus folgt die mittlere Lagerdauer.',k=>TITLE('Mittlere Lagerdauer')+OP(ph(k,.05,.4),FO(240,104,[{n:'360 Tage',d:'Umschlagshäufigkeit'}],20))+OP(ph(k,.45,.85),FO(240,190,[{n:'360 Tage',d:'5'},' = 72 Tage'],20))),
+  S(14,'Weniger Bestand heißt mehr Umschlag und weniger Lagerkosten.',k=>lkB({JV:3,B:600-300*ph(k,.15,.85),z:20},lkC({JV:3,B:600-300*ph(k,.15,.85),z:20})))],
+ skz:[[SKZ(k=>lkB({JV:3,B:600,z:20},lkC({JV:3,B:600,z:20})),'Skizze Lagerkennzahlen'),'Links der Bestand als gefülltes Regal, rechts die Kennzahlen. Der Balken unten zeigt die Lagerdauer.']],
+ sim:{t:'Bestand senken, Umschlag erhöhen',fix:'Gerechnet wird mit 360 Tagen. Der Lagerkostensatz enthält Zinsen, Raum, Versicherung, Schwund und Verwaltung.',
+  c:[{k:'JV',l:'Jahresverbrauch',u:'Mio. €',min:1,max:6,st:.5,v:3},{k:'B',l:'mittlerer Lagerbestand',u:'T€',min:100,max:1000,st:50,v:600},{k:'z',l:'Lagerkostensatz',u:'%',min:10,max:30,st:1,v:20}],
+  calc:lkC,
+  rows:(v,r)=>[['Umschlagshäufigkeit',nz(r.U,1),r.U>=8?'g':''],['mittlere Lagerdauer',nz(r.D,0)+' Tage'],['Lagerkosten',nz(r.K,0)+' €',r.K<=60000?'g':'r']],
+  svg:(v,r)=>lkB(v,r),
+  auf:{z:'Bei 3 Mio. € Verbrauch: Umschlag mindestens 8, Lagerkosten höchstens 60 000 €.',t:'Das Lager verbraucht im Jahr Ware für 3 Mio. €. Die Leitung verlangt mindestens 8 Umschläge im Jahr und höchstens 60 000 € Lagerkosten. Finde Bestand und Lagerkostensatz, die beides erfüllen.',h:'Tipp: Für 8 Umschläge darf der Bestand höchstens ein Achtel des Verbrauchs betragen.',ok:(v,r)=>v.JV===3&&r.U>=8&&r.K<=60000}}};
+/* ---------- Fuhrpark oder Spedition ---------- */
+const fpC=v=>{const Ke=v.Fx*1000+v.km*1000*.45,Ks=v.km*1000*v.sp;return{Ke,Ks,kr:v.Fx*1000/(v.sp-.45),d:Ks-Ke}};
+const fpB=(v,r)=>{const c=CHT({X0:66,X1:452,Y0:218,Y1:68,xm:120,ym:250,xt:[0,20,40,60,80,100,120],yt:[50,100,150,200,250],xl:'Fahrleistung in 1000 km je Jahr',yl:'Kosten in 1000 €'});let s=c.s;
+ s+=LN(c,0,v.Fx,120,v.Fx+120*.45,CC('b'),3)+LN(c,0,0,Math.min(120,250/v.sp),Math.min(250,120*v.sp),CC('y'),3);
+ const kk=r.kr/1000;if(kk<=120)s+=LN(c,kk,0,kk,kk*v.sp,'var(--mute)',1.4,'4 4')+L(c.px(kk)+(kk<=60?6:-6),c.py(0)-8,'gleich teuer bei rund '+nz(Math.round(r.kr/100)*100,0)+' km',kk<=60?'start':'end',11.5,'var(--mute)',700);
+ s+=DOT(c.px(v.km),c.py(r.Ke/1000),CC('b'),6)+DOT(c.px(v.km),c.py(Math.min(250,r.Ks/1000)),CC('y'),6);
+ s+=P('M66 18h18',CC('b'),3)+L(88,22,'eigener Lkw','start',12,CC('b'),700)+P('M186 18h18',CC('y'),3)+L(208,22,'Spedition','start',12,'var(--ink)',700)+L(452,22,r.d>0?'eigener Lkw günstiger':'Spedition günstiger','end',12.5,r.d>0?CC('b'):'var(--ink)',800);return s};
+X['Fuhrpark oder Spedition']={
+ v:['Ein eigener Lkw kostet je Kilometer nur ein Drittel des Speditionspreises. Ist er damit immer günstiger?',['Ja','Nein, erst ab einer bestimmten Fahrleistung, weil er hohe feste Kosten hat','Nein, nie','Nur im Winter'],1,'Die festen Kosten fallen auch an, wenn der Lkw steht. Erst ab der kritischen Fahrleistung macht der niedrige Kilometersatz sie wett.'],
+ ein:[S(13,'Zwei Wege mit ganz verschiedener Kostenstruktur.',VS('Kostenstruktur',{h:'eigener Lkw',c:'b',l:['hohe feste Kosten','niedrige Kosten je km','lohnt bei hoher Auslastung']},{h:'Spedition',c:'y',l:['kaum feste Kosten','höherer Preis je km','lohnt bei wenig oder schwankend']})),
+  S(14,'Wo sich die Geraden schneiden, sind beide Wege gleich teuer.',k=>fpB({Fx:70,sp:1.4,km:20+90*ph(k,.1,.9)},fpC({Fx:70,sp:1.4,km:20+90*ph(k,.1,.9)}))),
+  S(13,'Die kritische Fahrleistung lässt sich ausrechnen.',k=>TITLE('Kritische Fahrleistung')+OP(ph(k,.05,.4),FO(240,104,[{n:'Fixkosten',d:'Preis je km − eigene Kosten je km'}],19))+OP(ph(k,.45,.85),FO(240,190,[{n:'70 000 €',d:'1,40 €/km − 0,45 €/km'},' = 73 684 km'],18))),
+  S(13,'Nicht alles steht in der Rechnung.',LIST('Was zusätzlich zählt',[['Termine und Auftreten beim Kunden','1'],['Reserve für Spitzen','2'],['Ausfall von Fahrer oder Fahrzeug','3'],['Abhängigkeit vom Dienstleister','4']]))],
+ skz:[[SKZ(k=>fpB({Fx:70,sp:1.4,km:60},fpC({Fx:70,sp:1.4,km:60})),'Skizze Kostenvergleich Fuhrpark und Spedition'),'Die blaue Gerade beginnt bei den Fixkosten und steigt flach. Die gelbe beginnt bei null und steigt steil.']],
+ sim:{t:'Eigener Lkw oder Spedition?',fix:'Eigener Lkw: 0,45 € je Kilometer für Kraftstoff, Reifen, Wartung und Maut (Beispielwert). Die Fixkosten enthalten Leasing, Steuer, Versicherung und Fahrer.',
+  c:[{k:'km',l:'Fahrleistung im Jahr',u:'1000 km',min:20,max:120,st:5,v:60},{k:'Fx',l:'Fixkosten eigener Lkw',u:'T€',min:40,max:100,st:5,v:70},{k:'sp',l:'Preis der Spedition',u:'€/km',min:1,max:2,st:.05,v:1.4}],
+  calc:fpC,
+  rows:(v,r)=>[['eigener Lkw',nz(r.Ke,0)+' €'],['Spedition',nz(r.Ks,0)+' €'],['kritische Fahrleistung',nz(r.kr,0)+' km'],['Vorteil eigener Lkw',nz(r.d,0)+' €',r.d>=10000?'g':r.d<0?'r':'']],
+  svg:(v,r)=>fpB(v,r),
+  auf:{z:'Eigener Lkw mindestens 10 000 € günstiger.',t:'Die Geschäftsleitung kauft nur dann einen eigenen Lkw, wenn er im Jahr mindestens 10 000 € günstiger ist als die Spedition. Finde heraus, unter welchen Bedingungen das der Fall ist.',h:'Tipp: Verändere zuerst nur die Fahrleistung und beobachte den Schnittpunkt der Geraden.',ok:(v,r)=>r.d>=10000}}};
+/* ---------- Verkehrswege ---------- */
+const vwSk=k=>{let s=TI('Wege trennen');
+ s+=RC(20,50,440,60,MX('y',16),'none',4,0)+P('M20 80H460','var(--ink)',1.6,'14 10')+L(30,68,'Fahrweg','start',12,'var(--ink)',700);
+ s+=RC(140,62,54,34,MX('y',55),'var(--ink)',6,1.8)+`<circle cx="152" cy="100" r="7" fill="var(--ink)"/><circle cx="182" cy="100" r="7" fill="var(--ink)"/>`+P('M196 70V98H216','var(--ink)',3)+AW(222,80,262,80,'var(--ink)',2.4);
+ s+=RC(20,124,440,30,MX('g',16),'none',4,0)+L(30,144,'Gehweg','start',12,'var(--ok)',700)+[120,170,300,360].map(x=>`<circle cx="${x}" cy="134" r="5" fill="${CC('g')}"/>`+P(`M${x} 139v10`,CC('g'),3)).join('');
+ s+=P('M20 117H460','var(--ink)',3)+RC(250,112,40,10,'var(--card)','var(--ink)',1,1.4)+L(270,172,'gesicherter Übergang','middle',11.5,'var(--mute)',600);
+ s+=BOX(40,190,120,44,'Sicht','b',13,'Spiegel, Licht')+BOX(180,190,120,44,'frei halten','y',13,'nichts abstellen')+BOX(320,190,120,44,'Rampe','r',13,'Lkw gegen Wegrollen');return s};
+X['Verkehrswege, Staplerverkehr & Ergonomie']={
+ v:['Im Lager gibt es immer wieder Beinahe-Unfälle zwischen Staplern und Fußgängern. Was hilft am meisten?',['Mehr Warnschilder','Fahr- und Gehwege baulich trennen','Hellere Warnwesten','Eine Dienstanweisung'],1,'Wo sich Wege nicht kreuzen, kann niemand angefahren werden. Schilder, Westen und Anweisungen ergänzen das nur.'],
+ ein:[S(14,'Fahrzeuge und Fußgänger bekommen eigene Wege.',vwSk),
+  S(13,'Die Rangfolge der Schutzmaßnahmen gilt auch im Lager.',FLOW('Rangfolge',[['🧱','technisch','trennen'],['📋','organisatorisch','Regeln, Zeiten'],['🦺','persönlich','Weste, Schuhe']])),
+  S(13,'Heben und Tragen belastet den Rücken, wenn es falsch gemacht wird.',VS('Heben und Tragen',{h:'richtig',c:'g',l:['nah am Körper','gerader Rücken','Hebehilfe nutzen']},{h:'falsch',c:'r',l:['weit vom Körper','verdreht','ruckartig']})),
+  S(13,'Regale brauchen Aufmerksamkeit.',LIST('Regalsicherheit',[['Fach- und Feldlast angeschrieben','1'],['Anfahrschutz an den Stützen','2'],['Schäden sofort melden, Feld entlasten','3'],['Jährliche Inspektion','4']]))],
+ skz:[[SKZ(vwSk,'Skizze getrennte Verkehrswege'),'Oben der Fahrweg, unten der Gehweg, dazwischen eine Abtrennung mit gesichertem Übergang.']]};
+Object.assign(ERK,{'Logistikkosten & Lagerkennzahlen':['Bestand bindet Kapital. Umschlagshäufigkeit und Lagerdauer zeigen, wie schnell es wieder frei wird. Der Lagerkostensatz macht daraus Euro.','Du kennst Umschlag und Reichweite Deiner wichtigsten Artikel, prüfst Ladenhüter regelmäßig und planst das Personal nach der Menge.',['Bestand mit Lieferfähigkeit gleichsetzen','Lagerkosten nur als Miete sehen','Ladenhüter liegen lassen','Saisonspitzen erst angehen, wenn sie da sind']],
+'Fuhrpark oder Spedition':['Der eigene Lkw hat hohe feste und niedrige laufende Kosten, die Spedition umgekehrt. Die kritische Fahrleistung trennt beide. Dazu kommen Gründe, die sich nicht rechnen lassen.','Du lieferst die Zahlen zu Fahrleistung, Auslastung und Leerfahrten und bewertest Termintreue und Schäden des Dienstleisters mit Kennzahlen.',['Nur die Kosten je Kilometer vergleichen','Standtage und Leerfahrten nicht einrechnen','Dienstleister ohne Kennzahlen steuern','Verantwortung für die Verladung beim Fahrer sehen']],
+'Verkehrswege, Staplerverkehr & Ergonomie':['Fahrzeuge und Fußgänger werden getrennt. Wege bleiben frei, Regale werden geschützt und geprüft. Lasten werden körpernah oder mit Hilfsmitteln bewegt.','Du gehst regelmäßig durch Deinen Bereich, lässt abgestellte Ware sofort räumen, meldest Regalschäden und unterweist auch Aushilfen vor dem ersten Einsatz.',['Paletten im Verkehrsweg abstellen','Angefahrene Regalstützen weiter belasten','Aushilfen ohne Unterweisung einsetzen','Schwere Artikel ganz unten oder ganz oben lagern']]});
+}
 /*LO*/
 }
