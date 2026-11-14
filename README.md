@@ -2,11 +2,12 @@
 
 Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in sechs Fachrichtungen: Metall, Elektrotechnik, Chemie, Kunststoff & Kautschuk, Mechatronik und Logistik. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 13 (14.11.2026): Elektrotechnik mit drei bewegten Regler-Zeichnungen (Abschaltbedingung, Spannungsfall, Frequenzumrichter). Version 12: Metall mit elf bewegten Regler-Zeichnungen (Knopf zum Anhalten, Rücksicht auf „Bewegung reduzieren“). Version 11: Zahl und Einheit stehen immer zusammen, Wörter werden nur nach Wörterbuch getrennt, Texte stehen nicht über Ränder (sonst etwas kleinere Schrift). Version 10: neues App-Symbol. Version 9: Antworten bleiben gespeichert, Formelzeichen an den Reglern, Glossar und Formelsammlung, „Woran lag es?“, Schrittleiste folgt dem Lesen, Einheiten mit Bruchstrich, Knopfzeile in einer Zeile, Kacheln 2 × 2, Blocksatz in allen Textfeldern. Version 8: Bedienung wie im Lernlabor: Adresse je Ansicht (Zurück, Neuladen, Teilen, QR-Code), eine Zeichnung statt zwei, einzeilige Regler, Rechenaufgaben mit Rückfrage, Hinweis und Lösungsweg nach dem zweiten Versuch, Menüs Lernen / Üben & Prüfen / Ich, heller Standard. Version 7: Korrekturen aus der fachlichen Prüfung (Durchlauf 1) in allen sechs Fachrichtungen. Seit Version 6 gibt es die Fachrichtungen Kunststoff & Kautschuk, Mechatronik und Logistik. Seit Version 5 hat Chemie das Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 39 Themen, Elektrotechnik 40, Chemie 51, Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 14 (14.11.2026): Neue Versionen wie im Lernlabor: Ich → Sonstiges zeigt die Version mit „Was ist neu“, ist eine neue Version online, erscheint unten „Jetzt laden“; einmal geöffnet läuft die App auch ohne Internet (sw.js). Version 13: Elektrotechnik mit drei bewegten Regler-Zeichnungen (Abschaltbedingung, Spannungsfall, Frequenzumrichter). Version 12: Metall mit elf bewegten Regler-Zeichnungen (Knopf zum Anhalten, Rücksicht auf „Bewegung reduzieren“). Version 11: Zahl und Einheit stehen immer zusammen, Wörter werden nur nach Wörterbuch getrennt, Texte stehen nicht über Ränder (sonst etwas kleinere Schrift). Version 10: neues App-Symbol. Version 9: Antworten bleiben gespeichert, Formelzeichen an den Reglern, Glossar und Formelsammlung, „Woran lag es?“, Schrittleiste folgt dem Lesen, Einheiten mit Bruchstrich, Knopfzeile in einer Zeile, Kacheln 2 × 2, Blocksatz in allen Textfeldern. Version 8: Bedienung wie im Lernlabor: Adresse je Ansicht (Zurück, Neuladen, Teilen, QR-Code), eine Zeichnung statt zwei, einzeilige Regler, Rechenaufgaben mit Rückfrage, Hinweis und Lösungsweg nach dem zweiten Versuch, Menüs Lernen / Üben & Prüfen / Ich, heller Standard. Version 7: Korrekturen aus der fachlichen Prüfung (Durchlauf 1) in allen sechs Fachrichtungen. Seit Version 6 gibt es die Fachrichtungen Kunststoff & Kautschuk, Mechatronik und Logistik. Seit Version 5 hat Chemie das Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 39 Themen, Elektrotechnik 40, Chemie 51, Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
 - `index.html`: die fertige App in einer Datei (gebaut, nicht von Hand ändern)
+- `sw.js`: Service Worker (gebaut aus `werkzeug/sw-vorlage.js`, Cache-Name je Version)
 - `fonts/`, `manifest.webmanifest`, Symbole
 - `werkzeug/`: Quellen und Bauwerkzeug
   - `build.py`: baut `index.html` aus dem Meisterlabor-Gerüst und den Pro-Dateien
@@ -24,6 +25,7 @@ Stand: Version 13 (14.11.2026): Elektrotechnik mit drei bewegten Regler-Zeichnun
   - `pro-ib.js`, `pro-ib2.js`: Aufgaben „Im Betrieb“ für alle Fachrichtungen
   - `pro-a1.js`, `pro-xa.js`: Zusatzthemen und Fachbeispiele in der Organisation, Situationsaufgaben, Fachgespräch
   - `pro-anim.js`: bewegte Regler-Zeichnungen, Paket Metall (Getriebe, Hydraulik, Instandhaltung, Zustandsüberwachung, Sauggreifer, Drehen, Fräsen, Scherschneiden, Verzinken, Montagelinie, Roboterzelle). `svg()` baut das Bild, `tick()` bewegt nur Attribute benannter Teile (`data-a`)
+  - `pro-upd.js`, `sw-vorlage.js`: Version 14, Hinweis „Neue Version … Jetzt laden“ und Service Worker wie im Lernlabor
   - `pro.css`: Gestaltung
   - `pro-nb.js`: Version 11, Zahl und Einheit zusammenhalten, Texte und Beschriftungen in ihr Feld einpassen
   - `pro-l9.js`: Version 9, übrige Punkte aus dem UI-Audit (Antworten speichern, Formelzeichen, Reglerwerte behalten, Schrittleiste, Startseite, Lernstand, Glossar, Formelsammlung, Rückweg aus Im Betrieb)
@@ -35,6 +37,8 @@ Stand: Version 13 (14.11.2026): Elektrotechnik mit drei bewegten Regler-Zeichnun
 ```
 python3 werkzeug/build.py werkzeug/basis/meisterlabor-v5.html index.html
 ```
+
+Neue Version: nur `APPV, APPD` oben in `werkzeug/build.py` hochzählen und oben in `NEU` den Eintrag ergänzen. Das Bauen schreibt die Nummer in die App (Ich → Sonstiges, Fußzeilen) und in `sw.js`. Erst der neue Cache-Name in `sw.js` lässt die Geräte die neue Version erkennen.
 
 ## Prüfen
 
