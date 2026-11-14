@@ -125,3 +125,53 @@ body.subpg .brand .bpro{font-size:.5em}
 #ft>details:not([open]){display:none}#ft details{margin:6px 0}#ft summary{cursor:pointer;font-weight:700;line-height:44px}#ft p{max-width:64ch}
 /* Einheiten als Bruch */
 .fr.fru{font-size:.86em;line-height:1.1;margin:0 .1em}.fr.fru>span{padding:0 .18em}
+
+/* ===== Version 8: Bedienung wie im Lernlabor ===== */
+/* Regler: Beschriftung, Regler und Zahlenfeld in einer Zeile */
+.psim .rg2.rg1{grid-template-columns:minmax(0,9.5em) minmax(0,1fr) 80px minmax(1.6em,auto);gap:2px 8px;margin:4px 0}
+.psim .rg2.rg1 .rgl{grid-column:auto;font-size:14px;line-height:1.2;overflow-wrap:break-word;hyphens:auto}
+.psim .rg2.rg1 .rgh{grid-column:1/-1}
+@media(max-width:480px){.psim .rg2.rg1{grid-template-columns:minmax(0,6.4em) minmax(0,1fr) 68px minmax(1.3em,auto);gap:2px 6px}.psim .rg2.rg1 .rgl{font-size:13.5px}.psim .rg2.rg1 .rgu{font-size:14px}}
+/* Ergebnis-Kacheln zu dritt */
+.psim .simk{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:480px){.psim .simk{gap:6px}.psim .kc{padding:6px 7px}.psim .kc b{font-size:15px;white-space:normal}.psim .kc>span{font-size:12px}}
+/* eine Zeichnung: Erklärsatz der Skizze unter der bewegten Zeichnung */
+.psim .simcap{margin:6px 2px 0;font-size:14px}
+/* Mehr-Menü bleibt im Bild (Lage per Skript) */
+.psim .more .mm{right:auto}
+/* Schrittleiste am Handy: Nummer nur am aktuellen Schritt, „Probieren“ */
+#rfs .tsy{display:none}
+@media(max-width:400px){#rfs button:not(.on) .n{display:none}#rfs .tsx{display:none}#rfs .tsy{display:inline}}
+/* Rechenaufgaben */
+.q .plock{opacity:.75;cursor:not-allowed}
+.q .sol.hlp{background:color-mix(in srgb,var(--amber) 10%,var(--card));border-color:var(--amber)}
+/* Teilen, QR-Code, Hinweis */
+#qrd{border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:18px;max-width:min(92vw,380px);box-shadow:0 8px 24px rgba(0,0,0,.25)}#qrd::backdrop{background:rgba(0,0,0,.45)}#qrd h2{margin:0 0 10px;font-size:19px}
+#qrd .qrb{background:#fff;border-radius:12px;padding:8px}#qrd .qrb svg{background:#fff;width:100%;height:auto;display:block}#qrd .qrb svg path,#qrd .qrb svg rect{shape-rendering:crispEdges}
+#qrd .qru{width:100%;font:inherit;font-size:13px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+#lltoast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--card);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:900;max-width:90vw}#lltoast.on{opacity:1}
+@media(min-width:900px){#lltoast{bottom:24px}}
+/* Zum Inhalt springen */
+.skipl{position:absolute;left:-9999px;top:0;z-index:1000;background:var(--card);color:var(--ink);padding:8px 12px;border-radius:8px;border:2px solid var(--acc);font-weight:700}.skipl:focus{left:8px;top:8px}
+/* Dunkel: dunkle Schrift auf dem hellen Orange (vorher weiß, 2,26 : 1) */
+:root[data-theme=dark].accb .btn:not(.sec):not(.nxt .btn):not(.ubb),:root[data-theme=dark].accb .seg button[aria-pressed=true],:root[data-theme=dark].accb #nm button[aria-current=true]{color:#1f2328}
+@media(prefers-color-scheme:dark){:root:not([data-theme]).accb .btn:not(.sec):not(.nxt .btn):not(.ubb),:root:not([data-theme]).accb .seg button[aria-pressed=true],:root:not([data-theme]).accb #nm button[aria-current=true]{color:#1f2328}}
+/* Safari: Auswahlfelder machen die Seite nicht breiter */
+.row label{min-width:0;max-width:100%}.row select{min-width:0;max-width:100%;contain:paint}
+/* Fachrichtungs-Wahl bei 320 px zweispaltig */
+@media(max-width:360px){.frs{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* Menüband unten bei 320 px: vier gleich breite Spalten, lange Namen umbrechen statt die Seite zu verbreitern */
+@media(max-width:899px){#fs{grid-template-columns:repeat(4,minmax(0,1fr))}#fs button>span:last-child{max-width:100%;line-height:1.15;overflow-wrap:break-word}}
+/* lange Themennamen (z. B. Blindleistungskompensation) bei 320 px trennen */
+#tht{overflow-wrap:break-word;hyphens:auto}
+/* Kacheln zu dritt: Werte dürfen umbrechen statt aus der Kachel zu ragen (Tablet: schmale Reglerspalte) */
+.psim .kc b{white-space:normal;overflow-wrap:break-word}
+@media(min-width:721px) and (max-width:1000px){.psim .kc b{font-size:15px}}
+@media(max-width:480px){.psim .rg2.rg1{grid-template-columns:minmax(0,6.2em) minmax(0,1fr) 74px minmax(1.3em,auto)}.psim .rg2.rg1 .rgn{padding:5px 6px}}
+/* Themenkopf bei 320 px: lange Gebietsnamen brechen um statt unter „Thema wechseln“ zu laufen */
+.thk .crb{overflow-wrap:break-word;hyphens:auto}
+@media(max-width:360px){.thw{font-size:14px!important;padding:5px 10px!important}}
+/* Rechenaufgabe: Antwort prüfen neben dem Feld, Rückmeldung, darunter Hilfe und Lösungsweg */
+.q .pb{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.q .pb .btn{margin:0}
+/* offenes Mehr-Menü liegt über der nächsten Karte */
+.psim.mmo{position:relative;z-index:40}
