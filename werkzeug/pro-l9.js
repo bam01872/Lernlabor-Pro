@@ -97,7 +97,9 @@ function glossar(v){const A=[];FACH.forEach(f=>D[f].modules.forEach((m,i)=>{if(m
 const nav9=nav;nav=function(){nav9.apply(this,arguments);const b1=q('#fs [data-g="1"]');if(!b1)return;
  if(tab==='glossar'||tab==='formeln')b1.setAttribute('aria-pressed','true');
  b1.addEventListener('click',()=>{const m=q('#nm');if(m.hidden||m.querySelector('.nmns'))return;const h=el('<h3 class="nmns">Nachschlagen</h3>','').firstChild;m.append(h);
-  ['glossar','formeln'].forEach(k=>{const l=TL[k],sp=l.indexOf(' '),x=document.createElement('button');x.type='button';x.setAttribute('role','menuitem');x.dataset.k=k;x.setAttribute('aria-current',String(tab===k));x.innerHTML='<span class="mi">'+l.slice(0,sp)+'</span><span>'+l.slice(sp+1)+'</span>';x.onclick=()=>{nmClose();go(k);scrollTo(0,0)};m.append(x)})})};
+  ['glossar','formeln'].forEach(k=>{const l=TL[k],sp=l.indexOf(' '),x=document.createElement('button');x.type='button';x.setAttribute('role','menuitem');x.dataset.k=k;x.setAttribute('aria-current',String(tab===k));x.innerHTML='<span class="mi">'+l.slice(0,sp)+'</span><span>'+l.slice(sp+1)+'</span>';x.onclick=()=>{nmClose();go(k);scrollTo(0,0)};m.append(x)});
+  /* „Weiter mit …“ wie im Lernlabor: klein und zweizeilig rechts neben Glossar und Formelsammlung */
+  const w=m.querySelector('.nmw');if(w){const n=document.createElement('div');n.className='nmn';const l=document.createElement('div');m.querySelectorAll('[data-k="glossar"],[data-k="formeln"]').forEach(x=>l.append(x));const t=w.querySelector('span:last-child').textContent.replace(/^Weiter mit /,'');w.innerHTML='<small>↩ Weiter mit</small>'+esc(t);w.setAttribute('aria-label','Weiter mit '+t);n.append(l,w);m.append(n)}})};
 /* Suche findet auch Glossar und Formelsammlung nicht doppelt: nichts zu tun. Start mit Adresse: */
 if(/^#(glossar|formelsammlung)$/.test(location.hash)){const h=location.hash;go(h==='#glossar'?'glossar':'formeln')}else nav();
 if(FACH.includes(tab)){const sp=q('#sim');if(sp){symLabels(sp);keepValues(sp,tab+':'+modSel[tab])}stepTrack()}
