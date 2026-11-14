@@ -1,6 +1,7 @@
 /* ===== Lernlabor Pro, Pakete E3 und E4: Elektrotechnik, Automatisierungs- & Informationstechnik. Eigene Texte und Aufgaben.
    Zahlenwerte aus Normen (Sicherheitsabstand, Reduktionsfaktoren) sind Beispielwerte. ===== */
-if(FR==='el'){
+/* Diese Themen nutzt Mechatronik mit (gemeinsamer Kern) */
+if(FR==='el'||FR==='mt'){
 TM({t:'Schaltpläne & Schaltungstechnik',intro:'Der Stromlaufplan ist die gemeinsame Sprache von Planung, Montage und Instandhaltung. Du liest ihn sicher, erkennst die Grundschaltungen und weißt, warum ein Stopp-Taster immer ein Öffner ist.',
 pts:['Der Stromlaufplan in aufgelöster Darstellung trennt Hauptstromkreis (Energie zum Motor) und Steuerstromkreis (Befehle und Verriegelungen). Kontakte und Spule eines Schützes stehen an verschiedenen Stellen, gehören aber über die Kennzeichnung zusammen.',
 'Kennbuchstaben nach Aufgabe: Q schaltet Energie (Schütz, Leistungsschalter), F schützt (Sicherung, Motorschutz), S ist ein Handbefehl (Taster), K verarbeitet Signale (Hilfsschütz, Relais), B ist ein Sensor, M ein Motor, P meldet (Leuchte).',

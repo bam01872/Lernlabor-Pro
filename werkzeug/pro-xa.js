@@ -1,6 +1,6 @@
 
 /* ===== Paket A1: Zusatzthemen in der Organisation (Elektrotechnik, Chemie): Vermuten, Kurz erklärt, Skizze ===== */
-if(FR==='el'){const TI=t=>L(240,28,t,'middle',16,'var(--ink)',700),VL=(x,y1,y2)=>`<path d="M${x} ${y1}V${y2}" stroke="var(--ink)" stroke-width="2" fill="none"/>`;
+if(FR==='el'||FR==='mt'){const TI=t=>L(240,28,t,'middle',16,'var(--ink)',700),VL=(x,y1,y2)=>`<path d="M${x} ${y1}V${y2}" stroke="var(--ink)" stroke-width="2" fill="none"/>`;
 const vefkBild=k=>{let s=TI('Wer verantwortet was?');
  s+=BOX(170,44,140,44,'Unternehmer','a',14,'Gesamtverantwortung')+VL(240,88,104)+BOX(115,104,250,48,'Verantwortliche Elektrofachkraft','b',13,'fachliche Leitung, schriftlich bestellt')+VL(240,152,166)+`<path d="M120 166H360" stroke="var(--ink)" stroke-width="2"/>`+VL(120,166,180)+VL(360,166,180);
  s+=BOX(30,180,180,48,'Anlagenverantwortlicher','g',13,'gibt die Anlage frei')+BOX(270,180,180,48,'Arbeitsverantwortlicher','y',13,'leitet die Arbeit vor Ort')+L(240,256,'Pflichten werden schriftlich und mit Befugnissen übertragen.','middle',13,'var(--mute)',500);return s};
