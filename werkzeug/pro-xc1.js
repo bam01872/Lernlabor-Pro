@@ -60,10 +60,10 @@ X['Mechanische Trennverfahren']={
 /* ---------- Thermische Trennverfahren: Kolonne ---------- */
 const kolBild=(F0,xf,xd,xb,Dm)=>{const B=F0-Dm;let s=L(30,30,'Rektifikationskolonne','start',16,'var(--ink)',700);
  s+=RC(206,46,68,180,MX('b',12),'var(--ink)',26,1.8);for(let i=0;i<6;i++)s+=P(`M${i%2?212:228} ${72+i*26}H${i%2?252:268}`,'var(--mute)',1.6);
- s+=AW(120,136,204,136,'var(--ink)',2.8)+L(30,124,'Zulauf F','start',14,'var(--ink)',700)+L(30,142,nz(F0,0)+' kg/h','start',13,'var(--ink)',600)+L(30,158,nz(xf*100,0)+' % Leichtsieder','start',12.5,'var(--mute)',500);
+ s+=AW(120,136,204,136,'var(--ink)',2.8)+L(30,124,'Zulauf F','start',14,'var(--ink)',700)+L(30,142,nz(F0,0)+' kg/h','start',13,'var(--ink)',600)+L(30,163,nz(xf*100,0)+' % Leichtsieder','start',12.5,'var(--mute)',500);
  s+=P('M240 46V36H316','var(--ink)',2.2)+RC(316,24,54,26,MX('b',30),CC('b'),6,1.5)+L(343,42,'Kühler','middle',12,'var(--ink)',700)+P('M343 50V76H276','var(--ink)',2,'5 3')+L(310,92,'Rücklauf','middle',12,'var(--mute)',600)+AW(370,37,440,37,CC('g'),2.8);
- s+=L(450,62,'Destillat D','end',14,CC('g'),700)+L(450,80,nz(Dm,0)+' kg/h','end',13,'var(--ink)',600)+L(450,96,nz(xd*100,0)+' %','end',12.5,'var(--mute)',500);
- s+=P('M240 226V244','var(--ink)',2.2)+AW(240,244,340,244,CC('r'),2.8)+L(450,226,'Sumpf B','end',14,CC('r'),700)+L(450,244,nz(B,0)+' kg/h','end',13,'var(--ink)',600)+L(450,260,nz(xb*100,0)+' %','end',12.5,'var(--mute)',500);
+ s+=L(450,62,'Destillat D','end',14,CC('g'),700)+L(450,80,nz(Dm,0)+' kg/h','end',13,'var(--ink)',600)+L(450,101,nz(xd*100,0)+' %','end',12.5,'var(--mute)',500);
+ s+=P('M240 226V244','var(--ink)',2.2)+AW(240,244,340,244,CC('r'),2.8)+L(450,226,'Sumpf B','end',14,CC('r'),700)+L(450,244,nz(B,0)+' kg/h','end',13,'var(--ink)',600)+L(450,265,nz(xb*100,0)+' %','end',12.5,'var(--mute)',500);
  s+=RC(186,200,22,22,MX('r',40),CC('r'),4,1.4)+L(180,216,'Heizung','end',12,'var(--mute)',600);return s};
 X['Thermische Trennverfahren']={
  v:['Das Kopfprodukt einer Kolonne ist nicht rein genug. Welche Änderung hilft, und was kostet sie?',['Weniger Rücklauf, das spart Energie.','Mehr Rücklauf, das kostet mehr Dampf und Kühlwasser.','Mehr Zulauf, das kostet nichts.','Kopfkühler abschalten.'],1,'Mehr Rücklauf verbessert die Trennung, weil mehr Flüssigkeit dem aufsteigenden Dampf entgegenläuft. Dafür muss mehr verdampft und kondensiert werden.'],

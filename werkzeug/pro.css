@@ -175,3 +175,52 @@ body.subpg .brand .bpro{font-size:.5em}
 .q .pb{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.q .pb .btn{margin:0}
 /* offenes Mehr-Menü liegt über der nächsten Karte */
 .psim.mmo{position:relative;z-index:40}
+.fr .fr.fru{font-size:.8em;margin:0 .08em}
+
+/* ===== Version 9 ===== */
+/* Regler: Formelzeichen vorn, Name klein darunter */
+.psim .rgl .rgs{display:block;font-size:16px;font-weight:800;line-height:1.1}
+.psim .rgl .rgs+.rgn2{display:block;font-size:12px;font-weight:600;color:var(--mute);line-height:1.2}
+/* Auswahlregler (z. B. Normdurchmesser): Wert im gleichen Kasten wie die Zahlenfelder */
+.psim .rg2 .rgv{display:flex;align-items:center;justify-content:flex-end;min-height:36px;border:1px dashed var(--line);border-radius:8px;padding:5px 8px;background:color-mix(in srgb,var(--card) 60%,transparent)}
+/* Woran lag es? */
+.q .wlr{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.q .wlr .wlh,.q .wlr .wlt{flex-basis:100%;margin:0}
+.q .wlr .chip{display:block;text-align:left;white-space:normal;line-height:1.45}.q .wlr .chip[aria-pressed=true]{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,var(--card))}
+/* Schrittleiste: Markierung folgt dem Lesen */
+#rfs.trk button.on:not(.cur){border-color:var(--line);box-shadow:none}
+#rfs.trk button.on:not(.cur) .n{background:var(--line);color:var(--ink)}
+#rfs.trk button.cur{border-color:var(--acc);color:var(--ink);box-shadow:inset 0 0 0 1px var(--acc)}
+#rfs.trk button.cur:not(.ok) .n{background:var(--acc);color:#fff}
+@media(max-width:400px){#rfs.trk button.on:not(.cur) .n{display:none}#rfs.trk button.cur .n{display:grid}}
+/* Antworten gespeichert, Rückweg */
+.ansv{margin:2px 0 6px;font-size:13px}.bkw{margin:0 0 10px}
+/* Startseite: Fachrichtung eingeklappt */
+.frt{display:flex;align-items:center;gap:8px;width:100%;font:inherit;font-size:17px;font-weight:600;color:var(--ink);background:none;border:0;padding:4px 0;cursor:pointer;text-align:left;flex-wrap:wrap}.frt .frta{margin-left:auto;color:var(--acc);font-weight:700;font-size:15px}
+/* Lernstand: Richtig / Falsch */
+.rr{color:var(--ok);font-weight:700}.rw{color:var(--red);font-weight:700}
+/* Glossar und Formelsammlung */
+.nsl .nsf{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin:6px 0 4px}
+.fsm h3,.gls h3{margin:18px 0 6px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.fsi,.gli{padding:8px 0;border-top:1px solid var(--line)}.fsi ul{margin:4px 0 0;padding-left:20px}.gli p{margin:2px 0 0;color:var(--mute);font-size:15px}
+.nsl .lk{font:inherit;font-weight:700;background:none;border:0;padding:0;color:var(--acc);cursor:pointer;text-align:left}
+#nm h3.nmns{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+/* Kontraste hell: Brotkrumen, „mehr“, Zweitknöpfe eine Stufe dunkler; Kennzeichen dunkler */
+:root[data-theme=light] .crumb,:root[data-theme=light] .tmore,:root[data-theme=light] .btn.sec,:root[data-theme=light] .nsl .lk,:root[data-theme=light] .frt .frta{color:color-mix(in srgb,var(--acc) 78%,#000)}
+@media(prefers-color-scheme:light){:root:not([data-theme]) .crumb,:root:not([data-theme]) .tmore,:root:not([data-theme]) .btn.sec{color:color-mix(in srgb,var(--acc) 78%,#000)}}
+.tag.ibt,.ibm .tag{filter:brightness(.82)}
+/* Brotkrumen-Knopf mindestens 24 px hoch */
+.crb{min-height:24px;padding:2px 0!important}
+/* Regler: Üben, Favorit und Mehr in einer Zeile; vier Kacheln als 2 × 2 */
+.psim .simb{flex-wrap:nowrap}
+.psim .simb>*{flex:1 1 0;min-width:0;margin:0}
+.psim .simb .btn,.psim .simb>.more>summary{width:100%;justify-content:center;white-space:nowrap;padding-left:8px;padding-right:8px}
+.psim .simk:has(>.kc:nth-child(4):last-child),.psim .simk:has(>.kc:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
+.psim .simk:has(>.kc:only-child){grid-template-columns:minmax(0,1fr)}
+.psim .simb>.more{flex:1 1 0}
+.psim .simb>.more>summary{display:flex;align-items:center;min-height:40px;box-sizing:border-box}
+@media(max-width:420px){.psim .simb{gap:5px}.psim .simb .btn,.psim .simb>.more>summary{font-size:15px;padding-left:4px;padding-right:4px}}
+@media(max-width:340px){.psim .simb .btn,.psim .simb>.more>summary{font-size:14px;padding-left:2px;padding-right:2px;letter-spacing:-.01em}}
+/* Blocksatz in allen Textfeldern (auch Vermuten, Auftrag, Aufgaben), mit Silbentrennung gegen Löcher */
+:where(#view,#nm) :where(p,li,.skc,.aufz,.tdesc){text-align:justify;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+:where(#view) :where(.kc,td,th,.chip,.simb,.mm,.wlh) :where(p,li){text-align:start}
+:where(#view) :where(.crumb,.crumb *){text-align:start;-webkit-hyphens:manual;hyphens:manual}

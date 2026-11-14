@@ -232,7 +232,7 @@ X['Antriebe & Getriebe']={
   calc:v=>{const M1=9550*v.P/1450,n2=1450/v.i,M2=M1*v.i*.9;return{M1,n2,M2}},
   rows:(v,r)=>[['Motormoment',nz(r.M1,1)+' N·m'],['Abtriebsdrehzahl',nz(r.n2,1)+' 1/min',r.n2>=50&&r.n2<=60?'g':'r'],['Abtriebsmoment',nz(r.M2,0)+' N·m',r.M2>=1200?'g':'r']],
   svg:(v,r)=>{let s=antrieb({i:v.i});s+=L(85,84,nt(v.P,1)+' kW','middle',16,'var(--ink)',700)+L(256,62,'i = '+nt(v.i,1),'middle',16,'var(--ink)',700);
-   s+=L(85,206,'1450 1/min','middle',15,'var(--red)',700)+L(85,226,nz(r.M1,1)+' N·m','middle',15,'var(--flow)',700)+L(400,206,nz(r.n2,1)+' 1/min','middle',15,r.n2>=50&&r.n2<=60?'var(--ok)':'var(--red)',700)+L(400,226,nz(r.M2,0)+' N·m','middle',15,r.M2>=1200?'var(--ok)':'var(--red)',700);
+   s+=L(85,200,'1450 1/min','middle',15,'var(--red)',700)+L(85,234,nz(r.M1,1)+' N·m','middle',15,'var(--flow)',700)+L(400,200,nz(r.n2,1)+' 1/min','middle',15,r.n2>=50&&r.n2<=60?'var(--ok)':'var(--red)',700)+L(400,234,nz(r.M2,0)+' N·m','middle',15,r.M2>=1200?'var(--ok)':'var(--red)',700);
    return s},
   auf:{z:'50 bis 60 1/min und mindestens 1200 N·m an der Trommel.',t:'Eine Seiltrommel braucht 50 bis 60 Umdrehungen pro Minute und mindestens 1200 N·m. Wähle Motor und Getriebe. Gut ist die kleinste Lösung, die beides schafft.',h:'Tipp: Zuerst die Übersetzung für die Drehzahl wählen (1450 ÷ i), dann den Motor so groß, dass das Moment reicht.',ok:(v,r)=>r.n2>=50&&r.n2<=60&&r.M2>=1200}}};
 
