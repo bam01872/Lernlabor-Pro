@@ -334,12 +334,24 @@ window.betrieb=function(v){const bn={tec:FR==='ch'?'Produktion':'Technik',org:'O
  W='A-Za-zÄÖÜäöüßµΩ0-9_',rq=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),
  RE=new RegExp('(^|[^'+W+'/€²³])('+NU.map(rq).join('|')+')/('+DE.map(rq).join('|')+'|\\([^()/]{1,16}\\))(?![/²³'+W+'])','g'),
  SKIP=/^(svg|input|textarea|select|option|script|style|code)$/i;
- const walk=root=>{if(!root)return;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(n.nodeValue.indexOf('/')<0)return NodeFilter.FILTER_REJECT;for(let e=n.parentNode;e&&e!==root.parentNode;e=e.parentNode){if(e.nodeType===1&&(SKIP.test(e.nodeName)||e.classList.contains('fr')||e.isContentEditable))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}}),L=[];
+ const walk=root=>{if(!root)return;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(n.nodeValue.indexOf('/')<0)return NodeFilter.FILTER_REJECT;for(let e=n.parentNode;e&&e!==root.parentNode;e=e.parentNode){if(e.nodeType===1&&(SKIP.test(e.nodeName)||e.classList.contains('fru')||e.isContentEditable))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}}),L=[];
   while(tw.nextNode())L.push(tw.currentNode);
   L.forEach(n=>{const t=n.nodeValue;RE.lastIndex=0;if(!RE.test(t))return;RE.lastIndex=0;const fr=document.createDocumentFragment();let last=0,m;
    while((m=RE.exec(t))){const st=m.index+m[1].length;fr.append(t.slice(last,st));const sp=document.createElement('span');sp.className='fr fru';const a=document.createElement('span'),b=document.createElement('span');a.textContent=m[2];b.textContent=m[3].replace(/^\((.*)\)$/,'$1');sp.append(a,b);sp.setAttribute('aria-label',m[2]+' pro '+b.textContent);fr.append(sp);last=m.index+m[0].length}
    fr.append(t.slice(last));n.parentNode.replaceChild(fr,n)})};
- const vw=document.getElementById('view');let q=0;const run=()=>{q=0;walk(vw)};
+ /* dasselbe in Zeichnungen: Zähler und Nenner als kleine Zeilen übereinander, Bruchstrich als Linie */
+ const NS='http://www.w3.org/2000/svg',svgFr=root=>{root.querySelectorAll('svg text').forEach(t=>{if(t.children.length||t.hasAttribute('data-fru'))return;const s=t.textContent;if(s.indexOf('/')<0)return;RE.lastIndex=0;if(!RE.test(s))return;RE.lastIndex=0;
+   const seg=[];let last=0,m;while((m=RE.exec(s))){const st=m.index+m[1].length;seg.push(s.slice(last,st),[m[2],m[3].replace(/^\((.*)\)$/,'$1')]);last=m.index+m[0].length}seg.push(s.slice(last));
+   const cs=getComputedStyle(t),fs=parseFloat(cs.fontSize)||12,sm=fs*.74,x0=parseFloat(t.getAttribute('x'))||0,y0=parseFloat(t.getAttribute('y'))||0,an=cs.textAnchor||t.getAttribute('text-anchor')||'start';
+   const meas=(str,size)=>{if(!str)return 0;t.textContent='';const p=document.createElementNS(NS,'tspan');p.textContent=str;if(size)p.setAttribute('font-size',size);p.setAttribute('xml:space','preserve');p.style.whiteSpace='pre';t.append(p);let w=0;try{w=p.getComputedTextLength()}catch(e){}return w};
+   const sp=meas('a b')-meas('ab'),parts=seg.map(g=>typeof g==='string'?{s:g,w:meas(g)+((/\s$/.test(g)?sp:0))+((/^\s/.test(g)?sp:0))}:{n:g[0],d:g[1],wn:meas(g[0],sm),wd:meas(g[1],sm)});
+   let W=0;parts.forEach(p=>{if(p.n){p.w=Math.max(p.wn,p.wd)+fs*.24}W+=p.w});
+   let x=an==='middle'?x0-W/2:an==='end'?x0-W:x0;t.textContent='';t.setAttribute('data-fru','1');t.setAttribute('text-anchor','start');t.style.textAnchor='start';
+   const mk=(str,xx,yy,size)=>{const p=document.createElementNS(NS,'tspan');const um=/^(.*?[A-Za-zητσβμ])_([A-Za-z0-9]+)(.*)$/.exec(str);if(um){p.append(um[1]);const u=document.createElementNS(NS,'tspan');u.setAttribute('baseline-shift','sub');u.setAttribute('font-size','.7em');u.textContent=um[2];p.append(u,um[3])}else p.textContent=str;p.setAttribute('x',xx.toFixed(2));p.setAttribute('y',yy.toFixed(2));if(size)p.setAttribute('font-size',size.toFixed(2));p.style.whiteSpace='pre';t.append(p)};
+   const g=t.parentNode;parts.forEach(p=>{if(p.n){const c=x+p.w/2;mk(p.n,c-p.wn/2,y0-fs*.42,sm);mk(p.d,c-p.wd/2,y0+fs*.36,sm);
+     const l=document.createElementNS(NS,'line');l.setAttribute('x1',(x+fs*.06).toFixed(2));l.setAttribute('x2',(x+p.w-fs*.06).toFixed(2));l.setAttribute('y1',(y0-fs*.3).toFixed(2));l.setAttribute('y2',(y0-fs*.3).toFixed(2));l.setAttribute('stroke',cs.fill&&cs.fill!=='none'?cs.fill:'currentColor');l.setAttribute('stroke-width',Math.max(.8,fs*.075).toFixed(2));if(t.hasAttribute('transform'))l.setAttribute('transform',t.getAttribute('transform'));l.setAttribute('class','frl');g.insertBefore(l,t.nextSibling)}
+    else if(p.s){mk(p.s.replace(/^\s+/,''),x+(/^\s/.test(p.s)?sp:0),y0)}x+=p.w})})};
+ const vw=document.getElementById('view');let q=0;const run=()=>{q=0;walk(vw);svgFr(vw)};
  new MutationObserver(()=>{if(!q)q=requestAnimationFrame(run)}).observe(vw,{childList:true,subtree:true,characterData:true});window.frUnits=walk}
 go(tab);
 })();
