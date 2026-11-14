@@ -5696,6 +5696,12 @@ body.subpg .brand .bpro{font-size:.5em}
 .simpp{position:absolute;top:6px;right:6px;width:26px;height:26px;min-height:0;padding:0;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 88%,transparent);color:var(--ink);font-size:11px;line-height:1;cursor:pointer;display:grid;place-items:center}
 .simpp:hover{border-color:var(--acc)}
 .simpp:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* Version 15: „Weiter mit …“ wie im Lernlabor rechts neben Glossar und Formelsammlung */
+#nm .nmn{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px;align-items:center}#nm .nmn>div button{white-space:nowrap;padding-right:8px}
+#nm button.nmw{display:block!important;align-self:center;min-height:44px;font-size:13px;line-height:1.3;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);border-radius:12px;padding:8px 10px;text-align:left;overflow-wrap:break-word;-webkit-hyphens:auto;hyphens:auto}
+#nm button.nmw small{display:block;font-size:11px;font-weight:600;color:var(--mute);margin-bottom:2px;letter-spacing:.02em}
+@media(max-width:380px){#nm button.nmw{font-size:12px;padding:7px 8px}}
 </style>
 <script>/* ===== Lernlabor Pro: Mustermodule mit Vermuten, Kurz erklärt, Skizze und Reglern mit Auftrag (wie im Lernlabor) ===== */
 (()=>{const {F,ph,T,RC,OP,POP,ARp,OK,NO,TW,TX,TITLE,STG,CC,LIST,CARDS,BARS,FLOW,VS,CYC,SKZ:SKZ0}=ML5.H,X=ML5.X;
@@ -9090,7 +9096,9 @@ function glossar(v){const A=[];FACH.forEach(f=>D[f].modules.forEach((m,i)=>{if(m
 const nav9=nav;nav=function(){nav9.apply(this,arguments);const b1=q('#fs [data-g="1"]');if(!b1)return;
  if(tab==='glossar'||tab==='formeln')b1.setAttribute('aria-pressed','true');
  b1.addEventListener('click',()=>{const m=q('#nm');if(m.hidden||m.querySelector('.nmns'))return;const h=el('<h3 class="nmns">Nachschlagen</h3>','').firstChild;m.append(h);
-  ['glossar','formeln'].forEach(k=>{const l=TL[k],sp=l.indexOf(' '),x=document.createElement('button');x.type='button';x.setAttribute('role','menuitem');x.dataset.k=k;x.setAttribute('aria-current',String(tab===k));x.innerHTML='<span class="mi">'+l.slice(0,sp)+'</span><span>'+l.slice(sp+1)+'</span>';x.onclick=()=>{nmClose();go(k);scrollTo(0,0)};m.append(x)})})};
+  ['glossar','formeln'].forEach(k=>{const l=TL[k],sp=l.indexOf(' '),x=document.createElement('button');x.type='button';x.setAttribute('role','menuitem');x.dataset.k=k;x.setAttribute('aria-current',String(tab===k));x.innerHTML='<span class="mi">'+l.slice(0,sp)+'</span><span>'+l.slice(sp+1)+'</span>';x.onclick=()=>{nmClose();go(k);scrollTo(0,0)};m.append(x)});
+  /* „Weiter mit …“ wie im Lernlabor: klein und zweizeilig rechts neben Glossar und Formelsammlung */
+  const w=m.querySelector('.nmw');if(w){const n=document.createElement('div');n.className='nmn';const l=document.createElement('div');m.querySelectorAll('[data-k="glossar"],[data-k="formeln"]').forEach(x=>l.append(x));const t=w.querySelector('span:last-child').textContent.replace(/^Weiter mit /,'');w.innerHTML='<small>↩ Weiter mit</small>'+esc(t);w.setAttribute('aria-label','Weiter mit '+t);n.append(l,w);m.append(n)}})};
 /* Suche findet auch Glossar und Formelsammlung nicht doppelt: nichts zu tun. Start mit Adresse: */
 if(/^#(glossar|formelsammlung)$/.test(location.hash)){const h=location.hash;go(h==='#glossar'?'glossar':'formeln')}else nav();
 if(FACH.includes(tab)){const sp=q('#sim');if(sp){symLabels(sp);keepValues(sp,tab+':'+modSel[tab])}stepTrack()}
