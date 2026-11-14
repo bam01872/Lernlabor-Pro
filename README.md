@@ -2,7 +2,7 @@
 
 Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 4 (14.11.2026), Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 38 Themen, Elektrotechnik 39, Chemie 40, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 5 (14.11.2026), Chemie mit dem neuen Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 38 Themen, Elektrotechnik 39, Chemie 50, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
@@ -16,6 +16,7 @@ Stand: Version 4 (14.11.2026), Bedienung an das Lernlabor angeglichen (Wischleis
   - `pro-fr.js`: Fachrichtungen (Umschalter, Gruppen, Prüfungsaufbau)
   - `pro-el1.js`, `pro-el2.js`, `pro-xe1.js`, `pro-xe2.js`: Elektrotechnik (Themen, Aufgaben, Erklärstrecken, Skizzen, Regler)
   - `pro-ch1.js`, `pro-ch2.js`, `pro-xc1.js`, `pro-xc2.js`: Chemie
+  - `pro-thd.js`, `pro-xthd.js`: Chemie, Gebiet Thermodynamik (Themen, Aufgaben, Erklärstrecken, Skizzen, Regler)
   - `pro-ib.js`: Aufgaben „Im Betrieb“ für alle drei Fachrichtungen
   - `pro-a1.js`, `pro-xa.js`: Zusatzthemen und Fachbeispiele in der Organisation, Situationsaufgaben, Fachgespräch
   - `pro.css`: Gestaltung
