@@ -4,7 +4,8 @@
    2. Jede Rechenaufgabe liefert in 25 Zahlenvarianten ein gültiges Ergebnis.
    3. Toleranzen sind relativ und klein (höchstens 5 %).
    4. Deutlich falsche Eingaben (Hälfte, plus 10 %) werden als falsch erkannt.
-   5. Hinweis: Der Lösungsweg zeigt das gerundete Ergebnis. */
+   5. Hinweis: Der Lösungsweg zeigt das gerundete Ergebnis.
+   6. Version: sw.js passt zu APPV, Ich → Sonstiges zeigt sie, Hinweis auf neue Version. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const FILE=path.resolve(__dirname,'..','index.html');
 const OKF='ok=Math.abs(v-t.a)<=Math.max(Math.abs(t.a)*t.tol,t.d===0?0.5:Math.pow(10,-t.d)/2+1e-9)';
@@ -36,6 +37,14 @@ const ok=(v,t)=>Math.abs(v-t.a)<=Math.max(Math.abs(t.a)*t.tol,t.d===0?0.5:Math.p
   }
   await p.close();
  }
+ /* 6. Version: sw.js passt zu APPV, Ich → Sonstiges zeigt die Version, Hinweis „Jetzt laden“ erscheint */
+ {const p=await b.newPage();await p.goto('file://'+FILE+'?fr=me');await p.waitForTimeout(400);
+  const r=await p.evaluate(()=>{go('sonst');const v=document.querySelector('#view .vnr');window.llUpdate();const u=document.querySelector('#upd');return{appv:APPV,vnr:v?v.textContent:'',upd:u?u.textContent:''}});
+  const sw=fs.readFileSync(path.resolve(__dirname,'..','sw.js'),'utf8');
+  if(!sw.includes("'lernlabor-pro-v"+r.appv+"'"))fehler.push('sw.js hat nicht den Cache-Namen lernlabor-pro-v'+r.appv+': werkzeug/build.py neu laufen lassen');
+  if(!r.vnr.includes('Version '+r.appv))fehler.push('Ich → Sonstiges zeigt die Version nicht');
+  if(!r.upd.includes('Jetzt laden'))fehler.push('Hinweis auf neue Version fehlt');
+  await p.close()}
  await b.close();
  console.log(n+' Rechenaufgaben geprüft, je 25 Zahlenvarianten.');
  if(hinweise.length){console.log('\nHinweise ('+hinweise.length+'):');hinweise.forEach(h=>console.log('  '+h))}
