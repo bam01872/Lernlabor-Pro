@@ -416,3 +416,16 @@ if(o)SIMX('Trocknen, Fördern & Dosieren',{
 if(o)SIMX('Rheologie: Fließverhalten der Schmelze',{
  svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2),
  tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=3.2-2.2*v.sp/100,u=(t+d+.5)%(d+1.6),p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
+
+/* ===== Paket Logistik ===== */
+/* ---------- Stapler: Die Gabel hebt die Last auf die gewählte Hubhöhe. Ist sie zu schwer, kippt der Stapler über die Vorderachse ---------- */
+{const S=X['Flurförderzeuge & Fördertechnik']&&X['Flurförderzeuge & Fördertechnik'].sim;
+if(S&&S.svgA)SIMX('Flurförderzeuge & Fördertechnik',{svg:(v,r)=>S.svgA(v,r),
+ tick:(E,v,r,t,dt,st)=>{const T=6.5,u=(t+4)%T,over=r.au>1,hy=[126,96,66][v.h],lh=20+v.m/3000*30,d0=Math.max(0,196-(hy+lh)),p=u<.6?0:u<3?(u-.6)/2.4:1,e=p*p*(3-2*p);
+  A(E.lf,'transform','translate(0 '+F(d0*(1-e))+')');const k=over?CL((p-.45)/.55,0,1):0;A(E.tp,'transform','rotate('+F(5*k*k+(over&&p>=1?.5*Math.sin(t*5):0))+' 176 222)')}})}
+
+/* ---------- Ladungssicherung: Der Lkw fährt und bremst voll. Reicht die Sicherung nicht, rutscht die Ladung nach vorn ---------- */
+{const S=X['Ladungssicherung']&&X['Ladungssicherung'].sim;
+if(S&&S.svgA)SIMX('Ladungssicherung',{svg:(v,r)=>S.svgA(v,r),
+ tick:(E,v,r,t,dt,st)=>{const T=5.5,u=(t+4)%T,br=u<2?0:Math.min(1,(u-2)/1.1),sp=1-br;st.o=(st.o||0)+dt*150*sp;A(E.rd,'stroke-dashoffset',F(st.o%26));
+  A(E.ld,'transform','translate('+F(r.ok?0:26*br*br)+' 0)');A(E.ar,'opacity',br>0?1:.2)}})}

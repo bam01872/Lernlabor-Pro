@@ -8005,14 +8005,14 @@ X['Kommissionierung']={
 /* ---------- Stapler: Traglast ---------- */
 const SH=[3,4.5,6],SF=[1,.9,.75];
 const stC=v=>{const q=2500*(450+500)/(450+v.c)*SF[v.h];return{q,au:v.m/q,M:v.m*9.81*(450+v.c)/1000}};
-const stB=(v,r)=>{const over=r.au>1,hy=[126,96,66][v.h],lw=v.c*2*.056,lh=20+v.m/3000*30;let g='';
+const stB=(v,r,an)=>{const over=r.au>1,hy=[126,96,66][v.h],lw=v.c*2*.05,lh=20+v.m/3000*30;let g='';
  /* Stapler: Körper, Gegengewicht, Dach, Räder, Mast, Gabel */
  g+=RC(60,150,130,50,MX('y',55),'var(--ink)',8,2)+RC(46,158,26,42,'var(--mute)','var(--ink)',6,1.6)+P('M84 150V96H168V150','var(--ink)',3)+RC(110,128,30,22,MX('m',30),'var(--ink)',3,1.2);
  g+=`<circle cx="84" cy="204" r="16" fill="var(--ink)"/><circle cx="84" cy="204" r="6" fill="var(--card)"/><circle cx="176" cy="204" r="19" fill="var(--ink)"/><circle cx="176" cy="204" r="7" fill="var(--card)"/>`;
- g+=RC(196,50,9,160,'var(--mute)','var(--ink)',2,1.4)+P(`M205 ${hy+lh}H${205+Math.max(90,lw+6)}`,'var(--ink)',5)+P(`M205 ${hy-10}V${hy+lh}`,'var(--ink)',5);
+ g+=RC(196,50,9,160,'var(--mute)','var(--ink)',2,1.4)+(an?'<g data-a="lf">':'')+P(`M205 ${hy+lh}H${205+Math.max(90,lw+6)}`,'var(--ink)',5)+P(`M205 ${hy-10}V${hy+lh}`,'var(--ink)',5);
  g+=RC(208,hy,lw,lh,MX(over?'r':'b',40),'var(--ink)',3,1.8)+DOT(208+lw/2,hy+lh/2,'var(--ink)',4)+L(208+lw/2,hy-8,nz(v.m,0)+' kg','middle',13,'var(--ink)',800);
- g+=P(`M208 ${hy+lh+14}H${F(208+lw/2)}`,'var(--ink)',1.4)+P(`M208 ${hy+lh+9}v10M${F(208+lw/2)} ${hy+lh+9}v10`,'var(--ink)',1.4)+L(F(208+lw/2+7),hy+lh+18,v.c+' mm','start',11.5,'var(--ink)',700);
- let s=`<g${over?' transform="rotate(7 176 222)"':''}>${g}</g>`+P('M20 223H330','var(--ink)',2)+P('M176 223v14','var(--red)',2.2)+L(176,250,'Kippkante','middle',11.5,'var(--red)',700);
+ g+=P(`M208 ${hy+lh+14}H${F(208+lw/2)}`,'var(--ink)',1.4)+P(`M208 ${hy+lh+9}v10M${F(208+lw/2)} ${hy+lh+9}v10`,'var(--ink)',1.4)+L(F(208+lw/2+7),hy+lh+18,v.c+' mm','start',11.5,'var(--ink)',700)+(an?'</g>':'');
+ let s=`<g${an?' data-a="tp"':''}${over?' transform="rotate(5 176 222)"':''}>${g}</g>`+P('M20 223H330','var(--ink)',2)+P('M176 223v14','var(--red)',2.2)+L(176,250,'Kippkante','middle',11.5,'var(--red)',700);
  s+=RC(346,46,122,62,'var(--card)','var(--ink)',8,1.6)+L(407,66,'zulässig','middle',12,'var(--mute)',600)+L(407,96,nz(r.q,0)+' kg','middle',21,'var(--ink)',800);
  s+=RC(346,118,122,62,MX(over?'r':r.au>=.8?'g':'y',16),CC(over?'r':r.au>=.8?'g':'y'),8,1.8)+L(407,138,'Auslastung','middle',12,'var(--mute)',600)+L(407,168,nz(r.au*100,0)+' %','middle',21,'var(--ink)',800);
  s+=L(407,202,'Hubhöhe '+nz(SH[v.h],1)+' m','middle',12.5,'var(--ink)',700)+(over?L(407,226,'kippt!','middle',17,'var(--red)',800):'');return s};
@@ -8027,7 +8027,7 @@ X['Flurförderzeuge & Fördertechnik']={
   c:[{k:'m',l:'Last',u:'kg',min:400,max:3000,st:100,v:1200},{k:'c',l:'Lastschwerpunktabstand',u:'mm',min:400,max:1200,st:50,v:500},{k:'h',l:'Hubhöhe',u:'',opts:[0,1,2],v:0,lab:['3 m','4,5 m','6 m']}],
   calc:stC,
   rows:(v,r)=>[['zulässige Last',nz(r.q,0)+' kg'],['Auslastung',nz(r.au*100,0)+' %',r.au>1?'r':'g'],['Lastmoment',nz(r.M/1000,1)+' kNm']],
-  svg:(v,r)=>stB(v,r),
+  svg:(v,r)=>stB(v,r),svgA:(v,r)=>stB(v,r,1),
   auf:{z:'Lange Kiste ab 1500 kg sicher heben, Stapler zu 80 bis 100 % nutzen.',t:'Eine lange Kiste mit mindestens 1500 kg hat ihren Schwerpunkt mindestens 800 mm vor dem Gabelrücken. Finde Einstellungen, bei denen der Stapler sie sicher hebt und zu 80 bis 100 % ausgelastet ist.',h:'Tipp: Stell Last und Abstand ein und sieh, was die Hubhöhe noch zulässt.',ok:(v,r)=>v.m>=1500&&v.c>=800&&r.au<=1&&r.au>=.8}}};
 
 /* ---------- Ladeeinheiten: Kartons auf der Europalette ---------- */
@@ -8071,16 +8071,17 @@ X['Transport & Tourenplanung']={
 /* ---------- Ladungssicherung ---------- */
 const LM=[.2,.3,.4,.6],LML=['0,2 (Metall, nass)','0,3 (Holz auf Platte)','0,4 (trocken, sauber)','0,6 (rutschhemmende Matte)'];
 const lsC=v=>{const mu=LM[v.mu],FG=v.m*9.81,Fb=.8*FG,FR=mu*FG,FZ=v.n*1.5*4000*Math.sin(v.al*Math.PI/180)*mu;return{mu,FG,Fb,FR,FZ,ok:FR+FZ>=Fb,nn:Math.max(0,Math.ceil((Fb-FR)/(1.5*4000*Math.sin(v.al*Math.PI/180)*mu)-1e-9))}};
-const lsB=(v,r)=>{const bw=70+v.m/5000*70,bh=46+v.m/5000*30,dx=r.ok?0:26,bx=160+dx,by=150-bh;let s='';
+const lsB=(v,r,an)=>{const bw=70+v.m/5000*70,bh=46+v.m/5000*30,dx=r.ok||an?0:26,bx=160+dx,by=150-bh;let s='';
  /* Ladefläche mit Stirnwand, Fahrtrichtung nach rechts */
  s+=RC(40,150,300,10,'var(--mute)','var(--ink)',2,1.4)+RC(334,96,8,54,'var(--mute)','var(--ink)',2,1.4)+`<circle cx="90" cy="174" r="13" fill="var(--ink)"/><circle cx="126" cy="174" r="13" fill="var(--ink)"/><circle cx="290" cy="174" r="13" fill="var(--ink)"/>`;
  if(LM[v.mu]>=.6)s+=RC(150,146,bw+50,4,'var(--ink)','none',1,0);
+ if(an)s+='<path data-a="rd" d="M20 189H460" stroke="var(--mute)" stroke-width="2" stroke-dasharray="14 12"/><g data-a="ld">';
  s+=RC(bx,by,bw,bh,MX(r.ok?'b':'r',38),'var(--ink)',3,2)+L(bx+bw/2,by-8,nz(v.m,0)+' kg','middle',13,'var(--ink)',800);
  for(let i=0;i<v.n;i++){const x=bx+bw*(i+.5)/v.n;s+=P(`M${F(x)} 150V${by-2}`,CC('y'),3)}
- s+=AW(bx+bw+4,by+bh/2,bx+bw+4+Math.min(44,16+r.Fb/900),by+bh/2,'var(--red)',3.4);
+ s+=(an?'<g data-a="ar">':'')+AW(bx+bw+4,by+bh/2,bx+bw+4+Math.min(44,16+r.Fb/900),by+bh/2,'var(--red)',3.4)+(an?'</g></g>':'');
  s+=L(40,36,'Fahrtrichtung →','start',12,'var(--mute)',600)+(r.ok?'':L(40,60,'Ladung rutscht!','start',16,'var(--red)',800));
  /* Zurrwinkel von hinten */
- const cx=396,cy=120,a=v.al*Math.PI/180;s+=L(cx,36,'von hinten','middle',12,'var(--mute)',600)+RC(cx-22,cy-30,44,30,MX('b',38),'var(--ink)',2,1.6)+P(`M${cx-50} ${cy}H${cx+50}`,'var(--ink)',2)+P(`M${cx+22} ${cy-30}L${F(cx+22+30/Math.tan(Math.max(a,.3)))} ${cy}`,CC('y'),3)+P(`M${cx-22} ${cy-30}H${cx+22}`,CC('y'),3)+P(`M${cx-22} ${cy-30}L${F(cx-22-30/Math.tan(Math.max(a,.3)))} ${cy}`,CC('y'),3)+L(cx,cy+18,'α = '+v.al+'°','middle',12.5,'var(--ink)',700);
+ const cx=396,cy=120,a=v.al*Math.PI/180;s+=L(cx,64,'von hinten','middle',12,'var(--mute)',600)+RC(cx-22,cy-30,44,30,MX('b',38),'var(--ink)',2,1.6)+P(`M${cx-50} ${cy}H${cx+50}`,'var(--ink)',2)+P(`M${cx+22} ${cy-30}L${F(cx+22+30/Math.tan(Math.max(a,.3)))} ${cy}`,CC('y'),3)+P(`M${cx-22} ${cy-30}H${cx+22}`,CC('y'),3)+P(`M${cx-22} ${cy-30}L${F(cx-22-30/Math.tan(Math.max(a,.3)))} ${cy}`,CC('y'),3)+L(cx,cy+18,'α = '+v.al+'°','middle',12.5,'var(--ink)',700);
  /* Kräftevergleich */
  const X0=40,W=400,mx=Math.max(r.Fb,r.FR+r.FZ)*1.08;s+=L(X0,206,'schiebt nach vorn','start',11.5,'var(--red)',700)+XSTK(X0+110,196,W-110,14,[[r.Fb,'r','']],mx)+L(X0,230,'hält','start',11.5,'var(--ok)',700)+XSTK(X0+110,220,W-110,14,[[r.FR,'g',''],[r.FZ,'y','']],mx);
  s+=L(240,256,'Reibung '+nz(r.FR/1000,1)+' kN + Gurte '+nz(r.FZ/1000,1)+' kN gegen '+nz(r.Fb/1000,1)+' kN','middle',12.5,r.ok?'var(--ok)':'var(--red)',700);return s};
@@ -8095,7 +8096,7 @@ X['Ladungssicherung']={
   c:[{k:'m',l:'Masse der Ladung',u:'kg',min:500,max:5000,st:250,v:2000},{k:'mu',l:'Gleitreibbeiwert',u:'',opts:[0,1,2,3],v:1,lab:LML},{k:'n',l:'Zurrgurte',u:'',min:0,max:8,st:1,v:2},{k:'al',l:'Zurrwinkel',u:'°',min:30,max:90,st:15,v:60}],
   calc:lsC,
   rows:(v,r)=>[['Kraft nach vorn',nz(r.Fb/1000,1)+' kN'],['Reibung hält',nz(r.FR/1000,1)+' kN'],['Gurte halten',nz(r.FZ/1000,1)+' kN'],['Ergebnis',r.ok?'gesichert':'rutscht',r.ok?'g':'r'],['nötige Gurte',String(r.nn)]],
-  svg:(v,r)=>lsB(v,r),
+  svg:(v,r)=>lsB(v,r),svgA:(v,r)=>lsB(v,r,1),
   auf:{z:'Mindestens 2000 kg mit höchstens 4 Gurten sichern.',t:'Eine Maschine mit mindestens 2000 kg soll mit höchstens 4 Gurten niedergezurrt werden. Finde heraus, was Du außer den Gurten verändern musst, damit die Ladung hält.',h:'Tipp: Sieh Dir an, wie sich der Reibbeiwert auf beide grünen und gelben Balken auswirkt.',ok:(v,r)=>v.m>=2000&&v.n<=4&&r.ok}}};
 
 /* ---------- Kennzahlen ---------- */
@@ -8749,6 +8750,19 @@ if(o)SIMX('Trocknen, Fördern & Dosieren',{
 if(o)SIMX('Rheologie: Fließverhalten der Schmelze',{
  svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2),
  tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=3.2-2.2*v.sp/100,u=(t+d+.5)%(d+1.6),p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
+
+/* ===== Paket Logistik ===== */
+/* ---------- Stapler: Die Gabel hebt die Last auf die gewählte Hubhöhe. Ist sie zu schwer, kippt der Stapler über die Vorderachse ---------- */
+{const S=X['Flurförderzeuge & Fördertechnik']&&X['Flurförderzeuge & Fördertechnik'].sim;
+if(S&&S.svgA)SIMX('Flurförderzeuge & Fördertechnik',{svg:(v,r)=>S.svgA(v,r),
+ tick:(E,v,r,t,dt,st)=>{const T=6.5,u=(t+4)%T,over=r.au>1,hy=[126,96,66][v.h],lh=20+v.m/3000*30,d0=Math.max(0,196-(hy+lh)),p=u<.6?0:u<3?(u-.6)/2.4:1,e=p*p*(3-2*p);
+  A(E.lf,'transform','translate(0 '+F(d0*(1-e))+')');const k=over?CL((p-.45)/.55,0,1):0;A(E.tp,'transform','rotate('+F(5*k*k+(over&&p>=1?.5*Math.sin(t*5):0))+' 176 222)')}})}
+
+/* ---------- Ladungssicherung: Der Lkw fährt und bremst voll. Reicht die Sicherung nicht, rutscht die Ladung nach vorn ---------- */
+{const S=X['Ladungssicherung']&&X['Ladungssicherung'].sim;
+if(S&&S.svgA)SIMX('Ladungssicherung',{svg:(v,r)=>S.svgA(v,r),
+ tick:(E,v,r,t,dt,st)=>{const T=5.5,u=(t+4)%T,br=u<2?0:Math.min(1,(u-2)/1.1),sp=1-br;st.o=(st.o||0)+dt*150*sp;A(E.rd,'stroke-dashoffset',F(st.o%26));
+  A(E.ld,'transform','translate('+F(r.ok?0:26*br*br)+' 0)');A(E.ar,'opacity',br>0?1:.2)}})}
 
 }
 /* ---------- Bruchstrich in Merkbox und Lösungsweg: [[Zähler||Nenner]] ---------- */
