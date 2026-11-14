@@ -94,7 +94,7 @@ C.push({f:'fp',m,name:'Bruttopersonalbedarf',gen:r=>{const x=r.step(2000,9000,50
  sol:['Arbeitsvolumen = '+nz(x,0)+' · '+t+' min ÷ 60 min/h = '+nz(V,0)+' h','Einsatzbedarf = [['+nz(V,0)+' h||'+h+' h]] = '+nz(E,2),'Bruttopersonalbedarf = [['+nz(E,2)+'||1 − '+nt(f/100)+']] = '+nz(B,2),'Aufgerundet: '+N+' Mitarbeiter']}}});
 C.push({f:'fp',m,name:'Nettopersonalbedarf',gen:r=>{const B=r.i(12,40),Be=B-r.i(-2,5),ab=r.i(0,3),zu=r.i(0,2),N=B-Be+ab-zu;
  return{q:'Bruttopersonalbedarf '+B+' Mitarbeiter, Bestand '+Be+'. Im Planungszeitraum gehen '+ab+' Mitarbeiter ab, '+zu+' Zugänge stehen schon fest. Wie groß ist der Nettopersonalbedarf? (Eine Überdeckung gibst Du mit Minus an.)',a:N,u:'Mitarbeiter',d:0,tol:0,
- sol:['Nettobedarf = Bruttobedarf − Bestand + Abgänge − Zugänge','Nettobedarf = '+B+' − '+Be+' + '+ab+' − '+zu+' = '+N,N>0?'Unterdeckung: einstellen, qualifizieren oder Arbeit anders verteilen.':N<0?'Überdeckung: umsetzen oder Arbeitszeitkonten nutzen.':'Bedarf und Bestand passen zusammen.']}}});}
+ sol:['Nettobedarf = Bruttobedarf − Bestand + Abgänge − Zugänge','Nettobedarf = '+B+' − '+Be+' + '+ab+' − '+zu+' = '+nz(N,0),N>0?'Unterdeckung: einstellen, qualifizieren oder Arbeit anders verteilen.':N<0?'Überdeckung: umsetzen oder Arbeitszeitkonten nutzen.':'Bedarf und Bestand passen zusammen.']}}});}
 
 /* ---------- Paket P1: weitere Situationsaufgaben (eigene Fälle) ---------- */
 CASES.push(

@@ -185,11 +185,11 @@ C.push({f:'org',m,name:'Gewinnschwelle',gen:r=>{const kv=r.step(12,60,1),db=r.st
  return{q:'Ein Produkt wird für '+nz(p,2)+' € je Stück verkauft. Die variablen Kosten betragen '+nz(kv,2)+' € je Stück, die Fixkosten '+nz(Kf,0)+' € pro Jahr. Ab welcher Menge arbeitet der Betrieb mit Gewinn?',a:x,u:'Stück',d:0,tol:0,
  sol:['db = p − k_v = '+nz(p,2)+' €/Stück − '+nz(kv,2)+' €/Stück = '+nz(db,2)+' €/Stück','x_BE = [[K_f||db]] = [['+nz(Kf,0)+' €||'+nz(db,2)+' €/Stück]] = '+nz(x,0)+' Stück']}}});
 C.push({f:'org',m,name:'Zusatzauftrag bewerten',gen:r=>{const kv=r.step(10,40,1),pz=kv+r.p([-2,1,2,3,4,5]),x=r.step(5,40,5)*100,E=(pz-kv)*x;
- return{q:'Ein Kunde fragt '+nz(x,0)+' Stück zu je '+nz(pz,2)+' € an. Die variablen Kosten betragen '+nz(kv,2)+' € je Stück, Kapazität ist frei, die Fixkosten bleiben gleich. Um wie viel ändert sich das Betriebsergebnis, wenn Du annimmst (negativ = Verlust)?',a:E,u:'€',d:2,
+ return{q:'Ein Kunde fragt '+nz(x,0)+' Stück zu je '+nz(pz,2)+' € an. Die variablen Kosten betragen '+nz(kv,2)+' € je Stück, Kapazität ist frei, die Fixkosten bleiben gleich. Um wie viel ändert sich das Betriebsergebnis, wenn Du annimmst (negativ = Verlust)?',a:E,u:'€',d:2,tol:.005,
  sol:['db = '+nz(pz,2)+' €/Stück − '+nz(kv,2)+' €/Stück = '+nz(pz-kv,2)+' €/Stück','Ergebnisänderung = '+nz(pz-kv,2)+' €/Stück · '+nz(x,0)+' Stück = '+nz(E,2)+' €',E>=0?'Annehmen: Der Auftrag verbessert das Ergebnis.':'Ablehnen: Der Preis liegt unter den variablen Kosten.']}}});}
 {const m=MI('org','Plankosten & Abweichungen');
 C.push({f:'org',m,name:'Verbrauchsabweichung',gen:r=>{const Bp=r.p([800,1000,1200,1600]),Kf=r.step(20,60,5)*1000,kv=r.step(20,60,5),Bi=Math.round(Bp*r.p([.7,.8,.85,.9,1.1])),Ist=Math.round((Kf+kv*Bi)*r.p([.94,.97,1.03,1.05,1.08])/100)*100,S=Kf+kv*Bi,V=Ist-S;
- return{q:'Kostenstelle Dreherei: Planbeschäftigung '+Bp+' h, fixe Plankosten '+nz(Kf,0)+' €, variable Plankosten '+nz(kv*Bp,0)+' €. Ist: '+Bi+' h und '+nz(Ist,0)+' € Kosten. Wie hoch ist die Verbrauchsabweichung (positiv = Mehrverbrauch)?',a:V,u:'€',d:0,
+ return{q:'Kostenstelle Dreherei: Planbeschäftigung '+Bp+' h, fixe Plankosten '+nz(Kf,0)+' €, variable Plankosten '+nz(kv*Bp,0)+' €. Ist: '+Bi+' h und '+nz(Ist,0)+' € Kosten. Wie hoch ist die Verbrauchsabweichung (positiv = Mehrverbrauch)?',a:V,u:'€',d:0,tol:.005,
  sol:['variabler Satz = [['+nz(kv*Bp,0)+' €||'+Bp+' h]] = '+nz(kv,2)+' €/h','Sollkosten = '+nz(Kf,0)+' € + '+nz(kv,2)+' €/h · '+Bi+' h = '+nz(S,0)+' €','Verbrauchsabweichung = '+nz(Ist,0)+' € − '+nz(S,0)+' € = '+nz(V,0)+' €']}}});
 C.push({f:'org',m,name:'Beschäftigungsabweichung',gen:r=>{const Bp=r.p([800,1000,1200]),Kf=r.step(20,60,5)*1000,kv=r.step(20,50,5),Bi=Math.round(Bp*r.p([.6,.7,.75,.8,.9])),Kp=Kf+kv*Bp,S=Kf+kv*Bi,vs=Kp/Bp,Vr=vs*Bi,B=S-Vr;
  return{q:'Plankosten '+nz(Kp,0)+' € bei '+Bp+' h, davon fix '+nz(Kf,0)+' €. Tatsächlich wurden nur '+Bi+' h gearbeitet. Wie hoch ist die Beschäftigungsabweichung?',a:B,u:'€',d:0,tol:0.002,
@@ -211,7 +211,7 @@ C.push({f:'tec',m,name:'Planfräsen: Hauptnutzungszeit',gen:r=>{const d=r.p([50,
  sol:['n = [['+vc+' m/min · 1000 mm/m||π · '+d+' mm]] = '+nz(n,0)+' 1/min','v_f = f_z · z · n = '+nt(fz)+' mm · '+z+' · '+nz(n,0)+' 1/min = '+nz(vf,0)+' mm/min','L = '+l+' mm + '+d+' mm + 4 mm = '+L+' mm','t_h = [['+L+' mm||'+nz(vf,0)+' mm/min]] = '+nz(t,2)+' min']}}});
 C.push({f:'tec',m,name:'Schleifscheibe: zulässige Drehzahl',gen:r=>{const d=r.p([150,175,200,250,300,350,400]),vz=r.p([35,40,50,63]),n=vz*60000/(Math.PI*d);
  return{q:'Auf einer Schleifscheibe mit d = '+d+' mm steht als Höchstgeschwindigkeit '+vz+' m/s. Welche Drehzahl darf die Spindel höchstens haben?',a:Math.floor(n),u:'1/min',d:0,tol:0.003,
- sol:['v_c = [[π · d · n||60 000]] umgestellt: n = [[v_c · 60 000||π · d]]','n = [['+vz+' m/s · 60 000||π · '+d+' mm]] = '+nz(n,0)+' 1/min','Die Spindel darf höchstens '+nz(Math.floor(n),0)+' 1/min drehen.']}}});}
+ sol:['n = [[v_c||π · d]]','n = [['+vz+' m/s · 1000 mm/m · 60 s/min||π · '+d+' mm]] = '+nz(n,0)+' 1/min','Die Spindel darf höchstens '+nz(Math.floor(n),0)+' 1/min drehen.']}}});}
 {const m=MI('tec','Pneumatik & Vakuumtechnik');
 C.push({f:'tec',m,name:'Kraft eines Pneumatikzylinders',gen:r=>{const D=r.p([25,32,40,50,63,80,100]),p=r.step(4,8,0.5),eta=r.p([0.85,0.9,0.95]),A=Math.PI*(D/10)**2/4,F=p*10*A*eta;
  return{q:'Ein Pneumatikzylinder mit D = '+D+' mm wird mit '+nt(p,1)+' bar Überdruck betrieben. Wirkungsgrad η = '+nt(eta)+'. Welche Kraft gibt er beim Ausfahren ab?',a:F,u:'N',d:0,tol:0.005,

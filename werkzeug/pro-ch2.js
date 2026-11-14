@@ -41,10 +41,10 @@ pts:['Inprozesskontrollen prüfen während der Herstellung, ob der Prozess im So
 'Messgeräte werden regelmäßig kalibriert, pH-Sonden mit Pufferlösungen. Ein falscher Messwert ist schlimmer als keiner.',
 'Dokumentiert wird sofort, lesbar und vollständig. Was nicht dokumentiert ist, gilt als nicht gemacht.'],
 fo:['Titration (einwertige Säure und Base): c_1 · V_1 = c_2 · V_2.',
-'pH-Wert: pH = −lg c(H⁺) mit c in [[mol||l]]. Eine Einheit weniger bedeutet zehnfache Säurekonzentration.'],
+'pH-Wert: pH = −lg c(H⁺) mit c in [[mol||l]]. Eine Einheit weniger bedeutet zehnfache Konzentration der H⁺-Ionen (Oxonium-Ionen).'],
 mcq:[['Wozu dient ein Rückstellmuster?','Bei Reklamationen kann die Charge nachgeprüft werden','Es ersetzt die Analyse','Es wird dem Kunden mitgegeben','Es dient als Reserve für die nächste Charge','Es wird für eine festgelegte Zeit beschriftet aufbewahrt.'],
 ['Ein Analysenwert liegt knapp außerhalb der Spezifikation. Was tust Du zuerst?','Charge sperren und die Messung überprüfen lassen','Charge freigeben, es ist ja nur knapp','Den Wert im Protokoll anpassen','Die Spezifikation ändern','Erst wenn der Wert bestätigt ist, wird über Nacharbeit oder Verschnitt entschieden.'],
-['Der pH-Wert sinkt von 5 auf 3. Wie ändert sich die Säurekonzentration?','Sie wird hundertmal so groß','Sie verdoppelt sich','Sie sinkt auf ein Hundertstel','Sie steigt um 40 %','Jede pH-Einheit ist ein Faktor 10.'],
+['Der pH-Wert sinkt von 5 auf 3. Wie ändert sich die Konzentration der H⁺-Ionen?','Sie wird hundertmal so groß','Sie verdoppelt sich','Sie sinkt auf ein Hundertstel','Sie steigt um 40 %','Jede pH-Einheit ist ein Faktor 10 bei c(H⁺). Bei schwachen Säuren heißt das nicht hundertmal so viel Säure.'],
 ['Womit wird eine pH-Sonde kalibriert?','Mit Pufferlösungen bekannter pH-Werte','Mit destilliertem Wasser','Mit dem Produkt selbst','Gar nicht, sie ist wartungsfrei','Meist mit zwei Puffern, die den Messbereich einschließen.']]});
 
 TM({t:'Stoffe bewerten & Explosionsschutz',intro:'Bevor ein Stoff in die Anlage kommt, musst Du wissen, was er anrichten kann. Du liest die Kenngrößen aus dem Sicherheitsdatenblatt und leitest ab, wie eine explosionsfähige Atmosphäre verhindert wird.',
@@ -135,7 +135,7 @@ C.push({f:tec,m,name:'Produktmasse einer Charge',gen:r=>{const me=r.step(400,200
  sol:['n = [['+me+' kg||'+Me+' kg/kmol]] = '+nz(me/Me,2)+' kmol Einsatzstoff','Theoretisch: '+nz(me/Me,2)+' kmol · '+Mp+' kg/kmol = '+nz(me/Me*Mp,0)+' kg','Mit Ausbeute: '+nz(me/Me*Mp,0)+' kg · '+nt(A/100)+' = '+nz(mp,0)+' kg']}}});
 C.push({f:tec,m,name:'Verweilzeit',gen:r=>{const V=r.p([2,4,6.3,10]),Vp=r.step(1,8,0.5),t=V/Vp*60;
  return{q:'Ein kontinuierlicher Rührkessel hat '+nt(V)+' m³ Reaktionsvolumen und wird mit '+nt(Vp)+' m³/h durchströmt. Wie groß ist die mittlere Verweilzeit?',a:t,u:'min',d:0,tol:0.01,
- sol:['τ = [[V_R||V̇]] = [['+nt(V)+' m³||'+nt(Vp)+' m³/h]] = '+nz(V/Vp,2)+' h','τ = '+nz(V/Vp,2)+' h · 60 min/h = '+nz(t,0)+' min']}}});}
+ sol:['τ = [[V_R||V̇]] = [['+nt(V)+' m³||'+nt(Vp)+' m³/h]] = '+nz(V/Vp,3)+' h','τ = '+nz(V/Vp,3)+' h · 60 min/h = '+nz(t,0)+' min']}}});}
 {const m=MI(tec,'Prozesskontrolle & Analytik');
 C.push({f:tec,m,name:'Titration',gen:r=>{const V1=r.p([10,20,25]),c2=r.p([0.1,0.5,1]),V2=r.step(8,24,0.5),c1=c2*V2/V1;
  return{q:'Eine Probe von '+V1+' ml Salzsäure wird mit Natronlauge der Konzentration '+nt(c2)+' mol/l titriert. Der Verbrauch beträgt '+nz(V2,1)+' ml. Welche Konzentration hat die Säure?',a:c1,u:'mol/l',d:3,tol:0.01,
@@ -144,7 +144,7 @@ C.push({f:tec,m,name:'pH-Wert einer starken Säure',gen:r=>{const e=r.i(1,5),c=M
  return{q:'Eine starke einwertige Säure hat die Konzentration c(H⁺) = '+nt(c,5)+' mol/l. Welchen pH-Wert hat die Lösung?',a:e,u:'',d:0,tol:0,
  sol:['pH = −lg c(H⁺) = −lg('+nt(c,5)+') = '+e]}}});}
 {const m=MI(tec,'Messtechnik: Druck, Temperatur, Durchfluss, Füllstand');
-C.push({f:tec,m,name:'Füllstand aus dem Bodendruck',gen:r=>{const rho=r.p([800,900,1000,1100,1200]),h=r.step(1,6,0.5),p=rho*9.81*h/100;
+C.push({f:tec,m,name:'Füllstand aus dem Bodendruck',gen:r=>{const rho=r.p([800,900,1000,1100,1200]),h0=r.step(1,6,0.5),p=Math.round(rho*9.81*h0/100),h=p*100/(rho*9.81);
  return{q:'Am Boden eines offenen Tanks misst die Sonde '+nz(p,0)+' mbar Überdruck. Die Flüssigkeit hat die Dichte '+rho+' kg/m³. Wie hoch steht sie?',a:h,u:'m',d:2,tol:0.02,
  sol:['p = '+nz(p,0)+' mbar · 100 Pa/mbar = '+nz(p*100,0)+' Pa','h = [[p||ρ · g]] = [['+nz(p*100,0)+' Pa||'+rho+' kg/m³ · 9,81 m/s²]] = '+nz(h,2)+' m']}}});
 C.push({f:tec,m,name:'Durchfluss an der Blende',gen:r=>{const V1=r.step(10,40,5),dp1=r.p([100,160,250]),f=r.p([0.25,0.5,2,4]),dp2=dp1*f,V2=V1*Math.sqrt(f);

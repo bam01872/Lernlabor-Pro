@@ -19,10 +19,10 @@ mcq:[['Was löst beim Pull-Prinzip den Nachschub aus?','Der tatsächliche Verbra
 ['Was spricht für die Vergabe an einen Logistikdienstleister?','Schwankende Mengen lassen sich besser auffangen, feste Kosten werden variabel','Man behält alles selbst in der Hand','Schnittstellen entfallen','Die Abhängigkeit sinkt','Der Dienstleister bündelt Mengen mehrerer Kunden.']]});
 LT('Logistikstrategien & Lieferkette',(m,A)=>{
 A({name:'Lieferbereitschaftsgrad',gen:r=>{const n=r.p([400,500,800,1200,1500]),f=r.p([12,18,24,30,45]),g=(n-f)/n*100;
- return{q:'Von '+n+' Anforderungen konnten '+f+' nicht sofort aus dem Lager bedient werden. Wie hoch ist der Lieferbereitschaftsgrad?',a:g,u:'%',d:1,tol:.06,
+ return{q:'Von '+n+' Anforderungen konnten '+f+' nicht sofort aus dem Lager bedient werden. Wie hoch ist der Lieferbereitschaftsgrad?',a:g,u:'%',d:1,tol:.005,
  sol:['sofort bedient = '+n+' − '+f+' = '+(n-f),'Lieferbereitschaftsgrad = [['+(n-f)+'||'+n+']] = '+nz(g/100,3)+' = '+nz(g,1)+' %']}}});
 A({name:'Liefertreue eines Lieferanten',gen:r=>{const n=r.p([40,60,80,120]),v=r.p([3,5,6,9]),g=(n-v)/n*100;
- return{q:'Ein Lieferant hat im Quartal '+n+' Lieferungen geschickt, '+v+' davon verspätet. Wie hoch ist die Liefertreue?',a:g,u:'%',d:1,tol:.06,
+ return{q:'Ein Lieferant hat im Quartal '+n+' Lieferungen geschickt, '+v+' davon verspätet. Wie hoch ist die Liefertreue?',a:g,u:'%',d:1,tol:.005,
  sol:['Liefertreue = [[termingerechte Lieferungen||alle Lieferungen]]','= [['+(n-v)+'||'+n+']] = '+nz(g,1)+' %']}}});});
 
 TM({t:'Beschaffung & Bestandsmanagement',intro:'Zu viel Bestand bindet Kapital, zu wenig legt die Fertigung still. Du rechnest Meldebestand, Reichweite und Sicherheitsbestand und liest den Bestandsverlauf wie eine Fieberkurve.',
@@ -43,7 +43,7 @@ A({name:'Meldebestand',gen:r=>{const v=r.p([20,40,50,80,120]),t=r.p([3,5,6,8,10]
  return{q:'Von einem Artikel werden täglich '+v+' Stück verbraucht. Die Wiederbeschaffungszeit beträgt '+t+' Tage, der Sicherheitsbestand '+sb+' Stück. Wie hoch ist der Meldebestand?',a:mb,u:'Stück',d:0,tol:0,
  sol:['Meldebestand = Tagesverbrauch · Wiederbeschaffungszeit + Sicherheitsbestand','= '+v+' [[Stück||Tag]] · '+t+' Tage + '+sb+' Stück = '+mb+' Stück']}}});
 A({name:'Reichweite des Bestands',gen:r=>{const b=r.p([600,900,1200,2400,3600]),v=r.p([30,40,60,80,120]),R=b/v;
- return{q:'Im Lager liegen '+b+' Stück. Der Tagesverbrauch beträgt '+v+' Stück. Wie viele Tage reicht der Bestand?',a:R,u:'Tage',d:1,tol:.05,
+ return{q:'Im Lager liegen '+b+' Stück. Der Tagesverbrauch beträgt '+v+' Stück. Wie viele Tage reicht der Bestand?',a:R,u:'Tage',d:1,tol:.01,
  sol:['Reichweite = [[Bestand||Tagesverbrauch]]','= [['+b+' Stück||'+v+' Stück/Tag]] = '+nz(R,1)+' Tage']}}});
 A({name:'Mittlerer Bestand',gen:r=>{const x=r.p([400,600,800,1000,2000]),sb=r.p([100,150,200,300]),bm=x/2+sb;
  return{q:'Bestellt werden jeweils '+x+' Stück, der Sicherheitsbestand beträgt '+sb+' Stück. Wie hoch ist der mittlere Bestand bei gleichmäßigem Verbrauch?',a:bm,u:'Stück',d:0,tol:0,
@@ -64,10 +64,10 @@ mcq:[['Was kennzeichnet Cross-Docking?','Umschlag ohne Einlagerung','Lagerung im
 ['Wann lohnt die Direktbelieferung?','Bei vollen Ladungen an einen Empfänger','Bei einzelnen Paketen','Bei jeder Sendung','Nur im Ausland','Der Umweg über den Umschlag kostet Zeit und Handhabung.']]});
 LT('Distribution & Standortwahl',(m,A)=>{
 A({name:'Standort mit der Schwerpunktmethode',gen:r=>{const K=[[r.p([10,20,30]),r.p([20,40,60])],[r.p([60,80,100]),r.p([10,30,50])],[r.p([40,50,70]),r.p([80,100,120])]],M=[r.p([100,200,300]),r.p([100,200,400]),r.p([100,300,500])],sm=M[0]+M[1]+M[2],sx=K.reduce((s,k,i)=>s+k[0]*M[i],0),xs=sx/sm;
- return{q:'Drei Kunden liegen bei x = '+K.map(k=>k[0]).join(' km, ')+' km und nehmen '+M.join(' t, ')+' t im Jahr ab. Berechne die x-Koordinate des Schwerpunkts.',a:xs,u:'km',d:1,tol:.06,
+ return{q:'Drei Kunden liegen bei x = '+K.map(k=>k[0]).join(' km, ')+' km und nehmen '+M.join(' t, ')+' t im Jahr ab. Berechne die x-Koordinate des Schwerpunkts.',a:xs,u:'km',d:1,tol:.01,
  sol:['x_S = [[Σ (Menge · x)||Σ Menge]]','x_S = [['+M.map((q,i)=>q+' t · '+K[i][0]+' km').join(' + ')+'||'+M.join(' t + ')+' t]]','x_S = [['+nz(sx,0)+' t · km||'+sm+' t]] = '+nz(xs,1)+' km']}}});
 A({name:'Transportleistung',gen:r=>{const m=r.p([8,12,18,24]),s=r.p([120,250,380,460,600]),n=r.p([40,60,100,150]),L=m*s*n;
- return{q:'Im Jahr fahren '+n+' Lkw mit je '+m+' t über '+s+' km. Wie groß ist die Transportleistung?',a:L,u:'t · km',d:0,tol:1,
+ return{q:'Im Jahr fahren '+n+' Lkw mit je '+m+' t über '+s+' km. Wie groß ist die Transportleistung?',a:L,u:'t · km',d:0,tol:.005,
  sol:['Transportleistung = Fahrten · Menge · Entfernung','= '+n+' · '+m+' t · '+s+' km = '+nz(L,0)+' t · km']}}});});
 
 TM({t:'Informationsfluss: Lagerverwaltung, Barcode, RFID',intro:'Jede Palette hat einen Datenzwilling. Stimmt er nicht mit der Wirklichkeit überein, steht die Ware zwar im Regal, ist aber nicht zu finden. Du kennst die Bausteine des Informationsflusses im Lager.',
@@ -85,10 +85,10 @@ mcq:[['Was kann RFID, was der Strichcode nicht kann?','Ohne Sichtkontakt und meh
 ['Welche Fehlerquelle ist bei Systemschnittstellen typisch?','Abweichende Stammdaten wie Mengeneinheit oder Gewicht','Zu schnelle Rechner','Zu viele Scanner','Zu gute Schulung','Wenn ein System in Stück und das andere in Karton rechnet, stimmen Bestände nie.']]});
 LT('Informationsfluss: Lagerverwaltung, Barcode, RFID',(m,A)=>{
 A({name:'Bestandsgenauigkeit',gen:r=>{const n=r.p([200,250,400,500,800]),f=r.p([4,6,9,12,15]),g=(n-f)/n*100;
- return{q:'Bei einer Stichprobe wurden '+n+' Lagerplätze gezählt. An '+f+' Plätzen wich die Menge vom System ab. Wie hoch ist die Bestandsgenauigkeit?',a:g,u:'%',d:1,tol:.06,
+ return{q:'Bei einer Stichprobe wurden '+n+' Lagerplätze gezählt. An '+f+' Plätzen wich die Menge vom System ab. Wie hoch ist die Bestandsgenauigkeit?',a:g,u:'%',d:1,tol:.005,
  sol:['Bestandsgenauigkeit = [[Plätze ohne Abweichung||geprüfte Plätze]]','= [['+(n-f)+'||'+n+']] = '+nz(g,1)+' %']}}});
 A({name:'Zeitgewinn durch Scannen',gen:r=>{const n=r.p([300,450,600,900]),a=r.p([45,60,75]),b=r.p([10,15,20]),t=n*(a-b)/3600;
- return{q:'Im Wareneingang werden täglich '+n+' Paletten vereinnahmt. Das Erfassen von Hand dauert '+a+' s je Palette, mit Scan und Lieferavis '+b+' s. Wie viele Stunden werden täglich gespart?',a:t,u:'h',d:1,tol:.06,
+ return{q:'Im Wareneingang werden täglich '+n+' Paletten vereinnahmt. Das Erfassen von Hand dauert '+a+' s je Palette, mit Scan und Lieferavis '+b+' s. Wie viele Stunden werden täglich gespart?',a:t,u:'h',d:1,tol:.01,
  sol:['Ersparnis je Palette = '+a+' s − '+b+' s = '+(a-b)+' s','Ersparnis je Tag = '+n+' · '+(a-b)+' s = '+n*(a-b)+' s = [['+n*(a-b)+' s||3600 s/h]] = '+nz(t,1)+' h']}}});});
 
 TM({t:'Wareneingang & Lagerstrategien',intro:'Im Wareneingang entscheidet sich, ob Menge, Qualität und Daten stimmen. Danach kommt die Frage: Wohin damit? Du kennst Prüfpflichten, Lagerarten und die Regeln, nach denen Plätze vergeben werden.',
@@ -106,7 +106,7 @@ mcq:[['Ein Karton ist sichtbar eingedrückt. Was tust Du bei der Annahme?','Scha
 ['Wohin gehören Schnelldreher?','In Griffhöhe und nah an den Kommissionierbereich','Ganz nach oben','In das hinterste Regal','In das Sperrlager','Kurze Wege für häufige Zugriffe sparen die meiste Zeit.']]});
 LT('Wareneingang & Lagerstrategien',(m,A)=>{
 A({name:'Auslastung des Lagers',gen:r=>{const n=r.p([1200,2400,3600,5000]),b=Math.round(n*r.p([0.72,0.78,0.85,0.91,0.94])),a=b/n*100;
- return{q:'Ein Palettenregal hat '+n+' Plätze. Belegt sind '+b+'. Wie hoch ist die Auslastung?',a,u:'%',d:1,tol:.06,
+ return{q:'Ein Palettenregal hat '+n+' Plätze. Belegt sind '+b+'. Wie hoch ist die Auslastung?',a,u:'%',d:1,tol:.005,
  sol:['Auslastung = [[belegte Plätze||vorhandene Plätze]]','= [['+b+'||'+n+']] = '+nz(a,1)+' %']}}});
 A({name:'Stellplätze im Blocklager',gen:r=>{const l=r.p([12,18,24]),b=r.p([8,10,12]),h=r.p([2,3,4]),nl=Math.floor(l/1.3),nb=Math.floor(b/0.9),n=nl*nb*h;
  return{q:'Eine Blocklagerfläche ist '+l+' m lang und '+b+' m breit. Europaletten stehen längs und brauchen mit Abstand 1,3 m in der Länge und 0,9 m in der Breite. Gestapelt wird '+h+'-fach. Wie viele Paletten passen?',a:n,u:'Paletten',d:0,tol:0,
@@ -127,14 +127,14 @@ mcq:[['Welcher Zeitanteil ist bei Mann zur Ware meist der größte?','Die Wegzei
 ['Wohin gehören schwere Schnelldreher?','In Hüfthöhe nah am Hauptweg','Ganz nach oben','Auf den Boden im hintersten Gang','In das Außenlager','Kurzer Weg und gute Griffhöhe schonen Zeit und Rücken.']]});
 LT('Kommissionierung',(m,A)=>{
 A({name:'Kommissionierleistung',gen:r=>{const tb=r.p([60,90,120]),n=r.p([4,5,6,8,10]),tw=r.p([12,15,20,25]),tg=r.p([4,5,6]),tt=r.p([3,6,10,12]),t=tb/n+tw+tg+tt,L=3600/t;
- return{q:'Je Auftrag fallen '+tb+' s Basiszeit an, ein Auftrag hat '+n+' Positionen. Je Position: Wegzeit '+tw+' s, Greifzeit '+tg+' s, Totzeit '+tt+' s. Wie viele Positionen schafft ein Kommissionierer je Stunde (ohne Verteilzeit)?',a:L,u:'Pos./h',d:0,tol:1,
+ return{q:'Je Auftrag fallen '+tb+' s Basiszeit an, ein Auftrag hat '+n+' Positionen. Je Position: Wegzeit '+tw+' s, Greifzeit '+tg+' s, Totzeit '+tt+' s. Wie viele Positionen schafft ein Kommissionierer je Stunde (ohne Verteilzeit)?',a:L,u:'Pos./h',d:0,tol:.005,
  sol:['Zeit je Position = [['+tb+' s||'+n+']] + '+tw+' s + '+tg+' s + '+tt+' s = '+nz(t,1)+' s','Leistung = [[3600 s/h||'+nz(t,1)+' s]] = '+nz(L,0)+' Positionen je Stunde']}}});
 A({name:'Personalbedarf in der Kommissionierung',gen:r=>{const p=r.p([4800,6000,7200,9600,12000]),L=r.p([100,120,150]),h=r.p([7,7.5]),n=p/(L*h);
  return{q:'An einem Tag sind '+p+' Positionen zu kommissionieren. Ein Mitarbeiter schafft '+L+' Positionen je Stunde und arbeitet '+nz(h,1)+' h produktiv. Wie viele Mitarbeiter werden gebraucht (aufrunden)?',a:Math.ceil(n-1e-9),u:'Mitarbeiter',d:0,tol:0,
  sol:['Leistung je Mitarbeiter = '+L+' [[Pos.||h]] · '+nz(h,1)+' h = '+nz(L*h,0)+' Positionen','Bedarf = [['+p+'||'+nz(L*h,0)+']] = '+nz(n,2)+', aufgerundet '+Math.ceil(n-1e-9)+' Mitarbeiter']}}});
 A({name:'Fehlerquote',gen:r=>{const p=r.p([20000,40000,50000,80000]),f=r.p([40,60,90,120,200]),q=f/p*100;
- return{q:'Im Monat wurden '+nz(p,0)+' Positionen kommissioniert, '+f+' davon fehlerhaft. Wie hoch ist die Fehlerquote?',a:q,u:'%',d:2,tol:.006,
- sol:['Fehlerquote = [[fehlerhafte Positionen||alle Positionen]]','= [['+f+'||'+nz(p,0)+']] = '+nz(q/100,4)+' = '+nz(q,2)+' %']}}});});
+ return{q:'Im Monat wurden '+nz(p,0)+' Positionen kommissioniert, '+f+' davon fehlerhaft. Wie hoch ist die Fehlerquote?',a:q,u:'%',d:3,tol:.01,
+ sol:['Fehlerquote = [[fehlerhafte Positionen||alle Positionen]]','= [['+f+'||'+nz(p,0)+']] = '+nz(q/100,5)+' = '+nz(q,3)+' %']}}});});
 
 TM({t:'Flurförderzeuge & Fördertechnik',intro:'Stapler, Hubwagen und Förderbänder bewegen die Ware. Du liest ein Traglastdiagramm, weißt, warum ein Stapler kippt, und kennst die Regeln für Fahrer und Fahrzeug.',
 pts:['Unstetigförderer arbeiten im Einzelspiel: Gabelstapler, Schubmaststapler, Hubwagen, Regalbediengerät, Kran. Stetigförderer laufen durchgehend: Rollenbahn, Gurtförderer, Kettenförderer.',
@@ -152,13 +152,13 @@ mcq:[['Eine lange Kiste hat ihren Schwerpunkt 800 mm vor dem Gabelrücken statt 
 ['Welches Fördermittel ist ein Stetigförderer?','Die Rollenbahn','Der Gabelstapler','Der Hallenkran','Das Regalbediengerät','Stetigförderer transportieren fortlaufend auf festem Weg.']]});
 LT('Flurförderzeuge & Fördertechnik',(m,A)=>{
 A({name:'Zulässige Last bei größerem Lastschwerpunktabstand',gen:r=>{const Q=r.p([1600,2000,2500,3000]),x=r.p([400,450,500]),c2=r.p([600,700,800,900,1000]),Q2=Q*(x+500)/(x+c2);
- return{q:'Ein Stapler trägt '+Q+' kg bei 500 mm Lastschwerpunktabstand. Der Abstand von der Vorderachse zum Gabelrücken beträgt '+x+' mm. Welche Last ist bei '+c2+' mm Lastschwerpunktabstand etwa zulässig?',a:Q2,u:'kg',d:0,tol:2,
+ return{q:'Ein Stapler trägt '+Q+' kg bei 500 mm Lastschwerpunktabstand. Der Abstand von der Vorderachse zum Gabelrücken beträgt '+x+' mm. Welche Last ist bei '+c2+' mm Lastschwerpunktabstand etwa zulässig?',a:Q2,u:'kg',d:0,tol:.005,
  sol:['Das Lastmoment um die Vorderachse bleibt gleich: Q_1 · (x + c_1) = Q_2 · (x + c_2)','Q_2 = '+Q+' kg · [['+x+' mm + 500 mm||'+x+' mm + '+c2+' mm]] = '+Q+' kg · [['+(x+500)+' mm||'+(x+c2)+' mm]] = '+nz(Q2,0)+' kg','Maßgeblich ist immer das Traglastdiagramm am Gerät.']}}});
 A({name:'Paletten je Stunde mit dem Stapler',gen:r=>{const s=r.p([30,40,60,80]),v=r.p([2,2.5,3]),tf=r.p([40,50,60]),t=2*s/v+tf,n=3600/t;
- return{q:'Ein Stapler fährt je Palette '+s+' m hin und '+s+' m zurück, im Mittel mit '+nz(v,1)+' m/s. Aufnehmen und Absetzen dauern zusammen '+tf+' s. Wie viele Paletten schafft er je Stunde?',a:n,u:'Paletten/h',d:0,tol:1,
+ return{q:'Ein Stapler fährt je Palette '+s+' m hin und '+s+' m zurück, im Mittel mit '+nz(v,1)+' m/s. Aufnehmen und Absetzen dauern zusammen '+tf+' s. Wie viele Paletten schafft er je Stunde?',a:n,u:'Paletten/h',d:0,tol:.005,
  sol:['Fahrzeit = [[2 · '+s+' m||'+nz(v,1)+' m/s]] = '+nz(2*s/v,1)+' s','Spielzeit = '+nz(2*s/v,1)+' s + '+tf+' s = '+nz(t,1)+' s','Leistung = [[3600 s/h||'+nz(t,1)+' s]] = '+nz(n,0)+' Paletten je Stunde']}}});
 A({name:'Durchsatz einer Rollenbahn',gen:r=>{const v=r.p([0.2,0.3,0.4,0.5]),a=r.p([0.8,1.0,1.2,1.5]),n=v/a*3600;
- return{q:'Auf einer Rollenbahn laufen Behälter mit '+nz(v,1)+' m/s. Der Abstand von Behälter zu Behälter beträgt '+nz(a,1)+' m. Wie viele Behälter kommen je Stunde an?',a:n,u:'Behälter/h',d:0,tol:1,
+ return{q:'Auf einer Rollenbahn laufen Behälter mit '+nz(v,1)+' m/s. Der Abstand von Behälter zu Behälter beträgt '+nz(a,1)+' m. Wie viele Behälter kommen je Stunde an?',a:n,u:'Behälter/h',d:0,tol:.005,
  sol:['Durchsatz = [[Geschwindigkeit||Abstand]]','= [['+nz(v,1)+' m/s||'+nz(a,1)+' m]] · 3600 [[s||h]] = '+nz(n,0)+' Behälter je Stunde']}}});});
 
 TM({t:'Ladeeinheiten & Verpackung',intro:'Die Palette ist das Maß der Logistik. Du bildest stabile Ladeeinheiten, rechnest Kartons je Palette und Paletten je Lkw und weißt, was eine Verpackung leisten muss.',
@@ -180,7 +180,7 @@ A({name:'Kartons auf der Europalette',gen:r=>{const k=r.p([[600,400],[400,300],[
  return{q:'Kartons mit '+k[0]+' mm · '+k[1]+' mm Grundfläche und '+h+' mm Höhe kommen auf eine Europalette (1200 mm · 800 mm, 144 mm hoch). Die Ladeeinheit darf '+H+' mm hoch sein. Wie viele Kartons passen?',a:n,u:'Kartons',d:0,tol:0,
  sol:['je Lage: [[1200 mm · 800 mm||'+k[0]+' mm · '+k[1]+' mm]] = '+nl+' Kartons','Lagen: [['+H+' mm − 144 mm||'+h+' mm]] = '+nz((H-144)/h,2)+', also '+lg+' Lagen','gesamt = '+nl+' · '+lg+' = '+n+' Kartons']}}});
 A({name:'Lademeter einer Sendung',gen:r=>{const n=r.p([4,6,8,10,12,16]),lm=n*1.2*.8/2.4;
- return{q:'Eine Sendung besteht aus '+n+' nicht stapelbaren Europaletten (1,2 m · 0,8 m). Wie viele Lademeter belegt sie auf einem 2,4 m breiten Lkw?',a:lm,u:'m',d:1,tol:.05,
+ return{q:'Eine Sendung besteht aus '+n+' nicht stapelbaren Europaletten (1,2 m · 0,8 m). Wie viele Lademeter belegt sie auf einem 2,4 m breiten Lkw?',a:lm,u:'m',d:1,tol:.01,
  sol:['Lademeter je Palette = [[1,2 m · 0,8 m||2,4 m]] = 0,4 m','Sendung = '+n+' · 0,4 m = '+nz(lm,1)+' m']}}});
 A({name:'Nutzlast oder Stellplätze',gen:r=>{const g=r.p([450,600,750,900]),N=24000,n=Math.min(33,Math.floor(N/g));
  return{q:'Ein Sattelzug hat 33 Stellplätze für Europaletten und 24 000 kg Nutzlast. Eine Palette wiegt '+g+' kg. Wie viele Paletten dürfen geladen werden?',a:n,u:'Paletten',d:0,tol:0,
@@ -205,7 +205,7 @@ A({name:'Dauer einer Tour',gen:r=>{const s=r.p([180,240,300,360]),v=r.p([50,60])
  return{q:'Eine Tour ist '+s+' km lang (im Mittel '+v+' km/h) und hat '+n+' Stopps zu je '+ts+' min. Nach spätestens 4,5 h Lenkzeit sind 45 min Pause einzuplanen. Wie lange dauert die Tour?',a:T,u:'h',d:2,tol:.02,
  sol:['Fahrzeit = [['+s+' km||'+v+' km/h]] = '+nz(tf,2)+' h','Standzeit = '+n+' · '+ts+' min = '+n*ts+' min = '+nz(n*ts/60,2)+' h','Pause: '+(p?'Lenkzeit über 4,5 h, also 0,75 h':'Lenkzeit höchstens 4,5 h, keine Pflichtpause'),'Tourdauer = '+nz(tf,2)+' h + '+nz(n*ts/60,2)+' h + '+nz(p,2)+' h = '+nz(T,2)+' h']}}});
 A({name:'Auslastung des Fahrzeugs',gen:r=>{const g=r.p([9500,12000,15600,18000,21000]),sp=r.p([18,22,26,30]),ag=g/24000*100,as=sp/33*100;
- return{q:'Ein Sattelzug (24 000 kg Nutzlast, 33 Stellplätze) lädt '+nz(g,0)+' kg auf '+sp+' Stellplätzen. Wie hoch ist die Auslastung nach Stellplätzen?',a:as,u:'%',d:1,tol:.06,
+ return{q:'Ein Sattelzug (24 000 kg Nutzlast, 33 Stellplätze) lädt '+nz(g,0)+' kg auf '+sp+' Stellplätzen. Wie hoch ist die Auslastung nach Stellplätzen?',a:as,u:'%',d:1,tol:.005,
  sol:['Auslastung nach Stellplätzen = [['+sp+'||33]] = '+nz(as,1)+' %','zum Vergleich nach Gewicht: [['+nz(g,0)+' kg||24 000 kg]] = '+nz(ag,1)+' %']}}});
 A({name:'Frachtkosten je 100 kg',gen:r=>{const K=r.p([380,460,540,720,950]),g=r.p([1200,2400,3600,6000,8000]),k=K/g*100;
  return{q:'Eine Teilladung mit '+g+' kg kostet '+K+' € Fracht. Wie hoch sind die Frachtkosten je 100 kg?',a:k,u:'€',d:2,tol:.01,
@@ -227,13 +227,13 @@ mcq:[['Mit welcher Kraft drängt die Ladung bei einer Vollbremsung nach vorn?','
 ['Ein Zurrgurt hat einen Einschnitt an der Kante. Was tust Du?','Aussondern, er ist ablegereif','Weiterverwenden, wenn es eilt','Verknoten','Mit Klebeband flicken','Ein beschädigter Gurt hält die angegebene Kraft nicht mehr.']]});
 LT('Ladungssicherung',(m,A)=>{
 A({name:'Sicherungskraft nach vorn',gen:r=>{const ms=r.p([800,1200,2000,3500,5000]),mu=r.p([0.2,0.3,0.4,0.6]),FG=ms*9.81,FS=(0.8-mu)*FG;
- return{q:'Eine Maschine mit '+ms+' kg steht auf der Ladefläche, der Gleitreibbeiwert beträgt '+nz(mu,1)+'. Welche Kraft muss die Sicherung nach vorn aufnehmen (g = 9,81 m/s²)?',a:FS,u:'N',d:0,tol:FS*.005+1,
+ return{q:'Eine Maschine mit '+ms+' kg steht auf der Ladefläche, der Gleitreibbeiwert beträgt '+nz(mu,1)+'. Welche Kraft muss die Sicherung nach vorn aufnehmen (g = 9,81 m/s²)?',a:FS,u:'N',d:0,tol:.005,
  sol:['F_G = m · g = '+ms+' kg · 9,81 [[m||s²]] = '+nz(FG,0)+' N','F_S = (0,8 − μ) · F_G = (0,8 − '+nz(mu,1)+') · '+nz(FG,0)+' N = '+nz(FS,0)+' N']}}});
-A({name:'Zahl der Zurrgurte beim Niederzurren',gen:r=>{const ms=r.p([600,1000,1500,2000,3000]),mu=r.p([0.3,0.4,0.6]),ST=r.p([300,400,500]),al=r.p([60,75,90]),FG=ms*9.81,n=(0.8-mu)*FG/(mu*1.5*ST*10*Math.sin(al*Math.PI/180)),N=Math.max(1,Math.ceil(n-1e-9));
- return{q:'Eine Kiste mit '+ms+' kg wird niedergezurrt. Gleitreibbeiwert '+nz(mu,1)+', Vorspannkraft je Gurt '+ST+' daN, Zurrwinkel '+al+'°. Wie viele Gurte sind nach der vereinfachten Formel nötig (aufrunden, g = 9,81 m/s²)?',a:N,u:'Gurte',d:0,tol:0,
- sol:['F_G = '+ms+' kg · 9,81 [[m||s²]] = '+nz(FG,0)+' N','n = [[(0,8 − μ) · F_G||μ · 1,5 · Vorspannkraft · sin α]]','n = [[(0,8 − '+nz(mu,1)+') · '+nz(FG,0)+' N||'+nz(mu,1)+' · 1,5 · '+ST*10+' N · '+nz(Math.sin(al*Math.PI/180),3)+']] = '+nz(n,2)+', also '+N+' Gurt'+(N>1?'e':''),'Mindestens zwei Gurte je frei stehendem Ladegut sind üblich.']}}});
+A({name:'Zahl der Zurrgurte beim Niederzurren',gen:r=>{const ms=r.p([600,1000,1500,2000,3000]),mu=r.p([0.3,0.4,0.6]),ST=r.p([300,400,500]),al=r.p([60,75,90]),FG=ms*9.81,n=(0.8-mu)*FG/(mu*1.5*ST*10*Math.sin(al*Math.PI/180)),N0=Math.ceil(n-1e-9),N=Math.max(2,N0);
+ return{q:'Eine Kiste mit '+ms+' kg wird niedergezurrt. Gleitreibbeiwert '+nz(mu,1)+', Vorspannkraft je Gurt '+ST+' daN, Zurrwinkel '+al+'°. Wie viele Gurte setzt Du ein? Rechne mit der vereinfachten Formel, runde auf und nimm mindestens 2 Gurte (g = 9,81 m/s²).',a:N,u:'Gurte',d:0,tol:0,
+ sol:['F_G = '+ms+' kg · 9,81 [[m||s²]] = '+nz(FG,0)+' N','n = [[(0,8 − μ) · F_G||μ · 1,5 · Vorspannkraft · sin α]]','n = [[(0,8 − '+nz(mu,1)+') · '+nz(FG,0)+' N||'+nz(mu,1)+' · 1,5 · '+ST*10+' N · '+nz(Math.sin(al*Math.PI/180),3)+']] = '+nz(n,2)+', aufgerundet '+N0+(N0>1?' Gurte':' Gurt'),N0<2?'Mindestens 2 Gurte je frei stehendem Ladegut, also 2 Gurte.':'Also '+N+' Gurte.','Die Formel ist eine Faustformel aus der älteren Praxis (Übertragungsfaktor 1,5). Verbindlich rechnet man nach DIN EN 12195-1.']}}});
 A({name:'Reibkraft mit und ohne Matte',gen:r=>{const ms=r.p([500,800,1200,2000]),FG=ms*9.81,d=(0.6-0.3)*FG;
- return{q:'Eine Palette mit '+ms+' kg steht auf einer Siebdruckplatte (μ = 0,3). Mit rutschhemmender Matte beträgt μ = 0,6. Um wie viel steigt die Reibkraft (g = 9,81 m/s²)?',a:d,u:'N',d:0,tol:d*.005+1,
+ return{q:'Eine Palette mit '+ms+' kg steht auf einer Siebdruckplatte (μ = 0,3). Mit rutschhemmender Matte beträgt μ = 0,6. Um wie viel steigt die Reibkraft (g = 9,81 m/s²)?',a:d,u:'N',d:0,tol:.005,
  sol:['F_G = '+ms+' kg · 9,81 [[m||s²]] = '+nz(FG,0)+' N','ohne Matte: F_R = 0,3 · '+nz(FG,0)+' N = '+nz(.3*FG,0)+' N','mit Matte: F_R = 0,6 · '+nz(FG,0)+' N = '+nz(.6*FG,0)+' N','Unterschied = '+nz(d,0)+' N']}}});});
 
 TM({t:'Prozessdaten & Logistikkennzahlen',intro:'Was nicht gemessen wird, lässt sich nicht steuern. Du wählst wenige, aussagekräftige Kennzahlen für Deinen Bereich, liest sie richtig und leitest Maßnahmen ab.',
@@ -251,13 +251,13 @@ mcq:[['Was macht eine Kennzahl erst aussagekräftig?','Der Vergleich mit Ziel, V
 ['Wo werden Kennzahlen am wirksamsten besprochen?','Täglich kurz an der Tafel im Bereich','Einmal im Jahr im Geschäftsbericht','Nur im Büro des Lagerleiters','Gar nicht, sie sprechen für sich','Nah am Geschehen folgen auf Abweichungen sofort Maßnahmen.']]});
 LT('Prozessdaten & Logistikkennzahlen',(m,A)=>{
 A({name:'Produktivität im Warenausgang',gen:r=>{const s=r.p([420,560,640,780,900]),h=r.p([56,64,72,80]),p=s/h;
- return{q:'In einer Schicht wurden '+s+' Sendungen verladen. Eingesetzt waren zusammen '+h+' Mitarbeiterstunden. Wie hoch ist die Produktivität?',a:p,u:'Sendungen/h',d:1,tol:.06,
+ return{q:'In einer Schicht wurden '+s+' Sendungen verladen. Eingesetzt waren zusammen '+h+' Mitarbeiterstunden. Wie hoch ist die Produktivität?',a:p,u:'Sendungen/h',d:1,tol:.01,
  sol:['Produktivität = [[Leistungsmenge||eingesetzte Stunden]]','= [['+s+' Sendungen||'+h+' h]] = '+nz(p,1)+' Sendungen je Stunde']}}});
 A({name:'Termintreue',gen:r=>{const n=r.p([800,1200,1500,2500]),v=r.p([24,36,45,60,75]),t=(n-v)/n*100;
- return{q:'Von '+n+' Sendungen im Monat kamen '+v+' zu spät an. Wie hoch ist die Termintreue?',a:t,u:'%',d:1,tol:.06,
+ return{q:'Von '+n+' Sendungen im Monat kamen '+v+' zu spät an. Wie hoch ist die Termintreue?',a:t,u:'%',d:1,tol:.005,
  sol:['Termintreue = [[pünktliche Sendungen||alle Sendungen]]','= [['+(n-v)+'||'+n+']] = '+nz(t,1)+' %']}}});
 A({name:'Schadenkosten im Jahr',gen:r=>{const n=r.p([12000,20000,30000,45000]),q=r.p([0.4,0.6,0.8,1.2]),k=r.p([120,180,250,320]),K=n*q/100*k;
- return{q:'Im Jahr gehen '+nz(n,0)+' Sendungen hinaus. Die Schadenquote beträgt '+nz(q,1)+' %, ein Schaden kostet im Mittel '+k+' €. Was kosten die Schäden im Jahr?',a:K,u:'€',d:0,tol:1,
+ return{q:'Im Jahr gehen '+nz(n,0)+' Sendungen hinaus. Die Schadenquote beträgt '+nz(q,1)+' %, ein Schaden kostet im Mittel '+k+' €. Was kosten die Schäden im Jahr?',a:K,u:'€',d:0,tol:.005,
  sol:['beschädigte Sendungen = '+nz(n,0)+' · '+nz(q/100,3)+' = '+nz(n*q/100,0),'Kosten = '+nz(n*q/100,0)+' · '+k+' € = '+nz(K,0)+' €']}}});});
 
 TM({t:'Incoterms & Zollabwicklung',intro:'Wer zahlt die Fracht, wer trägt das Risiko, wer macht die Zollpapiere? Du liest eine Lieferklausel richtig und kennst die Grundzüge von Ausfuhr und Einfuhr.',
@@ -319,9 +319,9 @@ mcq:[['Was ist im Lager wertschöpfend?','Die richtige Ware vollständig und pü
 ['Was ist der letzte Schritt im Verbesserungskreis?','Die bewährte Lösung zum Standard machen','Die nächste Idee beginnen','Den Verursacher suchen','Die Messung löschen','Ohne Standard rutscht der Ablauf zurück.']]});
 LT('Prozesse verbessern: Wertstrom & Lean',(m,A)=>{
 A({name:'Flussgrad eines Auftrags',gen:r=>{const tb=r.p([15,20,25,30,45]),dl=r.p([4,6,8,12,24]),f=tb/(dl*60)*100;
- return{q:'Ein Auftrag wird insgesamt '+tb+' min bearbeitet. Vom Eingang bis zur Verladung vergehen '+dl+' h. Wie hoch ist der Flussgrad?',a:f,u:'%',d:1,tol:.06,
+ return{q:'Ein Auftrag wird insgesamt '+tb+' min bearbeitet. Vom Eingang bis zur Verladung vergehen '+dl+' h. Wie hoch ist der Flussgrad?',a:f,u:'%',d:1,tol:.005,
  sol:['Durchlaufzeit = '+dl+' h = '+dl*60+' min','Flussgrad = [[Bearbeitungszeit||Durchlaufzeit]] = [['+tb+' min||'+dl*60+' min]] = '+nz(f,1)+' %']}}});
 A({name:'Eingesparte Wegzeit',gen:r=>{const w=r.p([18,24,30,36]),e=r.p([20,25,30,40]),n=r.p([120,150,200]),v=1.2,t=w*e/100/v*n*8/3600;
  return{q:'Ein Kommissionierer legt je Position im Mittel '+w+' m zurück (1,2 m/s) und schafft '+n+' Positionen je Stunde. Durch neue Platzvergabe sinkt der Weg um '+e+' %. Wie viele Stunden Wegzeit spart das in einer 8-Stunden-Schicht?',a:t,u:'h',d:2,tol:.02,
- sol:['eingesparter Weg je Position = '+w+' m · '+nz(e/100,2)+' = '+nz(w*e/100,1)+' m','eingesparte Zeit je Position = [['+nz(w*e/100,1)+' m||1,2 m/s]] = '+nz(w*e/100/v,1)+' s','je Schicht: '+nz(w*e/100/v,1)+' s · '+n+' · 8 = '+nz(w*e/100/v*n*8,0)+' s = '+nz(t,2)+' h']}}});});
+ sol:['eingesparter Weg je Position = '+w+' m · '+nz(e/100,2)+' = '+nz(w*e/100,1)+' m','eingesparte Zeit je Position = [['+nz(w*e/100,1)+' m||1,2 m/s]] = '+nz(w*e/100/v,1)+' s','je Schicht: [['+nz(w*e/100,1)+' m · '+n+' · 8||1,2 m/s]] = '+nz(w*e/100/v*n*8,0)+' s = '+nz(t,2)+' h']}}});});
 }

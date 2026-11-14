@@ -14,11 +14,11 @@ fo:['Wärmemenge: Q = m · c · ΔT.',
 'Wärmeübertrager: Q̇ = k · A · ΔT_m mit der Fläche A und der mittleren Temperaturdifferenz ΔT_m.'],
 mcq:[['Warum heizt man in der Chemie gern mit Dampf?','Beim Kondensieren wird viel Wärme bei gleicher Temperatur frei','Dampf ist kälter als Wasser','Dampf braucht keine Rohrleitung','Dampf hat keine Verluste','Die Kondensationswärme ist viel größer als die Wärme aus dem Abkühlen von Wasser.'],
 ['Ein Wärmeübertrager erreicht die Austrittstemperatur nicht mehr. Was ist eine typische Ursache?','Beläge auf den Wärmeübertragerflächen','Zu saubere Rohre','Zu hoher Dampfdruck','Zu viel Isolierung','Fouling verschlechtert den Wärmedurchgang. Abhilfe: reinigen.'],
-['Welche Stromführung nutzt das Temperaturgefälle am besten?','Gegenstrom','Gleichstrom','Kreuzstrom ist immer schlechter','Das ist egal','Im Gegenstrom bleibt die Temperaturdifferenz über die ganze Länge erhalten.'],
+['Welche Stromführung nutzt das Temperaturgefälle am besten?','Gegenstrom','Gleichstrom','Kreuzstrom ist immer schlechter','Das ist egal','Im Gegenstrom bleibt über die ganze Länge eine Temperaturdifferenz, sie ist gleichmäßiger verteilt. Das kalte Medium kann wärmer werden als das warme am Austritt.'],
 ['1000 kg Wasser werden um 10 K erwärmt. Wie viel Wärme ist nötig?','41 800 kJ','4180 kJ','418 kJ','10 000 kJ','Q = 1000 kg · 4,18 kJ/(kg · K) · 10 K = 41 800 kJ.']]});
 
 TM({t:'Fördern: Pumpen & Rohrleitungen',intro:'Ohne Pumpen bewegt sich in der Anlage nichts. Du unterscheidest die Bauarten, berechnest Strömungsgeschwindigkeit und Leistung und kennst die Fehler, die Pumpen zerstören.',
-pts:['Kreiselpumpen fördern gleichmäßig große Mengen. Ihr Förderstrom hängt vom Gegendruck ab. Sie sind nicht selbstansaugend und müssen vor dem Start gefüllt und entlüftet sein.',
+pts:['Kreiselpumpen fördern gleichmäßig große Mengen. Ihr Förderstrom hängt vom Gegendruck ab. Normale Kreiselpumpen sind nicht selbstansaugend und müssen vor dem Start gefüllt und entlüftet sein. Es gibt selbstansaugende Bauarten.',
 'Verdrängerpumpen (Kolben, Membran, Zahnrad, Exzenterschnecke) fördern fast unabhängig vom Gegendruck. Sie dürfen nie gegen eine geschlossene Armatur laufen und brauchen ein Überströmventil.',
 'Betriebspunkt: Schnittpunkt von Pumpenkennlinie und Anlagenkennlinie. Wird gedrosselt, wandert er zu kleinerem Förderstrom.',
 'Kavitation: Sinkt der Druck am Saugstutzen unter den Dampfdruck, bilden sich Dampfblasen, die schlagartig zusammenfallen. Die Pumpe prasselt, das Laufrad wird zerstört. Abhilfe: Zulaufhöhe erhöhen, Saugleitung kurz und weit, Medium kühler.',

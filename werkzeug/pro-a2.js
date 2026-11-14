@@ -24,7 +24,7 @@ C.push({f:'org',m,name:'Rüstkosten je Stück',gen:r=>{const tr=r.p([30,45,60,90
  return{q:'Ein Rüstvorgang dauert '+tr+' min. Die Anlage kostet '+S+' € je Stunde. Das Los umfasst '+n+' Stück. Wie hoch sind die Rüstkosten je Stück?',a:k,u:'€',d:3,tol:.002,
  sol:['Rüstkosten = Rüstzeit · Stundensatz = [['+tr+' min||60 min/h]] · '+S+' €/h = '+nz(K,2)+' €','Rüstkosten je Stück = [['+nz(K,2)+' €||'+n+' Stück]] = '+nz(k,3)+' €/Stück']}}});
 C.push({f:'org',m,name:'Gewonnene Laufzeit durch kürzeres Rüsten',gen:r=>{const a=r.p([60,75,90,120]),b=r.p([20,25,30,40]),n=r.p([6,8,10,12,15]),t=(a-b)*n/60;
- return{q:'Die Rüstzeit sinkt von '+a+' min auf '+b+' min. In der Woche wird '+n+'-mal gerüstet. Wie viele Stunden Laufzeit gewinnst Du je Woche?',a:t,u:'h',d:1,tol:.05,
+ return{q:'Die Rüstzeit sinkt von '+a+' min auf '+b+' min. In der Woche wird '+n+'-mal gerüstet. Wie viele Stunden Laufzeit gewinnst Du je Woche?',a:t,u:'h',d:1,tol:.01,
  sol:['Einsparung je Rüstvorgang = '+a+' min − '+b+' min = '+(a-b)+' min','Gewinn je Woche = '+(a-b)+' min · '+n+' = '+(a-b)*n+' min = [['+(a-b)*n+' min||60 min/h]] = '+nz(t,1)+' h']}}});}
 
 /* ================= Kunststoff & Kautschuk ================= */
@@ -86,7 +86,7 @@ FRB('ku',{'Maschinenstundensatz':'Zum Stundensatz der Spritzgießmaschine kommen
 
 CASES.push(
 {f:'tec',t:'Neues Gehäuse aus ABS anfahren',txt:'Ein Gehäusedeckel aus ABS wird neu angefahren. Das Teil hat eine projizierte Fläche von 150 cm² und wiegt 85 g, das 2-fach-Werkzeug hat einen Kaltkanal mit 20 g Anguss. Gerechnet wird mit 400 bar Werkzeuginnendruck und einem Sicherheitsfaktor von 1,2. Die Wanddicke beträgt 2,5 mm, bei 2,0 mm Wanddicke wurden an einem ähnlichen Teil 12 s Kühlzeit gebraucht. Zur Verfügung stehen Maschinen mit 1000 kN, 1500 kN und 2000 kN Schließkraft. ABS soll vor der Verarbeitung getrocknet werden.',
-tasks:[{q:'Berechne die nötige Schließkraft und wähle die Maschine.',a:'F = 150 cm² · 2 · 4000 N/cm² · 1,2 = 1 440 000 N = 1440 kN. Die Maschine mit 1500 kN reicht knapp, sie ist zu 96 % ausgelastet. Wenn der Innendruck höher ausfällt, ist die 2000-kN-Maschine die sichere Wahl.',p:5},
+tasks:[{q:'Berechne die nötige Schließkraft und wähle die Maschine.',a:'F = 150 cm² · 2 · 4000 N/cm² · 1,2 = 1 440 000 N = 1440 kN. Die Maschine mit 1500 kN reicht knapp, sie ist zu 96 % ausgelastet. Wenn der Innendruck höher ausfällt, ist die 2000-kN-Maschine die sichere Wahl. Die Fläche des Angusses ist hier vernachlässigt. In der Praxis zählt sie zur projizierten Fläche und erhöht die Kraft, ein weiterer Grund für die größere Maschine.',p:5},
 {q:'Schätze die Kühlzeit für 2,5 mm Wanddicke ab.',a:'Die Kühlzeit wächst mit dem Quadrat der Wanddicke. t = 12 s · (2,5 mm ÷ 2,0 mm)² = 12 s · 1,5625 = 18,8 s.',p:4},
 {q:'Wie viel Granulat braucht die Maschine je Stunde bei 30 s Zykluszeit, und wie groß muss der Trockentrichter bei 3 h Trockenzeit und einer Schüttdichte von 600 kg/m³ sein?',a:'Schussgewicht = 2 · 85 g + 20 g = 190 g. Durchsatz = 0,19 kg · 120 Schuss/h = 22,8 kg/h. Inhalt = 22,8 kg/h · 3 h = 68,4 kg. Volumen = 68,4 kg ÷ 600 kg/m³ = 0,114 m³ = 114 l. Gewählt wird der nächstgrößere Trichter.',p:6},
 {q:'In welcher Reihenfolge stellst Du den Prozess ein?',a:'Temperaturen von Zylinder und Werkzeug nach Datenblatt. Füllstudie ohne Nachdruck mit kurzen Schüssen. Umschaltpunkt bei etwa 95 bis 98 % Füllung. Nachdruck und Nachdruckzeit über das Teilegewicht bestimmen (Siegelpunkt). Kühlzeit schrittweise kürzen. Parameter dokumentieren und erstes Teil freigeben lassen.',p:5},
@@ -130,10 +130,10 @@ C.push({f:'org',m,name:'Gesamtanlageneffektivität (OEE)',gen:r=>{const a=r.p([8
  return{q:'Eine Linie erreicht '+a+' % Verfügbarkeit, '+l+' % Leistungsgrad und '+q+' % Qualitätsgrad. Wie hoch ist die OEE?',a:o,u:'%',d:1,tol:.15,
  sol:['OEE = Verfügbarkeit · Leistungsgrad · Qualitätsgrad','OEE = '+nz(a/100,2)+' · '+nz(l/100,2)+' · '+nz(q/100,2)+' = '+nz(o/100,3)+' = '+nz(o,1)+' %']}}});
 C.push({f:'org',m,name:'Ersatzteil lagern oder nicht',gen:r=>{const w=r.p([1500,2400,3000,4000,6000]),s=r.p([15,20,25]),lz=r.p([2,3,4,6]),st=r.p([8,16,24]),ks=r.p([300,400,500,600]),p=r.p([5,10,20]),KL=w*s/100,KA=lz*5*st*ks*p/100;
- return{q:'Ein Ersatzteil kostet '+w+' €, der Lagerkostensatz beträgt '+s+' % im Jahr. Ohne Lagerteil steht die Linie bei einem Ausfall '+lz+' Wochen lang an 5 Tagen je '+st+' h, eine Stunde Stillstand kostet '+ks+' €. Die Ausfallwahrscheinlichkeit beträgt '+p+' % im Jahr. Wie hoch ist das erwartete Ausfallrisiko im Jahr ohne Lagerteil?',a:KA,u:'€',d:0,tol:1,
+ return{q:'Ein Ersatzteil kostet '+w+' €, der Lagerkostensatz beträgt '+s+' % im Jahr. Ohne Lagerteil steht die Linie bei einem Ausfall '+lz+' Wochen lang an 5 Tagen je '+st+' h, eine Stunde Stillstand kostet '+ks+' €. Die Ausfallwahrscheinlichkeit beträgt '+p+' % im Jahr. Wie hoch ist das erwartete Ausfallrisiko im Jahr ohne Lagerteil?',a:KA,u:'€',d:0,tol:.005,
  sol:['Stillstand = '+lz+' Wochen · 5 Tage · '+st+' h = '+lz*5*st+' h','Schaden = '+lz*5*st+' h · '+ks+' €/h = '+nz(lz*5*st*ks,0)+' €','erwartetes Risiko = '+nz(lz*5*st*ks,0)+' € · '+nz(p/100,2)+' = '+nz(KA,0)+' € je Jahr','Zum Vergleich die Lagerkosten: '+w+' € · '+nz(s/100,2)+' = '+nz(KL,0)+' € je Jahr']}}});
 C.push({f:'org',m,name:'Kosten eines ungeplanten Ausfalls',gen:r=>{const t=r.p([4,6,8,12]),ks=r.p([350,450,600,800]),rp=r.p([600,900,1400,2000]),K=t*ks+rp;
- return{q:'Ein Getriebe fällt ungeplant aus. Die Linie steht '+t+' h, eine Stunde Stillstand kostet '+ks+' €. Reparatur und Teile kosten '+rp+' €. Wie hoch sind die Ausfallkosten?',a:K,u:'€',d:0,tol:1,
+ return{q:'Ein Getriebe fällt ungeplant aus. Die Linie steht '+t+' h, eine Stunde Stillstand kostet '+ks+' €. Reparatur und Teile kosten '+rp+' €. Wie hoch sind die Ausfallkosten?',a:K,u:'€',d:0,tol:.005,
  sol:['Ausfallkosten = Stillstandsdauer · Stillstandskosten + Reparatur','= '+t+' h · '+ks+' €/h + '+rp+' € = '+nz(K,0)+' €']}}});}
 
 FRB('mt',{'Maschinenstundensatz':'Bei verketteten, hochautomatisierten Anlagen bestimmen Abschreibung und Zinsen den Stundensatz. Deshalb zählt jede Stunde Laufzeit, und Stillstand ist der teuerste Posten.',
@@ -192,10 +192,10 @@ mcq:[['Der mittlere Bestand sinkt bei gleichem Verbrauch auf die Hälfte. Was pa
 ['Wie fängst Du eine Saisonspitze im Versand am besten auf?','Mit Arbeitszeitkonten, Springern und rechtzeitig eingearbeiteten Aushilfen','Mit Überstunden ohne Ende','Mit Lieferstopp','Indem das Stammpersonal verdoppelt wird','Die Spitze ist planbar. Einarbeitung und Unterweisung brauchen Vorlauf.']]});
 {const m=MI('org','Logistikkosten & Lagerkennzahlen');
 C.push({f:'org',m,name:'Umschlagshäufigkeit und Lagerdauer',gen:r=>{const jv=r.p([1.2,1.8,2.4,3.6,4.8])*1e6,b=r.p([150,200,300,400,600])*1000,U=jv/b,D=360/U;
- return{q:'Der Jahresverbrauch eines Lagers beträgt '+nz(jv,0)+' €, der mittlere Lagerbestand '+nz(b,0)+' €. Wie viele Tage liegt die Ware im Mittel (360 Tage)?',a:D,u:'Tage',d:1,tol:.06,
+ return{q:'Der Jahresverbrauch eines Lagers beträgt '+nz(jv,0)+' €, der mittlere Lagerbestand '+nz(b,0)+' €. Wie viele Tage liegt die Ware im Mittel (360 Tage)?',a:D,u:'Tage',d:1,tol:.01,
  sol:['Umschlagshäufigkeit = [['+nz(jv,0)+' €||'+nz(b,0)+' €]] = '+nz(U,1),'mittlere Lagerdauer = [[360 Tage||'+nz(U,1)+']] = '+nz(D,1)+' Tage']}}});
 C.push({f:'org',m,name:'Lagerkosten im Jahr',gen:r=>{const b=r.p([200,350,500,800])*1000,z=r.p([15,18,20,22,25]),K=b*z/100;
- return{q:'Der mittlere Lagerbestand beträgt '+nz(b,0)+' €, der Lagerkostensatz '+z+' %. Wie hoch sind die Lagerkosten im Jahr?',a:K,u:'€',d:0,tol:1,
+ return{q:'Der mittlere Lagerbestand beträgt '+nz(b,0)+' €, der Lagerkostensatz '+z+' %. Wie hoch sind die Lagerkosten im Jahr?',a:K,u:'€',d:0,tol:.005,
  sol:['Lagerkosten = mittlerer Lagerbestand · Lagerkostensatz','= '+nz(b,0)+' € · '+nz(z/100,2)+' = '+nz(K,0)+' €']}}});
 C.push({f:'org',m,name:'Kosten je Position',gen:r=>{const K=r.p([180,240,320,420])*1000,p=r.p([300,400,600,800])*1000,k=K/p;
  return{q:'Die Kommissionierung kostet im Jahr '+nz(K,0)+' € (Personal, Fläche, Technik). Kommissioniert werden '+nz(p,0)+' Positionen. Was kostet eine Position?',a:k,u:'€',d:2,tol:.006,
@@ -219,10 +219,10 @@ mcq:[['Was spricht bei geringer Fahrleistung gegen den eigenen Lkw?','Die Fixkos
 ['Was bleibt auch bei Vergabe an eine Spedition Deine Aufgabe?','Die beförderungssichere Verladung','Die Lenkzeiten des Fahrers','Die Wartung des Lkw','Die Kfz-Versicherung','Der Absender verlädt beförderungssicher.']]});
 {const m=MI('org','Fuhrpark oder Spedition');
 C.push({f:'org',m,name:'Kritische Fahrleistung',gen:r=>{const Fx=r.p([54,63,72,81,90])*1000,ke=r.p([0.4,0.45,0.5]),sp=r.p([1.2,1.3,1.4,1.5,1.6]),x=Fx/(sp-ke);
- return{q:'Ein eigener Lkw verursacht '+nz(Fx,0)+' € Fixkosten im Jahr und '+nz(ke,2)+' € je Kilometer. Die Spedition berechnet '+nz(sp,2)+' € je Kilometer. Ab welcher Fahrleistung im Jahr ist der eigene Lkw günstiger?',a:x,u:'km',d:0,tol:x*.002+1,
+ return{q:'Ein eigener Lkw verursacht '+nz(Fx,0)+' € Fixkosten im Jahr und '+nz(ke,2)+' € je Kilometer. Die Spedition berechnet '+nz(sp,2)+' € je Kilometer. Ab welcher Fahrleistung im Jahr ist der eigene Lkw günstiger?',a:x,u:'km',d:0,tol:.005,
  sol:['kritische Fahrleistung = [[Fixkosten||Preis je km − eigene Kosten je km]]','= [['+nz(Fx,0)+' €||'+nz(sp,2)+' €/km − '+nz(ke,2)+' €/km]] = '+nz(x,0)+' km']}}});
 C.push({f:'org',m,name:'Kostenvergleich bei gegebener Fahrleistung',gen:r=>{const Fx=r.p([60,70,80])*1000,ke=r.p([0.4,0.5]),sp=r.p([1.3,1.4,1.5]),km=r.p([40,60,80,100,120])*1000,Ke=Fx+km*ke,Ks=km*sp,d=Ks-Ke;
- return{q:'Eigener Lkw: '+nz(Fx,0)+' € Fixkosten im Jahr und '+nz(ke,2)+' € je Kilometer. Spedition: '+nz(sp,2)+' € je Kilometer. Geplant sind '+nz(km,0)+' km im Jahr. Um wie viel ist der eigene Lkw günstiger? (Negativ heißt: teurer.)',a:d,u:'€',d:0,tol:1,
+ return{q:'Eigener Lkw: '+nz(Fx,0)+' € Fixkosten im Jahr und '+nz(ke,2)+' € je Kilometer. Spedition: '+nz(sp,2)+' € je Kilometer. Geplant sind '+nz(km,0)+' km im Jahr. Um wie viel ist der eigene Lkw günstiger? (Negativ heißt: teurer.)',a:d,u:'€',d:0,tol:.005,
  sol:['eigener Lkw = '+nz(Fx,0)+' € + '+nz(km,0)+' km · '+nz(ke,2)+' €/km = '+nz(Ke,0)+' €','Spedition = '+nz(km,0)+' km · '+nz(sp,2)+' €/km = '+nz(Ks,0)+' €','Unterschied = '+nz(Ks,0)+' € − '+nz(Ke,0)+' € = '+nz(d,0)+' €']}}});
 C.push({f:'org',m,name:'Kosten je Sendung auf einer Tour',gen:r=>{const kt=r.p([280,340,420,480]),n=r.p([8,10,14,20]),k=kt/n;
  return{q:'Eine Verteilertour kostet '+kt+' € am Tag. Ausgeliefert werden '+n+' Sendungen. Was kostet eine Sendung?',a:k,u:'€',d:2,tol:.01,

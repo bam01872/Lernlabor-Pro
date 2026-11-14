@@ -2,7 +2,7 @@
 
 Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in sechs Fachrichtungen: Metall, Elektrotechnik, Chemie, Kunststoff & Kautschuk, Mechatronik und Logistik. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 6 (14.11.2026), drei neue Fachrichtungen Kunststoff & Kautschuk, Mechatronik und Logistik. Seit Version 5 hat Chemie das Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 39 Themen, Elektrotechnik 40, Chemie 51, Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 7 (14.11.2026), Korrekturen aus der fachlichen Prüfung (Durchlauf 1) in allen sechs Fachrichtungen. Seit Version 6 gibt es die Fachrichtungen Kunststoff & Kautschuk, Mechatronik und Logistik. Seit Version 5 hat Chemie das Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 39 Themen, Elektrotechnik 40, Chemie 51, Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
@@ -30,6 +30,14 @@ Stand: Version 6 (14.11.2026), drei neue Fachrichtungen Kunststoff & Kautschuk, 
 ```
 python3 werkzeug/build.py werkzeug/basis/meisterlabor-v5.html index.html
 ```
+
+## Prüfen
+
+```
+node tests/check.js
+```
+
+Lädt die App in allen sechs Fachrichtungen und prüft jede Rechenaufgabe in 25 Zahlenvarianten: gültiges Ergebnis, kleine relative Toleranz (höchstens 5 %), falsche Eingaben (Hälfte, plus 10 %) werden abgelehnt. Braucht Playwright mit Chromium. Wichtig: `tol` ist immer relativ (0,01 = 1 % des Ergebnisses), nie ein absoluter Wert.
 
 ## Hinweis zum Rechtsstand
 

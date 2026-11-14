@@ -22,7 +22,7 @@ pts:['Drei Schutzebenen: Basisschutz (Isolierung, Gehäuse), Fehlerschutz (autom
 'Die fünf Sicherheitsregeln vor jeder Arbeit: Freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit feststellen, Erden und Kurzschließen, benachbarte spannungsführende Teile abdecken.',
 'Erstprüfung in fester Reihenfolge: Besichtigen, Erproben, Messen. Erst danach wird die Anlage übergeben.',
 'Gemessen wird: Durchgängigkeit des Schutzleiters, Isolationswiderstand, Schleifenimpedanz, Auslösung des RCD, Drehfeld.',
-'Abschaltzeiten als Richtwerte im TN-System bei 230 V: 0,4 s in Endstromkreisen bis 32 A, 5 s in Verteilungsstromkreisen. Maßgeblich ist die aktuelle Norm.',
+'Abschaltzeiten als Richtwerte im TN-System bei 230 V: 0,4 s in Endstromkreisen mit Steckdosen bis 63 A und mit fest angeschlossenen Verbrauchern bis 32 A, 5 s in Verteilungsstromkreisen und den übrigen Endstromkreisen. Maßgeblich ist die aktuelle Norm.',
 'Ohne Prüfprotokoll gilt die Prüfung als nicht gemacht. Das Protokoll nennt Messwerte, Messgerät, Prüfer und Datum.'],
 fo:['Abschaltbedingung: Z_S ≤ [[U_0||I_a]] mit U_0 = 230 V und I_a als Strom, der das Schutzorgan in der geforderten Zeit auslöst.',
 'Leitungsschutzschalter lösen sicher unverzögert aus bei: Typ B I_a = 5 · I_n, Typ C I_a = 10 · I_n.',
@@ -86,7 +86,7 @@ pts:['Das Drehfeld läuft mit der Synchrondrehzahl um. Der Läufer bleibt etwas 
 'Typenschild: Bemessungsleistung an der Welle, Spannung und Schaltung (Stern oder Dreieck), Strom, cos φ, Drehzahl, Effizienzklasse (IE2, IE3, IE4).',
 'Direktanlauf: einfach, aber mit dem fünf- bis achtfachen Nennstrom. Stern-Dreieck-Anlauf: Strom und Moment sinken auf ein Drittel. Sanftanlauf: Spannung wird hochgefahren.',
 'Der Frequenzumrichter verändert Frequenz und Spannung gemeinsam. Die Drehzahl ist stufenlos einstellbar, der Anlauf weich, der Anlaufstrom klein.',
-'Bei Pumpen und Lüftern sinkt die Leistung mit der dritten Potenz der Drehzahl. 80 % Drehzahl brauchen nur etwa die Hälfte der Leistung.',
+'Bei Pumpen und Lüftern ohne Gegendruck sinkt die Leistung etwa mit der dritten Potenz der Drehzahl. 80 % Drehzahl brauchen dann nur etwa die Hälfte der Leistung. Muss die Anlage einen festen Druck halten, ist die Ersparnis deutlich kleiner.',
 'Umrichter erzeugen Störungen. Deshalb: geschirmte Motorleitung, Schirm beidseitig großflächig auflegen, Netzfilter, Leitungen getrennt von Signalleitungen verlegen.'],
 fo:['Synchrondrehzahl: n_s = [[f · 60||p]] mit p als Polpaarzahl, n_s in [[1||min]].',
 'Schlupf: s = [[n_s − n||n_s]] · 100 %.',
@@ -101,7 +101,7 @@ mcq:[['Ein vierpoliger Motor (p = 2) läuft am 50-Hz-Netz. Wie groß ist die Syn
 TM({t:'Instandhaltung elektrischer Anlagen',intro:'Elektrische Anlagen altern unauffällig: Klemmen lockern sich, Isolierungen verspröden, Schutzleiter brechen. Du planst die wiederkehrenden Prüfungen, legst Fristen fest und sorgst dafür, dass nur befähigte Personen an der Anlage arbeiten.',
 pts:['Elektrische Anlagen und Betriebsmittel werden vor der ersten Inbetriebnahme, nach Änderung oder Instandsetzung und wiederkehrend geprüft. Die Fristen legt der Unternehmer in der Gefährdungsbeurteilung fest.',
 'Richtwerte: ortsfeste Anlagen alle vier Jahre, ortsveränderliche Betriebsmittel je nach Einsatz alle sechs Monate bis zwei Jahre, auf Baustellen häufiger.',
-'Liegt die Fehlerquote bei den Prüfungen unter 2 %, kann die Frist verlängert werden. Liegt sie darüber, wird sie verkürzt.',
+'Die Fehlerquote ist ein Anhaltswert: Liegt sie unter 2 %, kann die Frist verlängert werden, liegt sie darüber, sollte sie verkürzt werden. Die Frist legt der Unternehmer in der Gefährdungsbeurteilung fest.',
 'Wer darf was: Die Elektrofachkraft arbeitet selbstständig. Die elektrotechnisch unterwiesene Person arbeitet nach Unterweisung unter Leitung und Aufsicht. Laien bedienen nur.',
 'Thermografie findet lockere Klemmen und überlastete Abgänge im laufenden Betrieb, bevor etwas ausfällt.',
 'Gearbeitet wird freigeschaltet nach den fünf Sicherheitsregeln. Arbeiten unter Spannung sind die Ausnahme und brauchen Ausbildung, Anweisung und Schutzausrüstung.'],
@@ -147,7 +147,7 @@ C.push({f:tec,m,name:'Kondensatorleistung',gen:r=>{const P=r.step(60,300,20),c1=
  sol:['tan φ_1 = '+nz(t1,3)+' und tan φ_2 = '+nz(t2,3)+' (aus cos φ mit dem Taschenrechner)','Q_C = P · (tan φ_1 − tan φ_2)','Q_C = '+P+' kW · ('+nz(t1,3)+' − '+nz(t2,3)+') = '+nz(Q,0)+' kvar']}}});
 C.push({f:tec,m,name:'Strom vor und nach der Kompensation',gen:r=>{const P=r.step(80,240,20),c1=r.p([0.7,0.75,0.8]),I1=P*1000/(q3*400*c1),I2=P*1000/(q3*400*0.95),d=(1-I2/I1)*100;
  return{q:'Eine Anlage nimmt am 400-V-Netz '+P+' kW auf. Durch die Kompensation steigt der cos φ von '+nt(c1)+' auf 0,95. Um wie viel Prozent sinkt der Strom in der Zuleitung?',a:d,u:'%',d:1,tol:0.02,
- sol:['I_1 = [['+nz(P*1000,0)+' W||1,732 · 400 V · '+nt(c1)+']] = '+nz(I1,0)+' A','I_2 = [['+nz(P*1000,0)+' W||1,732 · 400 V · 0,95]] = '+nz(I2,0)+' A','Abnahme = (1 − [['+nz(I2,0)+' A||'+nz(I1,0)+' A]]) · 100 % = '+nz(d,1)+' %']}}});}
+ sol:['I_1 = [['+nz(P*1000,0)+' W||1,732 · 400 V · '+nt(c1)+']] = '+nz(I1,1)+' A','I_2 = [['+nz(P*1000,0)+' W||1,732 · 400 V · 0,95]] = '+nz(I2,1)+' A','Abnahme = (1 − [['+nz(I2,1)+' A||'+nz(I1,1)+' A]]) · 100 % = '+nz(d,1)+' %','Kürzer: Abnahme = (1 − [['+nt(c1)+'||0,95]]) · 100 % = '+nz(d,1)+' %']}}});}
 {const m=MI(tec,'Elektrische Antriebe & Frequenzumrichter');
 C.push({f:tec,m,name:'Synchrondrehzahl und Schlupf',gen:r=>{const p=r.p([1,2,3]),ns=3000/p,s0=r.step(2,5,0.5),n=Math.round(ns*(1-s0/100)/5)*5,s=(ns-n)/ns*100;
  return{q:'Ein Motor mit der Polpaarzahl p = '+p+' läuft am 50-Hz-Netz mit '+n+' 1/min. Wie groß ist der Schlupf?',a:s,u:'%',d:1,tol:0.02,
@@ -157,7 +157,7 @@ C.push({f:tec,m,name:'Drehmoment an der Welle',gen:r=>{const P=r.p([4,5.5,7.5,11
  sol:['M = [[9550 · P||n]] mit P in kW und n in 1/min','M = [[9550 · '+nt(P)+'||'+n+']] Nm = '+nz(M,1)+' Nm']}}});
 C.push({f:tec,m,name:'Lüfter mit Frequenzumrichter',gen:r=>{const P1=r.p([7.5,11,15,22,30]),x=r.p([60,70,80,90]),P2=P1*Math.pow(x/100,3);
  return{q:'Ein Lüfter nimmt bei voller Drehzahl '+nt(P1)+' kW auf. Mit dem Frequenzumrichter läuft er nur noch mit '+x+' % der Drehzahl. Welche Leistung nimmt er dann etwa auf?',a:P2,u:'kW',d:1,tol:0.02,
- sol:['P_2 = P_1 · ([[n_2||n_1]])³','P_2 = '+nt(P1)+' kW · '+nt(x/100)+'³ = '+nt(P1)+' kW · '+nz(Math.pow(x/100,3),3)+' = '+nz(P2,1)+' kW']}}});}
+ sol:['P_2 = P_1 · ([[n_2||n_1]])³','P_2 = '+nt(P1)+' kW · '+nt(x/100)+'³ = '+nt(P1)+' kW · '+nz(Math.pow(x/100,3),3)+' = '+nz(P2,1)+' kW','Das gilt näherungsweise für einen Lüfter, der keinen festen Druck halten muss.']}}});}
 {const m=MI(tec,'Instandhaltung elektrischer Anlagen');
 C.push({f:tec,m,name:'Fehlerquote bei der Geräteprüfung',gen:r=>{const N=r.step(150,900,50),k=r.i(1,Math.round(N*0.05)),q=k/N*100;
  return{q:'Bei der Wiederholungsprüfung waren von '+N+' ortsveränderlichen Geräten '+k+' fehlerhaft. Wie groß ist die Fehlerquote?',a:q,u:'%',d:1,tol:0.02,
