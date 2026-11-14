@@ -7477,10 +7477,10 @@ const rhG=s=>100*Math.pow(100,s/100);
 const rhBild=(T,sp)=>{const g=rhG(sp),eta=rhEta(T,g),lx=v=>Math.log10(v);let s='';
  const X0=74,X1=272,Y0=226,Y1=46,px=v=>X0+(X1-X0)*(lx(v)-2)/2,py=v=>Y0-(Y0-Y1)*(lx(v)-1)/3;
  [10,100,1000,10000].forEach(v=>s+=`<path d="M${X0} ${F(py(v))}H${X1}" stroke="var(--line)"/>`+L(X0-6,py(v)+4,nz(v,0),'end',11.5,'var(--mute)',500));
- [100,1000,10000].forEach(v=>s+=L(px(v),Y0+16,nz(v,0),'middle',11.5,'var(--mute)',500));
+ [100,1000,10000].forEach(v=>s+=L(px(v),Y0+16,nz(v,0),v===100?'start':'middle',11.5,'var(--mute)',500));
  s+=`<path d="M${X0} ${Y1-6}V${Y0}H${X1+6}" fill="none" stroke="var(--ink)" stroke-width="1.4"/>`+L(X0-2,Y1-12,'η in Pa · s','start',12,'var(--mute)',600)+L(X1+4,Y0+32,'Schergeschwindigkeit in 1/s','end',12,'var(--mute)',600);
  s+=`<path d="M${X0} ${F(py(60))}H${X1}" stroke="var(--ok)" stroke-width="1.6" stroke-dasharray="6 4"/>`+L(X0+4,py(60)+14,'Teil wird voll','start',11.5,'var(--ok)',700);
- [200,240,280].forEach(t=>{let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(t,v))))}s+=P(d,'var(--mute)',1.4,'',)+L(px(10000)+4,py(Math.max(10,rhEta(t,10000)))+4,t+' °C','start',11,'var(--mute)',600)});
+ [200,240,280].forEach(t=>{let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(t,v))))}s+=P(d,'var(--mute)',1.4,'',)+L(px(10000)+4,Math.min(Y0-5,py(Math.max(10,rhEta(t,10000)))+4),t+' °C','start',11,'var(--mute)',600)});
  {let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(T,v))))}s+=P(d,CC('a'),3.2)}
  s+=DOT(px(g),py(Math.max(10,eta)),eta<=60?'var(--ok)':'var(--red)',7);
  /* rechts: Kavität füllt sich je nach Viskosität */
@@ -8747,7 +8747,7 @@ if(o)SIMX('Trocknen, Fördern & Dosieren',{
 /* ---------- Rheologie: Die Schmelze steigt vom Anschnitt in den Deckel, schnell eingespritzt geht es schneller ---------- */
 {const o=X['Rheologie: Fließverhalten der Schmelze']&&X['Rheologie: Fließverhalten der Schmelze'].sim.svg,T=4.6;
 if(o)SIMX('Rheologie: Fließverhalten der Schmelze',{
- svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2)+(v.sp>95?L(392,140,'Scherwärme!','middle',14,'var(--red)',800):''),
+ svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2),
  tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=2.8-1.9*v.sp/100,u=(t+d+.5)%T,p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
 
 }
