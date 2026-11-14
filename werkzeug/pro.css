@@ -125,3 +125,4 @@ body.subpg .brand .bpro{font-size:.5em}
 #ft>details:not([open]){display:none}#ft details{margin:6px 0}#ft summary{cursor:pointer;font-weight:700;line-height:44px}#ft p{max-width:64ch}
 /* Einheiten als Bruch */
 .fr.fru{font-size:.86em;line-height:1.1;margin:0 .1em}.fr.fru>span{padding:0 .18em}
+.fr .fr.fru{font-size:.8em;margin:0 .08em}

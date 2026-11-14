@@ -2,7 +2,7 @@
 
 Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 5 (14.11.2026), Chemie mit dem neuen Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 38 Themen, Elektrotechnik 39, Chemie 50, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 6 (14.11.2026), Einheiten überall mit echtem Bruchstrich. Version 5: Chemie mit dem neuen Gebiet Thermodynamik (zehn Themen). Seit Version 4 ist die Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 38 Themen, Elektrotechnik 39, Chemie 50, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
