@@ -415,4 +415,4 @@ if(o)SIMX('Trocknen, Fördern & Dosieren',{
 {const o=X['Rheologie: Fließverhalten der Schmelze']&&X['Rheologie: Fließverhalten der Schmelze'].sim.svg,T=4.6;
 if(o)SIMX('Rheologie: Fließverhalten der Schmelze',{
  svg:(v,r)=>o(v,r)+`<rect data-a="cv" x="336" y="64" width="112" height="0" fill="var(--card)"/>`+RC(334,62,116,150,'none','var(--ink)',6,2),
- tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=2.8-1.9*v.sp/100,u=(t+d+.5)%T,p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
+ tick:(E,v,r,t,dt,st)=>{const fl=Math.min(1,60/r.eta*1.02),d=3.2-2.2*v.sp/100,u=(t+d+.5)%(d+1.6),p=Math.min(1,u/d),y0=62+150*(1-fl);A(E.cv,'y',F(y0));A(E.cv,'height',F(Math.max(0,150*fl*(1-p)-2)))}})}
