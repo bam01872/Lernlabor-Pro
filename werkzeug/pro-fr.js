@@ -15,7 +15,7 @@ const FRD={
   subt:'Situationsaufgabe Technik: Energieversorgung, Schutzmaßnahmen, Leitungen, Antriebe, SPS, Regelung, Netzwerke',
   hq:[['Situationsaufgabe Technik','schriftlich · Kern: Infrastruktursysteme und Betriebstechnik, Automatisierungs- und Informationstechnik'],['Situationsaufgabe Organisation','schriftlich · Kern: Kostenwesen, Planung und Steuerung, Arbeits-, Umwelt- und Gesundheitsschutz'],['Fachgespräch','mündlich · Kern: Führung und Personal, ausgehend von einer dritten Situationsaufgabe']],
   hqn:'Nach der Verordnung von 2004 dauern die schriftlichen Situationsaufgaben je mindestens vier Stunden, das Fachgespräch 45 bis 60 Minuten. Maßgeblich sind die Angaben Deiner IHK.'},
- ch:{em:'⚗️',first:0,orgx:[14,15],
+ ch:{em:'🧪',first:0,orgx:[14,15],
   grp:[['Verfahrens- & Anlagentechnik',[0,1,2,3,4,5]],['Chemische Prozesse & Verfahren',[6,7,8,9]],['Prozessleittechnik',[10,11,12,13]]],
   og:['Betriebliches Kostenwesen','Information, Planung & Kommunikation','Verantwortliches Handeln (Responsible Care)'],
   tnm:'Verfahrens­technik, chemische Prozesse, Prozessleit­technik',
@@ -23,7 +23,7 @@ const FRD={
   hq:[['Situationsaufgabe I','schriftlich · Kern: Chemische Produktion (Verfahrens- und Anlagentechnik, chemische Prozesse, Prozessleittechnik)'],['Situationsaufgabe II','schriftlich und Fachgespräch · Kern: Organisation, Führung und Kommunikation'],['Spezialisierungsgebiet','schriftlich · Wahlgebiet, in dieser App noch nicht enthalten']],
   hqn:'Nach der Verordnung von 2004 dauert die Situationsaufgabe I mindestens vier Stunden, der schriftliche Teil der Situationsaufgabe II mindestens zwei Stunden, das Fachgespräch 30 bis 45 Minuten. Maßgeblich sind die Angaben Deiner IHK.'}};
 if(FR!=='me'){[C,CASES,ORAL].forEach(A=>{for(let i=A.length-1;i>=0;i--){const e=A[i];if((Array.isArray(e)?e[0]:e.f)==='tec')A.splice(i,1)}});D.tec.modules=[]}
-if(FR==='ch'){D.tec.name='Chemische Produktion';D.tec.kurz='Produktion';D.tec.icon='⚗'}
+if(FR==='ch'){D.tec.name='Chemische Produktion';D.tec.kurz='Produktion';D.tec.icon='🧪'}
 if(FR==='el')D.tec.icon='⚡';
 const TM=o=>D.tec.modules.push(o),OM=o=>D.org.modules.push(o);
 /* Aufgaben „Im Betrieb“: mehrstufig, jede Teilaufgabe trägt ihren Bereich (b: tec, org, fp) */

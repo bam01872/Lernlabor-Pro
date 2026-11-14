@@ -2236,7 +2236,7 @@ const FRD={
   subt:'Situationsaufgabe Technik: Energieversorgung, Schutzmaßnahmen, Leitungen, Antriebe, SPS, Regelung, Netzwerke',
   hq:[['Situationsaufgabe Technik','schriftlich · Kern: Infrastruktursysteme und Betriebstechnik, Automatisierungs- und Informationstechnik'],['Situationsaufgabe Organisation','schriftlich · Kern: Kostenwesen, Planung und Steuerung, Arbeits-, Umwelt- und Gesundheitsschutz'],['Fachgespräch','mündlich · Kern: Führung und Personal, ausgehend von einer dritten Situationsaufgabe']],
   hqn:'Nach der Verordnung von 2004 dauern die schriftlichen Situationsaufgaben je mindestens vier Stunden, das Fachgespräch 45 bis 60 Minuten. Maßgeblich sind die Angaben Deiner IHK.'},
- ch:{em:'⚗️',first:0,orgx:[14,15],
+ ch:{em:'🧪',first:0,orgx:[14,15],
   grp:[['Verfahrens- & Anlagentechnik',[0,1,2,3,4,5]],['Chemische Prozesse & Verfahren',[6,7,8,9]],['Prozessleittechnik',[10,11,12,13]]],
   og:['Betriebliches Kostenwesen','Information, Planung & Kommunikation','Verantwortliches Handeln (Responsible Care)'],
   tnm:'Verfahrens­technik, chemische Prozesse, Prozessleit­technik',
@@ -2244,7 +2244,7 @@ const FRD={
   hq:[['Situationsaufgabe I','schriftlich · Kern: Chemische Produktion (Verfahrens- und Anlagentechnik, chemische Prozesse, Prozessleittechnik)'],['Situationsaufgabe II','schriftlich und Fachgespräch · Kern: Organisation, Führung und Kommunikation'],['Spezialisierungsgebiet','schriftlich · Wahlgebiet, in dieser App noch nicht enthalten']],
   hqn:'Nach der Verordnung von 2004 dauert die Situationsaufgabe I mindestens vier Stunden, der schriftliche Teil der Situationsaufgabe II mindestens zwei Stunden, das Fachgespräch 30 bis 45 Minuten. Maßgeblich sind die Angaben Deiner IHK.'}};
 if(FR!=='me'){[C,CASES,ORAL].forEach(A=>{for(let i=A.length-1;i>=0;i--){const e=A[i];if((Array.isArray(e)?e[0]:e.f)==='tec')A.splice(i,1)}});D.tec.modules=[]}
-if(FR==='ch'){D.tec.name='Chemische Produktion';D.tec.kurz='Produktion';D.tec.icon='⚗'}
+if(FR==='ch'){D.tec.name='Chemische Produktion';D.tec.kurz='Produktion';D.tec.icon='🧪'}
 if(FR==='el')D.tec.icon='⚡';
 const TM=o=>D.tec.modules.push(o),OM=o=>D.org.modules.push(o);
 /* Aufgaben „Im Betrieb“: mehrstufig, jede Teilaufgabe trägt ihren Bereich (b: tec, org, fp) */
@@ -5264,7 +5264,7 @@ X['Stöchiometrie & Stoffbilanz']={
  v:['Für einen Ansatz brauchst Du 100 kg reines NaOH. Im Lager steht 50-prozentige Natronlauge. Wie viel füllst Du ab?',['50 kg','100 kg','150 kg','200 kg'],3,'In 200 kg 50-prozentiger Lauge stecken genau 100 kg reines NaOH. Der Gehalt gehört in jede Ansatzrechnung.'],
  ein:[S(13,'Die Reaktionsgleichung zählt Teilchen. Über die molare Masse wird daraus ein Massenverhältnis.',k=>TITLE('Von der Gleichung zur Masse')+OP(ph(k,.05,.35),TX(240,92,'HCl + NaOH → NaCl + H₂O',440,'ein3','middle'))+OP(ph(k,.4,.65),TX(240,142,'36,5 kg + 40 kg → 58,5 kg + 18 kg',440,'ein3','middle'))+OP(ph(k,.7,.95),TX(240,200,'Links und rechts je 76,5 kg',440,'ein2','middle'))),
   S(12,'Die Stoffmenge verbindet Masse und molare Masse.',k=>TITLE('Stoffmenge')+OP(ph(k,.05,.4),FORM(240,104,['n = ',{n:'m',d:'M'}],'middle',undefined,24))+OP(ph(k,.45,.85),FORM(240,190,['n = ',{n:'200 kg',d:'40 kg/kmol'},' = 5 kmol'],'middle',undefined,18))),
-  S(13,'Die Massenbilanz gilt für jeden Apparat: Was hineingeht, kommt wieder heraus.',FLOW('Massenbilanz',[['📥','Eintrag','Einsatzstoffe','b'],['⚗️','Apparat','Bestand ändert sich','y'],['📤','Austrag','Produkt, Abfall, Abluft','g']])),
+  S(13,'Die Massenbilanz gilt für jeden Apparat: Was hineingeht, kommt wieder heraus.',FLOW('Massenbilanz',[['📥','Eintrag','Einsatzstoffe','b'],['🧪','Apparat','Bestand ändert sich','y'],['📤','Austrag','Produkt, Abfall, Abluft','g']])),
   S(13,'Beim Verdünnen bleibt die Masse des gelösten Stoffs gleich. Daraus folgt die Mischungsgleichung.',k=>mixBild(400,50,600,20))],
  skz:[[SKZ(k=>mixBild(400,50,600,20),'Skizze Verdünnen'),'400 kg Lauge mit 50 % enthalten 200 kg NaOH. Mit 600 kg Wasser werden daraus 1000 kg mit 20 %.']],
  sim:{t:'Lauge auf 20 % einstellen',fix:'Ziel: 990 bis 1010 kg Natronlauge mit 19,5 bis 20,5 % für den nächsten Ansatz.',
@@ -5298,7 +5298,7 @@ const spBild=k=>{const c=CHT({xm:9,ym:10,xt:[1,2,3,4,5,6,7,8],yt:[2,4,6,8],xl:'C
  s+=PL(d.map((y,i)=>[c.px(i+1),c.py(y)]),'var(--flow)',2.2);d.forEach((y,i)=>s+=DOT(c.px(i+1),c.py(y),y>8?'var(--red)':'var(--flow)',5));s+=L(c.px(8)-8,c.py(8.4)-10,'gesperrt','end',13,'var(--red)',700);return s};
 X['Prozesskontrolle & Analytik']={
  v:['Die pH-Werte der letzten sechs Chargen steigen langsam an, liegen aber alle noch in der Spezifikation. Was tust Du?',['Nichts, alle Werte sind in Ordnung.','Der Ursache jetzt nachgehen, bevor eine Charge außerhalb liegt.','Die Spezifikation erweitern.','Seltener messen.'],1,'Ein Trend ist ein Frühwarnzeichen: Sonde verschmutzt, Dosierung driftet, Rohstoff verändert. Wer früh reagiert, vermeidet die gesperrte Charge.'],
- ein:[S(13,'Geprüft wird an drei Stellen. Je früher ein Fehler auffällt, desto billiger ist er.',FLOW('Wo wird geprüft?',[['📥','Wareneingang','Rohstoffe','b'],['⚗️','Im Prozess','pH, Dichte, Umsatz','y'],['📦','Endprodukt','Freigabe','g']])),
+ ein:[S(13,'Geprüft wird an drei Stellen. Je früher ein Fehler auffällt, desto billiger ist er.',FLOW('Wo wird geprüft?',[['📥','Wareneingang','Rohstoffe','b'],['🧪','Im Prozess','pH, Dichte, Umsatz','y'],['📦','Endprodukt','Freigabe','g']])),
   S(13,'Eine Probe ist nur so gut wie die Probenahme.',LIST('Probenahme',[['Festgelegte Stelle, vorher spülen','1'],['Sauberes, geeignetes Gefäß','2'],['Sofort beschriften','3','Produkt, Charge, Zeit, Name'],['Rückstellmuster aufbewahren','4']])),
   S(14,'Werte außerhalb der Spezifikation führen zur Sperrung. Ein Trend warnt schon vorher.',spBild),
   S(13,'Bei einer Abweichung gehst Du in fester Reihenfolge vor.',LIST('Charge außerhalb der Spezifikation',[['Charge sperren und kennzeichnen','1'],['Messung und Probe überprüfen','2'],['Ursache suchen','3'],['Nacharbeit, Verschnitt oder Entsorgung','4','entscheidet die Qualitätsstelle']]))],
