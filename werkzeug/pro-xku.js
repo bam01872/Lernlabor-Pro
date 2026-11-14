@@ -120,14 +120,14 @@ const rhG=s=>100*Math.pow(100,s/100);
 const rhBild=(T,sp)=>{const g=rhG(sp),eta=rhEta(T,g),lx=v=>Math.log10(v);let s='';
  const X0=74,X1=272,Y0=226,Y1=46,px=v=>X0+(X1-X0)*(lx(v)-2)/2,py=v=>Y0-(Y0-Y1)*(lx(v)-1)/3;
  [10,100,1000,10000].forEach(v=>s+=`<path d="M${X0} ${F(py(v))}H${X1}" stroke="var(--line)"/>`+L(X0-6,py(v)+4,nz(v,0),'end',11.5,'var(--mute)',500));
- [100,1000,10000].forEach(v=>s+=L(px(v),Y0+16,nz(v,0),'middle',11.5,'var(--mute)',500));
+ [100,1000,10000].forEach(v=>s+=L(px(v),Y0+16,nz(v,0),v===100?'start':'middle',11.5,'var(--mute)',500));
  s+=`<path d="M${X0} ${Y1-6}V${Y0}H${X1+6}" fill="none" stroke="var(--ink)" stroke-width="1.4"/>`+L(X0-2,Y1-12,'η in Pa · s','start',12,'var(--mute)',600)+L(X1+4,Y0+32,'Schergeschwindigkeit in 1/s','end',12,'var(--mute)',600);
  s+=`<path d="M${X0} ${F(py(60))}H${X1}" stroke="var(--ok)" stroke-width="1.6" stroke-dasharray="6 4"/>`+L(X0+4,py(60)+14,'Teil wird voll','start',11.5,'var(--ok)',700);
- [200,240,280].forEach(t=>{let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(t,v))))}s+=P(d,'var(--mute)',1.4,'',)+L(px(10000)+4,py(Math.max(10,rhEta(t,10000)))+4,t+' °C','start',11,'var(--mute)',600)});
+ [200,240,280].forEach(t=>{let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(t,v))))}s+=P(d,'var(--mute)',1.4,'',)+L(px(10000)+4,Math.min(Y0-5,py(Math.max(10,rhEta(t,10000)))+4),t+' °C','start',11,'var(--mute)',600)});
  {let d='';for(let e=2;e<=4.001;e+=.05){const v=Math.pow(10,e);d+=(d?'L':'M')+F(px(v))+' '+F(py(Math.max(10,rhEta(T,v))))}s+=P(d,CC('a'),3.2)}
  s+=DOT(px(g),py(Math.max(10,eta)),eta<=60?'var(--ok)':'var(--red)',7);
  /* rechts: Kavität füllt sich je nach Viskosität */
- const fill=Math.min(1,60/eta*1.02),ok=eta<=60;s+=L(392,40,'Dünnwandiger Deckel','middle',13,'var(--ink)',700);
+ const fill=Math.min(1,60/eta*1.02),ok=eta<=60;s+=L(392,40,'Deckel','middle',13,'var(--ink)',700);
  s+=RC(334,62,116,150,'var(--card)','var(--ink)',6,2)+RC(334,62+150*(1-fill),116,150*fill,MX(ok?'g':'y',45),'none',0,0)+RC(334,62,116,150,'none','var(--ink)',6,2);
  s+=P('M392 212V232','var(--ink)',6)+L(392,252,'Anschnitt','middle',11.5,'var(--mute)',600)+L(392,56,ok?'voll':'nicht voll','middle',12.5,ok?'var(--ok)':'var(--red)',800);
  if(sp>95)s+=L(392,140,'Scherwärme!','middle',14,'var(--red)',800);return s};
@@ -175,7 +175,7 @@ X['Temperieren & Kühlen von Werkzeugen']={
 const trBild=(V,tv,ok)=>{let s=TI('Trockentrichter an der Maschine');const h=Math.min(1,V/200),top=210-130*h;
  s+=P(`M150 ${F(top-6)}H290V200L240 236H200L150 200Z`,'var(--ink)',2.4,'','var(--card)');
  for(let i=0;i<70;i++){const x=158+(i*37%124),y=top+4+((i*53)%Math.max(8,196-top));if(y<200||x>180&&x<260)s+=`<circle cx="${x}" cy="${F(Math.min(y,228))}" r="3" fill="${MX('y',70)}" stroke="var(--ink)" stroke-width=".6"/>`}
- s+=FLO('M330 230H380V60H290',6)+L(386,148,'trockene Luft','start',12,CC('b'),700)+P('M210 236V258M230 236V258','var(--ink)',2)+L(220,268,'zur Maschine','middle',11,'var(--mute)',600);
+ s+=FLO('M330 230H380V60H290',6)+L(372,142,'trockene','end',12,CC('b'),700)+L(372,158,'Luft','end',12,CC('b'),700)+P('M210 236V258M230 236V258','var(--ink)',2)+L(220,268,'zur Maschine','middle',11,'var(--mute)',600);
  s+=L(80,92,nz(V,0)+' l','middle',18,'var(--ink)',800)+L(80,112,'Trichter','middle',12,'var(--mute)',600);
  s+=RC(30,150,100,40,MX(ok?'g':'r',22),CC(ok?'g':'r'),6,1.6)+L(80,166,'Verweilzeit','middle',11,'var(--mute)',600)+L(80,183,nz(tv,1)+' h','middle',14,'var(--ink)',800);return s};
 X['Trocknen, Fördern & Dosieren']={
