@@ -4,7 +4,7 @@
 const SB=s=>String(s).replace(/>([^<]*_[^<]*)</g,(q,t)=>'>'+SUBS(t)+'<');
 const S=(d,t,f)=>({d,t,f:k=>SB(f(k))}),SKZ=(f,l)=>SKZ0(k=>SB(f(k)),l);
 /* Formel in einer Zeile mit echtem Bruchstrich und tiefgestellten Indizes (a_p → a mit tiefem p) */
-const SUBS=s=>String(s).replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
+const SUBS=s=>String(s).replace(/([A-Za-zητσβμφρϑλ])_([A-Za-z0-9äöüß]+)/g,'$1<tspan baseline-shift="sub" style="font-size:.7em">$2</tspan>');
 const RAW=s=>String(s).replace(/_/g,'');
 const FORM=(x,y,parts,a='start',c='einf',fs=19)=>{const W=parts.map(p=>typeof p==='string'?TW(RAW(p),fs):Math.max(TW(RAW(p.n),fs),TW(RAW(p.d),fs))+12),tot=W.reduce((s,w)=>s+w,0);let cx=a==='middle'?x-tot/2:x,s='',st='white-space:pre;font-size:'+fs+'px';
  parts.forEach((p,i)=>{if(typeof p==='string')s+=T(cx,y,SUBS(p),c,'start',st);else{const m=cx+W[i]/2;s+=T(m,y-9,SUBS(p.n),c,'middle','font-size:'+fs+'px')+`<path d="M${F(cx+1)} ${F(y-3)}h${F(W[i]-2)}" stroke="var(--ink)" stroke-width="1.6"/>`+T(m,y+17,SUBS(p.d),c,'middle','font-size:'+fs+'px')}cx+=W[i]});return s};
@@ -201,8 +201,8 @@ X['Mitarbeitergespräche führen']={
  skz:[[SKZ(gsSkizze,'Skizze Gesprächsablauf'),'Vier Schritte, die in jedes Mitarbeitergespräch gehören.']]};
 
 /* ---------- Bruchstrich in Merkbox und Lösungsweg: [[Zähler||Nenner]] ---------- */
-const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zητσβμ])_([A-Za-z0-9äöüß]+)/g,'$1<sub>$2</sub>');
-const fixFR=root=>root.querySelectorAll('#mbx li, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
+const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zητσβμφρϑλ])_([A-Za-z0-9äöüßΔ]+)/g,'$1<sub>$2</sub>').replace(/((?:[^\s<>(]+(?:<sub>[^<]*<\/sub>)? = )?√?)(<span class="fr">.*?<\/span><\/span>[.,;]?)/g,'<span style="display:inline-block;max-width:100%">$1$2</span>');
+const fixFR=root=>root.querySelectorAll('#mbx li, .ibc p, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
 new MutationObserver(()=>fixFR(document)).observe(document.getElementById('view'),{childList:true,subtree:true});
 
 /* ---------- Regler mit Auftrag ---------- */
@@ -246,7 +246,19 @@ fach=function(f){fach0(f);const m=modSel[f],mod=D[f].modules[m],Q=X[mod.t]||{},k
 const home0=home;
 home=function(v){home0(v);v.querySelectorAll('.rstand,.warn').forEach(x=>x.remove());[...v.querySelectorAll(':scope>.panel')].forEach(p=>{if(p.textContent.includes('Abkürzungen'))p.remove()});
  const hh=v.querySelector('.hh');if(hh)hh.textContent='Handlungsbereiche';v.querySelectorAll('.nxt small').forEach(x=>{if(x.textContent==='(alle Fächer)')x.textContent='(alle Bereiche)'});
- const a=el('<h2>🧭 So ist die Hauptqualifikation aufgebaut</h2><div class="hqa"><div style="--c:#2f6fd0"><b>Situationsaufgabe Technik</b><small>schriftlich · Kern: Betriebs-, Fertigungs- und Montagetechnik, dazu Teile aus Organisation und Führung</small></div><div style="--c:#c27a12"><b>Situationsaufgabe Organisation</b><small>schriftlich · Kern: Kostenwesen, Planung und Steuerung, Arbeits-, Umwelt- und Gesundheitsschutz</small></div><div style="--c:#c2457b"><b>Fachgespräch</b><small>mündlich · Kern: Führung und Personal</small></div></div><p class="sub" style="margin-top:8px">Rechnen allein reicht nicht: In jeder Aufgabe leitest Du aus dem Ergebnis eine Entscheidung ab und begründest sie.</p>','panel');
+ const fd=FRD[FR],hc=['#2f6fd0','#c27a12','#c2457b'];
+ const a=el('<h2>🧭 So ist die Hauptqualifikation aufgebaut</h2><div class="hqa">'+fd.hq.map((h,i)=>'<div style="--c:'+hc[i]+'"><b>'+esc(h[0])+'</b><small>'+esc(h[1])+'</small></div>').join('')+'</div><p class="sub" style="margin-top:8px">Rechnen allein reicht nicht: In jeder Aufgabe leitest Du aus dem Ergebnis eine Entscheidung ab und begründest sie.'+(fd.hqn?' '+esc(fd.hqn):'')+'</p>','panel');
+ const sw=el('<h2><span aria-hidden="true">🎓</span> Deine Fachrichtung</h2><div class="seg frs" role="group" aria-label="Fachrichtung wählen">'+Object.keys(FRN).map(k=>'<button type="button" data-k="'+k+'" aria-pressed="'+(k===FR)+'">'+FRD[k].em+' '+FRN[k]+'</button>').join('')+'</div><p class="sub">Technik und die Aufgaben „Im Betrieb“ wechseln mit der Fachrichtung. Organisation sowie Führung und Personal sind gemeinsam. Dein Lernstand wird je Fachrichtung getrennt gemerkt.</p>','panel frp');
+ sw.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.k!==FR)frSet(b.dataset.k)});v.prepend(sw);
+ const ib=el('<button type="button" class="lk" data-k="betrieb">🏭 Im Betrieb <small>(fünf mehrstufige Aufgaben)</small></button>','').firstChild;ib.onclick=()=>{go('betrieb');scrollTo(0,0)};{const l=v.querySelector('.nxt .lk');if(l)l.before(ib)}
  const nx=v.querySelector('.nxt');nx?nx.after(a):v.prepend(a)};
+/* ---------- Im Betrieb: mehrstufige Aufgaben über Technik, Organisation und Führung ---------- */
+window.betrieb=function(v){const bn={tec:FR==='ch'?'Produktion':'Technik',org:'Organisation',fp:'Führung'};
+ v.append(el('<h2>🏭 Im Betrieb</h2><p class="sub">Fünf Lagen aus dem Alltag eines Meisters in der Fachrichtung '+FRN[FR]+'. Jede Aufgabe hat mehrere Schritte und verbindet Technik, Organisation und Führung, so wie die Situationsaufgaben in der Prüfung. Du schreibst Deine Lösung und hakst sie mit dem Erwartungshorizont ab.</p>','panel'));
+ const st=(load().c)||{};
+ CASES.forEach((c,i)=>{if(!c.ib)return;const d=st[c.f+':'+c.t],n={};c.tasks.forEach(t=>n[t.b]=(n[t.b]||0)+1);
+  const p=el('<h3>'+esc(c.t)+'</h3><p>'+esc(c.kz)+'</p><div class="ibm">'+['tec','org','fp'].filter(b=>n[b]).map(b=>'<span class="tag" style="background:'+D[b].col+'">'+bn[b]+' '+n[b]+'</span>').join('')+'<span class="sub">'+c.tasks.length+' Schritte · '+c.tasks.reduce((a,t)=>a+t.p,0)+' Punkte'+(d?' · zuletzt '+Math.round(d.g/d.m*100)+' %':'')+'</span></div><button type="button" class="btn">Aufgabe öffnen →</button>','panel ibc');
+  p.querySelector('.btn').onclick=()=>{fIdx=i;go('fall');scrollTo(0,0)};v.append(p)})};
+{const b=document.querySelector('#hdr .bs');if(b)b.textContent='Hauptqualifikation '+FRN[FR]+' · Verstehen. Anwenden. Bestehen.'}
 go(tab);
 })();

@@ -36,3 +36,9 @@ body.subpg .brand .bpro{font-size:.5em}
 .tdots{display:block;position:relative;height:0;pointer-events:none}.tdots::after{content:'…';position:absolute;right:0;bottom:6px;font-size:16px;line-height:24px}
 .tdesc:not(.cl.ov)+.tdots{display:none}
 @media(min-width:900px){.tdesc.cl{max-height:none;-webkit-mask-image:none;mask-image:none;cursor:auto}.tdots{display:none}}
+/* Fachrichtungen, Im Betrieb, Kästen */
+.frp .frs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0 8px}.frp .frs button{min-height:44px;font-weight:700;padding-left:4px;padding-right:4px;white-space:nowrap}@media(max-width:400px){.frp .frs button{font-size:13px}}
+.box h2.bx2{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+.ibc h3{margin:0 0 4px}.ibc .ibm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 10px}.ibc .ibm .tag,.tag.ibt{color:#fff}
+#fsel{max-width:100%;min-width:0;width:100%}.row label:has(#fsel){min-width:0;max-width:100%;flex:1 1 100%}
+@media(max-width:440px){#rfs:has(button:nth-child(5)){flex-wrap:wrap}#rfs:has(button:nth-child(5)) button{flex:1 1 30%}.frp .frs button{font-size:13px}}

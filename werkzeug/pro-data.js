@@ -1,6 +1,10 @@
 /* ===== Lernlabor Pro: Daten (Handlungsspezifische Qualifikationen, Fachrichtung Metall) =====
    Eigene Texte und Aufgaben. Keine IHK-Originale, keine Texte fremder Seiten.
    Bruchschreibweise in Texten: [[Zähler||Nenner]] wird als echter Bruchstrich gezeigt. */
+/* Fachrichtung: Metall (me), Elektrotechnik (el), Chemie (ch). Gewählt auf der Startseite, gemerkt auf dem Gerät. */
+let FR='me';try{const w=/^llp-fr:(me|el|ch)$/.exec(window.name||'');let q=new URLSearchParams(location.search).get('fr')||(w&&w[1]);if(!q)try{q=localStorage.getItem('lernlabor-pro-fr')}catch(e){}if(['me','el','ch'].includes(q))FR=q}catch(e){}
+const FRS=FR==='me'?'':'-'+FR,FRN={me:'Metall',el:'Elektrotechnik',ch:'Chemie'};
+const frSet=k=>{try{localStorage.setItem('lernlabor-pro-fr',k)}catch(e){}try{window.name='llp-fr:'+k}catch(e){}try{const u=new URL(location.href);if(u.searchParams.has('fr')){u.searchParams.delete('fr');u.hash='';location.replace(u.href);return}}catch(e){}location.hash='';location.reload()};
 ['reha','beha','mikp','zib'].forEach(k=>delete D[k]);
 C.length=0;CASES.length=0;ORAL.length=0;
 /* Zahlen: Komma, Tausender-Leerzeichen nur bei runden Zahlen ab 10 000 und ab sechs Stellen */
