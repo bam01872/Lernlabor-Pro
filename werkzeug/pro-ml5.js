@@ -202,28 +202,46 @@ X['Mitarbeitergespräche führen']={
 
 /* ---------- Bruchstrich in Merkbox und Lösungsweg: [[Zähler||Nenner]] ---------- */
 const FRX=s=>String(s).replace(/\[\[(.+?)\|\|(.+?)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>').replace(/([A-Za-zητσβμφρϑλ])_([A-Za-z0-9äöüßΔ]+)/g,'$1<sub>$2</sub>').replace(/((?:[^\s<>(]+(?:<sub>[^<]*<\/sub>)? = )?√?)(<span class="fr">.*?<\/span><\/span>[.,;]?)/g,'<span style="display:inline-block;max-width:100%">$1$2</span>');
-const fixFR=root=>root.querySelectorAll('#mbx li, .ibc p, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
+const fixFR=root=>root.querySelectorAll('#mbx li, .nsl li, .nsl details p, .ibc p, .sol div, .eh li, .q > p, .opt, .fb, .simfx, .skc').forEach(e=>{if(/\[\[|_[A-Za-z0-9äöüß]/.test(e.textContent)&&!e.dataset.fr){e.dataset.fr=1;e.innerHTML=FRX(e.innerHTML)}});
 new MutationObserver(()=>fixFR(document)).observe(document.getElementById('view'),{childList:true,subtree:true});
 
 /* ---------- Regler mit Auftrag ---------- */
 const RFK='lernlabor-pro-rf',AK='lernlabor-pro-auf';
 const lsG=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}},lsS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-function simPanel(key,Sm){const p=el('<h2>🎛️ Ausprobieren: '+esc(Sm.t)+'</h2>','panel psim');p.id='sim';
- const v={};Sm.c.forEach(c=>v[c.k]=c.opts?c.opts[c.v]:c.v);
+const FAVK='lernlabor-pro-fav'+FRS,NOTK='lernlabor-pro-notiz'+FRS;
+const favs=()=>{const a=lsG(FAVK);return Array.isArray(a)?a:[]};
+function simPanel(key,Sm,hk){hk=hk||{};const p=el('<h2>Werte einstellen</h2><p class="sub simn">'+esc(Sm.t)+'</p>','panel psim');p.id='sim';
+ const v={},ctl=[];Sm.c.forEach(c=>v[c.k]=c.opts?c.opts[c.v]:c.v);
  const g=el('','simg'),sv=el('','simsv'),cs=el('','simc');
  const done=()=>!!lsG(AK)[key];
- const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufi">🎯</span><span class="aufz"><b>Auftrag:</b> '+FRX(esc(Sm.auf.z))+'</span><span class="aufa">▾</span></button><div class="aufb" hidden><p>'+FRX(esc(Sm.auf.t))+'</p><p class="sub">'+FRX(esc(Sm.auf.h))+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
- au.querySelector('.aufk').onclick=e=>{const b=au.querySelector('.aufb');b.hidden=!b.hidden;e.currentTarget.setAttribute('aria-expanded',!b.hidden)};
+ const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufh"><b>🎯 Auftrag</b><span class="aufd"></span><span class="aufa">▾ Aufklappen</span></span><span class="aufz">Ziel: '+FRX(esc(Sm.auf.z))+'</span></button><div class="aufb" hidden><p>'+FRX(esc(Sm.auf.t))+'</p><p class="sub">'+FRX(esc(Sm.auf.h))+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
+ au.querySelector('.aufk').onclick=e=>{const b=au.querySelector('.aufb');b.hidden=!b.hidden;e.currentTarget.setAttribute('aria-expanded',!b.hidden);au.querySelector('.aufa').textContent=b.hidden?'▾ Aufklappen':'▴ Zuklappen'};
  cs.append(au);
- Sm.c.forEach(c=>{const w=el('<label class="rg"><span class="rgl">'+FRX(esc(c.l))+'</span><b class="rgv"></b><input type="range" min="'+(c.opts?0:c.min)+'" max="'+(c.opts?c.opts.length-1:c.max)+'" step="'+(c.opts?1:c.st)+'" value="'+c.v+'"></label>','');
-  const i=w.querySelector('input'),o=w.querySelector('.rgv'),show=()=>{o.textContent=(c.opts?nt(v[c.k],2):nz(v[c.k],(String(c.st).split('.')[1]||'').length))+(c.u?' '+c.u:'')};
-  i.oninput=()=>{v[c.k]=c.opts?c.opts[+i.value]:+i.value;show();up()};show();cs.append(w)});
- const tb=el('','simt');cs.append(tb,el(FRX(esc(Sm.fix)),'sub simfx'));
- g.append(sv,cs);p.append(g);
- function up(){const r=Sm.calc(v);sv.innerHTML='<svg viewBox="0 0 480 270" class="mlsk" role="img" aria-label="'+esc(Sm.t)+'">'+Sm.svg(v,r)+'</svg>';
-  tb.innerHTML='<table>'+Sm.rows(v,r).map(x=>'<tr'+(x[2]?' class="t'+x[2]+'"':'')+'><td>'+FRX(esc(x[0]))+'</td><td>'+esc(x[1])+'</td></tr>').join('')+'</table>';
-  const ok=Sm.auf.ok(v,r);if(ok&&!done()){const A=lsG(AK);A[key]=1;lsS(AK,A);au.classList.add('aufflash');const o=lsG(RFK);o[key]=o[key]||{};o[key].r=1;lsS(RFK,o);paintRF(key)}
-  au.classList.toggle('aufok',done());au.querySelector('.aufr').innerHTML=ok?'✅ Geschafft. Diese Einstellung erfüllt den Auftrag.':done()?'✅ Auftrag schon einmal erfüllt.':''}
+ Sm.c.forEach(c=>{const dg=(String(c.st||1).split('.')[1]||'').length,fm=x=>c.opts?nt(x,2):nz(x,dg);
+  const w=el('<div class="rg2"><label class="rgl" for="rg-'+c.k+'">'+FRX(esc(c.l))+'</label><input id="rg-'+c.k+'" type="range" min="'+(c.opts?0:c.min)+'" max="'+(c.opts?c.opts.length-1:c.max)+'" step="'+(c.opts?1:c.st)+'" value="'+c.v+'">'+(c.opts?'<b class="rgv"></b>':'<input class="rgn" type="text" inputmode="decimal" autocomplete="off" aria-label="'+esc(c.l)+' als Zahl">')+'<span class="rgu">'+esc(c.u||'')+'</span><p class="rgh" hidden></p></div>','').firstChild;
+  const i=w.querySelector('input[type=range]'),n=w.querySelector('.rgn'),o=w.querySelector('.rgv'),h=w.querySelector('.rgh');
+  const show=()=>{if(n)n.value=fm(v[c.k]);if(o)o.textContent=fm(v[c.k]);h.hidden=true;i.style.setProperty('--p',((+i.value-+i.min)/((+i.max-+i.min)||1)*100)+'%')};
+  i.oninput=()=>{v[c.k]=c.opts?c.opts[+i.value]:+i.value;show();up()};
+  if(n){const take=x=>{x=Math.min(c.max,Math.max(c.min,x));x=Math.round((x-c.min)/c.st)*c.st+c.min;x=+x.toFixed(6);v[c.k]=x;i.value=x;show();up()};
+   n.onchange=()=>{const t=n.value.trim().replace(/\s/g,'');h.hidden=true;h.innerHTML='';
+    if(/^\d{1,3}\.\d{3}$/.test(t)){const a=parseFloat(t),b=+t.replace('.','');h.hidden=false;h.textContent='Meinst Du ';[[a,nz(a,3)],[b,nz(b,0)]].forEach((q,k)=>{const bb=document.createElement('button');bb.type='button';bb.className='rghb';bb.textContent=q[1];bb.onclick=()=>take(q[0]);h.append(bb,k?' ?':' oder ')});return}
+    const x=parseFloat(t.replace(',','.'));if(isNaN(x)){show();return}take(x);if(x<c.min||x>c.max){h.hidden=false;h.textContent='Möglich sind '+fm(c.min)+' bis '+fm(c.max)+(c.u?' '+c.u:'')+'.'}};
+   n.onfocus=()=>n.select()}
+  ctl.push({c,i,show});show();cs.append(w)});
+ const bt=el('<button type="button" class="btn ubb">✏️ Üben</button><button type="button" class="btn sec fvb" aria-pressed="false"></button><details class="more"><summary>⋯ Mehr</summary><div class="mm"><button type="button" data-a="w">↺ Werte zurücksetzen</button><button type="button" data-a="a">Auftrag zurücksetzen</button></div></details>','simb');
+ const fv=bt.querySelector('.fvb'),fs=()=>{const on=favs().includes(key);fv.innerHTML=(on?'★':'☆')+' Favorit';fv.setAttribute('aria-pressed',on);fv.title=on?'Aus den Favoriten entfernen':'Zu den Favoriten'};
+ fv.onclick=()=>{let a=favs();a=a.includes(key)?a.filter(x=>x!==key):a.concat(key);lsS(FAVK,a);fs()};fs();
+ bt.querySelector('.ubb').onclick=()=>hk.ueben&&hk.ueben();
+ bt.querySelector('[data-a=w]').onclick=()=>{ctl.forEach(x=>{v[x.c.k]=x.c.opts?x.c.opts[x.c.v]:x.c.v;x.i.value=x.c.v;x.show()});bt.querySelector('.more').open=false;up()};
+ bt.querySelector('[data-a=a]').onclick=()=>{const A=lsG(AK);delete A[key];lsS(AK,A);const o=lsG(RFK);if(o[key]){delete o[key].r;lsS(RFK,o)}bt.querySelector('.more').open=false;paintRF(key);up(true)};
+ const tb=el('','simk');cs.append(bt,tb);
+ g.append(sv,cs);p.append(g);p._fix=Sm.fix;
+ function up(quiet){const r=Sm.calc(v);sv.innerHTML='<svg viewBox="0 0 480 270" class="mlsk" role="img" aria-label="'+esc(Sm.t)+'">'+Sm.svg(v,r)+'</svg>';
+  const R=Sm.rows(v,r);tb.innerHTML=R.map(x=>'<div class="kc'+(x[2]?' t'+x[2]:'')+'"><b>'+esc(x[1])+'</b><span>'+FRX(esc(x[0]))+'</span></div>').join('');
+  p._all=()=>'<table>'+Sm.c.map(c=>'<tr><td>'+FRX(esc(c.l))+'</td><td>'+esc((c.opts?nt(v[c.k],2):nz(v[c.k],(String(c.st||1).split('.')[1]||'').length))+(c.u?' '+c.u:''))+'</td></tr>').join('')+R.map(x=>'<tr'+(x[2]?' class="t'+x[2]+'"':'')+'><td>'+FRX(esc(x[0]))+'</td><td>'+esc(x[1])+'</td></tr>').join('')+'</table>';
+  hk.all&&hk.all(p._all());
+  const ok=Sm.auf.ok(v,r);if(ok&&!done()&&!quiet){const A=lsG(AK);A[key]=1;lsS(AK,A);au.classList.add('aufflash');const o=lsG(RFK);o[key]=o[key]||{};o[key].r=1;lsS(RFK,o);paintRF(key)}
+  au.classList.toggle('aufok',done());au.querySelector('.aufd').textContent=done()?'✓ geschafft':'';au.querySelector('.aufr').innerHTML=ok?'✅ Geschafft. Diese Einstellung erfüllt den Auftrag.':''}
  up();return p}
 function paintRF(key){const o=lsG(RFK)[key]||{},bs=[...document.querySelectorAll('#rfs button')];let cur=bs.find(b=>!o[b.dataset.s]);bs.forEach(b=>{b.classList.toggle('ok',!!o[b.dataset.s]);b.classList.toggle('on',b===cur)})}
 
@@ -239,10 +257,48 @@ fach=function(f){fach0(f);const m=modSel[f],mod=D[f].modules[m],Q=X[mod.t]||{},k
   const b=el('<p><b>🚧 Dieses Thema ist geplant</b> (Arbeitspaket '+esc(mod.wip)+'). In '+esc(D[f].name)+' schon fertig:</p><div class="wipl"></div>','panel wip');
   D[f].modules.forEach((x,i)=>{if(!x.wip){const c=el('<button type="button" class="chip">'+esc(x.t)+'</button>','');c.firstChild.onclick=()=>{modSel[f]=i;go(f);scrollTo(0,0)};b.querySelector('.wipl').append(c.firstChild)}});
   const rf=$('#rfs');if(rf)rf.remove();const ds=v.querySelector('.tmore');(ds||v.firstChild).after(b)}
- if(Q.sim){const p=simPanel(key,Q.sim),ub=$('#ueb');ub?ub.before(p):v.append(p);
-  const rf=$('#rfs');if(rf){const bs=[...rf.querySelectorAll('button')],ia=bs.findIndex(b=>b.dataset.s==='m');const nb=el('<button type="button" data-s="r"><span class="n"><b></b></span><span class="t">Ausprobieren</span></button>','').firstChild;
+ let simP=null,allBox=null,openUeb=()=>{};if(Q.sim){const p=simP=simPanel(key,Q.sim,{ueben:()=>openUeb(),all:h=>{if(allBox)allBox.innerHTML=h}}),ub=$('#ueb');ub?ub.before(p):v.append(p);
+  const rf=$('#rfs');if(rf){const bs=[...rf.querySelectorAll('button')],ia=bs.findIndex(b=>b.dataset.s==='u')-1;const nb=el('<button type="button" data-s="r"><span class="n"><b></b></span><span class="t">Ausprobieren</span></button>','').firstChild;
    nb.onclick=()=>p.scrollIntoView({behavior:'smooth',block:'start'});(ia>=0?bs[ia]:bs[bs.length-1]).after(nb);rf.querySelectorAll('button').forEach((b,i)=>b.querySelector('.n b').textContent=i+1)}
-  paintRF(key)}};
+  paintRF(key)}
+ /* Thema wechseln wie im Lernlabor: zwei Wischleisten (Gebiete, Themen) statt einer langen Liste */
+ {const mn=v.querySelector('.thm'),G=GRP[f],ms=D[f].modules;if(mn&&G){let gs=Math.max(0,G.findIndex(g=>g[1].includes(m)));
+  mn.classList.add('wls');const W=(k,l)=>'<div class="wlw"><button type="button" class="wla l" aria-label="zurück" tabindex="-1">‹</button><div class="wl" data-k="'+k+'" role="group" aria-label="'+l+'"></div><button type="button" class="wla r" aria-label="weiter" tabindex="-1">›</button></div>';
+  mn.innerHTML=W('g','Gebiet wählen')+W('t','Thema wählen');
+  const bg=mn.querySelector('[data-k=g]'),bt=mn.querySelector('[data-k=t]');
+  const arr=w=>{const l=w.querySelector('.wl'),mx=l.scrollWidth-l.clientWidth;w.classList.toggle('ml',l.scrollLeft>4);w.classList.toggle('mr',l.scrollLeft<mx-4)};
+  const mid=l=>{const c=l.querySelector('[aria-pressed=true],[aria-current=true]')||l.firstChild;if(c)l.scrollLeft=c.offsetLeft-(l.clientWidth-c.offsetWidth)/2;arr(l.parentNode)};
+  const topics=()=>{bt.innerHTML=G[gs][1].map(j=>'<button type="button" data-i="'+j+'" aria-current="'+(j===m)+'">'+esc(ms[j].t)+'</button>').join('');
+   bt.querySelectorAll('button').forEach(b=>b.onclick=()=>{modSel[f]=+b.dataset.i;go(f);scrollTo(0,0)});bt.scrollLeft=0;mid(bt)};
+  bg.innerHTML=G.map((g,i)=>'<button type="button" data-g="'+i+'" aria-pressed="'+(i===gs)+'">'+esc(g[0])+'</button>').join('');
+  bg.querySelectorAll('button').forEach(b=>b.onclick=()=>{gs=+b.dataset.g;bg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));topics()});
+  mn.querySelectorAll('.wlw').forEach(w=>{const l=w.querySelector('.wl');l.addEventListener('scroll',()=>arr(w),{passive:true});
+   w.querySelector('.wla.l').onclick=()=>l.scrollBy({left:-l.clientWidth*.7,behavior:'smooth'});w.querySelector('.wla.r').onclick=()=>l.scrollBy({left:l.clientWidth*.7,behavior:'smooth'})});
+  topics();const op=()=>{const t=v.querySelector('#thd .thw');if(t)t.textContent='Thema wechseln '+(mn.hidden?'▾':'▴');if(!mn.hidden)requestAnimationFrame(()=>{mid(bg);mid(bt)})};
+  v.querySelectorAll('#thd .crb,#thd .thw').forEach(b=>b.addEventListener('click',op));
+  document.onkeydown=e=>{if(e.key==='Escape'&&mn.isConnected&&!mn.hidden){const t=v.querySelector('#thd .crb');t&&t.click()}}}}
+ /* Üben steht am Schluss der Themenseite und ist eingeklappt */
+ {const ub=$('#ueb');if(ub&&!mod.wip){v.append(ub);const h=ub.querySelector('h2'),nq=mod.mcq.length,nc=C.filter(x=>x.f===f&&x.m===m).length;
+  const bd=document.createElement('div');bd.className='uebb';while(h.nextSibling)bd.append(h.nextSibling);bd.hidden=true;
+  const bt=document.createElement('button');bt.type='button';bt.className='uebk';bt.setAttribute('aria-expanded','false');
+  bt.innerHTML='<span class="uebt">✏️ Üben</span><span class="uebz">'+nq+' Check-Fragen'+(nc?' · '+nc+' Rechenaufgabe'+(nc>1?'n':''):'')+'</span><span class="ueba" aria-hidden="true">▾</span>';
+  const set=o=>{bd.hidden=!o;bt.setAttribute('aria-expanded',String(o));bt.querySelector('.ueba').textContent=o?'▴':'▾'};
+  bt.onclick=()=>set(bd.hidden);h.replaceWith(bt);ub.append(bd);
+  const rb=v.querySelector('#rfs [data-s=u]');if(rb)rb.addEventListener('click',()=>set(true));
+  openUeb=()=>{set(true);ub.scrollIntoView({behavior:'smooth',block:'start'})}}}
+ /* Schrittleiste wie im Lernlabor: ohne „Merken“, vier Schritte in einer Zeile */
+ {const rf=$('#rfs');if(rf){const mb=rf.querySelector('[data-s=m]');if(mb)mb.remove();rf.querySelectorAll('button').forEach((b,i)=>b.querySelector('.n b').textContent=i+1);paintRF(key)}}
+ /* Nachschlagen wie im Lernlabor: alles eingeklappt, dazu „Alle Werte“ und „Meine Notiz“ */
+ if(!mod.wip){const E=ERK[mod.t],GL=mod.fo||mod.pts.filter(x=>x.includes('=')),WI=mod.fo?mod.pts:mod.pts.filter(x=>!GL.includes(x)),ul=a=>'<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+  const mb=$('#mbx'),gr=mb&&mb.closest('.grid');if(mb){const sd=mb.parentNode;mb.remove();if(sd.classList.contains('side')&&!sd.childNodes.length){sd.remove();if(gr)gr.style.gridTemplateColumns='minmax(0,1fr)'}}
+  let ns=v.querySelector('.nsl');if(!ns){ns=el('','panel nsl');v.append(ns)}
+  const D1=(sm,h)=>'<details><summary>'+sm+'</summary>'+h+'</details>';
+  ns.innerHTML='<h2>Nachschlagen</h2>'+(simP&&simP._fix?D1('📏 Rechenweg und Hintergrund','<p>'+esc(simP._fix)+'</p>'):'')+(simP?D1('🗃️ Alle Werte','<div class="allw"></div>'):'')+(WI.length?D1('📌 Wichtiges','<div class="wib">'+ul(WI)+'</div>'):'')+(GL.length?D1('📜 Grundgleichungen',ul(GL)):'')+(E?D1('💡 Verstehen und typische Fehler','<p>'+esc(E[0])+'</p>'+(E[1]?'<p><b>🏭 Im Betrieb:</b> '+esc(E[1])+'</p>':'')+(E[2]?'<p><b>Typische Fehler:</b></p>'+ul(E[2]):'')):'')+D1('📝 Meine Notiz','<textarea class="ntz" rows="4" aria-label="Meine Notiz zu diesem Thema" placeholder="Deine Notiz zu diesem Thema. Sie bleibt auf Deinem Gerät."></textarea><p class="sub ntzs" aria-live="polite"></p>');
+  {const rb=KI.readBtn(mod.t+'. '+mod.pts.join(' '),'w'),wb=ns.querySelector('.wib');if(rb&&wb)wb.append(rb)}
+  allBox=ns.querySelector('.allw');if(allBox&&simP)allBox.innerHTML=simP._all();
+  const ta=ns.querySelector('.ntz'),nst=ns.querySelector('.ntzs'),N=lsG(NOTK);ta.value=N[key]||'';if(ta.value){const sm=ta.closest('details').querySelector('summary');sm.insertAdjacentHTML('beforeend','<span class="ntzm">vorhanden</span>')}
+  let tm=0;ta.oninput=()=>{clearTimeout(tm);tm=setTimeout(()=>{const o=lsG(NOTK);if(ta.value.trim())o[key]=ta.value;else delete o[key];lsS(NOTK,o);nst.textContent='Gespeichert auf diesem Gerät.'},400)};
+  const ub=$('#ueb');if(ub)v.append(ub)}};
 const home0=home;
 home=function(v){home0(v);v.querySelectorAll('.rstand,.warn').forEach(x=>x.remove());[...v.querySelectorAll(':scope>.panel')].forEach(p=>{if(p.textContent.includes('Abkürzungen'))p.remove()});
  const hh=v.querySelector('.hh');if(hh)hh.textContent='Handlungsbereiche';v.querySelectorAll('.nxt small').forEach(x=>{if(x.textContent==='(alle Fächer)')x.textContent='(alle Bereiche)'});
@@ -260,5 +316,30 @@ window.betrieb=function(v){const bn={tec:FR==='ch'?'Produktion':'Technik',org:'O
   const p=el('<h3>'+esc(c.t)+'</h3><p>'+esc(c.kz)+'</p><div class="ibm">'+['tec','org','fp'].filter(b=>n[b]).map(b=>'<span class="tag" style="background:'+D[b].col+'">'+bn[b]+' '+n[b]+'</span>').join('')+'<span class="sub">'+c.tasks.length+' Schritte · '+c.tasks.reduce((a,t)=>a+t.p,0)+' Punkte'+(d?' · zuletzt '+Math.round(d.g/d.m*100)+' %':'')+'</span></div><button type="button" class="btn">Aufgabe öffnen →</button>','panel ibc');
   p.querySelector('.btn').onclick=()=>{fIdx=i;go('fall');scrollTo(0,0)};v.append(p)})};
 {const b=document.querySelector('#hdr .bs');if(b)b.textContent='Hauptqualifikation '+FRN[FR]+' · Verstehen. Anwenden. Bestehen.'}
+/* Favoriten auf der Startseite */
+{const hF=home;home=function(v){hF(v);const a=favs().map(k=>{const q=k.split(':'),m=D[q[0]]&&D[q[0]].modules[+q[1]];return m?[q[0],+q[1],m.t]:null}).filter(Boolean);if(!a.length)return;
+ const p=el('<h2><span aria-hidden="true">⭐</span> Deine Favoriten</h2><div class="favl"></div>','panel favp');a.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=x[2];b.onclick=()=>{modSel[x[0]]=x[1];go(x[0]);scrollTo(0,0)};p.querySelector('.favl').append(b)});
+ const nx=v.querySelector('.nxt');nx?nx.after(p):v.prepend(p)}}
+/* Fußzeile wie im Lernlabor: Impressum, Datenschutz, Hinweise */
+{const vf=document.querySelector('.ftr');if(vf){const OW='Dr. rer. nat. Markus Baum',ML=['baum.ma91','yahoo.de'].join('@'),AD='Am alten Schlachthof 2<br>93053 Regensburg';
+ const ft=document.createElement('footer');ft.id='ft';ft.className='ftr';
+ ft.innerHTML='<nav class="ftl" aria-label="Impressum und Datenschutz"><button type="button" data-ft="Impressum">Impressum</button><span aria-hidden="true">·</span><button type="button" data-ft="Datenschutz">Datenschutz</button><span aria-hidden="true">·</span><button type="button" data-ft="Hinweise">Hinweise</button></nav><p class="ftk">🔒 Dein Lernstand bleibt auf Deinem Gerät · keine Konten · kein Tracking</p><p class="ft-c">© 2026 '+OW+' · Version 4 · Weitergabe nur mit Erlaubnis</p>'
+ +'<details><summary>Hinweise</summary><p>Alle Aufgaben sind eigene Aufgaben und keine IHK-Prüfungsaufgaben. Ich prüfe die Inhalte sorgfältig, Fehler sind trotzdem möglich. Normwerte, Grenzwerte und Fristen sind Beispiel- und Richtwerte zum Üben, maßgeblich sind die aktuellen Normen, Gesetze, Tabellenbücher und die Angaben Deiner IHK. Lernlabor Pro ersetzt keinen Lehrgang und garantiert keinen Prüfungserfolg.</p></details>'
+ +'<details><summary>Impressum</summary><p>Angaben gemäß § 5 DDG</p><p>'+OW+'<br>'+AD+'</p><p>E-Mail: '+ML+'</p><p>Lernlabor Pro ist ein privates Lernangebot. Es steht in keiner Verbindung zur IHK oder zum DIHK.</p><p><b>Urheberrecht:</b> Aufgaben, Texte, Grafiken und Programm von Lernlabor Pro sind urheberrechtlich geschützt. Du darfst sie für Dein eigenes Lernen nutzen. Kopieren, Weitergeben oder Veröffentlichen, auch in Teilen, ist nur mit meiner schriftlichen Erlaubnis gestattet.</p></details>'
+ +'<details><summary>Datenschutz</summary><p>Verantwortlich: '+OW+', '+AD.replace('<br>',', ')+', '+ML+'</p><p><b>Dein Lernstand:</b> Lernlabor Pro speichert Deinen Lernstand, Deine Favoriten und Deine Notizen nur in Deinem Browser auf Deinem Gerät. Sie werden nicht automatisch an mich oder andere übertragen. Du kannst sie unter „Ich“ exportieren oder löschen.</p><p><b>Hosting:</b> Die Seite liegt bei GitHub Pages (GitHub Inc., USA). Beim Aufruf verarbeitet GitHub technisch nötige Zugriffsdaten, zum Beispiel Deine IP-Adresse, um die Seite auszuliefern und vor Angriffen zu schützen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren Bereitstellung). Die Übermittlung in die USA stützt sich auf das EU-US Data Privacy Framework.</p><p>Keine Cookies, kein Tracking, keine KI durch diese Seite.</p><p><b>Deine Rechte:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Datenschutz-Aufsichtsbehörde (in Bayern für Private: Bayerisches Landesamt für Datenschutzaufsicht).</p></details>';
+ vf.replaceWith(ft);ft.querySelectorAll('.ftl button').forEach(b=>b.onclick=()=>{let t=null;ft.querySelectorAll(':scope>details').forEach(d=>{const m=d.querySelector('summary').textContent.trim()===b.dataset.ft;d.open=m&&!d.open;if(d.open)t=d});if(t)t.scrollIntoView({behavior:'smooth',block:'nearest'})})}}
+/* Einheiten mit echtem Bruchstrich (m/s wird zu m über s), nur im Text, nicht in Zeichnungen und Eingabefeldern */
+{const NU=['m³','m²','cm³','cm²','mm²','mm','cm','km','µm','m','kg','mg','g','t','ml','l','kJ','MJ','J','kWh','MWh','Wh','kW','MW','W','kN','Nm','N','€','ct','kmol','mol','Stück','Teile','U','kvar','K','mbar','bar','A','h','min','s','1'],
+ DE=['m³','m²','cm²','mm²','mm','cm','m','kmol','mol','kg','g','t','ml','l','s²','s','min','h','a','d','K','kWh','MWh','kW','Stück','Jahr','Tag','Woche','Monat','Schicht','Teil','Zahn','U'],
+ W='A-Za-zÄÖÜäöüßµΩ0-9_',rq=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),
+ RE=new RegExp('(^|[^'+W+'/€²³])('+NU.map(rq).join('|')+')/('+DE.map(rq).join('|')+'|\\([^()/]{1,16}\\))(?![/²³'+W+'])','g'),
+ SKIP=/^(svg|input|textarea|select|option|script|style|code)$/i;
+ const walk=root=>{if(!root)return;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(n.nodeValue.indexOf('/')<0)return NodeFilter.FILTER_REJECT;for(let e=n.parentNode;e&&e!==root.parentNode;e=e.parentNode){if(e.nodeType===1&&(SKIP.test(e.nodeName)||e.classList.contains('fr')||e.isContentEditable))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}}),L=[];
+  while(tw.nextNode())L.push(tw.currentNode);
+  L.forEach(n=>{const t=n.nodeValue;RE.lastIndex=0;if(!RE.test(t))return;RE.lastIndex=0;const fr=document.createDocumentFragment();let last=0,m;
+   while((m=RE.exec(t))){const st=m.index+m[1].length;fr.append(t.slice(last,st));const sp=document.createElement('span');sp.className='fr fru';const a=document.createElement('span'),b=document.createElement('span');a.textContent=m[2];b.textContent=m[3].replace(/^\((.*)\)$/,'$1');sp.append(a,b);sp.setAttribute('aria-label',m[2]+' pro '+b.textContent);fr.append(sp);last=m.index+m[0].length}
+   fr.append(t.slice(last));n.parentNode.replaceChild(fr,n)})};
+ const vw=document.getElementById('view');let q=0;const run=()=>{q=0;walk(vw)};
+ new MutationObserver(()=>{if(!q)q=requestAnimationFrame(run)}).observe(vw,{childList:true,subtree:true,characterData:true});window.frUnits=walk}
 go(tab);
 })();
