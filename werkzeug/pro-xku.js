@@ -175,7 +175,7 @@ X['Temperieren & Kühlen von Werkzeugen']={
 const trBild=(V,tv,ok)=>{let s=TI('Trockentrichter an der Maschine');const h=Math.min(1,V/200),top=210-130*h;
  s+=P(`M150 ${F(top-6)}H290V200L240 236H200L150 200Z`,'var(--ink)',2.4,'','var(--card)');
  for(let i=0;i<70;i++){const x=158+(i*37%124),y=top+4+((i*53)%Math.max(8,196-top));if(y<200||x>180&&x<260)s+=`<circle cx="${x}" cy="${F(Math.min(y,228))}" r="3" fill="${MX('y',70)}" stroke="var(--ink)" stroke-width=".6"/>`}
- s+=FLO('M330 230H380V60H290',6)+L(372,142,'trockene','end',12,CC('b'),700)+L(372,158,'Luft','end',12,CC('b'),700)+P('M210 236V258M230 236V258','var(--ink)',2)+L(220,268,'zur Maschine','middle',11,'var(--mute)',600);
+ s+=FLO('M406 180V214H273',6)+FLO(`M270 ${F(top-6)}V52H406V120`,6)+RC(372,120,68,60,MX('b',18),'var(--ink)',6,2)+L(406,155,'Trockner','middle',12,'var(--ink)',700)+L(340,234,'trockene Luft','middle',12,CC('b'),700)+L(338,72,'feuchte Luft','middle',12,'var(--mute)',700)+P('M210 236V258M230 236V258','var(--ink)',2)+L(220,268,'zur Maschine','middle',11,'var(--mute)',600);
  s+=L(80,92,nz(V,0)+' l','middle',18,'var(--ink)',800)+L(80,112,'Trichter','middle',12,'var(--mute)',600);
  s+=RC(30,150,100,40,MX(ok?'g':'r',22),CC(ok?'g':'r'),6,1.6)+L(80,166,'Verweilzeit','middle',11,'var(--mute)',600)+L(80,183,nz(tv,1)+' h','middle',14,'var(--ink)',800);return s};
 X['Trocknen, Fördern & Dosieren']={
