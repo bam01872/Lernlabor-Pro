@@ -2,7 +2,7 @@
 
 Lern- und Übungsplattform für die Handlungsspezifischen Qualifikationen der Industriemeister in drei Fachrichtungen: Metall, Elektrotechnik und Chemie. Eigenständige Schwester von Lernlabor und Meisterlabor, Farbe Anthrazit und Orange.
 
-Stand: Version 3 (14.11.2026). Metall 38 Themen, Elektrotechnik 39, Chemie 40, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
+Stand: Version 4 (14.11.2026), Bedienung an das Lernlabor angeglichen (Wischleisten, Regler mit Zahlenfeld, Nachschlagen, Einheiten mit Bruchstrich). Metall 38 Themen, Elektrotechnik 39, Chemie 40, dazu je fünf mehrstufige Aufgaben „Im Betrieb“. Alle Texte und Aufgaben sind eigene, keine Prüfungsoriginale. Der Lernstand bleibt lokal im Browser, es gibt keine Konten und keine Nutzungszählung.
 
 ## Aufbau
 
