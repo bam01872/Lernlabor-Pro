@@ -217,7 +217,8 @@ function simPanel(key,Sm,hk){hk=hk||{};const p=el('<h2>Werte einstellen</h2><p c
  const au=el('<button type="button" class="aufk" aria-expanded="false"><span class="aufh"><b>🎯 Auftrag</b><span class="aufd"></span><span class="aufa">▾ Aufklappen</span></span><span class="aufz">Ziel: '+FRX(esc(Sm.auf.z))+'</span></button><div class="aufb" hidden><p>'+FRX(esc(Sm.auf.t))+'</p><p class="sub">'+FRX(esc(Sm.auf.h))+'</p></div><p class="aufr" aria-live="polite"></p>','auf');
  au.querySelector('.aufk').onclick=e=>{const b=au.querySelector('.aufb');b.hidden=!b.hidden;e.currentTarget.setAttribute('aria-expanded',!b.hidden);au.querySelector('.aufa').textContent=b.hidden?'▾ Aufklappen':'▴ Zuklappen'};
  cs.append(au);
- Sm.c.forEach(c=>{const dg=(String(c.st||1).split('.')[1]||'').length,fm=x=>c.opts?nt(x,2):nz(x,dg);
+ /* Auswahlregler: opts mit Beschriftungen in lab (Text statt Zahl) */
+ Sm.c.forEach(c=>{const dg=(String(c.st||1).split('.')[1]||'').length,fm=x=>c.lab?c.lab[c.opts.indexOf(x)]:c.opts?nt(x,2):nz(x,dg);
   const w=el('<div class="rg2"><label class="rgl" for="rg-'+c.k+'">'+FRX(esc(c.l))+'</label><input id="rg-'+c.k+'" type="range" min="'+(c.opts?0:c.min)+'" max="'+(c.opts?c.opts.length-1:c.max)+'" step="'+(c.opts?1:c.st)+'" value="'+c.v+'">'+(c.opts?'<b class="rgv"></b>':'<input class="rgn" type="text" inputmode="decimal" autocomplete="off" aria-label="'+esc(c.l)+' als Zahl">')+'<span class="rgu">'+esc(c.u||'')+'</span><p class="rgh" hidden></p></div>','').firstChild;
   const i=w.querySelector('input[type=range]'),n=w.querySelector('.rgn'),o=w.querySelector('.rgv'),h=w.querySelector('.rgh');
   const show=()=>{if(n)n.value=fm(v[c.k]);if(o)o.textContent=fm(v[c.k]);h.hidden=true;i.style.setProperty('--p',((+i.value-+i.min)/((+i.max-+i.min)||1)*100)+'%')};
@@ -238,7 +239,7 @@ function simPanel(key,Sm,hk){hk=hk||{};const p=el('<h2>Werte einstellen</h2><p c
  g.append(sv,cs);p.append(g);p._fix=Sm.fix;
  function up(quiet){const r=Sm.calc(v);sv.innerHTML='<svg viewBox="0 0 480 270" class="mlsk" role="img" aria-label="'+esc(Sm.t)+'">'+Sm.svg(v,r)+'</svg>';
   const R=Sm.rows(v,r);tb.innerHTML=R.map(x=>'<div class="kc'+(x[2]?' t'+x[2]:'')+'"><b>'+esc(x[1])+'</b><span>'+FRX(esc(x[0]))+'</span></div>').join('');
-  p._all=()=>'<table>'+Sm.c.map(c=>'<tr><td>'+FRX(esc(c.l))+'</td><td>'+esc((c.opts?nt(v[c.k],2):nz(v[c.k],(String(c.st||1).split('.')[1]||'').length))+(c.u?' '+c.u:''))+'</td></tr>').join('')+R.map(x=>'<tr'+(x[2]?' class="t'+x[2]+'"':'')+'><td>'+FRX(esc(x[0]))+'</td><td>'+esc(x[1])+'</td></tr>').join('')+'</table>';
+  p._all=()=>'<table>'+Sm.c.map(c=>'<tr><td>'+FRX(esc(c.l))+'</td><td>'+esc((c.lab?c.lab[c.opts.indexOf(v[c.k])]:c.opts?nt(v[c.k],2):nz(v[c.k],(String(c.st||1).split('.')[1]||'').length))+(c.u?' '+c.u:''))+'</td></tr>').join('')+R.map(x=>'<tr'+(x[2]?' class="t'+x[2]+'"':'')+'><td>'+FRX(esc(x[0]))+'</td><td>'+esc(x[1])+'</td></tr>').join('')+'</table>';
   hk.all&&hk.all(p._all());
   const ok=Sm.auf.ok(v,r);if(ok&&!done()&&!quiet){const A=lsG(AK);A[key]=1;lsS(AK,A);au.classList.add('aufflash');const o=lsG(RFK);o[key]=o[key]||{};o[key].r=1;lsS(RFK,o);paintRF(key)}
   au.classList.toggle('aufok',done());au.querySelector('.aufd').textContent=done()?'✓ geschafft':'';au.querySelector('.aufr').innerHTML=ok?'✅ Geschafft. Diese Einstellung erfüllt den Auftrag.':''}
@@ -304,12 +305,12 @@ home=function(v){home0(v);v.querySelectorAll('.rstand,.warn').forEach(x=>x.remov
  const hh=v.querySelector('.hh');if(hh)hh.textContent='Handlungsbereiche';v.querySelectorAll('.nxt small').forEach(x=>{if(x.textContent==='(alle Fächer)')x.textContent='(alle Bereiche)'});
  const fd=FRD[FR],hc=['#2f6fd0','#c27a12','#c2457b'];
  const a=el('<h2>🧭 So ist die Hauptqualifikation aufgebaut</h2><div class="hqa">'+fd.hq.map((h,i)=>'<div style="--c:'+hc[i]+'"><b>'+esc(h[0])+'</b><small>'+esc(h[1])+'</small></div>').join('')+'</div><p class="sub" style="margin-top:8px">Rechnen allein reicht nicht: In jeder Aufgabe leitest Du aus dem Ergebnis eine Entscheidung ab und begründest sie.'+(fd.hqn?' '+esc(fd.hqn):'')+'</p>','panel');
- const sw=el('<h2><span aria-hidden="true">🎓</span> Deine Fachrichtung</h2><div class="seg frs" role="group" aria-label="Fachrichtung wählen">'+Object.keys(FRN).map(k=>'<button type="button" data-k="'+k+'" aria-pressed="'+(k===FR)+'">'+FRD[k].em+' '+FRN[k]+'</button>').join('')+'</div><p class="sub">Technik und die Aufgaben „Im Betrieb“ wechseln mit der Fachrichtung. Organisation sowie Führung und Personal sind gemeinsam. Dein Lernstand wird je Fachrichtung getrennt gemerkt.</p>','panel frp');
+ const sw=el('<h2><span aria-hidden="true">🎓</span> Deine Fachrichtung</h2><div class="seg frs" role="group" aria-label="Fachrichtung wählen">'+Object.keys(FRN).map(k=>'<button type="button" data-k="'+k+'" aria-pressed="'+(k===FR)+'" title="'+FRN[k]+'">'+FRD[k].em+' '+FRK[k]+'</button>').join('')+'</div><p class="sub">Technik (bei Chemie Produktion, bei Logistik Logistikprozesse) und die Aufgaben „Im Betrieb“ wechseln mit der Fachrichtung. Organisation sowie Führung und Personal sind gemeinsam. Dein Lernstand wird je Fachrichtung getrennt gemerkt.</p>','panel frp');
  sw.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.k!==FR)frSet(b.dataset.k)});v.prepend(sw);
  const ib=el('<button type="button" class="lk" data-k="betrieb">🏭 Im Betrieb <small>(fünf mehrstufige Aufgaben)</small></button>','').firstChild;ib.onclick=()=>{go('betrieb');scrollTo(0,0)};{const l=v.querySelector('.nxt .lk');if(l)l.before(ib)}
  const nx=v.querySelector('.nxt');nx?nx.after(a):v.prepend(a)};
 /* ---------- Im Betrieb: mehrstufige Aufgaben über Technik, Organisation und Führung ---------- */
-window.betrieb=function(v){const bn={tec:FR==='ch'?'Produktion':'Technik',org:'Organisation',fp:'Führung'};
+window.betrieb=function(v){const bn={tec:TKZ,org:'Organisation',fp:'Führung'};
  v.append(el('<h2>🏭 Im Betrieb</h2><p class="sub">Fünf Lagen aus dem Alltag eines Meisters in der Fachrichtung '+FRN[FR]+'. Jede Aufgabe hat mehrere Schritte und verbindet Technik, Organisation und Führung, so wie die Situationsaufgaben in der Prüfung. Du schreibst Deine Lösung und hakst sie mit dem Erwartungshorizont ab.</p>','panel'));
  const st=(load().c)||{};
  CASES.forEach((c,i)=>{if(!c.ib)return;const d=st[c.f+':'+c.t],n={};c.tasks.forEach(t=>n[t.b]=(n[t.b]||0)+1);

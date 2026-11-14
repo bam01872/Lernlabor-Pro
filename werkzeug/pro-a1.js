@@ -1,7 +1,8 @@
 /* ===== Lernlabor Pro, Pakete A1 und P: Zusatzthemen in der Organisation, Beispiele aus der Fachrichtung in den gemeinsamen Themen,
    Situationsaufgaben und Fragen für das Fachgespräch je Fachrichtung. Eigene Texte und Aufgaben.
    Rechtliche Angaben sind eine Lernhilfe und keine Rechtsberatung. Maßgeblich sind die aktuellen Vorschriften und die Festlegungen im Betrieb. ===== */
-if(FR==='el'){
+/* Verantwortliche Elektrofachkraft: auch Mechatronik */
+if(FR==='el'||FR==='mt'){
 OM({t:'Verantwortliche Elektrofachkraft & Organisation',intro:'Wer ist im Betrieb wofür verantwortlich, wenn es um Strom geht? Du kennst die Rollen von der verantwortlichen Elektrofachkraft bis zum Arbeitsverantwortlichen und weißt, wie Pflichten wirksam übertragen werden.',
 pts:['Der Unternehmer trägt die Gesamtverantwortung. Fehlt ihm die Fachkunde, überträgt er die fachliche Leitung des elektrotechnischen Bereichs schriftlich einer verantwortlichen Elektrofachkraft.',
 'Die verantwortliche Elektrofachkraft ist in fachlichen Fragen weisungsfrei. Sie legt Regeln, Qualifikationen und Prüfungen fest und braucht dafür Befugnisse und Mittel.',
@@ -13,7 +14,8 @@ pts:['Der Unternehmer trägt die Gesamtverantwortung. Fehlt ihm die Fachkunde, �
 mcq:[['Wie wird die fachliche Verantwortung für die Elektrotechnik wirksam übertragen?','Schriftlich, mit klaren Aufgaben und Befugnissen, an eine geeignete Person','Mündlich in der Schichtbesprechung','Automatisch an den dienstältesten Elektriker','Durch Aushang am Schwarzen Brett','Ohne Befugnisse und Mittel kann niemand Verantwortung tragen.'],
 ['Wer leitet die Arbeit an einer freigeschalteten Anlage vor Ort?','Der Arbeitsverantwortliche','Der Unternehmer','Der Energieversorger','Der Betriebsrat','Er sorgt an der Arbeitsstelle für die Einhaltung der Sicherheitsregeln.'],
 ['Was bedeutet Weisungsfreiheit der verantwortlichen Elektrofachkraft?','In fachlichen Fragen der elektrischen Sicherheit darf ihr niemand hineinreden','Sie hat keinen Vorgesetzten','Sie darf Urlaub selbst festlegen','Sie muss nichts dokumentieren','Disziplinarisch bleibt sie eingebunden, fachlich entscheidet sie.'],
-['Wofür haftet ein Vorgesetzter, der einen ungeeigneten Mitarbeiter an einer Schaltanlage arbeiten lässt?','Für Auswahlverschulden','Für nichts, der Mitarbeiter ist selbst schuld','Nur für den Sachschaden','Für Lieferverzug','Die Auswahl geeigneter Mitarbeiter gehört zu den Führungspflichten.']]});
+['Wofür haftet ein Vorgesetzter, der einen ungeeigneten Mitarbeiter an einer Schaltanlage arbeiten lässt?','Für Auswahlverschulden','Für nichts, der Mitarbeiter ist selbst schuld','Nur für den Sachschaden','Für Lieferverzug','Die Auswahl geeigneter Mitarbeiter gehört zu den Führungspflichten.']]});}
+if(FR==='el'){
 FRB('el',{'Maschinenstundensatz':'Auch für Prüfplätze, Schaltschrankbau und Bestückungsautomaten wird ein Stundensatz gebildet. Bei teurer Messtechnik zählen vor allem Abschreibung und Kalibrierkosten.',
 'Kostenvergleich & kritische Menge':'Typische Frage: Schaltschränke selbst bauen oder zukaufen? Ab welcher Stückzahl lohnt sich der eigene Verdrahtungsautomat?',
 'Amortisation & Rentabilität':'Klassische Beispiele sind Frequenzumrichter, LED-Beleuchtung und Kompensationsanlagen. Der Rückfluss ist die eingesparte Energie.',

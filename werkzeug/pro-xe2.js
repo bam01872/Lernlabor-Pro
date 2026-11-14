@@ -1,6 +1,6 @@
 
 /* ===== Pakete E3 und E4 (Elektrotechnik): Vermuten, Kurz erklärt, Skizze, Regler mit Auftrag ===== */
-if(FR==='el'){const TI=t=>L(240,28,t,'middle',16,'var(--ink)',700),P=(d,c='var(--ink)',w=2.4,da='')=>`<path d="${d}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linejoin="round"${da?` stroke-dasharray="${da}"`:''}/>`;
+if(FR==='el'||FR==='mt'){const TI=t=>L(240,28,t,'middle',16,'var(--ink)',700),P=(d,c='var(--ink)',w=2.4,da='')=>`<path d="${d}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linejoin="round"${da?` stroke-dasharray="${da}"`:''}/>`;
 
 /* ---------- Schaltpläne: Selbsthaltung ---------- */
 const KT=(x,y,oe,c='var(--ink)')=>P(`M${x} ${y}V${y+8}M${x-11} ${y+10}L${x} ${y+30}V${y+38}`+(oe?`M${x} ${y+8}H${x-9}`:''),c,2.6);
