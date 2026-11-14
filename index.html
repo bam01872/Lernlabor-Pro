@@ -3873,7 +3873,7 @@ fach=function(f){const v=$('#view'),d=D[f],ms=d.modules,m=modSel[f],mod=ms[m],gi
  if(Q.v||Q.ein){const u=el('','');u.id='uir';if(Q.v)u.append(predBox(key,Q.v));if(Q.ein){const e=el('','');e.id='ein';u.append(e)}v.append(u);if(Q.ein)einShow(mod.t,Q.ein,()=>rfMark(key,'a'))}
  const wrap=el('','grid'),left=el('',''),right=el('','side');
  const SK=Q.skz?Q.skz.map(z=>[z[0](),z[1]]):(mod.viz||[]).map(k=>[VIZ[k](),'']);
- SK.forEach((z,i)=>{const g=z[0];const pn=el(i?'':'<h2>✏️ Skizze</h2>','panel skz'),bx=el('','skb');if(typeof g==='string')bx.innerHTML=g;else bx.append(g);if(z[1])bx.append(el(esc(z[1]),'sub skc'));pn.append(bx);left.append(pn)});
+ SK.forEach((z,i)=>{const g=z[0];const pn=el(i?'':'<h2>📐 Skizze</h2>','panel skz'),bx=el('','skb');if(typeof g==='string')bx.innerHTML=g;else bx.append(g);if(z[1])bx.append(el(esc(z[1]),'sub skc'));pn.append(bx);left.append(pn)});
  const GL=mod.fo||(mod.wip?[]:mod.pts.filter(p=>p.includes('='))),WI=mod.fo?mod.pts:mod.pts.filter(p=>!GL.includes(p)),bxl=a=>'<ul>'+a.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>';const mbx=el((WI.length?'<h2>📌 Wichtiges</h2>'+bxl(WI):'')+(GL.length?'<h2'+(WI.length?' class="bx2"':'')+'>🧮 Gleichungen</h2>'+bxl(GL):'')+(E&&E[2]?'<h2 class="bx2">⚠️ Typische Fehlerquellen</h2>'+bxl(E[2]):''),'panel box');mbx.id='mbx';{const rb=KI.readBtn(mod.t+'. '+mod.pts.join(' '),'w');if(rb)mbx.append(rb)}
  SK.length?right.append(mbx):left.append(mbx);
  wrap.append(left);if(right.childNodes.length)wrap.append(right);else wrap.style.gridTemplateColumns='minmax(0,1fr)';v.append(wrap);
@@ -4032,6 +4032,35 @@ body.subpg .brand .bpro{font-size:.5em}
 .ibc h3{margin:0 0 4px}.ibc .ibm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 10px}.ibc .ibm .tag,.tag.ibt{color:#fff}
 #fsel{max-width:100%;min-width:0;width:100%}.row label:has(#fsel){min-width:0;max-width:100%;flex:1 1 100%}
 @media(max-width:440px){#rfs:has(button:nth-child(5)){flex-wrap:wrap}#rfs:has(button:nth-child(5)) button{flex:1 1 30%}.frp .frs button{font-size:13px}}
+
+/* Wischleisten unter „Thema wechseln“ wie im Lernlabor */
+.thm.wls{max-height:none;overflow:visible;padding:10px 8px}
+.wlw{position:relative;margin:2px 0}
+.wlw+.wlw{margin-top:8px}
+.thm .wl{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 4px}
+.thm .wl::-webkit-scrollbar{display:none}
+.thm .wl button{flex:none;white-space:nowrap;min-height:40px}
+.thm .wl[data-k=g] button{font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--acc);border-color:transparent;background:transparent}
+.thm .wl[data-k=g] button[aria-pressed=true]{color:var(--ink);border-color:var(--acc);background:var(--card);box-shadow:inset 0 0 0 1px var(--acc)}
+.wla{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;line-height:1;display:none;place-items:center;cursor:pointer;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.wla.l{left:-4px}.wla.r{right:-4px}
+.wlw.ml .wla.l,.wlw.mr .wla.r{display:grid}
+.wlw.ml .wl{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px);mask-image:linear-gradient(90deg,transparent 0,#000 44px)}
+.wlw.mr .wl{-webkit-mask-image:linear-gradient(270deg,transparent 0,#000 44px);mask-image:linear-gradient(270deg,transparent 0,#000 44px)}
+.wlw.ml.mr .wl{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%)}
+/* Üben am Schluss, eingeklappt */
+.uebk{display:flex;align-items:center;gap:10px;width:100%;font:inherit;color:var(--ink);background:none;border:0;padding:2px 0;cursor:pointer;text-align:left;min-height:44px}
+.uebk .uebt{font-size:19px;font-weight:800;flex:none}
+.uebk .uebz{flex:1 1 auto;min-width:0;font-size:14px;color:var(--mute)}
+.uebk .ueba{flex:none;color:var(--mute)}
+.uebb{margin-top:8px}
+.thk{flex-wrap:nowrap;align-items:flex-start}
+.thk .crb{white-space:normal;text-align:left}
+.thm.wls{background:none;border:0;box-shadow:none;padding:0;margin:6px 0 10px;border-radius:0}
+.thm .wl[data-k=g] button{font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;padding:8px 14px}
+.thm .wl[data-k=g] button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:none}
+.thm .wl[data-k=t] button{font-size:14px;border-radius:10px;padding:6px 12px}
+.thm.wls:not([hidden])+#ms5{display:none}
 </style>
 <script>/* ===== Lernlabor Pro: Mustermodule mit Vermuten, Kurz erklärt, Skizze und Reglern mit Auftrag (wie im Lernlabor) ===== */
 (()=>{const {F,ph,T,RC,OP,POP,ARp,OK,NO,TW,TX,TITLE,STG,CC,LIST,CARDS,BARS,FLOW,VS,CYC,SKZ:SKZ0}=ML5.H,X=ML5.X;
@@ -5463,7 +5492,31 @@ fach=function(f){fach0(f);const m=modSel[f],mod=D[f].modules[m],Q=X[mod.t]||{},k
  if(Q.sim){const p=simPanel(key,Q.sim),ub=$('#ueb');ub?ub.before(p):v.append(p);
   const rf=$('#rfs');if(rf){const bs=[...rf.querySelectorAll('button')],ia=bs.findIndex(b=>b.dataset.s==='m');const nb=el('<button type="button" data-s="r"><span class="n"><b></b></span><span class="t">Ausprobieren</span></button>','').firstChild;
    nb.onclick=()=>p.scrollIntoView({behavior:'smooth',block:'start'});(ia>=0?bs[ia]:bs[bs.length-1]).after(nb);rf.querySelectorAll('button').forEach((b,i)=>b.querySelector('.n b').textContent=i+1)}
-  paintRF(key)}};
+  paintRF(key)}
+ /* Thema wechseln wie im Lernlabor: zwei Wischleisten (Gebiete, Themen) statt einer langen Liste */
+ {const mn=v.querySelector('.thm'),G=GRP[f],ms=D[f].modules;if(mn&&G){let gs=Math.max(0,G.findIndex(g=>g[1].includes(m)));
+  mn.classList.add('wls');const W=(k,l)=>'<div class="wlw"><button type="button" class="wla l" aria-label="zurück" tabindex="-1">‹</button><div class="wl" data-k="'+k+'" role="group" aria-label="'+l+'"></div><button type="button" class="wla r" aria-label="weiter" tabindex="-1">›</button></div>';
+  mn.innerHTML=W('g','Gebiet wählen')+W('t','Thema wählen');
+  const bg=mn.querySelector('[data-k=g]'),bt=mn.querySelector('[data-k=t]');
+  const arr=w=>{const l=w.querySelector('.wl'),mx=l.scrollWidth-l.clientWidth;w.classList.toggle('ml',l.scrollLeft>4);w.classList.toggle('mr',l.scrollLeft<mx-4)};
+  const mid=l=>{const c=l.querySelector('[aria-pressed=true],[aria-current=true]')||l.firstChild;if(c)l.scrollLeft=c.offsetLeft-(l.clientWidth-c.offsetWidth)/2;arr(l.parentNode)};
+  const topics=()=>{bt.innerHTML=G[gs][1].map(j=>'<button type="button" data-i="'+j+'" aria-current="'+(j===m)+'">'+esc(ms[j].t)+'</button>').join('');
+   bt.querySelectorAll('button').forEach(b=>b.onclick=()=>{modSel[f]=+b.dataset.i;go(f);scrollTo(0,0)});bt.scrollLeft=0;mid(bt)};
+  bg.innerHTML=G.map((g,i)=>'<button type="button" data-g="'+i+'" aria-pressed="'+(i===gs)+'">'+esc(g[0])+'</button>').join('');
+  bg.querySelectorAll('button').forEach(b=>b.onclick=()=>{gs=+b.dataset.g;bg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));topics()});
+  mn.querySelectorAll('.wlw').forEach(w=>{const l=w.querySelector('.wl');l.addEventListener('scroll',()=>arr(w),{passive:true});
+   w.querySelector('.wla.l').onclick=()=>l.scrollBy({left:-l.clientWidth*.7,behavior:'smooth'});w.querySelector('.wla.r').onclick=()=>l.scrollBy({left:l.clientWidth*.7,behavior:'smooth'})});
+  topics();const op=()=>{const t=v.querySelector('#thd .thw');if(t)t.textContent='Thema wechseln '+(mn.hidden?'▾':'▴');if(!mn.hidden)requestAnimationFrame(()=>{mid(bg);mid(bt)})};
+  v.querySelectorAll('#thd .crb,#thd .thw').forEach(b=>b.addEventListener('click',op));
+  document.onkeydown=e=>{if(e.key==='Escape'&&mn.isConnected&&!mn.hidden){const t=v.querySelector('#thd .crb');t&&t.click()}}}}
+ /* Üben steht am Schluss der Themenseite und ist eingeklappt */
+ {const ub=$('#ueb');if(ub&&!mod.wip){v.append(ub);const h=ub.querySelector('h2'),nq=mod.mcq.length,nc=C.filter(x=>x.f===f&&x.m===m).length;
+  const bd=document.createElement('div');bd.className='uebb';while(h.nextSibling)bd.append(h.nextSibling);bd.hidden=true;
+  const bt=document.createElement('button');bt.type='button';bt.className='uebk';bt.setAttribute('aria-expanded','false');
+  bt.innerHTML='<span class="uebt">✏️ Üben</span><span class="uebz">'+nq+' Check-Fragen'+(nc?' · '+nc+' Rechenaufgabe'+(nc>1?'n':''):'')+'</span><span class="ueba" aria-hidden="true">▾</span>';
+  const set=o=>{bd.hidden=!o;bt.setAttribute('aria-expanded',String(o));bt.querySelector('.ueba').textContent=o?'▴':'▾'};
+  bt.onclick=()=>set(bd.hidden);h.replaceWith(bt);ub.append(bd);
+  const rb=v.querySelector('#rfs [data-s=u]');if(rb)rb.addEventListener('click',()=>set(true))}}};
 const home0=home;
 home=function(v){home0(v);v.querySelectorAll('.rstand,.warn').forEach(x=>x.remove());[...v.querySelectorAll(':scope>.panel')].forEach(p=>{if(p.textContent.includes('Abkürzungen'))p.remove()});
  const hh=v.querySelector('.hh');if(hh)hh.textContent='Handlungsbereiche';v.querySelectorAll('.nxt small').forEach(x=>{if(x.textContent==='(alle Fächer)')x.textContent='(alle Bereiche)'});

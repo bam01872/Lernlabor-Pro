@@ -73,6 +73,7 @@ rep(r'<p class="sub" style="margin-top:24px;font-size:13px">.*?</p>','<p class="
 rep("© 2026 Dr. rer. nat. Markus Baum · Version 5 · Eigene Aufgaben","© 2026 Dr. rer. nat. Markus Baum · Version 3 · Eigene Aufgaben")
 rep("let brand='bordeaux';","let brand='pro';")
 rep("const BRN={bordeaux:'Bordeaux',","const BRN={pro:'Pro',bordeaux:'Bordeaux',")
+rep('<h2>✏️ Skizze</h2>','<h2>📐 Skizze</h2>')
 rep('<meta name="theme-color" content="#7a1b38">','<meta name="theme-color" content="#1f2937">')
 rep("<script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>","")
 rep(r"<script>/\* ===== Version 5, Paket 2:.*?</script>","",rx=True)

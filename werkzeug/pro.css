@@ -42,3 +42,32 @@ body.subpg .brand .bpro{font-size:.5em}
 .ibc h3{margin:0 0 4px}.ibc .ibm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 10px}.ibc .ibm .tag,.tag.ibt{color:#fff}
 #fsel{max-width:100%;min-width:0;width:100%}.row label:has(#fsel){min-width:0;max-width:100%;flex:1 1 100%}
 @media(max-width:440px){#rfs:has(button:nth-child(5)){flex-wrap:wrap}#rfs:has(button:nth-child(5)) button{flex:1 1 30%}.frp .frs button{font-size:13px}}
+
+/* Wischleisten unter „Thema wechseln“ wie im Lernlabor */
+.thm.wls{max-height:none;overflow:visible;padding:10px 8px}
+.wlw{position:relative;margin:2px 0}
+.wlw+.wlw{margin-top:8px}
+.thm .wl{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 4px}
+.thm .wl::-webkit-scrollbar{display:none}
+.thm .wl button{flex:none;white-space:nowrap;min-height:40px}
+.thm .wl[data-k=g] button{font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--acc);border-color:transparent;background:transparent}
+.thm .wl[data-k=g] button[aria-pressed=true]{color:var(--ink);border-color:var(--acc);background:var(--card);box-shadow:inset 0 0 0 1px var(--acc)}
+.wla{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;line-height:1;display:none;place-items:center;cursor:pointer;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.wla.l{left:-4px}.wla.r{right:-4px}
+.wlw.ml .wla.l,.wlw.mr .wla.r{display:grid}
+.wlw.ml .wl{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px);mask-image:linear-gradient(90deg,transparent 0,#000 44px)}
+.wlw.mr .wl{-webkit-mask-image:linear-gradient(270deg,transparent 0,#000 44px);mask-image:linear-gradient(270deg,transparent 0,#000 44px)}
+.wlw.ml.mr .wl{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%)}
+/* Üben am Schluss, eingeklappt */
+.uebk{display:flex;align-items:center;gap:10px;width:100%;font:inherit;color:var(--ink);background:none;border:0;padding:2px 0;cursor:pointer;text-align:left;min-height:44px}
+.uebk .uebt{font-size:19px;font-weight:800;flex:none}
+.uebk .uebz{flex:1 1 auto;min-width:0;font-size:14px;color:var(--mute)}
+.uebk .ueba{flex:none;color:var(--mute)}
+.uebb{margin-top:8px}
+.thk{flex-wrap:nowrap;align-items:flex-start}
+.thk .crb{white-space:normal;text-align:left}
+.thm.wls{background:none;border:0;box-shadow:none;padding:0;margin:6px 0 10px;border-radius:0}
+.thm .wl[data-k=g] button{font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;padding:8px 14px}
+.thm .wl[data-k=g] button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:none}
+.thm .wl[data-k=t] button{font-size:14px;border-radius:10px;padding:6px 12px}
+.thm.wls:not([hidden])+#ms5{display:none}

@@ -242,7 +242,31 @@ fach=function(f){fach0(f);const m=modSel[f],mod=D[f].modules[m],Q=X[mod.t]||{},k
  if(Q.sim){const p=simPanel(key,Q.sim),ub=$('#ueb');ub?ub.before(p):v.append(p);
   const rf=$('#rfs');if(rf){const bs=[...rf.querySelectorAll('button')],ia=bs.findIndex(b=>b.dataset.s==='m');const nb=el('<button type="button" data-s="r"><span class="n"><b></b></span><span class="t">Ausprobieren</span></button>','').firstChild;
    nb.onclick=()=>p.scrollIntoView({behavior:'smooth',block:'start'});(ia>=0?bs[ia]:bs[bs.length-1]).after(nb);rf.querySelectorAll('button').forEach((b,i)=>b.querySelector('.n b').textContent=i+1)}
-  paintRF(key)}};
+  paintRF(key)}
+ /* Thema wechseln wie im Lernlabor: zwei Wischleisten (Gebiete, Themen) statt einer langen Liste */
+ {const mn=v.querySelector('.thm'),G=GRP[f],ms=D[f].modules;if(mn&&G){let gs=Math.max(0,G.findIndex(g=>g[1].includes(m)));
+  mn.classList.add('wls');const W=(k,l)=>'<div class="wlw"><button type="button" class="wla l" aria-label="zurück" tabindex="-1">‹</button><div class="wl" data-k="'+k+'" role="group" aria-label="'+l+'"></div><button type="button" class="wla r" aria-label="weiter" tabindex="-1">›</button></div>';
+  mn.innerHTML=W('g','Gebiet wählen')+W('t','Thema wählen');
+  const bg=mn.querySelector('[data-k=g]'),bt=mn.querySelector('[data-k=t]');
+  const arr=w=>{const l=w.querySelector('.wl'),mx=l.scrollWidth-l.clientWidth;w.classList.toggle('ml',l.scrollLeft>4);w.classList.toggle('mr',l.scrollLeft<mx-4)};
+  const mid=l=>{const c=l.querySelector('[aria-pressed=true],[aria-current=true]')||l.firstChild;if(c)l.scrollLeft=c.offsetLeft-(l.clientWidth-c.offsetWidth)/2;arr(l.parentNode)};
+  const topics=()=>{bt.innerHTML=G[gs][1].map(j=>'<button type="button" data-i="'+j+'" aria-current="'+(j===m)+'">'+esc(ms[j].t)+'</button>').join('');
+   bt.querySelectorAll('button').forEach(b=>b.onclick=()=>{modSel[f]=+b.dataset.i;go(f);scrollTo(0,0)});bt.scrollLeft=0;mid(bt)};
+  bg.innerHTML=G.map((g,i)=>'<button type="button" data-g="'+i+'" aria-pressed="'+(i===gs)+'">'+esc(g[0])+'</button>').join('');
+  bg.querySelectorAll('button').forEach(b=>b.onclick=()=>{gs=+b.dataset.g;bg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));topics()});
+  mn.querySelectorAll('.wlw').forEach(w=>{const l=w.querySelector('.wl');l.addEventListener('scroll',()=>arr(w),{passive:true});
+   w.querySelector('.wla.l').onclick=()=>l.scrollBy({left:-l.clientWidth*.7,behavior:'smooth'});w.querySelector('.wla.r').onclick=()=>l.scrollBy({left:l.clientWidth*.7,behavior:'smooth'})});
+  topics();const op=()=>{const t=v.querySelector('#thd .thw');if(t)t.textContent='Thema wechseln '+(mn.hidden?'▾':'▴');if(!mn.hidden)requestAnimationFrame(()=>{mid(bg);mid(bt)})};
+  v.querySelectorAll('#thd .crb,#thd .thw').forEach(b=>b.addEventListener('click',op));
+  document.onkeydown=e=>{if(e.key==='Escape'&&mn.isConnected&&!mn.hidden){const t=v.querySelector('#thd .crb');t&&t.click()}}}}
+ /* Üben steht am Schluss der Themenseite und ist eingeklappt */
+ {const ub=$('#ueb');if(ub&&!mod.wip){v.append(ub);const h=ub.querySelector('h2'),nq=mod.mcq.length,nc=C.filter(x=>x.f===f&&x.m===m).length;
+  const bd=document.createElement('div');bd.className='uebb';while(h.nextSibling)bd.append(h.nextSibling);bd.hidden=true;
+  const bt=document.createElement('button');bt.type='button';bt.className='uebk';bt.setAttribute('aria-expanded','false');
+  bt.innerHTML='<span class="uebt">✏️ Üben</span><span class="uebz">'+nq+' Check-Fragen'+(nc?' · '+nc+' Rechenaufgabe'+(nc>1?'n':''):'')+'</span><span class="ueba" aria-hidden="true">▾</span>';
+  const set=o=>{bd.hidden=!o;bt.setAttribute('aria-expanded',String(o));bt.querySelector('.ueba').textContent=o?'▴':'▾'};
+  bt.onclick=()=>set(bd.hidden);h.replaceWith(bt);ub.append(bd);
+  const rb=v.querySelector('#rfs [data-s=u]');if(rb)rb.addEventListener('click',()=>set(true))}}};
 const home0=home;
 home=function(v){home0(v);v.querySelectorAll('.rstand,.warn').forEach(x=>x.remove());[...v.querySelectorAll(':scope>.panel')].forEach(p=>{if(p.textContent.includes('Abkürzungen'))p.remove()});
  const hh=v.querySelector('.hh');if(hh)hh.textContent='Handlungsbereiche';v.querySelectorAll('.nxt small').forEach(x=>{if(x.textContent==='(alle Fächer)')x.textContent='(alle Bereiche)'});
