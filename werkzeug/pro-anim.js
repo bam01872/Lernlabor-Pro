@@ -256,3 +256,59 @@ SIMX('Automatisierung & Robotik',{fix:'7,5 h Betriebszeit je Schicht. Im Bild l�
   A(E.pi,'transform','translate('+F(u<.1?P1[0]:P1[0]-96+96*Math.min(1,(u-.1)/.7))+' 0)');A(E.pi,'opacity',u<.1&&!dn?1:u<.1?1:1);
   A(E.po,'transform','translate('+F(u>=.5?P2[0]+150*Math.max(0,(u-.6)/.4):P2[0])+' 0)');A(E.po,'opacity',u>=.5&&!dn?1:0);
   A(E.lr,'fill',dn?'var(--red)':MXC('var(--red)',22));A(E.lg,'fill',dn?MXC('#16a34a',20):'#16a34a');A(E.stt,'opacity',dn?1:0)}})}
+
+/* ===== Paket Elektrotechnik ===== */
+/* ---------- Abschaltbedingung: Körperschluss am Gerät, der Fehlerstrom fließt über den Schutzleiter zurück, der Schalter löst aus oder nicht ---------- */
+{const YL=92,YP=132;
+SIMX('Schutzmaßnahmen & Prüfung elektrischer Anlagen',{
+ svg:(v,r)=>{const ok=r.Ik>=r.Ia,xd=196+(v.l-10)/110*150,w=2.2+v.A*.85,dk='#46505e';
+  let s=L(24,30,'Typ '+(v.kf===5?'B':'C')+'16, '+v.l+' m, '+nt(v.A)+' mm²','start',15,'var(--ink)',700);
+  /* Verteiler mit Leitungsschutzschalter */
+  s+=RC(20,56,96,104,MXC('var(--mute)',16),'var(--ink)',6,2)+L(68,152,'Verteiler','middle',13,'var(--ink)',700);
+  s+=RC(50,70,36,44,'var(--card)','var(--ink)',4,1.6)+`<g data-a="lev"><path d="M68 ${YL}V74" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><circle cx="68" cy="74" r="5" fill="${dk}"/></g>`+L(68,128,(v.kf===5?'B':'C')+'16','middle',13,'var(--ink)',700);
+  /* Leitung: Außenleiter und Schutzleiter */
+  s+=`<path data-a="wl" d="M86 ${YL}H${F(xd)}" stroke="#7a4a21" stroke-width="${F(w)}" fill="none"/><path d="M116 ${YP}H${F(xd)}" stroke="#16a34a" stroke-width="${F(w)}" fill="none"/><path d="M116 ${YP}H${F(xd)}" stroke="#eab308" stroke-width="${F(w)}" stroke-dasharray="7 7" fill="none"/>`;
+  s+=L(130,YL-9,'L','start',14,'var(--ink)',700)+L(130,YP+19,'PE','start',14,'#15803d',700);
+  s+=`<path data-a="cur" d="M86 ${YL}H${F(xd+18)}V${YP}H116" stroke="var(--red)" stroke-width="${F(Math.min(7,2+r.Ik/70))}" stroke-dasharray="9 9" fill="none" opacity="0"/>`;
+  /* Gerät und Mensch */
+  s+=`<rect data-a="hs" x="${F(xd)}" y="62" width="62" height="98" rx="6" fill="${MXC('var(--mute)',22)}" stroke="var(--ink)" stroke-width="2.2"/>`+L(xd+31,152,'Gerät','middle',13,'var(--ink)',700);
+  s+=`<path data-a="bolt" d="M${F(xd+34)} 80l-9 13h9l-7 13" stroke="#eab308" stroke-width="4" fill="none" stroke-linejoin="round" opacity="0"/>`;
+  const px=xd+86;s+=`<g data-a="man"><circle cx="${F(px)}" cy="84" r="9" fill="${MXC('var(--mute)',30)}" stroke="var(--ink)" stroke-width="1.8"/><path d="M${F(px)} 93V132M${F(px)} 132l-9 28M${F(px)} 132l9 28M${F(px)} 104L${F(xd+62)} 112" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"/></g>`;
+  s+=HB(40,206,400,18,r.Ik/460,ok?'var(--ok)':'var(--red)','Kurzschlussstrom',SUB('I_k = '+nz(r.Ik,0)+' A'))+MK(40+400*r.Ia/460,206,18,'');
+  s+=L(40+400*r.Ia/460,244,'nötig: '+nz(r.Ia,0)+' A','middle',13,'var(--ink)',700)+L(240,264,ok?'Der Schalter löst rechtzeitig aus.':'Zu wenig Strom: Das Gehäuse bleibt unter Spannung.','middle',14,ok?'var(--ok)':'var(--red)',700);return s},
+ tick:(E,v,r,t,dt,st)=>{const ok=r.Ik>=r.Ia,T=4.2,u=(t+1.6)%T,f=u>=.9,trip=ok&&u>=1.5,on=f&&!trip;st.o=(st.o||0)+(on?CL(r.Ik/3,25,150):0)*dt;
+  A(E.cur,'opacity',on?1:0);A(E.cur,'stroke-dashoffset',F(-st.o%18));A(E.bolt,'opacity',on?(Math.sin(t*40)>0?1:.5):0);
+  A(E.lev,'transform','rotate('+(trip?62:0)+' 68 '+YL+')');A(E.wl,'stroke',trip?'var(--mute)':'#7a4a21');
+  A(E.hs,'fill',on?MXC('var(--red)',28+10*Math.sin(t*12)):MXC('var(--mute)',22));A(E.hs,'stroke',on?'var(--red)':'var(--ink)');A(E.man,'opacity',on&&!ok?(Math.sin(t*30)>0?1:.55):1)}})}
+
+/* ---------- Spannungsfall: Die Spannung sinkt entlang der Leitung, der Strom läuft sichtbar zur Maschine ---------- */
+{const X0=96,YU=56,YC=156;
+SIMX('Leitungen bemessen & Spannungsfall',{
+ svg:(v,r)=>{const ok=r.du<=3,c=ok?'var(--ok)':'var(--red)',th=3+Math.sqrt(v.A)*2.2,xm=206+(v.l-10)/140*160,ye=YU+Math.min(70,r.dU*1.5),yg=YU+18;
+  let s=L(24,30,nt(v.l)+' m, '+nt(v.A)+' mm², '+nt(v.I)+' A','start',15,'var(--ink)',700);
+  /* Spannungsverlauf über der Leitung */
+  s+=`<path d="M${X0} ${YU}H${F(xm)}" stroke="var(--mute)" stroke-width="1.4" stroke-dasharray="4 4"/><path d="M${X0} ${yg}H${F(xm)}" stroke="${AMB}" stroke-width="1.4" stroke-dasharray="4 4"/>`;
+  s+=`<path d="M${X0} ${YU}L${F(xm)} ${F(ye)}V${YU}Z" fill="${MXC(c,22,'transparent')}"/><path d="M${X0} ${YU}L${F(xm)} ${F(ye)}" stroke="${c}" stroke-width="3.2" fill="none"/>`+DOT(X0,YU,'var(--ink)',4.5)+DOT(xm,ye,c,5.5);
+  s+=L(X0-8,YU+5,'400 V','end',14,'var(--ink)',700)+L(X0-8,yg+14,'3 %','end',13,AMB,700)+L(xm+10,ye+5,nz(400-r.dU,1)+' V','start',15,c,700);
+  s+=`<path d="M${X0} ${YU}V${YC-20}M${F(xm)} ${F(ye)}V${YC-20}" stroke="var(--line)" stroke-width="1.2"/>`;
+  /* Verteiler, Leitung, Maschine */
+  s+=RC(20,YC-28,76,56,MXC(CC('b'),20),'var(--ink)',6,2)+L(58,YC+5,'Verteiler','middle',13,'var(--ink)',700);
+  s+=`<path d="M${X0} ${YC}H${F(xm)}" stroke="#b87333" stroke-width="${F(th)}"/><path data-a="cur" d="M${X0} ${YC}H${F(xm)}" stroke="#fde68a" stroke-width="${F(Math.max(1.6,th*.36))}" stroke-dasharray="5 13" stroke-linecap="round"/>`;
+  s+=RC(xm,YC-28,84,56,MXC(c,20),'var(--ink)',6,2)+`<circle cx="${F(xm+24)}" cy="${YC}" r="15" fill="var(--card)" stroke="var(--ink)" stroke-width="1.8"/><path data-a="rot" d="M${F(xm+24)} ${YC-11}V${YC+11}M${F(xm+13)} ${YC}H${F(xm+35)}" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round"/>`+L(xm+60,YC+5,'M','middle',17,'var(--ink)',800);
+  return s+HB(40,222,400,18,r.du/8,c,'Spannungsfall','Δu = '+nz(r.du,1)+' %')+MK(40+400*3/8,222,18,'Richtwert 3 %')},
+ tick:(E,v,r,t,dt,st)=>{st.o=(st.o||0)+v.I*1.6*dt;A(E.cur,'stroke-dashoffset',F(-st.o%18));const xm=206+(v.l-10)/140*160;st.a=(st.a||0)+dt*CL(360*(1-r.dU/130),40,360);A(E.rot,'transform','rotate('+F(st.a%360)+' '+F(xm+24)+' '+YC+')')}})}
+
+/* ---------- Frequenzumrichter: zwei gleiche Lüfter, links mit Drosselklappe, rechts mit Umrichter ---------- */
+{const fan=(ox,k)=>{const cx=ox+44,cy=124,dk='#46505e';let s=RC(cx,82,146,30,MXC('var(--mute)',14),'var(--ink)',2,2)+`<circle cx="${cx}" cy="${cy}" r="40" fill="${MXC('var(--mute)',24)}" stroke="var(--ink)" stroke-width="2"/><g data-a="imp${k}">`;
+  for(let i=0;i<8;i++){const a=i*TAU/8;s+=`<path d="M${F(cx+9*Math.cos(a))} ${F(cy+9*Math.sin(a))}Q${F(cx+22*Math.cos(a+.5))} ${F(cy+22*Math.sin(a+.5))} ${F(cx+31*Math.cos(a+.25))} ${F(cy+31*Math.sin(a+.25))}" fill="none" stroke="var(--ink)" stroke-width="3.4" stroke-linecap="round"/>`}
+  s+=`</g><circle cx="${cx}" cy="${cy}" r="8" fill="${dk}" stroke="var(--ink)" stroke-width="1.5"/>`;
+  s+=`<path data-a="air${k}" d="M${cx+86} 97H${cx+158}" stroke="var(--flow)" stroke-width="5" stroke-dasharray="10 9" stroke-linecap="round"/><path d="M${cx+160} 89l12 8l-12 8z" fill="var(--flow)"/>`;return s};
+SIMX('Elektrische Antriebe & Frequenzumrichter',{
+ svg:(v,r)=>{const q=v.q,bar=(ox,P,c)=>RC(ox,214,190,14,'var(--card)','var(--line)',5,1.2)+RC(ox,214,Math.max(2,190*P/15),14,c,'none',5,0)+L(ox,208,'P = '+nz(P,1)+' kW','start',15,'var(--ink)',700);
+  let s=L(112,62,'mit Drosselklappe','middle',14,'var(--ink)',700)+L(346,62,'mit Frequenzumrichter','middle',14,'var(--ink)',700)+`<path d="M238 48V232" stroke="var(--line)" stroke-width="1.5"/>`;
+  s+=fan(12,1)+`<path data-a="kl" d="M122 84V110" stroke="var(--red)" stroke-width="5" stroke-linecap="round" transform="rotate(${F(90-(100-q)/50*62)} 122 97)"/><circle cx="122" cy="97" r="3.4" fill="var(--ink)"/>`+L(16,183,'50 Hz, volle Drehzahl','start',13,'var(--mute)',600);
+  s+=fan(246,2)+L(250,183,nz(50*q/100,0)+' Hz, Drehzahl '+q+' %','start',13,'var(--mute)',600);
+  s+=bar(16,r.Pd,'var(--amber)')+bar(250,r.Pf,'var(--ok)');
+  return s+L(240,256,r.sp>0?'Der Umrichter spart '+nz(r.sp,0)+' € im Jahr.':'Bei voller Luftmenge spart der Umrichter nichts.','middle',15,r.am<=1?'var(--ok)':'var(--ink)',700)},
+ tick:(E,v,r,t,dt,st)=>{const q=v.q/100;st.a=(st.a||0)+dt*420;st.b=(st.b||0)+dt*420*q;st.o=(st.o||0)+dt*90*q;
+  A(E.imp1,'transform','rotate('+F(st.a%360)+' 56 124)');A(E.imp2,'transform','rotate('+F(st.b%360)+' 290 124)');['air1','air2'].forEach(k=>{A(E[k],'stroke-dashoffset',F(-st.o%19));A(E[k],'stroke-width',F(2+4*q))})}})}
