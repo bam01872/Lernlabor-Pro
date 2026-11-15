@@ -2,19 +2,40 @@
    Leerzeichen zwischen Zahl und Einheit (auch %, °C, €) und zwischen Tausendergruppen werden geschützt,
    eine Zahl mit Bruch-Einheit (.fru) samt folgendem Satzzeichen steht in einem nicht umbrechenden Kasten. */
 (()=>{
-const U=['%','‰','°C','°F','°','K','V','kV','mV','µV','A','mA','kA','µA','W','kW','MW','GW','mW','Wh','kWh','MWh','GWh','Ah','mAh','Hz','kHz','MHz','GHz','Ω','kΩ','MΩ','mΩ','VA','kVA','MVA','var','kvar','Mvar','F','µF','nF','pF','mF','H','mH','T','mT','N','kN','MN','mN','Nm','N·m','kNm','kN·m','Pa','kPa','MPa','GPa','hPa','bar','mbar','m','mm','cm','dm','km','µm','μm','nm','m²','m³','mm²','mm³','cm²','cm³','dm²','dm³','km²','l','L','ml','dl','cl','hl','Liter','g','kg','mg','µg','t','s','ms','µs','min','h','d','a','mol','kmol','mmol','J','kJ','MJ','GJ','cal','kcal','€','ct','Cent','Euro','EUR','dB','dB(A)','lx','lm','cd','U','Stück','Stk.','Teile','Teil','Jahre','Jahren','Jahr','Tage','Tagen','Tag','Monate','Monaten','Monat','Wochen','Woche','Stunden','Stunde','Minuten','Minute','Sekunden','Sekunde','Schichten','Schicht','Prozent','Prozentpunkte','Grad','Mbit','kbit','bit','Byte','kB','MB','GB','HRC','HB','HV','ppm','rad','sr','Bq','Gy','Sv','eV','K⁻¹','1/K','mol/l'];
+const U=['%','‰','°C','°F','°','K','V','kV','mV','µV','A','mA','kA','µA','W','kW','MW','GW','mW','Wh','kWh','MWh','GWh','Ah','mAh','Hz','kHz','MHz','GHz','Ω','kΩ','MΩ','mΩ','VA','kVA','MVA','var','kvar','Mvar','F','µF','nF','pF','mF','H','mH','T','mT','N','kN','MN','mN','Nm','N·m','kNm','kN·m','Pa','kPa','MPa','GPa','hPa','bar','mbar','m','mm','cm','dm','km','µm','μm','nm','m²','m³','mm²','mm³','cm²','cm³','dm²','dm³','km²','l','L','ml','dl','cl','hl','Liter','g','kg','mg','µg','t','s','ms','µs','min','h','d','a','mol','kmol','mmol','J','kJ','MJ','GJ','cal','kcal','€','ct','Cent','Euro','EUR','dB','dB(A)','lx','lm','cd','U','Stück','Stk.','Teile','Teil','Jahre','Jahren','Jahr','Tage','Tagen','Tag','Monate','Monaten','Monat','Wochen','Woche','Stunden','Stunde','Minuten','Minute','Sekunden','Sekunde','Schichten','Schicht','Prozent','Prozentpunkte','Grad','Mbit','kbit','bit','Byte','kB','MB','GB','HRC','HB','HV','ppm','rad','sr','Bq','Gy','Sv','eV','K⁻¹','1/K','mol/l','Nm³','daN','phr','Vol.-%','Gew.-%','Ma.-%','Vol.%','Mio.','Mio','Mrd.','Mrd','Tsd.','Millionen','Milliarden','Uhr','Mitarbeiter','Mitarbeitern','Mitarbeitende','Vollarbeiter','Vollarbeitern','Personen','Betriebsstunden','Laufstunden','Arbeitsstunden','Produktionsstunden','Maschinenstunden','Arbeitstage','Arbeitstagen','Werktage','Werktagen','Liter','Litern','Positionen','Paletten','Europaletten','Stellplätze','Kartons','Pakete','Zyklen','Takte','Umdrehungen','Kavitäten','Sauger','Saugern','Stationen','Messungen','Schneiden','Zähne','Achsen','Gurte','Gurten','Geräte','Adressen','Pos.','Pos./h','Teilen','Fässer','Kommissionierer','Rechnungseinheiten','Verschlusskappen'];
 const rq=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),L='A-Za-zÄÖÜäöüßµμΩ0-9_²³';
 const RU=new RegExp('(\\d)[ \\u2009](?=(?:'+U.slice().sort((a,b)=>b.length-a.length).map(rq).join('|')+')(?!['+L+']))','g');
+const RS=new RegExp('^[ \\u00a0](?:'+U.slice().sort((a,b)=>b.length-a.length).map(rq).join('|')+')(?!['+L+'])');
 const RT=/(^|[^\d,.])(\d{1,3})((?:[  ]\d{3})+)(?![\d,])/g;
 const SKIP=/^(svg|input|textarea|select|option|script|style|code)$/i;
-const fix=s=>s.replace(RU,'$1 ').replace(RT,(m,a,b,c)=>a+b+c.replace(/[  ]/g,' '));
+const fix0=s=>s.replace(RU,'$1 ').replace(RT,(m,a,b,c)=>a+b+c.replace(/[  ]/g,' '));
+/* Version 19: kurze Formeln zusammenhalten. „=“ bleibt an einem kurzen Formelzeichen (bis 12 Zeichen) und, wenn beide Seiten zusammen kurz sind (bis 20 Zeichen), auch am Wert (r = 2257, Q = m · c · ΔT), ebenso um Malpunkte zwischen Formelzeichen und Zahlen (m · c · ΔT, √3 · U · I · cos φ) */
+const GR='ΔΦΩΨΣΘΛΠαβγδεζηϑθικλμνξπρσςτυφχψω\u1e00-\u1eff',SY='(?:cos ?|sin ?|tan ?)?[A-Za-z'+GR+'][A-Za-z0-9_\\u0307\\u0304'+GR+'\\u2019\']{0,3}',NB='[^A-Za-zÄÖÜäöüß0-9_'+GR+'\\u0307\\u0304]';
+const RE2=new RegExp('(^|'+NB+')('+SY+'|[\\d,]*\\d) ([·×]) (?=[-−+]?[\\d√(]|'+SY+'(?:'+NB+'|$))','g');
+const feq=s=>{if(!/[=·×]/.test(s))return s;s=s.replace(/(^|[^A-Za-z])(cos|sin|tan) (?=[α-ωϑφ])/g,'$1$2\u00a0');
+ s=s.replace(/([^\s\u00a0]+) = (?=([^\s\u00a0]+))/g,(m,a,b)=>a+(a.length<=12?'\u00a0':' ')+'='+(a.length+b.length<=20?'\u00a0':' '));for(let i=0;i<4;i++)s=s.replace(RE2,(m,a,b,c)=>a+b+'\u00a0'+c+'\u00a0');return s};
+const fix=s=>feq(fix0(s));
 const glue=root=>{if(!root)return;
- const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(!/\d[  ]/.test(n.nodeValue))return NodeFilter.FILTER_REJECT;for(let e=n.parentNode;e&&e!==root.parentNode;e=e.parentNode){if(e.nodeType===1&&(SKIP.test(e.nodeName)||e.isContentEditable))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}}),T=[];
+ const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(!/\d[ \u2009]| [=·×] /.test(n.nodeValue))return NodeFilter.FILTER_REJECT;for(let e=n.parentNode;e&&e!==root.parentNode;e=e.parentNode){if(e.nodeType===1&&(SKIP.test(e.nodeName)||e.isContentEditable))return NodeFilter.FILTER_REJECT}return NodeFilter.FILTER_ACCEPT}}),T=[];
  while(tw.nextNode())T.push(tw.currentNode);
  T.forEach(n=>{const v=fix(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
- root.querySelectorAll('.fru').forEach(f=>{if(f.parentNode.classList.contains('nw'))return;const p=f.previousSibling;if(!p||p.nodeType!==3)return;
-  const m=/(\S*\d)[\s ]$/.exec(p.nodeValue);if(!m)return;
-  const w=document.createElement('span');w.className='nw';p.nodeValue=p.nodeValue.slice(0,m.index);f.before(w);w.append(m[1]+' ',f);
+ /* Zahl am Textende, danach eine Einheit in eigenem Element (zum Beispiel <b>12</b> kW oder 12 <span>kW</span>): Leerzeichen schützen */
+ root.querySelectorAll('*').forEach(e=>{if(SKIP.test(e.nodeName)||e.closest('svg'))return;const a=e.previousSibling,b=e.nextSibling;
+  if(b&&b.nodeType===3&&/^(SUB|SUP|VAR|I|EM)$/.test(e.nodeName)&&/^ [=·×] /.test(b.nodeValue)&&e.textContent.length<=4)b.nodeValue='\u00a0'+b.nodeValue[1]+'\u00a0'+b.nodeValue.slice(3);
+  if(a&&a.nodeType===3&&/\d $/.test(a.nodeValue)&&RS.test(' '+e.textContent))a.nodeValue=a.nodeValue.slice(0,-1)+' ';
+  if(b&&b.nodeType===3&&/\d$/.test(e.textContent)&&RS.test(b.nodeValue))b.nodeValue=' '+b.nodeValue.slice(1)});
+ /* Zahl mit Bruch-Einheit (.fr aus [[…||…]] und .fru aus kJ/kg): Zahl, Bruch und folgendes Satzzeichen in einen nicht umbrechenden Kasten */
+ root.querySelectorAll('.fr').forEach(f=>{if(f.parentElement.closest('.fr,.nw'))return;
+  let t=f;const pa=f.parentElement;if(pa&&pa.tagName==='SPAN'&&pa.style.display==='inline-block'&&pa.firstChild===f)t=pa;
+  if(t!==f&&t.parentElement.closest('.nw'))return;
+  let p=t.previousSibling,lead=null,num='';
+  if(p&&p.nodeType===3){const m=/((?:[^\s\u00a0\u202f]*[\u00a0\u202f])*[^\s\u00a0\u202f]*\d)(\s?)$/.exec(p.nodeValue);
+   if(m){num=m[1]+(m[2]?' ':'');p.nodeValue=p.nodeValue.slice(0,m.index)}
+   else if(/^[\s  ]$/.test(p.nodeValue)&&p.previousSibling&&p.previousSibling.nodeType===1&&!SKIP.test(p.previousSibling.nodeName)&&/\d$/.test(p.previousSibling.textContent)){lead=p.previousSibling;num=' ';p.remove()}
+   else return}
+  else if(p&&p.nodeType===1&&!SKIP.test(p.nodeName)&&/\d$/.test(p.textContent))lead=p;
+  else return;
+  const w=document.createElement('span');w.className='nw';t.before(w);if(lead)w.append(lead);if(num)w.append(num);w.append(t);
   const nx=w.nextSibling;if(nx&&nx.nodeType===3){const k=/^[.,;:!?)»“]+/.exec(nx.nodeValue);if(k){w.append(k[0]);nx.nodeValue=nx.nodeValue.slice(k[0].length)}}})};
 /* ---------- Texte stehen nicht über: lieber etwas kleinere Schrift als ein Wort mitten im Wort brechen ---------- */
 const BLK=/^(block|list-item|flex|grid|inline-block|inline-flex|inline-grid|table-cell|table-caption|flow-root)$/;

@@ -8,8 +8,8 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 - **Besitzer:** Markus (Dr. rer. nat. Markus Baum), nebenberuflicher Dozent für Industriemeister. Deutsch, Du-Form.
 - **Repo:** https://github.com/bam01872/Lernlabor-Pro (öffentlich, Branch `main`)
 - **Live (GitHub Pages, main / root, seit 14.11.2026):** https://bam01872.github.io/Lernlabor-Pro/
-- **Stand main:** **Version 18** (PR #18, 14.11.2026, Commit 0349a87). Gemergt sind PR #1 bis #18.
-- **Nächste freie Version:** 19
+- **Stand main:** **Version 20** (15.11.2026). Gemergt sind PR #1 bis #20 und der PR zu Version 20.
+- **Nächste freie Version:** 21
 - **Umfang:** Metall 39 Themen, Elektrotechnik 40, Chemie 51 (mit Gebiet Thermodynamik), Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42; je 5 mehrstufige Aufgaben „Im Betrieb“, Situationsaufgaben, Fachgespräch-Fragen; `tests/check.js` prüft 213+ Rechenaufgaben.
 
 ### Versionsgeschichte (kurz)
@@ -28,6 +28,8 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 | 12, 13, 15, 17, 18 | #12 … #18 | bewegte Regler-Zeichnungen: Metall, Elektro, Chemie, Kunststoff, Mechatronik/Logistik |
 | 14 | #14 | Versionsanzeige, „Jetzt laden“, sw.js (offline) |
 | 16 | #16 | „Weiter mit …“ im Menü Lernen |
+| 19 | #20 | Fachrichtungs-Wahl als gleich breites Kachelraster |
+| 20 | (dieser PR) | Zahl + Bruch-Einheit zusammen, kurze Formeln in einer Zeile (Formatierungsregel) |
 
 ## 2. Aufbau des Repos
 
@@ -37,7 +39,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 - `tests/check.js`: lädt alle sechs Fachrichtungen, prüft jede Rechenaufgabe in 25 Zahlenvarianten (gültig, **relative** Toleranz ≤ 5 %, falsche Eingaben werden abgelehnt), Version/sw.js/Hinweis.
 - `werkzeug/`: Quellen und Bauwerkzeug.
   - **Bauen:** `python3 werkzeug/build.py werkzeug/basis/meisterlabor-v5.html index.html`
-  - **Version nur oben in `werkzeug/build.py` hochzählen:** `APPV,APPD=18,'14.11.2026'`. Daraus entstehen APPV in der App, Fußzeilen und sw.js. Dazu NEU-Eintrag (Was ist neu) und README-Stand.
+  - **Version nur oben in `werkzeug/build.py` hochzählen:** `APPV,APPD=20,'15.11.2026'`. Daraus entstehen APPV in der App, Fußzeilen und sw.js. Dazu NEU-Eintrag (Was ist neu) und README-Stand.
   - `basis/meisterlabor-v5.html`: Gerüst (Meisterlabor Version 5).
   - Inhalte: `pro-data.js`, `pro-pakete.js`, `pro-p3a..d.js` (Metall, Org, Führung), `pro-fr.js` (Fachrichtungen), `pro-el1/2` + `pro-xe1/2` (Elektro), `pro-ch1/2` + `pro-xc1/2` (Chemie), `pro-thd` + `pro-xthd` (Thermodynamik), `pro-ku1` + `pro-xku`, `pro-mt1` + `pro-xmt` (enthält Skizzenhelfer XTI/XMX/XP/XFO/XSTK), `pro-lo1` + `pro-xlo`, `pro-ib`/`pro-ib2` (Im Betrieb), `pro-a1/a2` + `pro-xa/xa2` (Situationsaufgaben, Fachgespräch).
   - Darstellung/Bedienung: `pro-ml5.js`, `pro-x2..x4.js` (Vermuten, Kurz erklärt, Skizzen, Regler), `pro-ll.js` (Hash-Routing `#thema/<slug>`, Teilen/QR, ONE-Liste ohne Doppel-Skizze, Menüs, Ich → Sonstiges), `pro-l9.js` (Restpunkte, „Weiter mit …“), `pro-nb.js` (Zahl+Einheit, Ränder, Trennung), `pro-upd.js` (Hinweis neue Version), `pro-anim.js` (bewegte Zeichnungen), `pro.css`, `qrcode.js`.
@@ -75,7 +77,13 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 
 **Gestaltung (aus dem Lernlabor)**
 - Themenseite: Einstieg → Vermuten → Kurz erklärt → Skizze → Regler mit Auftrag („Werte einstellen“), dann Nachschlagen eingeklappt, Üben am Ende.
-- Einheiten überall als echter Bruch, Zahl und Einheit nie trennen, Formeln in einer Zeile (zu lang → kleinere Schrift), Blocksatz mit Trennung nur nach Rechtschreibung, nichts über Ränder.
+- Einheiten überall als echter Bruch, Blocksatz mit Trennung nur nach Rechtschreibung, nichts über Ränder.
+- **Formatierungsregel Zahl, Einheit, Formel (Markus, 15.11.2026, Version 20), gilt für die ganze App:**
+  - Zahl und Einheit nie trennen: auch nicht vor einer Bruch-Einheit (kJ/kg, `[[kJ||kg]]`), nicht bei Tausenderlücke (30 000 €/Jahr), ein folgender Punkt oder ein folgendes Komma bleibt dabei. Zählwörter wie Mitarbeiter, Paletten, Betriebsstunden gelten als Einheit.
+  - Kurze Formeln stehen in einer Zeile: „r = 2257 kJ/kg“, „c = 4,18 kJ/(kg·K)“, „Q = m · c · ΔT“, „P = √3 · U · I · cos φ“. Nie am „=“ oder am Malpunkt umbrechen.
+  - Lange Wortformeln, die am Handy nicht in eine Zeile passen („Beschäftigungsabweichung = Sollkosten − …“): „=“ bleibt am Wort davor, Umbruch erst dahinter. Die Schrift wird dafür nicht verkleinert.
+  - Umgesetzt zentral in `werkzeug/pro-nb.js` beim Anzeigen (geschützte Leerzeichen, Kasten `.nw` mit `white-space:nowrap`). Inhalte nie einzeln von Hand mit geschützten Leerzeichen versehen. Neue Einheiten oder Zählwörter in die Liste `U` in `pro-nb.js` eintragen.
+  - Prüfen: alle Themenseiten bei 320, 360, 390 px und Laptop auf Umbrüche zwischen Zahl und Einheit und in Formeln.
 - Einheiten in jedem Rechenschritt. Skizzen verraten keine Lösung, Beschriftungen nie überlappend/verdeckt, alle Ansichten (390 px, 320 px, Laptop, hell/dunkel, Safari) prüfen.
 - Chemie-Symbol 🧪 wie im Lernlabor; Kacheln 🧴 Kunststoff, 🤖 Mechatronik, 📦 Logistik.
 
@@ -121,6 +129,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 | Weiter-Knopf (V16) | https://claude.ai/artifact/48rRK2iN6w89Kd7C4p5ake |
 | Animationen Kunststoff (V17) | https://claude.ai/artifact/XPfKnJMHXCBVotEGQLqDKz |
 | Animationen Mechatronik/Logistik (V18) | https://claude.ai/artifact/WuvV6x26yuZJzUfZqhCJeU |
+| Zahl, Einheit und Formel zusammen (V20) | https://claude.ai/artifact/7yxX4fCPcCCxmdHrLSpZZS |
 
 ## 6. Bezug zu den Schwester-Apps
 
