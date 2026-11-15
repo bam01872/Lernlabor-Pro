@@ -1,0 +1,57 @@
+/* ---------- Version 21: Ich → Tutorial, sieben kurze Kapitel wie im Lernlabor (v303/v304) ---------- */
+#tut .tuh h2{margin:0 0 4px}
+.tunav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:12px -4px 4px;padding:2px 4px 6px;scroll-snap-type:x proximity}.tunav::-webkit-scrollbar{display:none}
+.tunav button{flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 12px 7px 7px;font:inherit;font-size:.9em;font-weight:600;min-height:40px;cursor:pointer;white-space:nowrap}
+.tunav button i{font-style:normal;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--acc) 12%,var(--card));color:var(--acc);font-size:.85em;font-weight:800}
+.tunav button.dn i{background:var(--ok);color:#fff}
+.tunav button[aria-current="true"]{background:var(--acc);border-color:var(--acc);color:#fff}.tunav button[aria-current="true"] i{background:#fff;color:var(--acc)}
+.tuk h3{font-size:1.25em;margin:6px 0 4px}.tuk .tuz{color:var(--mute);margin:0 0 10px;text-align:left}
+.tupt{list-style:none;padding:0;margin:0 0 12px}.tupt li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);line-height:1.45}.tupt li:last-child{border-bottom:0}
+.tupt li>span:first-child{flex:0 0 1.6em;text-align:center;font-size:1.15em}.tupt li>span:last-child{flex:1;min-width:0}.tupt b{font-weight:700}
+.tudemo{border:2px dashed color-mix(in srgb,var(--acc) 40%,var(--line));border-radius:16px;padding:12px;margin:10px 0 12px;background:color-mix(in srgb,var(--acc) 4%,var(--card))}
+.tudemo h4{margin:0 0 8px;font-size:.8em;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.tugo{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}.tugo .btn{margin:0}
+.tubt{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.tubt .btn{margin:0;min-height:44px}.tubt .sub{font-size:.9em;margin:0}
+.tubt .btn{white-space:nowrap;padding-left:12px;padding-right:12px}.tubt .sub{white-space:nowrap}
+.tubt .btn:disabled{opacity:.4;cursor:default}
+/* Kapitel 1: Menüband zum Antippen */
+.tumb{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:4px}
+.tumb button{border:0;background:none;color:var(--ink);font:inherit;font-size:.78em;font-weight:700;border-radius:12px;padding:6px 2px;min-height:52px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;line-height:1.15}
+.tumb button span{font-size:1.5em;line-height:1}.tumb button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tumbl{margin:8px 0 0;padding:10px 12px;border-radius:12px;background:var(--card);border:1px solid var(--line);min-height:3em}
+.tumbl p{margin:4px 0 0}.tumbl ul{margin:6px 0 0;padding-left:1.1em}.tumbl li{margin:2px 0}
+/* Kapitel 2: Schrittleiste und Bereiche */
+.tusl{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.tusl button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.8em;font-weight:600;border-radius:999px;padding:6px 4px;min-height:40px;cursor:pointer;white-space:nowrap}
+.tusl button[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc);color:var(--acc)}
+.tufa{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:4px 0 10px}
+.tufa button{display:flex;justify-content:space-between;gap:6px;align-items:center;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 10px;font:inherit;font-size:.9em;font-weight:600;cursor:pointer;text-align:left;min-height:44px}.tufa .tucn{color:var(--mute);font-weight:500;white-space:nowrap;flex:none}
+@media(max-width:359px){.tusl{grid-template-columns:repeat(2,1fr)}}
+/* Kapitel 3: Knöpfe von „Kurz erklärt“ */
+.tupl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.tupl span{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:5px 9px;font-size:.88em;font-weight:600}
+.tuple{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:10px 0 0;font-size:.92em}.tuple dt{font-weight:700;white-space:nowrap}.tuple dd{margin:0}
+/* Kapitel 4: Mini-Regler Hydraulikzylinder */
+.tusim{display:grid;grid-template-columns:1fr;gap:8px;align-items:center}
+@media(min-width:620px){.tusim{grid-template-columns:230px 1fr;gap:16px}}
+.tusim svg{width:100%;max-width:300px;height:auto;display:block;margin:0 auto;background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.turg{display:grid;grid-template-columns:1.6em 1fr 4em 2.6em;gap:6px;align-items:center;margin:4px 0}.turg b{font-weight:700}.turg input[type=range]{width:100%;accent-color:var(--acc);min-height:32px}
+.turg input[type=number]{width:100%;font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);text-align:right}
+.tures{display:inline-block;border-left:4px solid var(--acc);background:color-mix(in srgb,var(--acc) 8%,var(--card));border-radius:8px;padding:6px 12px;margin:6px 0 0}.tures b{font-size:1.25em}
+.tuauf{--aufc:#4f46e5;--auft:#4338ca;border:1px solid color-mix(in srgb,var(--aufc) 35%,var(--line));border-left:4px solid var(--aufc);background:color-mix(in srgb,var(--aufc) 8%,var(--card));border-radius:12px;padding:8px 12px;margin:10px 0 0;font-size:.95em}
+:root[data-theme="dark"] .tuauf{--auft:#a5b4fc}@media (prefers-color-scheme:dark){:root:not([data-theme]) .tuauf{--auft:#a5b4fc}}
+.tuauf b{color:var(--auft)}.tuauf.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--line));border-left-color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,var(--card))}.tuauf.ok b{color:var(--ok)}
+.tusim .tuoil{fill:color-mix(in srgb,var(--acc) 55%,var(--card))}.tusim .tumet{fill:var(--card);stroke:var(--ink)}.tusim .tuarr{stroke:var(--ok);fill:var(--ok)}
+.tusim text{fill:var(--ink);font-family:inherit}
+/* Kapitel 5: Mini-Aufgabe */
+.tuq{font-size:1.05em;margin:0 0 8px}.tuin{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tuin input{width:9em;font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}.tuin .btn{margin:0}
+.tufb{margin:8px 0 0;padding:8px 12px;border-radius:10px;font-weight:600}.tufb.ok{background:color-mix(in srgb,var(--ok) 12%,var(--card));color:var(--ok)}.tufb.no{background:color-mix(in srgb,var(--red,#dc2626) 10%,var(--card))}
+.tulw{margin:8px 0 0;padding:8px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line)}.tulw p{margin:4px 0;text-align:left}
+.tubet{display:block;margin:4px 0 12px;padding:10px 12px;border-radius:12px;border:1px solid color-mix(in srgb,var(--amber) 55%,var(--line));background:color-mix(in srgb,var(--amber) 13%,var(--card));line-height:1.45}.tubet b{display:block;margin-bottom:2px}
+/* Kapitel 6: Aufgabenarten */
+.tuty{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin:4px 0 10px}
+.tuty>div{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--card);display:flex;flex-direction:column;gap:6px}
+.tuty h4{margin:0;font-size:1em}.tuty p{margin:0;font-size:.92em;line-height:1.45}.tutyh{display:flex;justify-content:space-between;align-items:center;gap:8px}.tutyh .chip{flex:none;margin:0}
+.tuwg{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.88em;font-weight:600}.tuwg span{background:color-mix(in srgb,var(--acc) 10%,var(--card));border-radius:999px;padding:4px 10px}.tuwg b{color:var(--mute)}
+@media (prefers-reduced-motion:no-preference){.tuk{animation:tuin .25s ease-out}}@keyframes tuin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Einführung: Punkte der Kartenfolge wie im Lernlabor (die Klasse .tdots ist in pro.css auch das „…“ der Themen-Einleitung) */
+.tbox .tdots,.tbox .tdots{display:flex!important;position:static;height:auto;gap:6px;margin:12px 0 2px}.tbox .tdots::after{content:none}
