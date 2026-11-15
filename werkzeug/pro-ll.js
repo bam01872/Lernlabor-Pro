@@ -19,12 +19,13 @@ const SL={},SN={};FACH.forEach(f=>D[f].modules.forEach((m,i)=>{let s=slug(m.t);i
 const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'glossar',formeln:'formelsammlung',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent'};
 const RT=Object.fromEntries(Object.entries(RN).map(([a,b])=>[b,a]));
 let ROUT=false;
-const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='fall'?'pruefungsaufgaben/'+(fIdx+1):tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
+const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='tut'?'tutorial/'+((window.TUK|0)+1):tab==='fall'?'pruefungsaufgaben/'+(fIdx+1):tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
 const link=r=>location.origin+location.pathname+'?fr='+FR+(r?'#'+r:'');
 function sync(){if(ROUT)return;const r=route(),want=r?'#'+r:'';if(location.hash===want||(!want&&!location.hash))return;
  try{history.replaceState(Object.assign({},history.state,{y:scrollY}),'');history.pushState({y:0},'',want||location.pathname+location.search)}catch(e){}}
 function openRoute(h){h=decodeURIComponent((h||'').replace(/^#/,''));const [a,...b]=h.split('/'),r=b.join('/');
  if(a==='thema'&&SL[r]){modSel[SL[r][0]]=SL[r][1];go(SL[r][0])}
+ else if(a==='tutorial'){window.TUK=Math.max(0,(parseInt(r,10)||1)-1);go('tut')}
  else if(a==='pruefungsaufgaben'){const n=parseInt(r,10);if(n>=1&&n<=CASES.length)fIdx=n-1;go('fall')}
  else if(RT[a]&&(a!=='dozent'||DOZENT))go(RT[a]);else go('home')}
 window.llSync=sync;window.llRoute=route;
@@ -32,10 +33,10 @@ addEventListener('popstate',e=>{ROUT=true;try{openRoute(location.hash)}finally{R
 
 /* ---------- Ich: Lernstand, Lernfortschritt senden, Meine Kurstermine, Tutorial, Sonstiges ---------- */
 let KMV=false;
-Object.assign(TL,{stand:'📈 Lernstand',kurs:'📅 Meine Kurstermine',tour:'🧭 Tutorial',sonst:'⚙️ Sonstiges'});
+Object.assign(TL,{stand:'📈 Lernstand',kurs:'📅 Meine Kurstermine',tut:'🗺️ Tutorial',sonst:'⚙️ Sonstiges'});
 const goL=go;go=function(t){if(t==='kurs'){KMV=true;ROUT=true;try{goL('stand')}finally{ROUT=false}const k=q('#kmp');if(k)k.scrollIntoView({block:'start'});sync();return}
  KMV=false;goL(t);if(t!=='tour'&&t!=='send')sync()};
-const drawL=draw;draw=function(){if(tab==='sonst'){const v=q('#view');v.innerHTML='';sonst(v);return}drawL()};
+const drawL=draw;draw=function(){if(tab==='sonst'){const v=q('#view');v.innerHTML='';sonst(v);return}if(tab==='tut'){const v=q('#view');v.innerHTML='';if(window.tutView)tutView(v);return}drawL()};
 function sonst(v){const m=LG(TK,'hell');
  const p=el('<h2>⚙️ Sonstiges</h2><h3>Darstellung</h3><div class="seg" role="group" aria-label="Darstellung">'+[['hell','☀️ Hell'],['dunkel','🌙 Dunkel'],['geraet','📱 Wie das Gerät']].map(x=>'<button type="button" data-m="'+x[0]+'" aria-pressed="'+(x[0]===m)+'">'+x[1]+'</button>').join('')+'</div><p class="sub">Lernlabor Pro startet hell. „Wie das Gerät“ folgt der Einstellung Deines Handys oder Laptops.</p><h3>Fachrichtung</h3><p class="sub">Die Fachrichtung wechselst Du auf der Startseite. Dein Lernstand wird je Fachrichtung getrennt gemerkt.</p><h3 id="vers">Version</h3><p class="vnr">🆕 Version '+APPV+' vom '+APPD+'</p><details class="vneu"><summary>Was ist neu</summary>'+NEU+'</details><p class="sub">Neue Versionen lädt Lernlabor Pro von selbst. Ist eine da, erscheint unten der Hinweis „Jetzt laden“.</p>','panel');
  p.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{LS(TK,b.dataset.m);thApply();p.querySelectorAll('[data-m]').forEach(x=>x.setAttribute('aria-pressed',x===b))});v.append(p)}
