@@ -8,7 +8,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 - **Besitzer:** Markus (Dr. rer. nat. Markus Baum), nebenberuflicher Dozent für Industriemeister. Deutsch, Du-Form.
 - **Repo:** https://github.com/bam01872/Lernlabor-Pro (öffentlich, Branch `main`)
 - **Live (GitHub Pages, main / root, seit 14.11.2026):** https://bam01872.github.io/Lernlabor-Pro/
-- **Stand main:** **Version 20** (15.11.2026). Gemergt sind PR #1 bis #20 und der PR zu Version 20.
+- **Stand main:** **Version 20** (15.11.2026). Gemergt sind PR #1 bis #21.
 - **Nächste freie Version:** 21
 - **Umfang:** Metall 39 Themen, Elektrotechnik 40, Chemie 51 (mit Gebiet Thermodynamik), Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42; je 5 mehrstufige Aufgaben „Im Betrieb“, Situationsaufgaben, Fachgespräch-Fragen; `tests/check.js` prüft 213+ Rechenaufgaben.
 
@@ -29,7 +29,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 | 14 | #14 | Versionsanzeige, „Jetzt laden“, sw.js (offline) |
 | 16 | #16 | „Weiter mit …“ im Menü Lernen |
 | 19 | #20 | Fachrichtungs-Wahl als gleich breites Kachelraster |
-| 20 | (dieser PR) | Zahl + Bruch-Einheit zusammen, kurze Formeln in einer Zeile (Formatierungsregel) |
+| 20 | #21 | Zahl + Bruch-Einheit zusammen, kurze Formeln in einer Zeile (Formatierungsregel) |
 
 ## 2. Aufbau des Repos
 
