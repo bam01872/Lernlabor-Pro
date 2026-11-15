@@ -1,0 +1,11 @@
+const {chromium,open,S}=require('./lib');const L=(...a)=>console.log(...a);
+(async()=>{const b=await chromium.launch();const p=await open(b,'m',{ls:{'lernlabor-pro-tour':'1'}});
+await p.evaluate(()=>go('betrieb'));await p.waitForTimeout(300);
+await p.locator('button',{hasText:'Aufgabe öffnen'}).first().click();await p.waitForTimeout(400);
+L('Ansicht',await p.evaluate(()=>tab+' '+document.querySelector('#view').innerText.slice(0,120).replace(/\n/g,' | ')));
+const ta=p.locator('textarea').first();L('ta',await ta.count());await ta.fill('Antwort Betrieb');
+await p.evaluate(()=>go('home'));await p.waitForTimeout(200);await p.evaluate(()=>go('betrieb'));await p.waitForTimeout(300);
+L('nach Wechsel Ansicht',await p.evaluate(()=>document.querySelector('#view').innerText.slice(0,80).replace(/\n/g,' | ')));
+const c=await p.locator('textarea').count();L('textareas',c, c?await p.locator('textarea').first().inputValue():'');
+await p.screenshot({path:S+'/betr.png'});
+await b.close()})();

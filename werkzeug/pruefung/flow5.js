@@ -1,0 +1,18 @@
+const {chromium,open,S}=require('./lib');const L=(...a)=>console.log(...a);
+(async()=>{const b=await chromium.launch();
+const p=await open(b,'m',{ls:{'lernlabor-pro-tour':'1'}});
+await p.evaluate(()=>{go('tec');scrollTo(0,0)});await p.waitForTimeout(300);await p.click('.uebk');await p.waitForTimeout(500);
+const ans=p.locator('.uebk ~ * input, .uebk + * input').first();
+L(await ans.count(), await ans.evaluate(e=>e.outerHTML));
+const card=async()=>ans.evaluate(e=>{let c=e;for(let k=0;k<4;k++){c=c.parentElement;if(c.innerText.length>120)break}return c.innerText.slice(0,500).replace(/\n/g,' | ')});
+L('Aufgabe',await card());await ans.scrollIntoViewIfNeeded();
+const prf=ans.locator('xpath=ancestor::*[.//button[normalize-space()="Prüfen"]][1]').locator('button:text-is("Prüfen")');
+const y0=await p.evaluate(()=>scrollY);
+await ans.fill('abc');await ans.press('Enter');await p.waitForTimeout(300);L('Enter abc',await card(),'scroll',y0,'->',await p.evaluate(()=>scrollY));
+await prf.click();await p.waitForTimeout(300);L('Prüfen abc',await card());
+await ans.fill('1.250');await prf.click();await p.waitForTimeout(300);L('1.250',await card());
+await ans.fill('3');await prf.click();await p.waitForTimeout(300);L('3',await card(),'val after',await ans.inputValue(),'disabled',await ans.isDisabled());
+await prf.click();await p.waitForTimeout(300);L('nochmal',await card());
+await ans.evaluate(e=>e.scrollIntoView({block:'center'}));await p.screenshot({path:S+'/f-ueben.png'});
+await p.locator('button:text-is("Lösungsweg")').first().click();await p.waitForTimeout(300);await ans.evaluate(e=>e.scrollIntoView({block:'start'}));await p.screenshot({path:S+'/f-loes.png'});
+await b.close()})();

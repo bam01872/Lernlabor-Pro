@@ -1,0 +1,5 @@
+const {chromium}=require('playwright');const S=__dirname;
+(async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});await c.addInitScript(()=>{try{localStorage.setItem('ll_tour','1')}catch(e){}});const p=await c.newPage();
+const res={};for(const s of ['hydraulik','ohmsches-gesetz','gasgesetze','zustandsgleichung']){await p.goto('http://localhost:8767/#thema/'+s);await p.waitForTimeout(900);
+res[s]=await p.evaluate(()=>[...document.querySelectorAll('main svg, #view svg, svg')].filter(x=>x.getBoundingClientRect().width>150).map(x=>(x.closest('section,.card,.panel')?.querySelector('h2,h3')?.innerText||'?').slice(0,25)+':'+[...x.querySelectorAll('text')].slice(0,3).map(t=>t.textContent).join('/')))}
+console.log(JSON.stringify(res,null,1));await p.addStyleTag({content:'.tiph,.tip{display:none!important}'});await p.goto('http://localhost:8767/#thema/hydraulik');await p.waitForTimeout(900);await p.screenshot({path:S+'/ll-hyd.png',fullPage:true});await b.close()})();
