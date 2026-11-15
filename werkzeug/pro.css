@@ -37,11 +37,9 @@ body.subpg .brand .bpro{font-size:.5em}
 .tdesc:not(.cl.ov)+.tdots{display:none}
 @media(min-width:900px){.tdesc.cl{max-height:none;-webkit-mask-image:none;mask-image:none;cursor:auto}.tdots{display:none}}
 /* Fachrichtungen, Im Betrieb, Kästen */
-.frp .frs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0 8px}.frp .frs button{min-height:44px;font-weight:700;padding-left:4px;padding-right:4px;white-space:nowrap}@media(max-width:400px){.frp .frs button{font-size:13px}}
 .box h2.bx2{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
 .ibc h3{margin:0 0 4px}.ibc .ibm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 10px}.ibc .ibm .tag,.tag.ibt{color:#fff}
 #fsel{max-width:100%;min-width:0;width:100%}.row label:has(#fsel){min-width:0;max-width:100%;flex:1 1 100%}
-@media(max-width:440px){.frp .frs button{font-size:13px}}
 
 /* Wischleisten unter „Thema wechseln“ wie im Lernlabor */
 .thm.wls{max-height:none;overflow:visible;padding:10px 8px}
@@ -158,8 +156,6 @@ body.subpg .brand .bpro{font-size:.5em}
 @media(prefers-color-scheme:dark){:root:not([data-theme]).accb .btn:not(.sec):not(.nxt .btn):not(.ubb),:root:not([data-theme]).accb .seg button[aria-pressed=true],:root:not([data-theme]).accb #nm button[aria-current=true]{color:#1f2328}}
 /* Safari: Auswahlfelder machen die Seite nicht breiter */
 .row label{min-width:0;max-width:100%}.row select{min-width:0;max-width:100%;contain:paint}
-/* Fachrichtungs-Wahl bei 320 px zweispaltig */
-@media(max-width:360px){.frs{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 /* Menüband unten bei 320 px: vier gleich breite Spalten, lange Namen umbrechen statt die Seite zu verbreitern */
 @media(max-width:899px){#fs{grid-template-columns:repeat(4,minmax(0,1fr))}#fs button>span:last-child{max-width:100%;line-height:1.15;overflow-wrap:break-word}}
 /* lange Themennamen (z. B. Blindleistungskompensation) bei 320 px trennen */
@@ -240,3 +236,14 @@ body.subpg .brand .bpro{font-size:.5em}
 #nm button.nmw{display:block!important;align-self:center;min-height:44px;font-size:13px;line-height:1.3;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);border-radius:12px;padding:8px 10px;text-align:left;overflow-wrap:break-word;-webkit-hyphens:auto;hyphens:auto}
 #nm button.nmw small{display:block;font-size:11px;font-weight:600;color:var(--mute);margin-bottom:2px;letter-spacing:.02em}
 @media(max-width:380px){#nm button.nmw{font-size:12px;padding:7px 8px}}
+
+/* Fachrichtungs-Wahl: gleich breite Kacheln im festen Raster, Symbol in eigener Spalte, nichts steht über.
+   Handy zwei Spalten mal drei Zeilen, ab 560 px drei Spalten mal zwei Zeilen. */
+.frp .frs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;margin:6px 0 8px;width:100%;box-sizing:border-box}
+@media(min-width:560px){.frp .frs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.frp .frs button{display:grid;grid-template-columns:1.4em minmax(0,1fr);align-items:center;column-gap:6px;min-width:0;min-height:48px;margin:0;padding:8px;font-weight:700;font-size:14px;line-height:1.2;text-align:left;white-space:normal;overflow-wrap:normal;hyphens:manual;-webkit-hyphens:manual;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.frp .frs button[aria-pressed=true]{border-color:transparent;background:var(--acc)}
+.frp .frs .fre{justify-self:center;font-size:1.15em;line-height:1}
+.frp .frs .frn{min-width:0}
+@media(max-width:360px){.frp .frs{gap:4px;padding:4px}}
+@media(min-width:560px){.frp .frs button{font-size:15px;padding:8px 12px;column-gap:8px}}
