@@ -16,6 +16,7 @@ const accL=setAcc;setAcc=function(f){accL(f);document.documentElement.classList.
 /* ---------- Adressen: #thema/<name>, #ueben, #im-betrieb … ---------- */
 const slug=t=>t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const SL={},SN={};FACH.forEach(f=>D[f].modules.forEach((m,i)=>{let s=slug(m.t);if(SL[s])s=f+'-'+s;SL[s]=[f,i];SN[f+':'+i]=s}));
+window.llSN=SN;
 const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'glossar',formeln:'formelsammlung',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent'};
 const RT=Object.fromEntries(Object.entries(RN).map(([a,b])=>[b,a]));
 let ROUT=false;
@@ -39,6 +40,7 @@ function openRoute(h){const raw=(h||'').replace(/^#/,'');if(raw.indexOf('kurs/')
  h=decodeURIComponent(raw);const [a,...b]=h.split('/'),r=b.join('/');
  if(a==='thema'&&SL[r]){modSel[SL[r][0]]=SL[r][1];go(SL[r][0])}
  else if(a==='tutorial'){window.TUK=Math.max(0,(parseInt(r,10)||1)-1);go('tut')}
+ else if(a==='ueben'&&SL[r]){/* Übungslink vom Dozenten (Version 27): Thema öffnen und zum Üben springen */modSel[SL[r][0]]=SL[r][1];go(SL[r][0]);setTimeout(()=>{const u=q('#ueb'),b=u&&u.querySelector('.uebk');if(b&&b.getAttribute('aria-expanded')!=='true')b.click();if(u)u.scrollIntoView({block:'start'})},350)}
  else if(a==='pruefungsaufgaben'){const n=parseInt(r,10);if(n>=1&&n<=CASES.length)fIdx=n-1;go('fall')}
  else if(RT[a]&&(a!=='dozent'||DOZENT))go(RT[a]);else go('home')}
 window.llSync=sync;window.llRoute=route;

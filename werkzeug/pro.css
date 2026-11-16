@@ -258,3 +258,6 @@ body.subpg .brand .bpro{font-size:.5em}
 #kgen .kgu{font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit;margin:8px 0}
 /* Version 26: Top-3-Fehler im Kurs (Dozent) */
 #dfw .dfwl{padding-left:1.3em;margin:8px 0}#dfw .dfwl li{margin:10px 0;text-align:left;hyphens:manual}#dfw .dfwl small{display:block;margin:2px 0}#dfw .chip{text-decoration:none;display:inline-block;margin-top:4px}
+/* Version 27: Übungslinks (Dozent) */
+#uel .kgu{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit;margin:8px 0}
+#uel select{max-width:100%}#uel label{max-width:100%;min-width:0}#uel .uer{margin:4px 0 8px;padding-left:1.2em}#uel .uer li{margin:4px 0;text-align:left}#uel .uerh{text-align:left;margin-bottom:0}
