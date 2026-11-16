@@ -57,3 +57,15 @@ function dzKursPanel(){let st={n:'',t:''};try{st=JSON.parse(localStorage.getItem
   $k('#kgc').onclick=async()=>{const i=$k('.kgu');try{await navigator.clipboard.writeText(u);if(window.llToast)llToast('Kurslink kopiert')}catch(e){i.select()}}};
  return p}
 {const doz0=doz;doz=function(v,msg){doz0(v,msg);if(DOZENT&&!v.querySelector('#kgen'))v.append(dzKursPanel())}}
+/* ===== Version 26: ⚠️ Top-3-Fehler im Kurs (wie Lernlabor fwTop) =====
+   Teilnehmende schicken mit dem Lernfortschritt mit, welche typischen Fehler sie nach einer falschen Antwort unter „Woran lag es?“ angetippt haben (fw).
+   Gezählt wird, wie viele Teilnehmende ein Fehlerbild gewählt haben, dann wie oft. */
+{const rb=repBuild;repBuild=function(){const o=rb.apply(this,arguments),s=load();if(s.fw&&Object.keys(s.fw).length)o.fw=s.fw;return o}}
+function dzFwTop(L){const a={};L.forEach(o=>Object.entries(o.fw||{}).forEach(([t,v])=>Object.entries((v&&v.c)||{}).forEach(([x,c])=>{if(!(c>0))return;const k=t+'|'+x,y=a[k]||(a[k]={t,x,s:v.s||'',fr:o.fr||'',tn:0,n:0});y.tn++;y.n+=c})));
+ return Object.values(a).sort((p,q)=>q.tn-p.tn||q.n-p.n).slice(0,3)}
+function dzNextDay(){let st={t:''};try{st=JSON.parse(localStorage.getItem(DZKL))||st}catch(e){}const T0=today(),d=dzKursParse(st.t||'').ok.map(x=>x.slice(0,10)).find(x=>x>=T0);return d?new Date(d+'T12:00:00').toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'}):''}
+function dzFwPanel(L){const F=dzFwTop(L),nd=dzNextDay(),sub=t=>rEsc(t).replace(/([A-Za-zσλμϑΔεηṁ])_([A-Za-z0-9äöü]+)/g,'$1<sub>$2</sub>');
+ const href=f=>!f.s?'':(!f.fr||f.fr===FR)?'#thema/'+f.s:(window.llBase?llBase():'')+'?fr='+f.fr+'#thema/'+f.s;
+ const p=el(`<h3>⚠️ Top-3-Fehler im Kurs</h3>${F.length?`<p class="sub">Aus den typischen Fehlern, die Teilnehmende nach einer falschen Antwort unter „Woran lag es?“ selbst angetippt haben.</p><ol class="dfwl">${F.map(f=>{const h=href(f);return`<li><b>${sub(f.x)}</b><br><small>${rEsc(f.t)} · ${f.tn} TN, ${f.n}×</small>${h?` <a class="chip" href="${rEsc(h)}"${h[0]==='#'?'':' target="_blank" rel="noopener"'}>Thema öffnen</a>`:''}</li>`}).join('')}</ol><p class="sub">Vorschlag für den nächsten Kurstag${nd?' (<span class="nw">'+rEsc(nd)+'</span>)':''}: Den ersten Fehler 5 Minuten an der Tafel vorrechnen lassen, mit falschem und richtigem Weg nebeneinander.</p>`:'<p class="sub">Noch keine angetippten Fehlerbilder. Sie kommen mit den nächsten gesendeten Lernfortschritten (ab Version 26).</p>'}`,'panel');p.id='dfw';return p}
+{const doz1=doz;doz=function(v,msg){doz1(v,msg);if(!DOZENT||v.querySelector('#dfw'))return;const L=Object.values(dozAll()).filter(o=>(DOZK==='*'||(o.kurs||'')===DOZK)&&(DOZF==='*'||(o.frn||'')===DOZF));if(!L.length)return;
+ const p=dzFwPanel(L),wk=[...v.querySelectorAll('h3')].find(h=>/schwersten/.test(h.textContent));if(wk)wk.closest('.panel').after(p);else{const k=v.querySelector('#kgen');k?k.before(p):v.append(p)}}}

@@ -256,3 +256,5 @@ body.subpg .brand .bpro{font-size:.5em}
 /* Version 25: Kurslink in der Kursübersicht (Dozent) */
 #kgen .kgl{display:block;margin:8px 0}#kgen textarea,#kgen .kgu{display:block;width:100%;box-sizing:border-box;font:inherit;margin-top:6px}
 #kgen .kgu{font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit;margin:8px 0}
+/* Version 26: Top-3-Fehler im Kurs (Dozent) */
+#dfw .dfwl{padding-left:1.3em;margin:8px 0}#dfw .dfwl li{margin:10px 0;text-align:left;hyphens:manual}#dfw .dfwl small{display:block;margin:2px 0}#dfw .chip{text-decoration:none;display:inline-block;margin-top:4px}
