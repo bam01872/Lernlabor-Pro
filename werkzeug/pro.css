@@ -261,3 +261,11 @@ body.subpg .brand .bpro{font-size:.5em}
 /* Version 27: Übungslinks (Dozent) */
 #uel .kgu{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit;margin:8px 0}
 #uel select{max-width:100%}#uel label{max-width:100%;min-width:0}#uel .uer{margin:4px 0 8px;padding-left:1.2em}#uel .uer li{margin:4px 0;text-align:left}#uel .uerh{text-align:left;margin-bottom:0}
+/* Version 28: Eigene Aufgaben (Dozent und „Vom Dozenten“) */
+#oed .oef{display:grid;gap:10px;margin:8px 0}#oed .oef label{display:block;max-width:100%;min-width:0}#oed .oef input[type=text],#oed .oef select{max-width:100%}
+#oed .oew textarea,#oed .oef textarea,.owa textarea{display:block;width:100%;box-sizing:border-box;font:inherit;margin-top:4px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit}
+#oed .oel{padding-left:1.3em}#oed .oel li{margin:8px 0;text-align:left}#oed .oead summary{cursor:pointer;font-weight:700;padding:6px 0}
+#oed .kgu{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:inherit;margin:8px 0}
+.owa h3{text-align:left}.owa .owk{font-weight:400;white-space:nowrap;hyphens:none;color:var(--mute,#5b6472)}.owa .owc{list-style:none;padding-left:0}.owa .owc li{margin:6px 0;text-align:left}
+#oed .oel small{white-space:nowrap}
+.owa p,.owa .sol,#oed p{text-align:left;hyphens:manual}#oed #oth,#oed #oen{width:min(100%,520px);box-sizing:border-box}

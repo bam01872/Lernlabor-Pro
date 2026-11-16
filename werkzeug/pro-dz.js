@@ -85,3 +85,80 @@ function dzUePanel(L){const G=[['tec','Technik ('+FRN[FR]+')'],['org','Organisat
   $u('#uec').onclick=async()=>{try{await navigator.clipboard.writeText(u);if(window.llToast)llToast('Übungslink kopiert')}catch(e){$u('.kgu').select()}}};
  $u('#uet').onchange=show;show();return p}
 {const doz2=doz;doz=function(v,msg){doz2(v,msg);if(!DOZENT||v.querySelector('#uel'))return;const L=Object.values(dozAll()).filter(o=>(DOZK==='*'||(o.kurs||'')===DOZK)&&(DOZF==='*'||(o.frn||'')===DOZF));v.append(dzUePanel(L))}}
+/* ===== Version 28: ✍️ Eigene Aufgaben (wie Lernlabor oed/ownClean/ownImport) =====
+   Dozent: Rechenaufgaben (Ergebnis, Einheit, Toleranz in %, Lösungsweg) oder Textaufgaben (Musterlösung, Stichpunkte) schreiben,
+   lokal speichern (lernlabor-pro-ownedit), als Link …#aufgaben/<base64> oder Datei weitergeben. Nur eigene Aufgaben, keine IHK-Originale.
+   Teilnehmende: Link übernimmt die Sammlung (lernlabor-pro-own, für alle Fachrichtungen), Ansicht „📝 Vom Dozenten“ unter Üben & Prüfen,
+   Fortschritt im Lernstand (s.own, je Fachrichtung, mit Sichern/Zurücksetzen) und im Lernfortschritt (own). */
+const OWK='lernlabor-pro-own',OEK='lernlabor-pro-ownedit';
+const owJ=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},owS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const b64e=t=>{const b=new TextEncoder().encode(t);let s='';b.forEach(c=>s+=String.fromCharCode(c));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')},
+ b64d=t=>new TextDecoder().decode(Uint8Array.from(atob(t.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0)));
+const owNum=v=>{v=String(v==null?'':v).trim().replace(/\s/g,'');if(v.indexOf(',')>=0)v=v.replace(/\./g,'').replace(',','.');return parseFloat(v)};
+const owFmt=v=>Number(v).toLocaleString('de-DE',{maximumFractionDigits:4});
+function ownClean(o){const S=(v,n)=>String(v==null?'':v).slice(0,n),L=(v,k,n)=>(Array.isArray(v)?v:[]).slice(0,k).map(x=>S(x,n)).filter(Boolean);if(!o||!Array.isArray(o.a))return null;
+ const a=o.a.slice(0,60).map((x,i)=>({id:S(x.id||i+1,12).replace(/[^\w-]/g,''),th:S(x.th,80),t:x.t==='num'?'num':'txt',q:S(x.q,1500),a:x.t==='num'?+x.a:undefined,u:S(x.u,20),tol:x.t==='num'?Math.min(20,Math.max(.1,+x.tol||2)):undefined,s:L(x.s,12,300),m:S(x.m,2500),c:L(x.c,8,200)})).filter(x=>x.th&&x.q&&(x.t==='txt'||isFinite(x.a)));
+ return a.length?{n:S(o.n,60),a}:null}
+function ownGet(){return ownClean(owJ(OWK,null))}
+function ownImport(r){let o=null;try{o=ownClean(JSON.parse(b64d(r)))}catch(e){}const say=m=>setTimeout(()=>{if(window.llToast)llToast(m)},300);
+ if(!o){say('Der Aufgaben-Link ist unvollständig. Bitte den ganzen Link öffnen.');return false}owS(OWK,o);say(o.a.length+(o.a.length===1?' Aufgabe':' Aufgaben')+' vom Dozenten übernommen');return true}
+/* Stand je Aufgabe im Lernstand: s.own[id]={d:erledigt,ok:richtig/Anteil,x:Antwort} */
+const owSt=()=>{const s=load();return s.own||{}},owSet=(id,o)=>{const s=load();s.own=s.own||{};s.own[id]=Object.assign(s.own[id]||{},o);actDay(s);save(s)};
+const owDone=O=>{const st=owSt();return O.a.filter(x=>st[x.id]&&st[x.id].d).length};
+const owUpd=()=>{const O=ownGet(),e=document.querySelector('.owdn');if(O&&e)e.textContent=owDone(O)};
+function ownView(v){const O=ownGet();
+ if(!O){v.append(el('<h2>📝 Vom Dozenten</h2><p class="sub">Hier erscheinen Aufgaben, die Dir Dein Dozent als Link oder QR-Code schickt. Noch ist keine Sammlung da.</p>','panel'));return}
+ const st=owSt(),dn=owDone(O);
+ v.append(el(`<h2>📝 Vom Dozenten${O.n?': '+rEsc(O.n):''}</h2><p class="sub">${O.a.length} ${O.a.length===1?'Aufgabe':'Aufgaben'} von Deinem Dozenten, <span class="owdn">${dn}</span> erledigt. Dein Stand geht mit „Lernfortschritt senden“ an ihn.</p>`,'panel'));
+ O.a.forEach((x,i)=>{const s=st[x.id]||{},p=el(`<h3>${s.d?'✓ ':''}${i+1}. ${rEsc(x.th)} <small class="owk">${x.t==='num'?'Rechnen':'Text'}</small></h3><p class="owq">${rEsc(x.q).replace(/\n/g,'<br>')}</p>`,'panel owa');
+  if(x.t==='num'){p.insertAdjacentHTML('beforeend',`<div class="row"><input type="text" inputmode="decimal" aria-label="Deine Antwort" size="12" value="${rEsc(s.x||'')}"> <span>${rEsc(x.u)}</span><button class="btn">Antwort prüfen</button><button class="btn sec owl"${s.d||s.w?'':' hidden'}>Lösungsweg</button></div><p class="fb" aria-live="polite">${s.d?'Richtig. Ergebnis: '+owFmt(x.a)+(x.u?' '+rEsc(x.u):''):''}</p><div class="sol" hidden><div>Ergebnis: <b>${owFmt(x.a)}${x.u?' '+rEsc(x.u):''}</b></div>${x.s.map(l=>'<div>'+rEsc(l)+'</div>').join('')}</div>`);
+   const inp=p.querySelector('input'),fb=p.querySelector('.fb'),lw=p.querySelector('.owl'),sol=p.querySelector('.sol');
+   const chk=()=>{const y=owNum(inp.value);if(!isFinite(y)){fb.textContent='Bitte eine Zahl eingeben.';return}const ok=Math.abs(y-x.a)<=Math.abs(x.a)*x.tol/100+1e-9;
+    if(ok){fb.textContent='Richtig. Ergebnis: '+owFmt(x.a)+(x.u?' '+x.u:'');fb.style.color='var(--ok)';owSet(x.id,{d:1,ok:1,x:inp.value});const h=p.querySelector('h3');if(!/^✓/.test(h.textContent))h.prepend('✓ ');owUpd()}
+    else{fb.textContent='Nicht ganz. Dein Wert ist zu '+(y>x.a?'groß':'klein')+'.'+(x.s.length?' Der Lösungsweg hilft weiter.':'');fb.style.color='var(--red)';const w=(owSt()[x.id]||{}).w||0;owSet(x.id,{w:w+1,x:inp.value});lw.hidden=false}};
+   p.querySelector('.btn').onclick=chk;inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();chk()}});lw.onclick=()=>{sol.hidden=!sol.hidden}}
+  else{p.insertAdjacentHTML('beforeend',`<textarea rows="4" aria-label="Deine Antwort" placeholder="Deine Antwort in Stichpunkten">${rEsc(s.x||'')}</textarea><div class="row"><button class="btn sec owm">Musterlösung zeigen</button></div><div class="owms" hidden><p><b>Musterlösung</b><br>${rEsc(x.m).replace(/\n/g,'<br>')}</p>${x.c.length?`<p class="sub">Was davon steht in Deiner Antwort? Hake ab.</p><ul class="owc">${x.c.map((c,j)=>`<li><label><input type="checkbox" data-j="${j}"${s.c&&s.c.includes(j)?' checked':''}> ${rEsc(c)}</label></li>`).join('')}</ul>`:''}<div class="row"><button class="btn owb">✓ Selbst bewertet</button></div><p class="fb" aria-live="polite"></p></div>`);
+   const ta=p.querySelector('textarea'),ms=p.querySelector('.owms');ta.onchange=()=>owSet(x.id,{x:ta.value.slice(0,2000)});
+   p.querySelector('.owm').onclick=()=>{ms.hidden=!ms.hidden};
+   p.querySelector('.owb').onclick=()=>{const c=[...p.querySelectorAll('.owc input:checked')].map(i=>+i.dataset.j),r=x.c.length?c.length/x.c.length:1;owSet(x.id,{d:1,ok:Math.round(r*100)/100,c,x:ta.value.slice(0,2000)});
+    p.querySelector('.owms .fb').textContent=x.c.length?'Gespeichert: '+c.length+' von '+x.c.length+' Punkten.':'Gespeichert.';const h=p.querySelector('h3');if(!/^✓/.test(h.textContent))h.prepend('✓ ');owUpd()}}
+  v.append(p)})}
+/* Lernfortschritt: Stand der Sammlung mitschicken */
+{const rb2=repBuild;repBuild=function(){const o=rb2.apply(this,arguments),O=ownGet();if(O){const st=owSt(),A=O.a.filter(x=>st[x.id]&&st[x.id].d);o.own={n:O.n,k:O.a.length,d:A.length,ok:Math.round(A.reduce((a,x)=>a+(+st[x.id].ok||0),0)*10)/10}}return o}}
+/* Dozent: Aufgaben schreiben */
+let OE=null;
+const oeGet=()=>owJ(OEK,{n:'',a:[]}),oeSet=v=>owS(OEK,v);
+function oePanel(){const p=el('','panel');p.id='oed';oeRender(p);return p}
+function oeRender(p){const o=oeGet(),$o=x=>p.querySelector(x),X=OE?o.a.find(x=>x.id===OE):null,x=X||{t:'num'},n=x.t==='num';
+ const L=Object.values(dozAll()).filter(r=>r.own&&(DOZK==='*'||(r.kurs||'')===DOZK)&&(DOZF==='*'||(r.frn||'')===DOZF));
+ p.innerHTML=`<h2>✍️ Eigene Aufgaben</h2><p class="sub">Schreib Aufgaben aus Deinem Unterricht oder aus Betrieben der Region. Die Teilnehmenden bekommen sie per Link und finden sie unter Üben &amp; Prüfen → „📝 Vom Dozenten“. Ihr Stand kommt mit dem Lernfortschritt zu Dir. Nur eigene Aufgaben, keine IHK-Originale.</p>
+ <div class="row"><label>Name der Sammlung <input type="text" id="oen" maxlength="60" value="${rEsc(o.n)}" placeholder="z. B. Woche 3: Hydraulik"></label></div>
+ ${o.a.length?`<ol class="oel">${o.a.map(y=>`<li><b>${rEsc(y.th)}</b> <small>${y.t==='num'?'Rechnen':'Text'}</small> <button class="btn sec" data-oe="${rEsc(y.id)}">Bearbeiten</button> <button class="btn sec" data-od="${rEsc(y.id)}" aria-label="Aufgabe ${rEsc(y.th)} löschen">✕</button></li>`).join('')}</ol>`:'<p class="sub">Noch keine eigenen Aufgaben.</p>'}
+ <details class="oead" open><summary>${OE?'✏️ Aufgabe bearbeiten':'➕ Aufgabe schreiben'}</summary><div class="oef">
+  <label>Titel <input type="text" id="oth" maxlength="80" value="${rEsc(x.th||'')}" placeholder="z. B. Hubzylinder der Firma Maier"></label>
+  <label>Art <select id="ot"><option value="num"${n?' selected':''}>Rechenaufgabe mit Ergebnis</option><option value="txt"${n?'':' selected'}>Text: Begründen, Beurteilen, Vorgehen</option></select></label>
+  <label class="oew">Aufgabentext <textarea id="oq" rows="4" maxlength="1500">${rEsc(x.q||'')}</textarea></label>
+  <div id="onum"${n?'':' hidden'}><div class="row"><label>Ergebnis <input type="text" id="oa" inputmode="decimal" size="10" value="${x.a!=null&&n?String(x.a).replace('.',','):''}"></label><label>Einheit <input type="text" id="ou" maxlength="20" size="8" value="${rEsc(x.u||'')}"></label><label>Toleranz in % <input type="text" id="otol" inputmode="decimal" size="4" value="${String(x.tol||2).replace('.',',')}"></label></div><label class="oew">Lösungsweg, ein Schritt pro Zeile <textarea id="os" rows="4">${rEsc((x.s||[]).join('\n'))}</textarea></label></div>
+  <div id="otxt"${n?' hidden':''}><label class="oew">Musterlösung <textarea id="om" rows="4" maxlength="2500">${rEsc(x.m||'')}</textarea></label><label class="oew">Das sollte in der Antwort vorkommen, ein Punkt pro Zeile <textarea id="oc" rows="4">${rEsc((x.c||[]).join('\n'))}</textarea></label></div>
+  <div class="row"><button class="btn" id="osv">${OE?'Änderung speichern':'Aufgabe hinzufügen'}</button>${OE?'<button class="btn sec" id="ocx">Abbrechen</button>':''}</div><p class="sub" id="omsg" role="status"></p></div></details>
+ <div class="row"><button class="btn" id="olk"${o.a.length?'':' disabled'}>🔗 Link erstellen</button><button class="btn sec" id="otry"${o.a.length?'':' disabled'}>👀 Als Teilnehmer ansehen</button><button class="btn sec" id="ofs"${o.a.length?'':' disabled'}>💾 Als Datei speichern</button><label class="btn sec">📂 Datei laden<input type="file" id="ofl" accept=".json,application/json" hidden></label></div><div id="oo"></div>
+ ${L.length?`<h3>Stand im Kurs</h3><ul class="dl">${L.sort((a,b)=>String(a.name).localeCompare(String(b.name),'de')).map(r=>{const q=Math.round(r.own.d/Math.max(1,r.own.k)*100);return`<li><span><b>${rEsc(r.name)}</b> <small>${rEsc(r.own.n||'')}</small></span><span>${bar(q)} ${r.own.d} von ${r.own.k}</span></li>`}).join('')}</ul>`:''}`;
+ const re=()=>oeRender(p);
+ $o('#oen').onchange=()=>{const v=oeGet();v.n=$o('#oen').value.trim();oeSet(v)};
+ $o('#ot').onchange=()=>{const m=$o('#ot').value==='num';$o('#onum').hidden=!m;$o('#otxt').hidden=m};
+ p.querySelectorAll('[data-oe]').forEach(b=>b.onclick=()=>{OE=b.dataset.oe;re();$o('#oth').focus()});
+ p.querySelectorAll('[data-od]').forEach(b=>b.onclick=()=>{if(b.dataset.s){const v=oeGet();v.a=v.a.filter(y=>y.id!==b.dataset.od);oeSet(v);if(OE===b.dataset.od)OE=null;re()}else{b.dataset.s=1;b.textContent='Wirklich löschen?'}});
+ if($o('#ocx'))$o('#ocx').onclick=()=>{OE=null;re()};
+ $o('#osv').onclick=()=>{const t=$o('#ot').value,y={id:OE||String(Date.now()).slice(-8),th:$o('#oth').value.trim(),t,q:$o('#oq').value.trim()},msg=m=>{$o('#omsg').textContent=m};
+  if(!y.th||!y.q){msg('Bitte Titel und Aufgabentext eintragen.');return}
+  if(t==='num'){y.a=owNum($o('#oa').value);if(!isFinite(y.a)){msg('Bitte das Ergebnis als Zahl eintragen.');return}y.u=$o('#ou').value.trim();y.tol=owNum($o('#otol').value)||2;y.s=$o('#os').value.split('\n').map(l=>l.trim()).filter(Boolean)}
+  else{y.m=$o('#om').value.trim();y.c=$o('#oc').value.split('\n').map(l=>l.trim()).filter(Boolean);if(!y.m){msg('Bitte eine Musterlösung eintragen.');return}}
+  const v=oeGet(),i=v.a.findIndex(z=>z.id===y.id);if(i>=0)v.a[i]=y;else v.a.push(y);const c=ownClean(v);if(!c){msg('Die Aufgabe ließ sich nicht speichern.');return}oeSet({n:v.n,a:c.a});OE=null;re();if(window.llToast)llToast('Aufgabe gespeichert')};
+ if(o.a.length){$o('#olk').onclick=()=>{const u=(window.llBase?llBase():'https://bam01872.github.io/Lernlabor-Pro/')+'#aufgaben/'+b64e(JSON.stringify(ownClean(oeGet())));
+   $o('#oo').innerHTML=`<input type="text" class="kgu" readonly value="${rEsc(u)}" aria-label="Aufgaben-Link"><p class="sub">Schick den Link per Mail oder Messenger. Wer ihn öffnet, findet die Aufgaben unter Üben &amp; Prüfen. Eine neue Sammlung ersetzt die alte.</p><div class="row"><button class="btn sec" id="ocp">Link kopieren</button>${u.length<1800?'<button class="btn sec" id="oqr">QR-Code zeigen</button>':''}</div>${u.length<1800?'':'<p class="sub">Für einen QR-Code ist der Link zu lang. Teile ihn als Text oder als Datei.</p>'}`;
+   $o('#ocp').onclick=async()=>{try{await navigator.clipboard.writeText(u);if(window.llToast)llToast('Link kopiert')}catch(e){$o('#oo .kgu').select()}};
+   if($o('#oqr'))$o('#oqr').onclick=()=>{if(window.llQr)llQr('Aufgaben: '+(oeGet().n||'Eigene Aufgaben'),u,'Der Link übernimmt die Aufgaben bei den Teilnehmenden.')}};
+  $o('#otry').onclick=()=>{owS(OWK,ownClean(oeGet()));go('own')};
+  $o('#ofs').onclick=()=>{try{dl(JSON.stringify(oeGet(),null,1),'lernlabor-pro-aufgaben-'+(oeGet().n||'eigene').replace(/[^a-z0-9äöüß]+/gi,'-').toLowerCase()+'.json','application/json')}catch(e){}}}
+ $o('#ofl').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;f.text().then(t=>{const c=ownClean(JSON.parse(t));if(!c)throw 0;oeSet(c);OE=null;re();if(window.llToast)llToast(c.a.length+' Aufgaben geladen')}).catch(()=>{if(window.llToast)llToast('Die Datei enthält keine Lernlabor-Pro-Aufgaben.')})}}
+{const doz3=doz;doz=function(v,msg){doz3(v,msg);if(!DOZENT||v.querySelector('#oed'))return;v.append(oePanel())}}

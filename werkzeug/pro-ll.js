@@ -17,7 +17,7 @@ const accL=setAcc;setAcc=function(f){accL(f);document.documentElement.classList.
 const slug=t=>t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const SL={},SN={};FACH.forEach(f=>D[f].modules.forEach((m,i)=>{let s=slug(m.t);if(SL[s])s=f+'-'+s;SL[s]=[f,i];SN[f+':'+i]=s}));
 window.llSN=SN;
-const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'glossar',formeln:'formelsammlung',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent'};
+const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'glossar',formeln:'formelsammlung',oral:'muendlich',sim:'simulation',stand:'lernstand',kurs:'kurstermine',sonst:'sonstiges',doz:'dozent',own:'vom-dozenten'};
 const RT=Object.fromEntries(Object.entries(RN).map(([a,b])=>[b,a]));
 let ROUT=false;
 const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='tut'?'tutorial/'+((window.TUK|0)+1):tab==='fall'?'pruefungsaufgaben/'+(fIdx+1):tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
@@ -36,7 +36,8 @@ function kursImport(r){const p=r.split('/'),dc=x=>{try{return decodeURIComponent
  L.forEach(([x,t],i)=>{if(!e[x])e[x]={t:'Kurstag '+(i+1)+' von '+L.length+(t?' · '+dc(t).slice(0,80):'')}});
  kSet({n,d:Object.keys(e),e});const s=load();s.id=Object.assign({name:''},s.id||{},{kurs:n});save(s);
  setTimeout(()=>toast('Kurs „'+n+'“ eingerichtet'+(L.length?' mit '+L.length+' Terminen':'')),300);return true}
-function openRoute(h){const raw=(h||'').replace(/^#/,'');if(raw.indexOf('kurs/')===0){kursImport(raw.slice(5));try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}go('home');return}
+function openRoute(h){const raw=(h||'').replace(/^#/,'');if(raw.indexOf('aufgaben/')===0){ownImport(raw.slice(9));go('own');try{history.replaceState(null,'',location.pathname+location.search+'#vom-dozenten')}catch(e){}return}
+ if(raw.indexOf('kurs/')===0){kursImport(raw.slice(5));try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}go('home');return}
  h=decodeURIComponent(raw);const [a,...b]=h.split('/'),r=b.join('/');
  if(a==='thema'&&SL[r]){modSel[SL[r][0]]=SL[r][1];go(SL[r][0])}
  else if(a==='tutorial'){window.TUK=Math.max(0,(parseInt(r,10)||1)-1);go('tut')}
