@@ -24,9 +24,19 @@ const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='tut'?
 const PAGES='https://bam01872.github.io/Lernlabor-Pro/';
 const base=()=>location.protocol==='file:'?PAGES:location.origin+location.pathname.replace(/[^/]*dozent[^/]*\.html$/i,'');
 const link=r=>base()+'?fr='+FR+(r?'#'+r:'');
+window.llBase=base;
 function sync(){if(ROUT)return;const r=route(),want=r?'#'+r:'';if(location.hash===want||(!want&&!location.hash))return;
  try{history.replaceState(Object.assign({},history.state,{y:scrollY}),'');history.pushState({y:0},'',want||location.pathname+location.search)}catch(e){}}
-function openRoute(h){h=decodeURIComponent((h||'').replace(/^#/,''));const [a,...b]=h.split('/'),r=b.join('/');
+/* Kurslink vom Dozenten (Version 25): #kurs/<Name>/<JJJJ-MM-TT[~Thema],...> richtet Kursnamen und Kurstage ein.
+   Eigene Termine bleiben, frühere Kurstage aus einem Kurslink werden ersetzt. Name und Thema sind einzeln kodiert (auch „/“ im Namen geht). */
+function kursImport(r){const p=r.split('/'),dc=x=>{try{return decodeURIComponent(x)}catch(e){return x}},n=dc(p[0]||'').trim().slice(0,60);if(!n)return false;
+ const L=(p[1]||'').split(',').map(x=>x.split('~')).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x[0])).sort((a,b)=>a[0]<b[0]?-1:1);
+ const k=kGet(),e={};k.d.forEach(x=>{if(k.e[x]&&k.e[x].own)e[x]=k.e[x]});
+ L.forEach(([x,t],i)=>{if(!e[x])e[x]={t:'Kurstag '+(i+1)+' von '+L.length+(t?' · '+dc(t).slice(0,80):'')}});
+ kSet({n,d:Object.keys(e),e});const s=load();s.id=Object.assign({name:''},s.id||{},{kurs:n});save(s);
+ setTimeout(()=>toast('Kurs „'+n+'“ eingerichtet'+(L.length?' mit '+L.length+' Terminen':'')),300);return true}
+function openRoute(h){const raw=(h||'').replace(/^#/,'');if(raw.indexOf('kurs/')===0){kursImport(raw.slice(5));try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}go('home');return}
+ h=decodeURIComponent(raw);const [a,...b]=h.split('/'),r=b.join('/');
  if(a==='thema'&&SL[r]){modSel[SL[r][0]]=SL[r][1];go(SL[r][0])}
  else if(a==='tutorial'){window.TUK=Math.max(0,(parseInt(r,10)||1)-1);go('tut')}
  else if(a==='pruefungsaufgaben'){const n=parseInt(r,10);if(n>=1&&n<=CASES.length)fIdx=n-1;go('fall')}
@@ -59,9 +69,10 @@ const navL=nav;nav=function(){navL.apply(this,arguments);
 /* ---------- Teilen und QR-Code ---------- */
 function share(t,u){if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'Lernlabor Pro: '+t,url:u}).catch(()=>{});return}
  const done=()=>toast('Link kopiert: '+t);if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(done,()=>qrShow(t,u));else qrShow(t,u)}
-function qrShow(t,u){let d=q('#qrd');if(!d){d=document.createElement('dialog');d.id='qrd';document.body.appendChild(d)}
+window.llQr=(t,u,h)=>qrShow(t,u,h);window.llToast=t=>toast(t);
+function qrShow(t,u,h){let d=q('#qrd');if(!d){d=document.createElement('dialog');d.id='qrd';document.body.appendChild(d)}
  let svg='';try{const x=qrcode(0,'M');x.addData(u);x.make();svg=x.createSvgTag({cellSize:8,margin:2,scalable:true})}catch(e){svg='<p>QR-Code konnte nicht erstellt werden.</p>'}
- d.innerHTML='<h2>'+esc(t)+'</h2><div class="qrb">'+svg+'</div><p class="sub">Mit der Handy-Kamera scannen. Der Link öffnet genau dieses Thema.</p><input class="qru" readonly value="'+esc(u)+'" aria-label="Link"><p class="qrbtn"><button type="button" class="btn" id="qrc">Link kopieren</button> <button type="button" class="btn sec" id="qrx">Schließen</button></p>';
+ d.innerHTML='<h2>'+esc(t)+'</h2><div class="qrb">'+svg+'</div><p class="sub">Mit der Handy-Kamera scannen. '+(h||'Der Link öffnet genau dieses Thema.')+'</p><input class="qru" readonly value="'+esc(u)+'" aria-label="Link"><p class="qrbtn"><button type="button" class="btn" id="qrc">Link kopieren</button> <button type="button" class="btn sec" id="qrx">Schließen</button></p>';
  d.querySelector('#qrx').onclick=()=>d.close();d.querySelector('#qrc').onclick=()=>{const i=d.querySelector('.qru');i.select();(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Link kopiert'),()=>{try{document.execCommand('copy');toast('Link kopiert')}catch(e){}})};
  d.onclick=e=>{if(e.target===d)d.close()};d.showModal?d.showModal():d.setAttribute('open','')}
 

@@ -35,3 +35,25 @@ async function dzMail(h,L,send){const TN=dzTnGet(),inp=h('#dmln'),m=h('#dmsg');i
  try{location.href='mailto:'+DZML+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(txt+'\n\n(Anhang: '+fn+' aus dem Download-Ordner)')}catch(e){}
  m.textContent='Die Datei „'+fn+'“ ist gespeichert, und eine Mail an '+DZML+' ist vorbereitet. Hänge die Datei an und sende. Falls sich keine Mail öffnet: Text unten kopieren. Prüfe die Teilnehmerzahl.'}
 async function dzCopy(h){const t=h('#dmlt');try{await navigator.clipboard.writeText(t.value);h('#dmsg').textContent='Text kopiert.'}catch(e){t.select()}}
+/* ===== Version 25: 🔗 Kurslink für Teilnehmer (wie Lernlabor kgen) =====
+   Kursname und Kurstage (TT.MM.JJJJ, optional ein Thema dahinter) ergeben …#kurs/<Name>/<JJJJ-MM-TT~Thema,...> mit QR-Code.
+   Bei den Teilnehmenden richtet kursImport() (pro-ll.js) „Meine Kurstermine“ ein, der nächste Termin steht auf der Startseite.
+   Diese Datei wird vor pro-ll.js geladen, damit #dozent schon beim ersten Öffnen vollständig ist; llBase, llQr und llToast (aus pro-ll.js) werden erst beim Klick gebraucht. */
+const DZKL='lernlabor-pro-dozkl';
+function dzKursParse(txt){const ok=[],bad=[];String(txt).split(/\n/).forEach(l=>{l=l.trim();if(!l)return;const x=l.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})\s*(.*)$/);
+ const d=x&&new Date(+x[3],+x[2]-1,+x[1]);if(!x||d.getDate()!==+x[1]||d.getMonth()!==+x[2]-1){bad.push(l);return}
+ ok.push(x[3]+'-'+x[2].padStart(2,'0')+'-'+x[1].padStart(2,'0')+(x[4]?'~'+encodeURIComponent(x[4].slice(0,80)):''))});return{ok:[...new Set(ok)].sort(),bad}}
+function dzKursPanel(){let st={n:'',t:''};try{st=JSON.parse(localStorage.getItem(DZKL))||st}catch(e){}
+ const p=el(`<h2>🔗 Kurslink für Teilnehmer</h2><p class="sub">Ein Link richtet bei den Teilnehmenden Kursnamen und Kurstage ein. Auf ihrer Startseite erscheint dann der nächste Termin mit „In den Kalender“. Ihre eigenen Termine bleiben erhalten.</p>
+ <div class="row"><label>Kurs <input type="text" id="kgn" maxlength="60" placeholder="z. B. IMM 2026-1" autocomplete="off" value="${rEsc(st.n)}"></label></div>
+ <label class="kgl">Kurstage, einer pro Zeile: Datum und, wenn Du möchtest, das Thema<textarea id="kgd" rows="8" placeholder="28.11.2026 Hydraulik&#10;05.12.2026 Kostenrechnung">${rEsc(st.t)}</textarea></label>
+ <div class="row"><button class="btn" id="kgb">Link erstellen</button></div><div id="kgo" aria-live="polite"></div>`,'panel');p.id='kgen';
+ const $k=x=>p.querySelector(x);
+ $k('#kgb').onclick=()=>{const n=$k('#kgn').value.trim(),t=$k('#kgd').value,o=$k('#kgo');try{localStorage.setItem(DZKL,JSON.stringify({n,t}))}catch(e){}
+  if(!n){o.innerHTML='<p class="sub">Bitte einen Kursnamen eintragen.</p>';$k('#kgn').focus();return}
+  const r=dzKursParse(t),u=(window.llBase?llBase():'https://bam01872.github.io/Lernlabor-Pro/')+'#kurs/'+encodeURIComponent(n)+'/'+r.ok.join(',');
+  o.innerHTML=`<p class="sub">${r.ok.length} ${r.ok.length===1?'Kurstag':'Kurstage'} im Link${r.bad.length?'. Ohne gültiges Datum übersprungen: '+r.bad.map(rEsc).join(' · '):''}.</p><input type="text" class="kgu" readonly value="${rEsc(u)}" aria-label="Kurslink"><div class="row"><button class="btn sec" id="kgc">Link kopieren</button><button class="btn sec" id="kgq">QR-Code zeigen</button></div>`;
+  $k('#kgq').onclick=()=>{if(window.llQr)llQr('Kurs '+n,u,'Der Link richtet bei den Teilnehmenden den Kurs und die Kurstage ein.')};
+  $k('#kgc').onclick=async()=>{const i=$k('.kgu');try{await navigator.clipboard.writeText(u);if(window.llToast)llToast('Kurslink kopiert')}catch(e){i.select()}}};
+ return p}
+{const doz0=doz;doz=function(v,msg){doz0(v,msg);if(DOZENT&&!v.querySelector('#kgen'))v.append(dzKursPanel())}}
