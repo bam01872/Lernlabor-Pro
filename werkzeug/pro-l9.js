@@ -75,7 +75,9 @@ const home9=home;home=function(v){home9(v);if(!chosen())return;const fr=v.queryS
  const h=p.querySelector('h2'),rest=[...p.children].filter(x=>x!==h);p.classList.add('frp2');
  const b=el('<button type="button" class="frt" aria-expanded="false"><span aria-hidden="true">🎓</span> Fachrichtung: <b>'+esc(FRN[FR])+'</b> <span class="frta">ändern ▾</span></button>','').firstChild;
  rest.forEach(x=>x.hidden=true);h.replaceWith(b);b.onclick=()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));rest.forEach(x=>x.hidden=!o);b.querySelector('.frta').textContent=o?'zuklappen ▴':'ändern ▾'};
- const nx=v.querySelector('.nxt');if(nx){const fv=v.querySelector('.favp');(fv||nx).after(p)}};
+ const nx=v.querySelector('.nxt');if(nx){const fv=v.querySelector('.favp');(fv||nx).after(p)}
+ /* Version 25: nächster Kurstag (Kurslink oder eigene Termine) ganz oben */
+ const kc=v.querySelector(':scope>.panel.kurs');if(kc&&nx)nx.before(kc)};
 
 /* ---------- 4 Glossar und Formelsammlung ---------- */
 Object.assign(TL,{glossar:'📖 Glossar',formeln:'📐 Formelsammlung'});
