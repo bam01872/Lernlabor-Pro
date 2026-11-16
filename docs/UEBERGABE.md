@@ -8,8 +8,8 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 - **Besitzer:** Markus (Dr. rer. nat. Markus Baum), nebenberuflicher Dozent für Industriemeister. Deutsch, Du-Form.
 - **Repo:** https://github.com/bam01872/Lernlabor-Pro (öffentlich, Branch `main`)
 - **Live (GitHub Pages, main / root, seit 14.11.2026):** https://bam01872.github.io/Lernlabor-Pro/
-- **Stand main:** **Version 22** (16.11.2026). Gemergt sind PR #1 bis #23.
-- **Nächste freie Version:** 23
+- **Stand main:** **Version 23** (16.11.2026). Gemergt sind PR #1 bis #24.
+- **Nächste freie Version:** 24
 - **Umfang:** Metall 39 Themen, Elektrotechnik 40, Chemie 51 (mit Gebiet Thermodynamik), Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42; je 5 mehrstufige Aufgaben „Im Betrieb“, Situationsaufgaben, Fachgespräch-Fragen; `tests/check.js` prüft 213+ Rechenaufgaben.
 
 ### Versionsgeschichte (kurz)
@@ -32,6 +32,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 | 20 | #21 | Zahl + Bruch-Einheit zusammen, kurze Formeln in einer Zeile (Formatierungsregel) |
 | 21 | #22 | Tutorial wie im Lernlabor: 4 Einführungskarten, Ich → Tutorial mit 7 Kapiteln (`pro-tut.js`) |
 | 22 | #23 | Gerechnete Prüfungsaufgaben wie Lernlabor v322: ✓/✎/○, Übersicht mit Filter, „Zufällige offene Aufgabe“ (`pro-ex.js`) |
+| 23 | #24 | Dozentenversion Grundlage: `build-dozent.py`, Prüfung in `tests/check.js`, Bericht mit Fachrichtung, feste Pages-Adresse für Links |
 
 ## 2. Aufbau des Repos
 
@@ -95,8 +96,8 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 2. **Rechtsstand** der Themen Arbeitsschutz, Gefahrstoffe, Unfallanzeige (O3), Maschinenverordnung 2023/1230 (ab 20.01.2027) u. a. nur mit „Stand prüfen“ markiert, nicht gegen Gesetzestexte geprüft.
 3. **Fachliche Durchsicht** Elektro, Chemie, Kunststoff, Mechatronik, Logistik durch Fachleute steht aus (nicht Markus' Fach). Normwerte sind Beispielwerte.
 4. **Fachprüfung Durchlauf 2** in Paketen P1–P7 (P1 Antwortprüfung zuerst); Prüfwerkzeuge lagen nur in Sitzungen und müssten neu gebaut werden.
-5. **Dozentenversion** für Pro gibt es noch nicht (Lernlabor: `const DOZENT=true`, Datei nie ins Repo).
-6. **Sicherung** (Backup-Skript wie bei Lernlabor/Meisterlabor) lief für Pro **noch nie**. Nach dem Umzug einrichten.
+5. **Dozentenversion:** Grundlage seit Version 23 (siehe Abschnitt 8). Offen, je einzeln nach Markus' Ja: Auswertung mailen mit Teilnehmerzahl, Kurslink `#kurs/…`, Top-3-Fehler (braucht gespeicherte „Woran lag es?“-Wahl), Übungslinks je Thema, Eigene Aufgaben.
+6. **Sicherung** läuft seit 15.11.2026 nach jedem Merge (Abschnitt 8).
 7. Gasgesetze gibt es auch im Lernlabor; in Pro bewusst behalten (Chemie hat kein NTG), auf Wunsch streichen.
 8. Rückführung der Kunststoff-Animation mit Tg ins Lernlabor (Punkt 52 aus Plan V6) nicht gemacht.
 9. Ideen ohne Auftrag: SPS-Selbsthaltung als Regler; SMIL-Bewegungen (Fließen, Spritzgießen, Extrusion, Positionierachse) hören nicht auf den Anhalten-Knopf.
@@ -148,3 +149,12 @@ Seit 15.11.2026 liegen zusätzlich im Repo:
 - `werkzeug/backup.py`: Sicherungsskript (Standard-Repo bam01872/Lernlabor-Pro). Aufruf: `BACKUP_ZIEL=/mnt/project-files/backup python3 werkzeug/backup.py`. Bisher gab es für Pro noch keine Sicherung: nach jedem Merge laufen lassen.
 
 Nicht im Repo, nur im Projektordner von „Lernlabor v2“: Vorschaubilder und -seiten aller Versionen (über die Artifact-Links oben erreichbar) und eine alte Kopie von `werkzeug/`. Diese werden nicht gebraucht, das Repo ist die Quelle der Wahrheit.
+
+## 8. Dozentenversion und Ablauf nach jedem Merge (seit Version 23)
+
+- **Eine Quelle:** Die Dozentenversion ist die fertig gebaute `index.html` mit `const DOZENT=true;`. Alles nur für Dozenten hängt an `if(DOZENT)`. In der Dozentendatei hat `<html>` die Klasse `dz`.
+- **Nie committen:** Im Repo steht immer `const DOZENT=false;` (`tests/check.js` prüft das und den Titel). Die Dozentendatei liegt nur unter `/mnt/project-files/dozent/lernlabor-pro_dozent.html`, nicht im Repo, nicht auf Pages, nicht als Artifact.
+- **Bauen:** `python3 /mnt/project-files/dozent/build-dozent.py index.html /mnt/project-files/dozent/lernlabor-pro_dozent.html` (Kopie des Skripts in `werkzeug/build-dozent.py`). Titel wird „Dozent · Lernlabor Pro“, 3 Schriften werden eingebettet, die Datei läuft per Doppelklick.
+- **Kursübersicht** (Ich → 👩‍🏫 Kursübersicht, Adresse `#dozent`): Bericht `typ:'lernlabor-pro-bericht'` mit `fr`/`frn` (Fachrichtung), Filter nach Kurs und Fachrichtung, Daten nur im Browser (`lernlabor-pro-dozent-v1`).
+- **Links:** `base()` in `pro-ll.js` entfernt `dozent….html` aus der Adresse; bei `file://` gilt https://bam01872.github.io/Lernlabor-Pro/.
+- **Nach jedem Merge (fest):** 1. Dozentenversion aus der neuen main-`index.html` bauen und prüfen (DOZENT=true, Titel, `#dozent` ohne JS-Fehler). 2. Sicherung: `werkzeug/backup.py` nach `/mnt/project-files/backup/werkzeug/` kopieren, dann `BACKUP_REPO=bam01872/Lernlabor-Pro BACKUP_ZIEL=/mnt/project-files/backup python3 /mnt/project-files/backup/werkzeug/backup.py`. 3. Beides in der Fertig-Meldung nennen.

@@ -20,7 +20,10 @@ const RN={uben:'ueben',betrieb:'im-betrieb',fall:'pruefungsaufgaben',glossar:'gl
 const RT=Object.fromEntries(Object.entries(RN).map(([a,b])=>[b,a]));
 let ROUT=false;
 const route=()=>FACH.includes(tab)?'thema/'+SN[tab+':'+modSel[tab]]:tab==='tut'?'tutorial/'+((window.TUK|0)+1):tab==='fall'?'pruefungsaufgaben/'+(fIdx+1):tab==='stand'&&KMV?'kurstermine':(RN[tab]||'');
-const link=r=>location.origin+location.pathname+'?fr='+FR+(r?'#'+r:'');
+/* Links zeigen immer auf die öffentliche App: aus der Dozentendatei (dozent….html) wird der Dateiname entfernt, lokal geöffnet (file://) gilt die feste Pages-Adresse (Version 23) */
+const PAGES='https://bam01872.github.io/Lernlabor-Pro/';
+const base=()=>location.protocol==='file:'?PAGES:location.origin+location.pathname.replace(/[^/]*dozent[^/]*\.html$/i,'');
+const link=r=>base()+'?fr='+FR+(r?'#'+r:'');
 function sync(){if(ROUT)return;const r=route(),want=r?'#'+r:'';if(location.hash===want||(!want&&!location.hash))return;
  try{history.replaceState(Object.assign({},history.state,{y:scrollY}),'');history.pushState({y:0},'',want||location.pathname+location.search)}catch(e){}}
 function openRoute(h){h=decodeURIComponent((h||'').replace(/^#/,''));const [a,...b]=h.split('/'),r=b.join('/');

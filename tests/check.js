@@ -5,7 +5,8 @@
    3. Toleranzen sind relativ und klein (höchstens 5 %).
    4. Deutlich falsche Eingaben (Hälfte, plus 10 %) werden als falsch erkannt.
    5. Hinweis: Der Lösungsweg zeigt das gerundete Ergebnis.
-   6. Version: sw.js passt zu APPV, Ich → Sonstiges zeigt sie, Hinweis auf neue Version. */
+   6. Version: sw.js passt zu APPV, Ich → Sonstiges zeigt sie, Hinweis auf neue Version.
+   7. Dozentenversion: const DOZENT=false; und <title>Lernlabor Pro</title> genau einmal. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const FILE=path.resolve(__dirname,'..','index.html');
 const OKF='ok=Math.abs(v-t.a)<=Math.max(Math.abs(t.a)*t.tol,t.d===0?0.5:Math.pow(10,-t.d)/2+1e-9)';
@@ -13,6 +14,9 @@ const ok=(v,t)=>Math.abs(v-t.a)<=Math.max(Math.abs(t.a)*t.tol,t.d===0?0.5:Math.p
 (async()=>{
  const html=fs.readFileSync(FILE,'utf8');let fehler=[],hinweise=[];
  if(!html.includes(OKF))fehler.push('Antwortprüfung in index.html hat sich geändert: tests/check.js anpassen');
+ /* 7. Dozentenversion bleibt baubar (werkzeug/build-dozent.py): im Repo nie DOZENT=true, Titel genau einmal */
+ if(html.split('const DOZENT=false;').length!==2)fehler.push('const DOZENT=false; fehlt oder doppelt (Dozentenversion nie committen)');
+ if(html.split('<title>Lernlabor Pro</title>').length!==2)fehler.push('<title>Lernlabor Pro</title> fehlt oder doppelt');
  const b=await chromium.launch();const gesehen=new Set();let n=0;
  for(const fr of ['me','el','ch','ku','mt','lo']){
   const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));
