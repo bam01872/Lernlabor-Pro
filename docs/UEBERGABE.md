@@ -1,4 +1,4 @@
-# Übergabe Lernlabor Pro (Stand 15.11.2026)
+# Übergabe Lernlabor Pro (Stand 16.11.2026)
 
 Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie fasst alles zusammen, was bisher im Projekt „Lernlabor v2“ dazu entstanden ist. Ein neuer Claude-Thread soll damit ohne Rückfragen weiterarbeiten können.
 
@@ -8,8 +8,8 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 - **Besitzer:** Markus (Dr. rer. nat. Markus Baum), nebenberuflicher Dozent für Industriemeister. Deutsch, Du-Form.
 - **Repo:** https://github.com/bam01872/Lernlabor-Pro (öffentlich, Branch `main`)
 - **Live (GitHub Pages, main / root, seit 14.11.2026):** https://bam01872.github.io/Lernlabor-Pro/
-- **Stand main:** **Version 21** (15.11.2026). Gemergt sind PR #1 bis #22.
-- **Nächste freie Version:** 22
+- **Stand main:** **Version 22** (16.11.2026). Gemergt sind PR #1 bis #23.
+- **Nächste freie Version:** 23
 - **Umfang:** Metall 39 Themen, Elektrotechnik 40, Chemie 51 (mit Gebiet Thermodynamik), Kunststoff & Kautschuk 42, Mechatronik 43, Logistik 42; je 5 mehrstufige Aufgaben „Im Betrieb“, Situationsaufgaben, Fachgespräch-Fragen; `tests/check.js` prüft 213+ Rechenaufgaben.
 
 ### Versionsgeschichte (kurz)
@@ -31,6 +31,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
 | 19 | #20 | Fachrichtungs-Wahl als gleich breites Kachelraster |
 | 20 | #21 | Zahl + Bruch-Einheit zusammen, kurze Formeln in einer Zeile (Formatierungsregel) |
 | 21 | #22 | Tutorial wie im Lernlabor: 4 Einführungskarten, Ich → Tutorial mit 7 Kapiteln (`pro-tut.js`) |
+| 22 | #23 | Gerechnete Prüfungsaufgaben wie Lernlabor v322: ✓/✎/○, Übersicht mit Filter, „Zufällige offene Aufgabe“ (`pro-ex.js`) |
 
 ## 2. Aufbau des Repos
 
@@ -43,7 +44,7 @@ Diese Datei ist der Startpunkt für das eigene Projekt „Lernlabor Pro“. Sie 
   - **Version nur oben in `werkzeug/build.py` hochzählen:** `APPV,APPD=20,'15.11.2026'`. Daraus entstehen APPV in der App, Fußzeilen und sw.js. Dazu NEU-Eintrag (Was ist neu) und README-Stand.
   - `basis/meisterlabor-v5.html`: Gerüst (Meisterlabor Version 5).
   - Inhalte: `pro-data.js`, `pro-pakete.js`, `pro-p3a..d.js` (Metall, Org, Führung), `pro-fr.js` (Fachrichtungen), `pro-el1/2` + `pro-xe1/2` (Elektro), `pro-ch1/2` + `pro-xc1/2` (Chemie), `pro-thd` + `pro-xthd` (Thermodynamik), `pro-ku1` + `pro-xku`, `pro-mt1` + `pro-xmt` (enthält Skizzenhelfer XTI/XMX/XP/XFO/XSTK), `pro-lo1` + `pro-xlo`, `pro-ib`/`pro-ib2` (Im Betrieb), `pro-a1/a2` + `pro-xa/xa2` (Situationsaufgaben, Fachgespräch).
-  - Darstellung/Bedienung: `pro-ml5.js`, `pro-x2..x4.js` (Vermuten, Kurz erklärt, Skizzen, Regler), `pro-ll.js` (Hash-Routing `#thema/<slug>`, Teilen/QR, ONE-Liste ohne Doppel-Skizze, Menüs, Ich → Sonstiges), `pro-l9.js` (Restpunkte, „Weiter mit …“), `pro-nb.js` (Zahl+Einheit, Ränder, Trennung), `pro-upd.js` (Hinweis neue Version), `pro-tut.js`/`pro-tut.css` (Ich → Tutorial, Adresse `#tutorial/<n>`), `pro-anim.js` (bewegte Zeichnungen), `pro.css`, `qrcode.js`.
+  - Darstellung/Bedienung: `pro-ml5.js`, `pro-x2..x4.js` (Vermuten, Kurz erklärt, Skizzen, Regler), `pro-ll.js` (Hash-Routing `#thema/<slug>`, Teilen/QR, ONE-Liste ohne Doppel-Skizze, Menüs, Ich → Sonstiges), `pro-l9.js` (Restpunkte, „Weiter mit …“), `pro-nb.js` (Zahl+Einheit, Ränder, Trennung), `pro-upd.js` (Hinweis neue Version), `pro-tut.js`/`pro-tut.css` (Ich → Tutorial, Adresse `#tutorial/<n>`), `pro-ex.js` (gerechnete Prüfungsaufgaben, localStorage `lernlabor-pro-gerechnet`+FRS; gerechnet = alle Teilaufgaben selbst bewertet, begonnen = Antwort geschrieben oder Erwartungshorizont geöffnet; in Sichern/Wiederherstellen/Zurücksetzen enthalten), `pro-anim.js` (bewegte Zeichnungen), `pro.css`, `qrcode.js`.
 - Fachrichtung über `?fr=me|el|ch|ku|mt|lo`, `window.name` oder localStorage `lernlabor-pro-fr`; Lernstand je Fachrichtung getrennt (Schlüssel-Suffix). Organisation und Führung & Personal sind gemeinsam, die Technik wechselt.
 
 **Technik-Hinweise**
