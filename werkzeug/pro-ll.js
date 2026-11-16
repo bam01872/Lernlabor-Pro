@@ -120,6 +120,9 @@ function hint(u,a,un){if(!isFinite(u)||!isFinite(a)||a===0)return'Prüfe Formel 
  if(a!==1&&Math.abs(u*a-1)<.03)return'Du hast den Kehrwert berechnet. Prüfe, ob Du richtig geteilt hast.';
  if(Math.abs(u-a)/Math.abs(a)<.1)return'Fast richtig. Runde erst am Ende und rechne mit mindestens 4 Stellen weiter.';
  return r>1?'Dein Wert ist deutlich zu groß. Prüfe Formel und eingesetzte Werte.':'Dein Wert ist deutlich zu klein. Prüfe Formel und eingesetzte Werte.'}
+/* Version 26: angetippte „Woran lag es?“ merken (Lernstand s.fw je Thema: Slug und Zähler je Fehlerbild), für die Top-3-Fehler beim Dozenten.
+   Ein Wechsel auf ein anderes Fehlerbild bei derselben Aufgabe verschiebt die Zählung. Sichern, Wiederherstellen und Zurücksetzen gehen mit dem Lernstand. */
+const fwRec=(t,sl,x,old)=>{const s=load(),F=s.fw||(s.fw={}),o=F[t]||(F[t]={s:sl,c:{}});if(old!=null&&o.c[old]>0){if(!--o.c[old])delete o.c[old]}o.c[x]=(o.c[x]||0)+1;save(s)};
 const calcL=calcHTML;calcHTML=function(c,onDone,mod){const w=calcL(c,onDone,mod);if(mod==='sim')return w;
  const t=w.t,row=w.querySelector('.row'),bs=row.querySelectorAll('button'),pb=bs[0],lb=bs[1],inp=w.querySelector('input'),fb=w.querySelector('.fb'),sol=w.querySelector('.sol');
  pb.textContent='Antwort prüfen';let fails=0,solved=false;
@@ -138,7 +141,7 @@ const calcL=calcHTML;calcHTML=function(c,onDone,mod){const w=calcL(c,onDone,mod)
   if(!/^Nicht ganz/.test(tx))return;fails++;
   let u=NaN;if(!t.dt){let s=inp.value.trim();s=s.indexOf(',')>=0?s.replace(/\./g,'').replace(',','.'):s;u=parseFloat(s)}
   fb.textContent='✗ Noch nicht. '+(t.dt?'Prüfe Startdatum, Fristbeginn und Feiertage.':hint(u,t.a,t.u));
-  if(fails===1&&!w.querySelector('.wlr')){const mt=D[c.f]&&D[c.f].modules[c.m],E=mt&&typeof ERK!=='undefined'&&ERK[mt.t];if(E&&E[2]&&E[2].length){const wl=document.createElement('div');wl.className='wlr';wl.innerHTML='<p class="wlh"><b>Woran lag es?</b> Tippe an, was passiert sein könnte.</p>'+E[2].map(x=>'<button type="button" class="chip" aria-pressed="false">'+esc(x).replace(/([A-Za-zσλμϑΔεηṁ])_([A-Za-z0-9äöü]+)/g,'$1<sub>$2</sub>')+'</button>').join('')+'<p class="sub wlt" hidden>Gut erkannt. Rechne mit diesem Punkt im Kopf noch einmal.</p>';wl.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{wl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));wl.querySelector('.wlt').hidden=false});fb.after(wl)}}
+  if(fails===1&&!w.querySelector('.wlr')){const mt=D[c.f]&&D[c.f].modules[c.m],E=mt&&typeof ERK!=='undefined'&&ERK[mt.t];if(E&&E[2]&&E[2].length){const wl=document.createElement('div');wl.className='wlr';wl.innerHTML='<p class="wlh"><b>Woran lag es?</b> Tippe an, was passiert sein könnte.</p>'+E[2].map(x=>'<button type="button" class="chip" aria-pressed="false">'+esc(x).replace(/([A-Za-zσλμϑΔεηṁ])_([A-Za-z0-9äöü]+)/g,'$1<sub>$2</sub>')+'</button>').join('')+'<p class="sub wlt" hidden>Gut erkannt. Rechne mit diesem Punkt im Kopf noch einmal.</p>';let cur=null;wl.querySelectorAll('.chip').forEach((b,i)=>b.onclick=()=>{wl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));wl.querySelector('.wlt').hidden=false;if(cur!==i){fwRec(mt.t,SN[c.f+':'+c.m],E[2][i],cur==null?null:E[2][cur]);cur=i}});fb.after(wl)}}
   if(fails===1){sol.hidden=true;lock()}else{sol.hidden=true;unlock();fb.textContent+=' Jetzt kannst Du den Lösungsweg ansehen.'}});
  return w};
 
